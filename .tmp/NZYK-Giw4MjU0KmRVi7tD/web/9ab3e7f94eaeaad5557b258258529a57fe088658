@@ -1,0 +1,10 @@
+Object.defineProperty(__vite_ssr_exports__, "renderChildren", { enumerable: true, configurable: true, get(){ try { return renderChildren } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/react/index.js", {"importedNames":["createElement"]});
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/src/rendering/renderer/RenderNode.tsx", {"importedNames":["RenderNode"]});
+const renderChildren = (node)=>node.childIds.map((childId)=>(0,__vite_ssr_import_0__.createElement)((0,__vite_ssr_import_1__.RenderNode), {
+            key: childId,
+            nodeId: childId
+        }));
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6IjtBQUFBO0FBR0E7QUFFTyxNQUFNQSxpQkFBaUIsQ0FBQ0MsT0FDN0JBLEtBQUtDLFFBQVEsQ0FBQ0MsR0FBRyxDQUFDLENBQUNDLGFBQVlDLHdDQUFjQyxtQ0FBWTtZQUFFQyxLQUFLSDtZQUFTSSxRQUFRSjtRQUFRIiwibmFtZXMiOlsicmVuZGVyQ2hpbGRyZW4iLCJub2RlIiwiY2hpbGRJZHMiLCJtYXAiLCJjaGlsZElkIiwiY3JlYXRlRWxlbWVudCIsIlJlbmRlck5vZGUiLCJrZXkiLCJub2RlSWQiXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZXMiOlsicmVuZGVyQ2hpbGRyZW4udHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgY3JlYXRlRWxlbWVudCB9IGZyb20gXCJyZWFjdFwiO1xuaW1wb3J0IHR5cGUgeyBSZWFjdE5vZGUgfSBmcm9tIFwicmVhY3RcIjtcbmltcG9ydCB0eXBlIHsgU2NlbmVOb2RlIH0gZnJvbSBcIkAvdHlwZXNcIjtcbmltcG9ydCB7IFJlbmRlck5vZGUgfSBmcm9tIFwiLi9SZW5kZXJOb2RlXCI7XG5cbmV4cG9ydCBjb25zdCByZW5kZXJDaGlsZHJlbiA9IChub2RlOiBTY2VuZU5vZGUpOiBSZWFjdE5vZGUgPT5cbiAgbm9kZS5jaGlsZElkcy5tYXAoKGNoaWxkSWQpID0+IGNyZWF0ZUVsZW1lbnQoUmVuZGVyTm9kZSwgeyBrZXk6IGNoaWxkSWQsIG5vZGVJZDogY2hpbGRJZCB9KSk7XG4iXSwiZmlsZSI6Ii9zcmMvcmVuZGVyaW5nL3JlbmRlcmVyL3JlbmRlckNoaWxkcmVuLnRzIn0=

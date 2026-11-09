@@ -1,0 +1,49 @@
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/vitest/dist/index.js", {"importedNames":["describe","expect","it"]});
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/@testing-library/react/dist/index.js", {"importedNames":["render","screen"]});
+const __vite_ssr_import_2__ = await __vite_ssr_import__("/node_modules/react/index.js", {"importedNames":["createElement"]});
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/src/engine/scene-graph/index.ts", {"importedNames":["createSceneNode"]});
+const __vite_ssr_import_4__ = await __vite_ssr_import__("/src/lib/storeTheme.ts", {"importedNames":["resolveTheme"]});
+const __vite_ssr_import_5__ = await __vite_ssr_import__("/src/pages/Store.tsx", {"importedNames":["ContactPage","routeForNode"]});
+const linkNode = (target)=>(0,__vite_ssr_import_3__.createSceneNode)({
+        id: `link-${target}`,
+        type: "button",
+        name: "Navigation link",
+        props: {
+            label: "Link"
+        },
+        extensions: {
+            navigationTarget: target
+        }
+    }, null, 1);
+(0,__vite_ssr_import_0__.describe)("storefront navigation routing", ()=>{
+    (0,__vite_ssr_import_0__.it)("keeps default and custom paths inside the active store", ()=>{
+        (0,__vite_ssr_import_0__.expect)((0,__vite_ssr_import_5__.routeForNode)("north", linkNode("home"))).toBe("/store/north");
+        (0,__vite_ssr_import_0__.expect)((0,__vite_ssr_import_5__.routeForNode)("north", linkNode("/pages/lookbook"))).toBe("/store/north/pages/lookbook");
+        (0,__vite_ssr_import_0__.expect)((0,__vite_ssr_import_5__.routeForNode)("north", linkNode("pages/journal"))).toBe("/store/north/pages/journal");
+    });
+    (0,__vite_ssr_import_0__.it)("preserves intentional external destinations", ()=>{
+        (0,__vite_ssr_import_0__.expect)((0,__vite_ssr_import_5__.routeForNode)("north", linkNode("https://example.com"))).toBe("https://example.com");
+    });
+});
+(0,__vite_ssr_import_0__.describe)("storefront contact integrity", ()=>{
+    (0,__vite_ssr_import_0__.it)("does not render a submission form or claim that an unavailable message was sent", ()=>{
+        (0,__vite_ssr_import_1__.render)((0,__vite_ssr_import_2__.createElement)((0,__vite_ssr_import_5__.ContactPage), {
+            profile: {
+                id: "store-1",
+                business_name: "North",
+                store_slug: "north",
+                theme: {}
+            },
+            theme: (0,__vite_ssr_import_4__.resolveTheme)({})
+        }));
+        (0,__vite_ssr_import_0__.expect)(__vite_ssr_import_1__.screen.queryByRole("form")).not.toBeInTheDocument();
+        (0,__vite_ssr_import_0__.expect)(__vite_ssr_import_1__.screen.queryByRole("button", {
+            name: /send message/i
+        })).not.toBeInTheDocument();
+        (0,__vite_ssr_import_0__.expect)(__vite_ssr_import_1__.screen.getByText("Contact form unavailable")).toBeInTheDocument();
+        (0,__vite_ssr_import_0__.expect)(__vite_ssr_import_1__.screen.getByText(/No message has been sent or stored/i)).toBeInTheDocument();
+    });
+});
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBRUEsTUFBTUEsV0FBVyxDQUFDQyxZQUNoQkMsdUNBQ0U7UUFDRUMsSUFBSSxDQUFDLEtBQUssRUFBRUYsUUFBUTtRQUNwQkcsTUFBTTtRQUNOQyxNQUFNO1FBQ05DLE9BQU87WUFBRUMsT0FBTztRQUFPO1FBQ3ZCQyxZQUFZO1lBQUVDLGtCQUFrQlI7UUFBTztJQUN6QyxHQUNBLE1BQ0E7R0FHSlMsZ0NBQVMsaUNBQWlDO09BQ3hDQywwQkFBRywwREFBMEQ7V0FDM0RDLGlDQUFPQyxvQ0FBYSxTQUFTYixTQUFTLFVBQVVjLElBQUksQ0FBQztXQUNyREYsaUNBQU9DLG9DQUFhLFNBQVNiLFNBQVMscUJBQXFCYyxJQUFJLENBQUM7V0FDaEVGLGlDQUFPQyxvQ0FBYSxTQUFTYixTQUFTLG1CQUFtQmMsSUFBSSxDQUFDO0lBQ2hFO09BRUFILDBCQUFHLCtDQUErQztXQUNoREMsaUNBQU9DLG9DQUFhLFNBQVNiLFNBQVMseUJBQXlCYyxJQUFJLENBQUM7SUFDdEU7QUFDRjtHQUVBSixnQ0FBUyxnQ0FBZ0M7T0FDdkNDLDBCQUFHLG1GQUFtRjtXQUNwRkksaUNBQ0VDLHdDQUFjQyxvQ0FBYTtZQUN6QkMsU0FBUztnQkFDUGYsSUFBSTtnQkFDSmdCLGVBQWU7Z0JBQ2ZDLFlBQVk7Z0JBQ1pDLE9BQU8sQ0FBQztZQUNWO1lBQ0FBLFVBQU9DLG9DQUFhLENBQUM7UUFDdkI7V0FHRlYsOEJBQU9XLDZCQUFPQyxXQUFXLENBQUMsU0FBU0MsR0FBRyxDQUFDQyxpQkFBaUI7V0FDeERkLDhCQUFPVyw2QkFBT0MsV0FBVyxDQUFDLFVBQVU7WUFBRW5CLE1BQU07UUFBZ0IsSUFBSW9CLEdBQUcsQ0FBQ0MsaUJBQWlCO1dBQ3JGZCw4QkFBT1csNkJBQU9JLFNBQVMsQ0FBQyw2QkFBNkJELGlCQUFpQjtXQUN0RWQsOEJBQU9XLDZCQUFPSSxTQUFTLENBQUMsd0NBQXdDRCxpQkFBaUI7SUFDbkY7QUFDRiIsIm5hbWVzIjpbImxpbmtOb2RlIiwidGFyZ2V0IiwiY3JlYXRlU2NlbmVOb2RlIiwiaWQiLCJ0eXBlIiwibmFtZSIsInByb3BzIiwibGFiZWwiLCJleHRlbnNpb25zIiwibmF2aWdhdGlvblRhcmdldCIsImRlc2NyaWJlIiwiaXQiLCJleHBlY3QiLCJyb3V0ZUZvck5vZGUiLCJ0b0JlIiwicmVuZGVyIiwiY3JlYXRlRWxlbWVudCIsIkNvbnRhY3RQYWdlIiwicHJvZmlsZSIsImJ1c2luZXNzX25hbWUiLCJzdG9yZV9zbHVnIiwidGhlbWUiLCJyZXNvbHZlVGhlbWUiLCJzY3JlZW4iLCJxdWVyeUJ5Um9sZSIsIm5vdCIsInRvQmVJblRoZURvY3VtZW50IiwiZ2V0QnlUZXh0Il0sImlnbm9yZUxpc3QiOltdLCJzb3VyY2VzIjpbIlN0b3JlLnRlc3QudHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgZGVzY3JpYmUsIGV4cGVjdCwgaXQgfSBmcm9tIFwidml0ZXN0XCI7XG5pbXBvcnQgeyByZW5kZXIsIHNjcmVlbiB9IGZyb20gXCJAdGVzdGluZy1saWJyYXJ5L3JlYWN0XCI7XG5pbXBvcnQgeyBjcmVhdGVFbGVtZW50IH0gZnJvbSBcInJlYWN0XCI7XG5pbXBvcnQgeyBjcmVhdGVTY2VuZU5vZGUgfSBmcm9tIFwiQC9lbmdpbmUvc2NlbmUtZ3JhcGhcIjtcbmltcG9ydCB7IHJlc29sdmVUaGVtZSB9IGZyb20gXCJAL2xpYi9zdG9yZVRoZW1lXCI7XG5pbXBvcnQgeyBDb250YWN0UGFnZSwgcm91dGVGb3JOb2RlIH0gZnJvbSBcIi4vU3RvcmVcIjtcblxuY29uc3QgbGlua05vZGUgPSAodGFyZ2V0OiBzdHJpbmcpID0+XG4gIGNyZWF0ZVNjZW5lTm9kZShcbiAgICB7XG4gICAgICBpZDogYGxpbmstJHt0YXJnZXR9YCxcbiAgICAgIHR5cGU6IFwiYnV0dG9uXCIsXG4gICAgICBuYW1lOiBcIk5hdmlnYXRpb24gbGlua1wiLFxuICAgICAgcHJvcHM6IHsgbGFiZWw6IFwiTGlua1wiIH0sXG4gICAgICBleHRlbnNpb25zOiB7IG5hdmlnYXRpb25UYXJnZXQ6IHRhcmdldCB9LFxuICAgIH0sXG4gICAgbnVsbCxcbiAgICAxLFxuICApO1xuXG5kZXNjcmliZShcInN0b3JlZnJvbnQgbmF2aWdhdGlvbiByb3V0aW5nXCIsICgpID0+IHtcbiAgaXQoXCJrZWVwcyBkZWZhdWx0IGFuZCBjdXN0b20gcGF0aHMgaW5zaWRlIHRoZSBhY3RpdmUgc3RvcmVcIiwgKCkgPT4ge1xuICAgIGV4cGVjdChyb3V0ZUZvck5vZGUoXCJub3J0aFwiLCBsaW5rTm9kZShcImhvbWVcIikpKS50b0JlKFwiL3N0b3JlL25vcnRoXCIpO1xuICAgIGV4cGVjdChyb3V0ZUZvck5vZGUoXCJub3J0aFwiLCBsaW5rTm9kZShcIi9wYWdlcy9sb29rYm9va1wiKSkpLnRvQmUoXCIvc3RvcmUvbm9ydGgvcGFnZXMvbG9va2Jvb2tcIik7XG4gICAgZXhwZWN0KHJvdXRlRm9yTm9kZShcIm5vcnRoXCIsIGxpbmtOb2RlKFwicGFnZXMvam91cm5hbFwiKSkpLnRvQmUoXCIvc3RvcmUvbm9ydGgvcGFnZXMvam91cm5hbFwiKTtcbiAgfSk7XG5cbiAgaXQoXCJwcmVzZXJ2ZXMgaW50ZW50aW9uYWwgZXh0ZXJuYWwgZGVzdGluYXRpb25zXCIsICgpID0+IHtcbiAgICBleHBlY3Qocm91dGVGb3JOb2RlKFwibm9ydGhcIiwgbGlua05vZGUoXCJodHRwczovL2V4YW1wbGUuY29tXCIpKSkudG9CZShcImh0dHBzOi8vZXhhbXBsZS5jb21cIik7XG4gIH0pO1xufSk7XG5cbmRlc2NyaWJlKFwic3RvcmVmcm9udCBjb250YWN0IGludGVncml0eVwiLCAoKSA9PiB7XG4gIGl0KFwiZG9lcyBub3QgcmVuZGVyIGEgc3VibWlzc2lvbiBmb3JtIG9yIGNsYWltIHRoYXQgYW4gdW5hdmFpbGFibGUgbWVzc2FnZSB3YXMgc2VudFwiLCAoKSA9PiB7XG4gICAgcmVuZGVyKFxuICAgICAgY3JlYXRlRWxlbWVudChDb250YWN0UGFnZSwge1xuICAgICAgICBwcm9maWxlOiB7XG4gICAgICAgICAgaWQ6IFwic3RvcmUtMVwiLFxuICAgICAgICAgIGJ1c2luZXNzX25hbWU6IFwiTm9ydGhcIixcbiAgICAgICAgICBzdG9yZV9zbHVnOiBcIm5vcnRoXCIsXG4gICAgICAgICAgdGhlbWU6IHt9LFxuICAgICAgICB9LFxuICAgICAgICB0aGVtZTogcmVzb2x2ZVRoZW1lKHt9KSxcbiAgICAgIH0pLFxuICAgICk7XG5cbiAgICBleHBlY3Qoc2NyZWVuLnF1ZXJ5QnlSb2xlKFwiZm9ybVwiKSkubm90LnRvQmVJblRoZURvY3VtZW50KCk7XG4gICAgZXhwZWN0KHNjcmVlbi5xdWVyeUJ5Um9sZShcImJ1dHRvblwiLCB7IG5hbWU6IC9zZW5kIG1lc3NhZ2UvaSB9KSkubm90LnRvQmVJblRoZURvY3VtZW50KCk7XG4gICAgZXhwZWN0KHNjcmVlbi5nZXRCeVRleHQoXCJDb250YWN0IGZvcm0gdW5hdmFpbGFibGVcIikpLnRvQmVJblRoZURvY3VtZW50KCk7XG4gICAgZXhwZWN0KHNjcmVlbi5nZXRCeVRleHQoL05vIG1lc3NhZ2UgaGFzIGJlZW4gc2VudCBvciBzdG9yZWQvaSkpLnRvQmVJblRoZURvY3VtZW50KCk7XG4gIH0pO1xufSk7XG4iXSwiZmlsZSI6IkY6L1N0b3JlYmxpbmsvc3JjL3BhZ2VzL1N0b3JlLnRlc3QudHMifQ==

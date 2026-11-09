@@ -1,0 +1,76 @@
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/react/jsx-dev-runtime.js", {"importedNames":["jsxDEV"]});
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/@testing-library/react/dist/index.js", {"importedNames":["render","screen","waitFor"]});
+const __vite_ssr_import_2__ = await __vite_ssr_import__("/node_modules/vitest/dist/index.js", {"importedNames":["describe","expect","it"]});
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/src/engine/scene-graph/index.ts", {"importedNames":["createSceneNode"]});
+const __vite_ssr_import_4__ = await __vite_ssr_import__("/src/themes/registerBuiltInThemePackages.ts", {"importedNames":["ensureBuiltInThemePackages"]});
+const __vite_ssr_import_5__ = await __vite_ssr_import__("/src/theme-engine/runtime/ThemeRuntimeProvider.tsx", {"importedNames":["ThemeRuntimeProvider"]});
+const __vite_ssr_import_6__ = await __vite_ssr_import__("/src/theme-engine/runtime/ThemeSectionBoundary.tsx", {"importedNames":["ThemeSectionBoundary"]});
+const section = (0,__vite_ssr_import_3__.createSceneNode)({
+    id: "runtime-section",
+    type: "section",
+    name: "Runtime section",
+    transform: {
+        width: 400,
+        height: 200
+    },
+    extensions: {
+        themeId: "atelier",
+        canonicalSectionType: "editorial-intro"
+    }
+}, null, 1);
+(0,__vite_ssr_import_2__.describe)("ThemeRuntimeProvider", ()=>{
+    (0,__vite_ssr_import_2__.it)("lazy-loads the active theme and uses the same section renderer in editor and storefront modes", async ()=>{
+        (0,__vite_ssr_import_4__.ensureBuiltInThemePackages)();
+        const { rerender } = (0,__vite_ssr_import_1__.render)(/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_5__.ThemeRuntimeProvider), {
+            themeId: "atelier",
+            mode: "editor",
+            children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_6__.ThemeSectionBoundary), {
+                node: section,
+                children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                    children: "Shared content"
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/theme-engine/runtime/ThemeRuntimeProvider.test.tsx",
+                    lineNumber: 29,
+                    columnNumber: 11
+                }, this)
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/theme-engine/runtime/ThemeRuntimeProvider.test.tsx",
+                lineNumber: 28,
+                columnNumber: 9
+            }, this)
+        }, void 0, false, {
+            fileName: "F:/Storeblink/src/theme-engine/runtime/ThemeRuntimeProvider.test.tsx",
+            lineNumber: 27,
+            columnNumber: 7
+        }, this));
+        await (0,__vite_ssr_import_1__.waitFor)(()=>{
+            (0,__vite_ssr_import_2__.expect)(__vite_ssr_import_1__.screen.getByText("Shared content").closest("section")).toHaveAttribute("data-theme-id", "atelier");
+        });
+        rerender(/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_5__.ThemeRuntimeProvider), {
+            themeId: "atelier",
+            mode: "storefront",
+            children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_6__.ThemeSectionBoundary), {
+                node: section,
+                children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                    children: "Shared content"
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/theme-engine/runtime/ThemeRuntimeProvider.test.tsx",
+                    lineNumber: 44,
+                    columnNumber: 11
+                }, this)
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/theme-engine/runtime/ThemeRuntimeProvider.test.tsx",
+                lineNumber: 43,
+                columnNumber: 9
+            }, this)
+        }, void 0, false, {
+            fileName: "F:/Storeblink/src/theme-engine/runtime/ThemeRuntimeProvider.test.tsx",
+            lineNumber: 42,
+            columnNumber: 7
+        }, this));
+        (0,__vite_ssr_import_2__.expect)(__vite_ssr_import_1__.screen.getByText("Shared content").closest("section")).toHaveAttribute("data-theme-id", "atelier");
+    });
+});
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6IjtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUVBLE1BQU1BLGFBQVVDLHVDQUNkO0lBQ0VDLElBQUk7SUFDSkMsTUFBTTtJQUNOQyxNQUFNO0lBQ05DLFdBQVc7UUFBRUMsT0FBTztRQUFLQyxRQUFRO0lBQUk7SUFDckNDLFlBQVk7UUFDVkMsU0FBUztRQUNUQyxzQkFBc0I7SUFDeEI7QUFDRixHQUNBLE1BQ0E7R0FHRkMsZ0NBQVMsd0JBQXdCO09BQy9CQywwQkFBRyxpR0FBaUc7V0FDbEdDO1FBQ0EsTUFBTSxFQUFFQyxRQUFRLEVBQUUsTUFBR0MsK0NBQ25CLGlDQUFDQztZQUFxQlAsU0FBUTtZQUFVUSxNQUFLO3NCQUMzQyxrREFBQ0M7Z0JBQXFCQyxNQUFNbkI7MEJBQzFCLCtDQUFDb0I7OEJBQUs7Ozs7Ozs7Ozs7Ozs7Ozs7UUFLWixTQUFNQywrQkFBUTtlQUNaQyw4QkFBT0MsNkJBQU9DLFNBQVMsQ0FBQyxrQkFBa0JDLE9BQU8sQ0FBQyxZQUFZQyxlQUFlLENBQzNFLGlCQUNBO1FBRUo7UUFFQVosMEJBQ0UsaUNBQUNFO1lBQXFCUCxTQUFRO1lBQVVRLE1BQUs7c0JBQzNDLGtEQUFDQztnQkFBcUJDLE1BQU1uQjswQkFDMUIsK0NBQUNvQjs4QkFBSzs7Ozs7Ozs7Ozs7Ozs7OztXQUtaRSw4QkFBT0MsNkJBQU9DLFNBQVMsQ0FBQyxrQkFBa0JDLE9BQU8sQ0FBQyxZQUFZQyxlQUFlLENBQzNFLGlCQUNBO0lBRUo7QUFDRiIsIm5hbWVzIjpbInNlY3Rpb24iLCJjcmVhdGVTY2VuZU5vZGUiLCJpZCIsInR5cGUiLCJuYW1lIiwidHJhbnNmb3JtIiwid2lkdGgiLCJoZWlnaHQiLCJleHRlbnNpb25zIiwidGhlbWVJZCIsImNhbm9uaWNhbFNlY3Rpb25UeXBlIiwiZGVzY3JpYmUiLCJpdCIsImVuc3VyZUJ1aWx0SW5UaGVtZVBhY2thZ2VzIiwicmVyZW5kZXIiLCJyZW5kZXIiLCJUaGVtZVJ1bnRpbWVQcm92aWRlciIsIm1vZGUiLCJUaGVtZVNlY3Rpb25Cb3VuZGFyeSIsIm5vZGUiLCJzcGFuIiwid2FpdEZvciIsImV4cGVjdCIsInNjcmVlbiIsImdldEJ5VGV4dCIsImNsb3Nlc3QiLCJ0b0hhdmVBdHRyaWJ1dGUiXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZXMiOlsiVGhlbWVSdW50aW1lUHJvdmlkZXIudGVzdC50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgcmVuZGVyLCBzY3JlZW4sIHdhaXRGb3IgfSBmcm9tIFwiQHRlc3RpbmctbGlicmFyeS9yZWFjdFwiO1xuaW1wb3J0IHsgZGVzY3JpYmUsIGV4cGVjdCwgaXQgfSBmcm9tIFwidml0ZXN0XCI7XG5pbXBvcnQgeyBjcmVhdGVTY2VuZU5vZGUgfSBmcm9tIFwiQC9lbmdpbmUvc2NlbmUtZ3JhcGhcIjtcbmltcG9ydCB7IGVuc3VyZUJ1aWx0SW5UaGVtZVBhY2thZ2VzIH0gZnJvbSBcIkAvdGhlbWVzL3JlZ2lzdGVyQnVpbHRJblRoZW1lUGFja2FnZXNcIjtcbmltcG9ydCB7IFRoZW1lUnVudGltZVByb3ZpZGVyIH0gZnJvbSBcIi4vVGhlbWVSdW50aW1lUHJvdmlkZXJcIjtcbmltcG9ydCB7IFRoZW1lU2VjdGlvbkJvdW5kYXJ5IH0gZnJvbSBcIi4vVGhlbWVTZWN0aW9uQm91bmRhcnlcIjtcblxuY29uc3Qgc2VjdGlvbiA9IGNyZWF0ZVNjZW5lTm9kZShcbiAge1xuICAgIGlkOiBcInJ1bnRpbWUtc2VjdGlvblwiLFxuICAgIHR5cGU6IFwic2VjdGlvblwiLFxuICAgIG5hbWU6IFwiUnVudGltZSBzZWN0aW9uXCIsXG4gICAgdHJhbnNmb3JtOiB7IHdpZHRoOiA0MDAsIGhlaWdodDogMjAwIH0sXG4gICAgZXh0ZW5zaW9uczoge1xuICAgICAgdGhlbWVJZDogXCJhdGVsaWVyXCIsXG4gICAgICBjYW5vbmljYWxTZWN0aW9uVHlwZTogXCJlZGl0b3JpYWwtaW50cm9cIixcbiAgICB9LFxuICB9LFxuICBudWxsLFxuICAxLFxuKTtcblxuZGVzY3JpYmUoXCJUaGVtZVJ1bnRpbWVQcm92aWRlclwiLCAoKSA9PiB7XG4gIGl0KFwibGF6eS1sb2FkcyB0aGUgYWN0aXZlIHRoZW1lIGFuZCB1c2VzIHRoZSBzYW1lIHNlY3Rpb24gcmVuZGVyZXIgaW4gZWRpdG9yIGFuZCBzdG9yZWZyb250IG1vZGVzXCIsIGFzeW5jICgpID0+IHtcbiAgICBlbnN1cmVCdWlsdEluVGhlbWVQYWNrYWdlcygpO1xuICAgIGNvbnN0IHsgcmVyZW5kZXIgfSA9IHJlbmRlcihcbiAgICAgIDxUaGVtZVJ1bnRpbWVQcm92aWRlciB0aGVtZUlkPVwiYXRlbGllclwiIG1vZGU9XCJlZGl0b3JcIj5cbiAgICAgICAgPFRoZW1lU2VjdGlvbkJvdW5kYXJ5IG5vZGU9e3NlY3Rpb259PlxuICAgICAgICAgIDxzcGFuPlNoYXJlZCBjb250ZW50PC9zcGFuPlxuICAgICAgICA8L1RoZW1lU2VjdGlvbkJvdW5kYXJ5PlxuICAgICAgPC9UaGVtZVJ1bnRpbWVQcm92aWRlcj4sXG4gICAgKTtcblxuICAgIGF3YWl0IHdhaXRGb3IoKCkgPT4ge1xuICAgICAgZXhwZWN0KHNjcmVlbi5nZXRCeVRleHQoXCJTaGFyZWQgY29udGVudFwiKS5jbG9zZXN0KFwic2VjdGlvblwiKSkudG9IYXZlQXR0cmlidXRlKFxuICAgICAgICBcImRhdGEtdGhlbWUtaWRcIixcbiAgICAgICAgXCJhdGVsaWVyXCIsXG4gICAgICApO1xuICAgIH0pO1xuXG4gICAgcmVyZW5kZXIoXG4gICAgICA8VGhlbWVSdW50aW1lUHJvdmlkZXIgdGhlbWVJZD1cImF0ZWxpZXJcIiBtb2RlPVwic3RvcmVmcm9udFwiPlxuICAgICAgICA8VGhlbWVTZWN0aW9uQm91bmRhcnkgbm9kZT17c2VjdGlvbn0+XG4gICAgICAgICAgPHNwYW4+U2hhcmVkIGNvbnRlbnQ8L3NwYW4+XG4gICAgICAgIDwvVGhlbWVTZWN0aW9uQm91bmRhcnk+XG4gICAgICA8L1RoZW1lUnVudGltZVByb3ZpZGVyPixcbiAgICApO1xuXG4gICAgZXhwZWN0KHNjcmVlbi5nZXRCeVRleHQoXCJTaGFyZWQgY29udGVudFwiKS5jbG9zZXN0KFwic2VjdGlvblwiKSkudG9IYXZlQXR0cmlidXRlKFxuICAgICAgXCJkYXRhLXRoZW1lLWlkXCIsXG4gICAgICBcImF0ZWxpZXJcIixcbiAgICApO1xuICB9KTtcbn0pO1xuIl0sImZpbGUiOiJGOi9TdG9yZWJsaW5rL3NyYy90aGVtZS1lbmdpbmUvcnVudGltZS9UaGVtZVJ1bnRpbWVQcm92aWRlci50ZXN0LnRzeCJ9

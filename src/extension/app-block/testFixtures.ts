@@ -1,0 +1,86 @@
+import type {
+  ExtensionGrant,
+  ThirdPartyExtensionManifest,
+} from "./contracts";
+
+export const createExtensionManifest = (): ThirdPartyExtensionManifest => ({
+  kind: "storeblink-extension",
+  schemaVersion: 1,
+  id: "product-promo",
+  version: "1.0.0",
+  publisherId: "acme",
+  name: "Product promo",
+  packageType: "app",
+  trustLevel: "sandboxed",
+  namespace: "app/acme/product-promo",
+  requestedCapabilities: [
+    "app/render",
+    "app/frame.resize",
+    "commerce/products.read",
+    "commerce/cart.add",
+    "commerce/cart.open",
+    "theme/navigation.request",
+  ],
+  grantedCapabilities: [
+    "app/render",
+    "app/frame.resize",
+    "commerce/products.read",
+    "commerce/cart.add",
+    "commerce/cart.open",
+    "theme/navigation.request",
+  ],
+  requestedQuotas: {
+    maxBlocks: 2,
+    maxMessageBytes: 16_384,
+    maxDataBytes: 32_768,
+    maxActionsPerMinute: 30,
+    maxViewElements: 20,
+  },
+  compiledReact: false,
+  storeKit: null,
+  appBlocks: [{
+    id: "product-card",
+    namespace: "app/acme/product-promo/product-card",
+    protocolVersion: 1,
+    slots: ["product-information/extra-content"],
+    requiredCapabilities: ["app/render", "commerce/cart.add"],
+    view: {
+      ariaLabel: "Product promotion",
+      elements: [
+        { kind: "text", key: "heading", text: "Complete the look", emphasis: "heading" },
+        { kind: "data", key: "price", label: "Price", path: "product.price" },
+        {
+          kind: "action",
+          key: "add",
+          label: "Add to cart",
+          action: "add-to-cart",
+          productId: "product-one",
+          quantity: 1,
+          path: null,
+        },
+      ],
+    },
+  }],
+  assets: [],
+});
+
+export const createExtensionGrant = (): ExtensionGrant => ({
+  kind: "storeblink-extension-grant",
+  schemaVersion: 1,
+  extensionId: "product-promo",
+  extensionVersion: "1.0.0",
+  trustLevel: "sandboxed",
+  grantedCapabilities: [...createExtensionManifest().grantedCapabilities],
+  quotas: {
+    maxBlocks: 2,
+    maxMessageBytes: 16_384,
+    maxDataBytes: 32_768,
+    maxActionsPerMinute: 30,
+    maxViewElements: 20,
+  },
+  status: "active",
+  issuedAt: "2026-01-01T00:00:00.000Z",
+  expiresAt: null,
+  revokedAt: null,
+  revocationReason: null,
+});

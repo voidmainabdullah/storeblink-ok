@@ -1,0 +1,5 @@
+Object.defineProperty(__vite_ssr_exports__, "sectionRenderers", { enumerable: true, configurable: true, get(){ try { return sectionRenderers } catch {} }});
+const sectionRenderers = {};
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6IjtBQUVPLE1BQU1BLG1CQUFxRCxDQUFDIiwibmFtZXMiOlsic2VjdGlvblJlbmRlcmVycyJdLCJpZ25vcmVMaXN0IjpbXSwic291cmNlcyI6WyJpbmRleC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgdHlwZSB7IFRoZW1lUGFja2FnZSB9IGZyb20gXCJAL3RoZW1lLWVuZ2luZS9jb250cmFjdHNcIjtcblxuZXhwb3J0IGNvbnN0IHNlY3Rpb25SZW5kZXJlcnM6IFRoZW1lUGFja2FnZVtcInNlY3Rpb25SZW5kZXJlcnNcIl0gPSB7fTtcbiJdLCJmaWxlIjoiL3NyYy90aGVtZXMvbm9pci1jaHJvbm8vc2VjdGlvbnMvaW5kZXgudHMifQ==

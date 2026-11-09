@@ -1,0 +1,74 @@
+[data-theme-id="atelier"] {
+  color: var(--atelier-ink);
+  font-family: var(--atelier-body);
+}
+
+[data-theme-id="atelier"] [data-node-type="image"] img {
+  transition: transform var(--atelier-motion) var(--atelier-ease), filter var(--atelier-motion) var(--atelier-ease);
+}
+
+[data-public-store] [data-theme-id="atelier"] [data-node-type="image"]:hover img {
+  transform: scale(1.025);
+  filter: contrast(1.02) saturate(0.94);
+}
+
+[data-theme-id="atelier"] [data-node-type="button"] {
+  transition: color var(--atelier-motion) var(--atelier-ease), background-color var(--atelier-motion) var(--atelier-ease), transform var(--atelier-motion) var(--atelier-ease);
+}
+
+[data-public-store] [data-theme-id="atelier"] [data-node-type="button"]:hover {
+  transform: translateY(-1px);
+}
+
+[data-theme-id="atelier"][data-canonical-section="editorial-intro"] [data-node-id="atelier-intro-accent"] {
+  font-family: var(--atelier-serif) !important;
+  font-style: italic;
+  font-weight: 400 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme-id="atelier"] *,
+  [data-theme-id="atelier"] [data-node-type="text"] {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+[data-storefront-secondary][data-active-theme="atelier"] {
+  background: var(--storefront-background);
+  color: var(--storefront-text);
+}
+
+[data-storefront-secondary][data-active-theme="atelier"] .bg-white {
+  background-color: var(--storefront-background) !important;
+}
+
+[data-storefront-secondary][data-active-theme="atelier"] .bg-neutral-50,
+[data-storefront-secondary][data-active-theme="atelier"] .bg-neutral-100 {
+  background-color: var(--storefront-surface) !important;
+}
+
+[data-storefront-secondary][data-active-theme="atelier"] .text-neutral-950,
+[data-storefront-secondary][data-active-theme="atelier"] .text-neutral-800,
+[data-storefront-secondary][data-active-theme="atelier"] .text-neutral-700 {
+  color: var(--storefront-text) !important;
+}
+
+[data-storefront-secondary][data-active-theme="atelier"] .text-neutral-600,
+[data-storefront-secondary][data-active-theme="atelier"] .text-neutral-500 {
+  color: var(--storefront-muted) !important;
+}
+
+[data-storefront-secondary][data-active-theme="atelier"] .rounded-3xl,
+[data-storefront-secondary][data-active-theme="atelier"] .rounded-2xl,
+[data-storefront-secondary][data-active-theme="atelier"] .rounded-xl,
+[data-storefront-secondary][data-active-theme="atelier"] .rounded-lg {
+  border-radius: 2px !important;
+}
+
+[data-storefront-secondary][data-active-theme="atelier"] h1,
+[data-storefront-secondary][data-active-theme="atelier"] h2 {
+  font-family: var(--storefront-heading);
+  font-weight: 500;
+  letter-spacing: 0;
+}

@@ -1,0 +1,5 @@
+Object.defineProperty(__vite_ssr_exports__, "useCustomerSession", { enumerable: true, configurable: true, get(){ try { return __vite_ssr_import_0__.useAuth } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/src/hooks/useAuth.tsx", {"importedNames":["useAuth"]});
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6IjtBQUFBIiwibmFtZXMiOltdLCJpZ25vcmVMaXN0IjpbXSwic291cmNlcyI6WyJpbmRleC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgeyB1c2VBdXRoIGFzIHVzZUN1c3RvbWVyU2Vzc2lvbiB9IGZyb20gXCJAL2hvb2tzL3VzZUF1dGhcIjtcbiJdLCJmaWxlIjoiL3NyYy9jb3JlL2FjY291bnRzL2luZGV4LnRzIn0=

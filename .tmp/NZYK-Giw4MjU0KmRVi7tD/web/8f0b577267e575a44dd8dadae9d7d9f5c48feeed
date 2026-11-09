@@ -1,0 +1,12 @@
+Object.defineProperty(__vite_ssr_exports__, "rectsIntersect", { enumerable: true, configurable: true, get(){ try { return __vite_ssr_import_1__.rectsIntersect } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "shouldRenderNode", { enumerable: true, configurable: true, get(){ try { return shouldRenderNode } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/src/rendering/geometry/index.ts", {"importedNames":["getAABB","rectsIntersect"]});
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/src/rendering/geometry/index.ts", {"importedNames":["rectsIntersect"]});
+const shouldRenderNode = (node, visibleRegion)=>{
+    if (node.meta.hidden) return false;
+    if (node.parentId === null) return true;
+    return (0,__vite_ssr_import_0__.rectsIntersect)((0,__vite_ssr_import_0__.getAABB)(node), visibleRegion);
+};
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7QUFBQTtBQUdBO0FBRU8sTUFBTUEsbUJBQW1CLENBQUNDLE1BQWlCQztJQUNoRCxJQUFJRCxLQUFLRSxJQUFJLENBQUNDLE1BQU0sRUFBRSxPQUFPO0lBQzdCLElBQUlILEtBQUtJLFFBQVEsS0FBSyxNQUFNLE9BQU87SUFDbkMsVUFBT0MseUNBQWVDLCtCQUFRTixPQUFPQztBQUN2QyIsIm5hbWVzIjpbInNob3VsZFJlbmRlck5vZGUiLCJub2RlIiwidmlzaWJsZVJlZ2lvbiIsIm1ldGEiLCJoaWRkZW4iLCJwYXJlbnRJZCIsInJlY3RzSW50ZXJzZWN0IiwiZ2V0QUFCQiJdLCJpZ25vcmVMaXN0IjpbXSwic291cmNlcyI6WyJpbmRleC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBnZXRBQUJCLCByZWN0c0ludGVyc2VjdCB9IGZyb20gXCJAL3JlbmRlcmluZy9nZW9tZXRyeVwiO1xuaW1wb3J0IHR5cGUgeyBSZWN0LCBTY2VuZU5vZGUgfSBmcm9tIFwiQC90eXBlc1wiO1xuXG5leHBvcnQgeyByZWN0c0ludGVyc2VjdCB9IGZyb20gXCJAL3JlbmRlcmluZy9nZW9tZXRyeVwiO1xuXG5leHBvcnQgY29uc3Qgc2hvdWxkUmVuZGVyTm9kZSA9IChub2RlOiBTY2VuZU5vZGUsIHZpc2libGVSZWdpb246IFJlY3QpOiBib29sZWFuID0+IHtcbiAgaWYgKG5vZGUubWV0YS5oaWRkZW4pIHJldHVybiBmYWxzZTtcbiAgaWYgKG5vZGUucGFyZW50SWQgPT09IG51bGwpIHJldHVybiB0cnVlO1xuICByZXR1cm4gcmVjdHNJbnRlcnNlY3QoZ2V0QUFCQihub2RlKSwgdmlzaWJsZVJlZ2lvbik7XG59O1xuIl0sImZpbGUiOiIvc3JjL3JlbmRlcmluZy92aXNpYmlsaXR5L2luZGV4LnRzIn0=

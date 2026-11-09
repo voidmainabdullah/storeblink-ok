@@ -1,0 +1,17 @@
+Object.defineProperty(__vite_ssr_exports__, "useEngine", { enumerable: true, configurable: true, get(){ try { return useEngine } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "useOptionalEngine", { enumerable: true, configurable: true, get(){ try { return useOptionalEngine } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "useEngineContext", { enumerable: true, configurable: true, get(){ try { return useEngineContext } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "useOptionalEngineContext", { enumerable: true, configurable: true, get(){ try { return useOptionalEngineContext } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/react/index.js", {"importedNames":["useContext"]});
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/src/engine/kernel/EngineReactContext.ts", {"importedNames":["EngineReactContext"]});
+const useEngine = ()=>{
+    const kernel = (0,__vite_ssr_import_0__.useContext)((0,__vite_ssr_import_1__.EngineReactContext));
+    if (!kernel) throw new Error("useEngine must be used inside EngineProvider.");
+    return kernel;
+};
+const useOptionalEngine = ()=>(0,__vite_ssr_import_0__.useContext)((0,__vite_ssr_import_1__.EngineReactContext));
+const useEngineContext = ()=>useEngine().getContext();
+const useOptionalEngineContext = ()=>useOptionalEngine()?.getContext() ?? null;
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7OztBQUFBO0FBQ0E7QUFJTyxNQUFNQSxZQUFZO0lBQ3ZCLE1BQU1DLFlBQVNDLHFDQUFXQztJQUMxQixJQUFJLENBQUNGLFFBQVEsTUFBTSxJQUFJRyxNQUFNO0lBQzdCLE9BQU9IO0FBQ1Q7QUFFTyxNQUFNSSxvQkFBb0IsT0FBMkJILHFDQUFXQztBQUVoRSxNQUFNRyxtQkFBbUIsSUFBcUJOLFlBQVlPLFVBQVU7QUFFcEUsTUFBTUMsMkJBQTJCLElBQTRCSCxxQkFBcUJFLGdCQUFnQiIsIm5hbWVzIjpbInVzZUVuZ2luZSIsImtlcm5lbCIsInVzZUNvbnRleHQiLCJFbmdpbmVSZWFjdENvbnRleHQiLCJFcnJvciIsInVzZU9wdGlvbmFsRW5naW5lIiwidXNlRW5naW5lQ29udGV4dCIsImdldENvbnRleHQiLCJ1c2VPcHRpb25hbEVuZ2luZUNvbnRleHQiXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZXMiOlsidXNlRW5naW5lLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IHVzZUNvbnRleHQgfSBmcm9tIFwicmVhY3RcIjtcbmltcG9ydCB7IEVuZ2luZVJlYWN0Q29udGV4dCB9IGZyb20gXCIuL0VuZ2luZVJlYWN0Q29udGV4dFwiO1xuaW1wb3J0IHR5cGUgeyBFbmdpbmVDb250ZXh0IH0gZnJvbSBcIi4vdHlwZXNcIjtcbmltcG9ydCB0eXBlIHsgRW5naW5lS2VybmVsIH0gZnJvbSBcIi4vRW5naW5lS2VybmVsXCI7XG5cbmV4cG9ydCBjb25zdCB1c2VFbmdpbmUgPSAoKTogRW5naW5lS2VybmVsID0+IHtcbiAgY29uc3Qga2VybmVsID0gdXNlQ29udGV4dChFbmdpbmVSZWFjdENvbnRleHQpO1xuICBpZiAoIWtlcm5lbCkgdGhyb3cgbmV3IEVycm9yKFwidXNlRW5naW5lIG11c3QgYmUgdXNlZCBpbnNpZGUgRW5naW5lUHJvdmlkZXIuXCIpO1xuICByZXR1cm4ga2VybmVsO1xufTtcblxuZXhwb3J0IGNvbnN0IHVzZU9wdGlvbmFsRW5naW5lID0gKCk6IEVuZ2luZUtlcm5lbCB8IG51bGwgPT4gdXNlQ29udGV4dChFbmdpbmVSZWFjdENvbnRleHQpO1xuXG5leHBvcnQgY29uc3QgdXNlRW5naW5lQ29udGV4dCA9ICgpOiBFbmdpbmVDb250ZXh0ID0+IHVzZUVuZ2luZSgpLmdldENvbnRleHQoKTtcblxuZXhwb3J0IGNvbnN0IHVzZU9wdGlvbmFsRW5naW5lQ29udGV4dCA9ICgpOiBFbmdpbmVDb250ZXh0IHwgbnVsbCA9PiB1c2VPcHRpb25hbEVuZ2luZSgpPy5nZXRDb250ZXh0KCkgPz8gbnVsbDtcbiJdLCJmaWxlIjoiL3NyYy9lbmdpbmUva2VybmVsL3VzZUVuZ2luZS50cyJ9

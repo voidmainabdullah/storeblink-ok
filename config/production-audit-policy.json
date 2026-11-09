@@ -1,0 +1,10 @@
+{
+  "expiresOn": "2026-09-01",
+  "exceptions": {
+    "react-router": {
+      "version": "7.18.2",
+      "advisories": ["GHSA-qwww-vcr4-c8h2"],
+      "reason": "The advisory affects React Router RSC server-action handling. StoreBlink is a client-only BrowserRouter SPA and does not ship React Router RSC or server handlers."
+    }
+  }
+}

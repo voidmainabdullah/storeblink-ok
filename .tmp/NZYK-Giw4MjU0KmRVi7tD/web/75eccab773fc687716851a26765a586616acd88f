@@ -1,0 +1,68 @@
+Object.defineProperty(__vite_ssr_exports__, "getLocalCorners", { enumerable: true, configurable: true, get(){ try { return getLocalCorners } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "polygonToAABB", { enumerable: true, configurable: true, get(){ try { return polygonToAABB } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "getTransformedOBB", { enumerable: true, configurable: true, get(){ try { return getTransformedOBB } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "getOBB", { enumerable: true, configurable: true, get(){ try { return getOBB } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "getAABB", { enumerable: true, configurable: true, get(){ try { return getAABB } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "unionBounds", { enumerable: true, configurable: true, get(){ try { return unionBounds } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "getChildrenBounds", { enumerable: true, configurable: true, get(){ try { return getChildrenBounds } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/src/rendering/geometry/matrix.ts", {"importedNames":["applyMatrix","composeMatrix"]});
+const getLocalCorners = (node)=>[
+        {
+            x: 0,
+            y: 0
+        },
+        {
+            x: node.transform.width,
+            y: 0
+        },
+        {
+            x: node.transform.width,
+            y: node.transform.height
+        },
+        {
+            x: 0,
+            y: node.transform.height
+        }
+    ];
+const polygonToAABB = (polygon)=>{
+    const xs = polygon.map((point)=>point.x);
+    const ys = polygon.map((point)=>point.y);
+    const minX = Math.min(...xs);
+    const maxX = Math.max(...xs);
+    const minY = Math.min(...ys);
+    const maxY = Math.max(...ys);
+    return {
+        x: minX,
+        y: minY,
+        width: maxX - minX,
+        height: maxY - minY
+    };
+};
+const getTransformedOBB = (node, matrix)=>getLocalCorners(node).map((point)=>(0,__vite_ssr_import_0__.applyMatrix)(matrix, point));
+const getOBB = (node)=>getTransformedOBB(node, (0,__vite_ssr_import_0__.composeMatrix)(node.transform));
+const getAABB = (node)=>polygonToAABB(getOBB(node));
+const unionBounds = (rects)=>{
+    if (!rects.length) return {
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0
+    };
+    const minX = Math.min(...rects.map((rect)=>rect.x));
+    const minY = Math.min(...rects.map((rect)=>rect.y));
+    const maxX = Math.max(...rects.map((rect)=>rect.x + rect.width));
+    const maxY = Math.max(...rects.map((rect)=>rect.y + rect.height));
+    return {
+        x: minX,
+        y: minY,
+        width: maxX - minX,
+        height: maxY - minY
+    };
+};
+const getChildrenBounds = (node, sceneGraph)=>{
+    const childBounds = sceneGraph.getChildren(node.id).map(getAABB);
+    return unionBounds(childBounds);
+};
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUVBO0FBSU8sTUFBTUEsa0JBQWtCLENBQUNDLE9BQTZCO1FBQzNEO1lBQUVDLEdBQUc7WUFBR0MsR0FBRztRQUFFO1FBQ2I7WUFBRUQsR0FBR0QsS0FBS0csU0FBUyxDQUFDQyxLQUFLO1lBQUVGLEdBQUc7UUFBRTtRQUNoQztZQUFFRCxHQUFHRCxLQUFLRyxTQUFTLENBQUNDLEtBQUs7WUFBRUYsR0FBR0YsS0FBS0csU0FBUyxDQUFDRTtRQUFPO1FBQ3BEO1lBQUVKLEdBQUc7WUFBR0MsR0FBR0YsS0FBS0csU0FBUyxDQUFDRTtRQUFPO0tBQ2xDO0FBRU0sTUFBTUMsZ0JBQWdCLENBQUNDO0lBQzVCLE1BQU1DLEtBQUtELFFBQVFFLEdBQUcsQ0FBQyxDQUFDQyxRQUFVQSxNQUFNVCxDQUFDO0lBQ3pDLE1BQU1VLEtBQUtKLFFBQVFFLEdBQUcsQ0FBQyxDQUFDQyxRQUFVQSxNQUFNUixDQUFDO0lBQ3pDLE1BQU1VLE9BQU9DLEtBQUtDLEdBQUcsSUFBSU47SUFDekIsTUFBTU8sT0FBT0YsS0FBS0csR0FBRyxJQUFJUjtJQUN6QixNQUFNUyxPQUFPSixLQUFLQyxHQUFHLElBQUlIO0lBQ3pCLE1BQU1PLE9BQU9MLEtBQUtHLEdBQUcsSUFBSUw7SUFDekIsT0FBTztRQUFFVixHQUFHVztRQUFNVixHQUFHZTtRQUFNYixPQUFPVyxPQUFPSDtRQUFNUCxRQUFRYSxPQUFPRDtJQUFLO0FBQ3JFO0FBRU8sTUFBTUUsb0JBQW9CLENBQUNuQixNQUFpQm9CLFNBQ2pEckIsZ0JBQWdCQyxNQUFNUyxHQUFHLENBQUMsQ0FBQ0MsV0FBVVcsbUNBQVlELFFBQVFWO0FBRXBELE1BQU1ZLFNBQVMsQ0FBQ3RCLE9BQTZCbUIsa0JBQWtCbkIsU0FBTXVCLHFDQUFjdkIsS0FBS0csU0FBUztBQUVqRyxNQUFNcUIsVUFBVSxDQUFDeEIsT0FBMEJNLGNBQWNnQixPQUFPdEI7QUFFaEUsTUFBTXlCLGNBQWMsQ0FBQ0M7SUFDMUIsSUFBSSxDQUFDQSxNQUFNQyxNQUFNLEVBQUUsT0FBTztRQUFFMUIsR0FBRztRQUFHQyxHQUFHO1FBQUdFLE9BQU87UUFBR0MsUUFBUTtJQUFFO0lBRTVELE1BQU1PLE9BQU9DLEtBQUtDLEdBQUcsSUFBSVksTUFBTWpCLEdBQUcsQ0FBQyxDQUFDbUIsT0FBU0EsS0FBSzNCLENBQUM7SUFDbkQsTUFBTWdCLE9BQU9KLEtBQUtDLEdBQUcsSUFBSVksTUFBTWpCLEdBQUcsQ0FBQyxDQUFDbUIsT0FBU0EsS0FBSzFCLENBQUM7SUFDbkQsTUFBTWEsT0FBT0YsS0FBS0csR0FBRyxJQUFJVSxNQUFNakIsR0FBRyxDQUFDLENBQUNtQixPQUFTQSxLQUFLM0IsQ0FBQyxHQUFHMkIsS0FBS3hCLEtBQUs7SUFDaEUsTUFBTWMsT0FBT0wsS0FBS0csR0FBRyxJQUFJVSxNQUFNakIsR0FBRyxDQUFDLENBQUNtQixPQUFTQSxLQUFLMUIsQ0FBQyxHQUFHMEIsS0FBS3ZCLE1BQU07SUFFakUsT0FBTztRQUFFSixHQUFHVztRQUFNVixHQUFHZTtRQUFNYixPQUFPVyxPQUFPSDtRQUFNUCxRQUFRYSxPQUFPRDtJQUFLO0FBQ3JFO0FBRU8sTUFBTVksb0JBQW9CLENBQUM3QixNQUFpQjhCO0lBQ2pELE1BQU1DLGNBQWNELFdBQVdFLFdBQVcsQ0FBQ2hDLEtBQUtpQyxFQUFFLEVBQUV4QixHQUFHLENBQUNlO0lBQ3hELE9BQU9DLFlBQVlNO0FBQ3JCIiwibmFtZXMiOlsiZ2V0TG9jYWxDb3JuZXJzIiwibm9kZSIsIngiLCJ5IiwidHJhbnNmb3JtIiwid2lkdGgiLCJoZWlnaHQiLCJwb2x5Z29uVG9BQUJCIiwicG9seWdvbiIsInhzIiwibWFwIiwicG9pbnQiLCJ5cyIsIm1pblgiLCJNYXRoIiwibWluIiwibWF4WCIsIm1heCIsIm1pblkiLCJtYXhZIiwiZ2V0VHJhbnNmb3JtZWRPQkIiLCJtYXRyaXgiLCJhcHBseU1hdHJpeCIsImdldE9CQiIsImNvbXBvc2VNYXRyaXgiLCJnZXRBQUJCIiwidW5pb25Cb3VuZHMiLCJyZWN0cyIsImxlbmd0aCIsInJlY3QiLCJnZXRDaGlsZHJlbkJvdW5kcyIsInNjZW5lR3JhcGgiLCJjaGlsZEJvdW5kcyIsImdldENoaWxkcmVuIiwiaWQiXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZXMiOlsiYm91bmRzLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB0eXBlIHsgUG9pbnQsIFJlY3QsIFNjZW5lTm9kZSB9IGZyb20gXCJAL3R5cGVzXCI7XG5pbXBvcnQgdHlwZSB7IFNjZW5lR3JhcGhBUEkgfSBmcm9tIFwiQC9lbmdpbmUvc2NlbmUtZ3JhcGhcIjtcbmltcG9ydCB7IGFwcGx5TWF0cml4LCBjb21wb3NlTWF0cml4LCB0eXBlIE1hdHJpeDJEIH0gZnJvbSBcIi4vbWF0cml4XCI7XG5cbmV4cG9ydCB0eXBlIFBvbHlnb24gPSBbUG9pbnQsIFBvaW50LCBQb2ludCwgUG9pbnRdO1xuXG5leHBvcnQgY29uc3QgZ2V0TG9jYWxDb3JuZXJzID0gKG5vZGU6IFNjZW5lTm9kZSk6IFBvbHlnb24gPT4gW1xuICB7IHg6IDAsIHk6IDAgfSxcbiAgeyB4OiBub2RlLnRyYW5zZm9ybS53aWR0aCwgeTogMCB9LFxuICB7IHg6IG5vZGUudHJhbnNmb3JtLndpZHRoLCB5OiBub2RlLnRyYW5zZm9ybS5oZWlnaHQgfSxcbiAgeyB4OiAwLCB5OiBub2RlLnRyYW5zZm9ybS5oZWlnaHQgfSxcbl07XG5cbmV4cG9ydCBjb25zdCBwb2x5Z29uVG9BQUJCID0gKHBvbHlnb246IHJlYWRvbmx5IFBvaW50W10pOiBSZWN0ID0+IHtcbiAgY29uc3QgeHMgPSBwb2x5Z29uLm1hcCgocG9pbnQpID0+IHBvaW50LngpO1xuICBjb25zdCB5cyA9IHBvbHlnb24ubWFwKChwb2ludCkgPT4gcG9pbnQueSk7XG4gIGNvbnN0IG1pblggPSBNYXRoLm1pbiguLi54cyk7XG4gIGNvbnN0IG1heFggPSBNYXRoLm1heCguLi54cyk7XG4gIGNvbnN0IG1pblkgPSBNYXRoLm1pbiguLi55cyk7XG4gIGNvbnN0IG1heFkgPSBNYXRoLm1heCguLi55cyk7XG4gIHJldHVybiB7IHg6IG1pblgsIHk6IG1pblksIHdpZHRoOiBtYXhYIC0gbWluWCwgaGVpZ2h0OiBtYXhZIC0gbWluWSB9O1xufTtcblxuZXhwb3J0IGNvbnN0IGdldFRyYW5zZm9ybWVkT0JCID0gKG5vZGU6IFNjZW5lTm9kZSwgbWF0cml4OiBNYXRyaXgyRCk6IFBvbHlnb24gPT5cbiAgZ2V0TG9jYWxDb3JuZXJzKG5vZGUpLm1hcCgocG9pbnQpID0+IGFwcGx5TWF0cml4KG1hdHJpeCwgcG9pbnQpKSBhcyBQb2x5Z29uO1xuXG5leHBvcnQgY29uc3QgZ2V0T0JCID0gKG5vZGU6IFNjZW5lTm9kZSk6IFBvbHlnb24gPT4gZ2V0VHJhbnNmb3JtZWRPQkIobm9kZSwgY29tcG9zZU1hdHJpeChub2RlLnRyYW5zZm9ybSkpO1xuXG5leHBvcnQgY29uc3QgZ2V0QUFCQiA9IChub2RlOiBTY2VuZU5vZGUpOiBSZWN0ID0+IHBvbHlnb25Ub0FBQkIoZ2V0T0JCKG5vZGUpKTtcblxuZXhwb3J0IGNvbnN0IHVuaW9uQm91bmRzID0gKHJlY3RzOiBSZWN0W10pOiBSZWN0ID0+IHtcbiAgaWYgKCFyZWN0cy5sZW5ndGgpIHJldHVybiB7IHg6IDAsIHk6IDAsIHdpZHRoOiAwLCBoZWlnaHQ6IDAgfTtcblxuICBjb25zdCBtaW5YID0gTWF0aC5taW4oLi4ucmVjdHMubWFwKChyZWN0KSA9PiByZWN0LngpKTtcbiAgY29uc3QgbWluWSA9IE1hdGgubWluKC4uLnJlY3RzLm1hcCgocmVjdCkgPT4gcmVjdC55KSk7XG4gIGNvbnN0IG1heFggPSBNYXRoLm1heCguLi5yZWN0cy5tYXAoKHJlY3QpID0+IHJlY3QueCArIHJlY3Qud2lkdGgpKTtcbiAgY29uc3QgbWF4WSA9IE1hdGgubWF4KC4uLnJlY3RzLm1hcCgocmVjdCkgPT4gcmVjdC55ICsgcmVjdC5oZWlnaHQpKTtcblxuICByZXR1cm4geyB4OiBtaW5YLCB5OiBtaW5ZLCB3aWR0aDogbWF4WCAtIG1pblgsIGhlaWdodDogbWF4WSAtIG1pblkgfTtcbn07XG5cbmV4cG9ydCBjb25zdCBnZXRDaGlsZHJlbkJvdW5kcyA9IChub2RlOiBTY2VuZU5vZGUsIHNjZW5lR3JhcGg6IFNjZW5lR3JhcGhBUEkpOiBSZWN0ID0+IHtcbiAgY29uc3QgY2hpbGRCb3VuZHMgPSBzY2VuZUdyYXBoLmdldENoaWxkcmVuKG5vZGUuaWQpLm1hcChnZXRBQUJCKTtcbiAgcmV0dXJuIHVuaW9uQm91bmRzKGNoaWxkQm91bmRzKTtcbn07XG4iXSwiZmlsZSI6Ii9zcmMvcmVuZGVyaW5nL2dlb21ldHJ5L2JvdW5kcy50cyJ9

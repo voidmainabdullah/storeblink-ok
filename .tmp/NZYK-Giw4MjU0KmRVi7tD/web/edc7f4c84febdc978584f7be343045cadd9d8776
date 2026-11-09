@@ -1,0 +1,412 @@
+Object.defineProperty(__vite_ssr_exports__, "CanvasToolDock", { enumerable: true, configurable: true, get(){ try { return CanvasToolDock } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/react/jsx-dev-runtime.js", {"importedNames":["jsxDEV"]});
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/lucide-react/dist/cjs/lucide-react.js", {"importedNames":["ArrowRight","Circle","Diamond","Grid3X3","Hand","Hexagon","ImagePlus","Minus","MousePointer2","Square","Star","Triangle","Type","ZoomIn","ZoomOut"]});
+const __vite_ssr_import_2__ = await __vite_ssr_import__("/node_modules/react/index.js", {"importedNames":["useRef","useState"]});
+const DockButton = ({ label, active, disabled, onClick, children })=>/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("button", {
+        type: "button",
+        "aria-label": label,
+        "aria-pressed": active,
+        title: label,
+        disabled: disabled,
+        onClick: onClick,
+        className: `grid h-8 w-8 shrink-0 place-items-center rounded transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${active ? "bg-[#0178ff] text-white" : "text-[#d8d8d8] hover:bg-white/10 hover:text-white"}`,
+        children: children
+    }, void 0, false, {
+        fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+        lineNumber: 34,
+        columnNumber: 3
+    }, this);
+const CanvasToolDock = ({ activeTool, gridVisible, zoom, onSelectTool, onInsertText, onInsertShape, onUploadImage, onToggleGrid, onZoomOut, onZoomIn })=>{
+    const [shapeMenuOpen, setShapeMenuOpen] = (0,__vite_ssr_import_2__.useState)(false);
+    const [textMenuOpen, setTextMenuOpen] = (0,__vite_ssr_import_2__.useState)(false);
+    const imageInputRef = (0,__vite_ssr_import_2__.useRef)(null);
+    const shapePresets = [
+        {
+            id: "rectangle",
+            label: "Rectangle",
+            icon: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.Square), {
+                size: 16
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                lineNumber: 78,
+                columnNumber: 50
+            }, this)
+        },
+        {
+            id: "circle",
+            label: "Circle",
+            icon: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.Circle), {
+                size: 16
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                lineNumber: 79,
+                columnNumber: 44
+            }, this)
+        },
+        {
+            id: "ellipse",
+            label: "Ellipse",
+            icon: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                className: "block h-3 w-5 rounded-[50%] border border-current"
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                lineNumber: 80,
+                columnNumber: 46
+            }, this)
+        },
+        {
+            id: "triangle",
+            label: "Triangle",
+            icon: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.Triangle), {
+                size: 16
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                lineNumber: 81,
+                columnNumber: 48
+            }, this)
+        },
+        {
+            id: "line",
+            label: "Line",
+            icon: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.Minus), {
+                size: 17
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                lineNumber: 82,
+                columnNumber: 40
+            }, this)
+        },
+        {
+            id: "arrow",
+            label: "Arrow",
+            icon: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.ArrowRight), {
+                size: 17
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                lineNumber: 83,
+                columnNumber: 42
+            }, this)
+        },
+        {
+            id: "star",
+            label: "Star",
+            icon: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.Star), {
+                size: 16
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                lineNumber: 84,
+                columnNumber: 40
+            }, this)
+        },
+        {
+            id: "polygon",
+            label: "Polygon",
+            icon: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.Hexagon), {
+                size: 16
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                lineNumber: 85,
+                columnNumber: 46
+            }, this)
+        },
+        {
+            id: "diamond",
+            label: "Diamond",
+            icon: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.Diamond), {
+                size: 16
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                lineNumber: 86,
+                columnNumber: 46
+            }, this)
+        }
+    ];
+    const textPresets = [
+        {
+            id: "heading",
+            label: "Heading",
+            sample: "32 px / Bold"
+        },
+        {
+            id: "subheading",
+            label: "Subheading",
+            sample: "22 px / Semibold"
+        },
+        {
+            id: "paragraph",
+            label: "Paragraph",
+            sample: "16 px / Regular"
+        }
+    ];
+    const handleImage = (event)=>{
+        const file = event.target.files?.[0];
+        event.target.value = "";
+        if (file) onUploadImage(file);
+    };
+    return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+        "data-editor-tool-dock": true,
+        className: "absolute bottom-4 left-1/2 z-50 flex max-w-[calc(100%-16px)] -translate-x-1/2 items-center gap-1 rounded-md border border-white/10 bg-[#2c2c2c] p-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.36)]",
+        children: [
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(DockButton, {
+                label: "Pointer tool (V)",
+                active: activeTool === "select",
+                onClick: ()=>onSelectTool("select"),
+                children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.MousePointer2), {
+                    size: 16
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                    lineNumber: 106,
+                    columnNumber: 7
+                }, this)
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                lineNumber: 105,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(DockButton, {
+                label: "Hand tool (H)",
+                active: activeTool === "hand",
+                onClick: ()=>onSelectTool("hand"),
+                children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.Hand), {
+                    size: 16
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                    lineNumber: 109,
+                    columnNumber: 7
+                }, this)
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                lineNumber: 108,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                className: "mx-1 h-6 w-px shrink-0 bg-[#4b4b4b]"
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                lineNumber: 111,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(DockButton, {
+                label: gridVisible ? "Hide grid" : "Show grid",
+                active: gridVisible,
+                onClick: onToggleGrid,
+                children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.Grid3X3), {
+                    size: 16
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                    lineNumber: 113,
+                    columnNumber: 7
+                }, this)
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                lineNumber: 112,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                className: "relative",
+                children: [
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(DockButton, {
+                        label: "Add shape",
+                        active: shapeMenuOpen,
+                        onClick: ()=>{
+                            setShapeMenuOpen((open)=>!open);
+                            setTextMenuOpen(false);
+                        },
+                        children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.Square), {
+                            size: 16
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                            lineNumber: 124,
+                            columnNumber: 11
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                        lineNumber: 116,
+                        columnNumber: 9
+                    }, this),
+                    shapeMenuOpen ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "absolute bottom-full left-0 mb-2 grid w-[238px] grid-cols-3 gap-1 rounded-md border border-[#494949] bg-[#2c2c2c] p-2 shadow-2xl",
+                        children: shapePresets.map((preset)=>/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("button", {
+                                type: "button",
+                                onClick: ()=>{
+                                    onInsertShape(preset.id);
+                                    setShapeMenuOpen(false);
+                                },
+                                className: "flex h-16 flex-col items-center justify-center gap-1 rounded text-[10px] text-[#d8d8d8] hover:bg-white/10 hover:text-white",
+                                children: [
+                                    preset.icon,
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                        children: preset.label
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                                        lineNumber: 139,
+                                        columnNumber: 17
+                                    }, this)
+                                ]
+                            }, preset.id, true, {
+                                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                                lineNumber: 129,
+                                columnNumber: 15
+                            }, this))
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                        lineNumber: 127,
+                        columnNumber: 11
+                    }, this) : null
+                ]
+            }, void 0, true, {
+                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                lineNumber: 115,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                className: "relative",
+                children: [
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(DockButton, {
+                        label: "Add text",
+                        active: textMenuOpen,
+                        onClick: ()=>{
+                            setTextMenuOpen((open)=>!open);
+                            setShapeMenuOpen(false);
+                        },
+                        children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.Type), {
+                            size: 16
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                            lineNumber: 154,
+                            columnNumber: 11
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                        lineNumber: 146,
+                        columnNumber: 9
+                    }, this),
+                    textMenuOpen ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "absolute bottom-full left-0 mb-2 w-[210px] rounded-md border border-[#494949] bg-[#2c2c2c] p-2 shadow-2xl",
+                        children: textPresets.map((preset)=>/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("button", {
+                                type: "button",
+                                onClick: ()=>{
+                                    onInsertText(preset.id);
+                                    setTextMenuOpen(false);
+                                },
+                                className: "flex h-11 w-full items-center justify-between rounded px-2 text-left hover:bg-white/10",
+                                children: [
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                        className: "text-xs font-semibold text-white",
+                                        children: preset.label
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                                        lineNumber: 168,
+                                        columnNumber: 17
+                                    }, this),
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                        className: "text-[9px] text-[#9a9a9a]",
+                                        children: preset.sample
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                                        lineNumber: 169,
+                                        columnNumber: 17
+                                    }, this)
+                                ]
+                            }, preset.id, true, {
+                                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                                lineNumber: 159,
+                                columnNumber: 15
+                            }, this))
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                        lineNumber: 157,
+                        columnNumber: 11
+                    }, this) : null
+                ]
+            }, void 0, true, {
+                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                lineNumber: 145,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(DockButton, {
+                label: "Upload image",
+                onClick: ()=>imageInputRef.current?.click(),
+                children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.ImagePlus), {
+                    size: 16
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                    lineNumber: 176,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                lineNumber: 175,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("input", {
+                ref: imageInputRef,
+                type: "file",
+                accept: "image/*",
+                onChange: handleImage,
+                className: "hidden"
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                lineNumber: 178,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                className: "mx-1 h-6 w-px shrink-0 bg-[#4b4b4b]"
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                lineNumber: 179,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(DockButton, {
+                label: "Zoom out",
+                disabled: zoom <= 0.1,
+                onClick: onZoomOut,
+                children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.ZoomOut), {
+                    size: 16
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                    lineNumber: 181,
+                    columnNumber: 7
+                }, this)
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                lineNumber: 180,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                className: "w-11 shrink-0 text-center text-[11px] tabular-nums text-[#e4e4e4]",
+                children: [
+                    Math.round(zoom * 100),
+                    "%"
+                ]
+            }, void 0, true, {
+                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                lineNumber: 183,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(DockButton, {
+                label: "Zoom in",
+                disabled: zoom >= 4,
+                onClick: onZoomIn,
+                children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.ZoomIn), {
+                    size: 16
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                    lineNumber: 187,
+                    columnNumber: 7
+                }, this)
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+                lineNumber: 186,
+                columnNumber: 5
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "F:/Storeblink/src/ui/toolbar/CanvasToolDock.tsx",
+        lineNumber: 101,
+        columnNumber: 5
+    }, this);
+};
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,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QzNELDhCQUFDbUM7d0NBQUt6QixXQUFVO2tEQUE2QitDLE9BQU9kOzs7Ozs7OytCQVQvQ2MsT0FBTzNCLEVBQUU7Ozs7Ozs7OzsrQkFhbEI7Ozs7Ozs7NkJBRU4sOEJBQUMvQjtnQkFBV0MsT0FBTTtnQkFBZUcsU0FBUyxJQUFNd0IsY0FBY2dDLE9BQU8sRUFBRUM7MEJBQ3JFLGtEQUFDQztvQkFBVTVCLE1BQU07Ozs7Ozs7Ozs7OzZCQUVuQiw4QkFBQzZCO2dCQUFNQyxLQUFLcEM7Z0JBQWVyQixNQUFLO2dCQUFPMEQsUUFBTztnQkFBVUMsVUFBVXJCO2dCQUFhbEMsV0FBVTs7Ozs7OzZCQUMzRiw4QkFBQ3dDO2dCQUFJeEMsV0FBVTs7Ozs7OzZCQUNmLDhCQUFDWDtnQkFBV0MsT0FBTTtnQkFBV0UsVUFBVVksUUFBUTtnQkFBS1gsU0FBU2lCOzBCQUMzRCxrREFBQzhDO29CQUFRakMsTUFBTTs7Ozs7Ozs7Ozs7NkJBRWpCLDhCQUFDRTtnQkFBS3pCLFdBQVU7O29CQUNieUQsS0FBS0MsS0FBSyxDQUFDdEQsT0FBTztvQkFBSzs7Ozs7Ozs2QkFFMUIsOEJBQUNmO2dCQUFXQyxPQUFNO2dCQUFVRSxVQUFVWSxRQUFRO2dCQUFHWCxTQUFTa0I7MEJBQ3hELGtEQUFDZ0Q7b0JBQU9wQyxNQUFNOzs7Ozs7Ozs7Ozs7Ozs7OztBQUlwQiIsIm5hbWVzIjpbIkRvY2tCdXR0b24iLCJsYWJlbCIsImFjdGl2ZSIsImRpc2FibGVkIiwib25DbGljayIsImNoaWxkcmVuIiwiYnV0dG9uIiwidHlwZSIsImFyaWEtbGFiZWwiLCJhcmlhLXByZXNzZWQiLCJ0aXRsZSIsImNsYXNzTmFtZSIsIkNhbnZhc1Rvb2xEb2NrIiwiYWN0aXZlVG9vbCIsImdyaWRWaXNpYmxlIiwiem9vbSIsIm9uU2VsZWN0VG9vbCIsIm9uSW5zZXJ0VGV4dCIsIm9uSW5zZXJ0U2hhcGUiLCJvblVwbG9hZEltYWdlIiwib25Ub2dnbGVHcmlkIiwib25ab29tT3V0Iiwib25ab29tSW4iLCJzaGFwZU1lbnVPcGVuIiwic2V0U2hhcGVNZW51T3BlbiIsInVzZVN0YXRlIiwidGV4dE1lbnVPcGVuIiwic2V0VGV4dE1lbnVPcGVuIiwiaW1hZ2VJbnB1dFJlZiIsInVzZVJlZiIsInNoYXBlUHJlc2V0cyIsImlkIiwiaWNvbiIsIlNxdWFyZSIsInNpemUiLCJDaXJjbGUiLCJzcGFuIiwiVHJpYW5nbGUiLCJNaW51cyIsIkFycm93UmlnaHQiLCJTdGFyIiwiSGV4YWdvbiIsIkRpYW1vbmQiLCJ0ZXh0UHJlc2V0cyIsInNhbXBsZSIsImhhbmRsZUltYWdlIiwiZXZlbnQiLCJmaWxlIiwidGFyZ2V0IiwiZmlsZXMiLCJ2YWx1ZSIsImRpdiIsImRhdGEtZWRpdG9yLXRvb2wtZG9jayIsIk1vdXNlUG9pbnRlcjIiLCJIYW5kIiwiR3JpZDNYMyIsIm9wZW4iLCJtYXAiLCJwcmVzZXQiLCJUeXBlIiwiY3VycmVudCIsImNsaWNrIiwiSW1hZ2VQbHVzIiwiaW5wdXQiLCJyZWYiLCJhY2NlcHQiLCJvbkNoYW5nZSIsIlpvb21PdXQiLCJNYXRoIiwicm91bmQiLCJab29tSW4iXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZXMiOlsiQ2FudmFzVG9vbERvY2sudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7XG4gIEFycm93UmlnaHQsXG4gIENpcmNsZSxcbiAgRGlhbW9uZCxcbiAgR3JpZDNYMyxcbiAgSGFuZCxcbiAgSGV4YWdvbixcbiAgSW1hZ2VQbHVzLFxuICBNaW51cyxcbiAgTW91c2VQb2ludGVyMixcbiAgU3F1YXJlLFxuICBTdGFyLFxuICBUcmlhbmdsZSxcbiAgVHlwZSxcbiAgWm9vbUluLFxuICBab29tT3V0LFxufSBmcm9tIFwibHVjaWRlLXJlYWN0XCI7XG5pbXBvcnQgeyB1c2VSZWYsIHVzZVN0YXRlLCB0eXBlIENoYW5nZUV2ZW50IH0gZnJvbSBcInJlYWN0XCI7XG5pbXBvcnQgdHlwZSB7IFJlYWN0Tm9kZSB9IGZyb20gXCJyZWFjdFwiO1xuaW1wb3J0IHR5cGUgeyBFZGl0b3JUb29sIH0gZnJvbSBcIkAvc3RvcmVzL3Rvb2wuc3RvcmVcIjtcblxuZXhwb3J0IHR5cGUgU2hhcGVQcmVzZXQgPSBcInJlY3RhbmdsZVwiIHwgXCJjaXJjbGVcIiB8IFwiZWxsaXBzZVwiIHwgXCJ0cmlhbmdsZVwiIHwgXCJsaW5lXCIgfCBcImFycm93XCIgfCBcInN0YXJcIiB8IFwicG9seWdvblwiIHwgXCJkaWFtb25kXCI7XG5leHBvcnQgdHlwZSBUZXh0UHJlc2V0ID0gXCJoZWFkaW5nXCIgfCBcInN1YmhlYWRpbmdcIiB8IFwicGFyYWdyYXBoXCI7XG5cbnR5cGUgRG9ja0J1dHRvblByb3BzID0ge1xuICBsYWJlbDogc3RyaW5nO1xuICBhY3RpdmU/OiBib29sZWFuO1xuICBkaXNhYmxlZD86IGJvb2xlYW47XG4gIG9uQ2xpY2s6ICgpID0+IHZvaWQ7XG4gIGNoaWxkcmVuOiBSZWFjdE5vZGU7XG59O1xuXG5jb25zdCBEb2NrQnV0dG9uID0gKHsgbGFiZWwsIGFjdGl2ZSwgZGlzYWJsZWQsIG9uQ2xpY2ssIGNoaWxkcmVuIH06IERvY2tCdXR0b25Qcm9wcykgPT4gKFxuICA8YnV0dG9uXG4gICAgdHlwZT1cImJ1dHRvblwiXG4gICAgYXJpYS1sYWJlbD17bGFiZWx9XG4gICAgYXJpYS1wcmVzc2VkPXthY3RpdmV9XG4gICAgdGl0bGU9e2xhYmVsfVxuICAgIGRpc2FibGVkPXtkaXNhYmxlZH1cbiAgICBvbkNsaWNrPXtvbkNsaWNrfVxuICAgIGNsYXNzTmFtZT17YGdyaWQgaC04IHctOCBzaHJpbmstMCBwbGFjZS1pdGVtcy1jZW50ZXIgcm91bmRlZCB0cmFuc2l0aW9uLWNvbG9ycyBkaXNhYmxlZDpjdXJzb3Itbm90LWFsbG93ZWQgZGlzYWJsZWQ6b3BhY2l0eS00MCAke1xuICAgICAgYWN0aXZlID8gXCJiZy1bIzAxNzhmZl0gdGV4dC13aGl0ZVwiIDogXCJ0ZXh0LVsjZDhkOGQ4XSBob3ZlcjpiZy13aGl0ZS8xMCBob3Zlcjp0ZXh0LXdoaXRlXCJcbiAgICB9YH1cbiAgPlxuICAgIHtjaGlsZHJlbn1cbiAgPC9idXR0b24+XG4pO1xuXG5leHBvcnQgdHlwZSBDYW52YXNUb29sRG9ja1Byb3BzID0ge1xuICBhY3RpdmVUb29sOiBFZGl0b3JUb29sO1xuICBncmlkVmlzaWJsZTogYm9vbGVhbjtcbiAgem9vbTogbnVtYmVyO1xuICBvblNlbGVjdFRvb2w6ICh0b29sOiBFZGl0b3JUb29sKSA9PiB2b2lkO1xuICBvbkluc2VydFRleHQ6IChwcmVzZXQ6IFRleHRQcmVzZXQpID0+IHZvaWQ7XG4gIG9uSW5zZXJ0U2hhcGU6IChwcmVzZXQ6IFNoYXBlUHJlc2V0KSA9PiB2b2lkO1xuICBvblVwbG9hZEltYWdlOiAoZmlsZTogRmlsZSkgPT4gdm9pZDtcbiAgb25Ub2dnbGVHcmlkOiAoKSA9PiB2b2lkO1xuICBvblpvb21PdXQ6ICgpID0+IHZvaWQ7XG4gIG9uWm9vbUluOiAoKSA9PiB2b2lkO1xufTtcblxuZXhwb3J0IGNvbnN0IENhbnZhc1Rvb2xEb2NrID0gKHtcbiAgYWN0aXZlVG9vbCxcbiAgZ3JpZFZpc2libGUsXG4gIHpvb20sXG4gIG9uU2VsZWN0VG9vbCxcbiAgb25JbnNlcnRUZXh0LFxuICBvbkluc2VydFNoYXBlLFxuICBvblVwbG9hZEltYWdlLFxuICBvblRvZ2dsZUdyaWQsXG4gIG9uWm9vbU91dCxcbiAgb25ab29tSW4sXG59OiBDYW52YXNUb29sRG9ja1Byb3BzKSA9PiB7XG4gIGNvbnN0IFtzaGFwZU1lbnVPcGVuLCBzZXRTaGFwZU1lbnVPcGVuXSA9IHVzZVN0YXRlKGZhbHNlKTtcbiAgY29uc3QgW3RleHRNZW51T3Blbiwgc2V0VGV4dE1lbnVPcGVuXSA9IHVzZVN0YXRlKGZhbHNlKTtcbiAgY29uc3QgaW1hZ2VJbnB1dFJlZiA9IHVzZVJlZjxIVE1MSW5wdXRFbGVtZW50PihudWxsKTtcbiAgY29uc3Qgc2hhcGVQcmVzZXRzOiBBcnJheTx7IGlkOiBTaGFwZVByZXNldDsgbGFiZWw6IHN0cmluZzsgaWNvbjogUmVhY3ROb2RlIH0+ID0gW1xuICAgIHsgaWQ6IFwicmVjdGFuZ2xlXCIsIGxhYmVsOiBcIlJlY3RhbmdsZVwiLCBpY29uOiA8U3F1YXJlIHNpemU9ezE2fSAvPiB9LFxuICAgIHsgaWQ6IFwiY2lyY2xlXCIsIGxhYmVsOiBcIkNpcmNsZVwiLCBpY29uOiA8Q2lyY2xlIHNpemU9ezE2fSAvPiB9LFxuICAgIHsgaWQ6IFwiZWxsaXBzZVwiLCBsYWJlbDogXCJFbGxpcHNlXCIsIGljb246IDxzcGFuIGNsYXNzTmFtZT1cImJsb2NrIGgtMyB3LTUgcm91bmRlZC1bNTAlXSBib3JkZXIgYm9yZGVyLWN1cnJlbnRcIiAvPiB9LFxuICAgIHsgaWQ6IFwidHJpYW5nbGVcIiwgbGFiZWw6IFwiVHJpYW5nbGVcIiwgaWNvbjogPFRyaWFuZ2xlIHNpemU9ezE2fSAvPiB9LFxuICAgIHsgaWQ6IFwibGluZVwiLCBsYWJlbDogXCJMaW5lXCIsIGljb246IDxNaW51cyBzaXplPXsxN30gLz4gfSxcbiAgICB7IGlkOiBcImFycm93XCIsIGxhYmVsOiBcIkFycm93XCIsIGljb246IDxBcnJvd1JpZ2h0IHNpemU9ezE3fSAvPiB9LFxuICAgIHsgaWQ6IFwic3RhclwiLCBsYWJlbDogXCJTdGFyXCIsIGljb246IDxTdGFyIHNpemU9ezE2fSAvPiB9LFxuICAgIHsgaWQ6IFwicG9seWdvblwiLCBsYWJlbDogXCJQb2x5Z29uXCIsIGljb246IDxIZXhhZ29uIHNpemU9ezE2fSAvPiB9LFxuICAgIHsgaWQ6IFwiZGlhbW9uZFwiLCBsYWJlbDogXCJEaWFtb25kXCIsIGljb246IDxEaWFtb25kIHNpemU9ezE2fSAvPiB9LFxuICBdO1xuICBjb25zdCB0ZXh0UHJlc2V0czogQXJyYXk8eyBpZDogVGV4dFByZXNldDsgbGFiZWw6IHN0cmluZzsgc2FtcGxlOiBzdHJpbmcgfT4gPSBbXG4gICAgeyBpZDogXCJoZWFkaW5nXCIsIGxhYmVsOiBcIkhlYWRpbmdcIiwgc2FtcGxlOiBcIjMyIHB4IC8gQm9sZFwiIH0sXG4gICAgeyBpZDogXCJzdWJoZWFkaW5nXCIsIGxhYmVsOiBcIlN1YmhlYWRpbmdcIiwgc2FtcGxlOiBcIjIyIHB4IC8gU2VtaWJvbGRcIiB9LFxuICAgIHsgaWQ6IFwicGFyYWdyYXBoXCIsIGxhYmVsOiBcIlBhcmFncmFwaFwiLCBzYW1wbGU6IFwiMTYgcHggLyBSZWd1bGFyXCIgfSxcbiAgXTtcblxuICBjb25zdCBoYW5kbGVJbWFnZSA9IChldmVudDogQ2hhbmdlRXZlbnQ8SFRNTElucHV0RWxlbWVudD4pID0+IHtcbiAgICBjb25zdCBmaWxlID0gZXZlbnQudGFyZ2V0LmZpbGVzPy5bMF07XG4gICAgZXZlbnQudGFyZ2V0LnZhbHVlID0gXCJcIjtcbiAgICBpZiAoZmlsZSkgb25VcGxvYWRJbWFnZShmaWxlKTtcbiAgfTtcblxuICByZXR1cm4gKFxuICAgIDxkaXZcbiAgICAgIGRhdGEtZWRpdG9yLXRvb2wtZG9ja1xuICAgICAgY2xhc3NOYW1lPVwiYWJzb2x1dGUgYm90dG9tLTQgbGVmdC0xLzIgei01MCBmbGV4IG1heC13LVtjYWxjKDEwMCUtMTZweCldIC10cmFuc2xhdGUteC0xLzIgaXRlbXMtY2VudGVyIGdhcC0xIHJvdW5kZWQtbWQgYm9yZGVyIGJvcmRlci13aGl0ZS8xMCBiZy1bIzJjMmMyY10gcC0xLjUgc2hhZG93LVswXzhweF8yNHB4X3JnYmEoMCwwLDAsMC4zNildXCJcbiAgICA+XG4gICAgPERvY2tCdXR0b24gbGFiZWw9XCJQb2ludGVyIHRvb2wgKFYpXCIgYWN0aXZlPXthY3RpdmVUb29sID09PSBcInNlbGVjdFwifSBvbkNsaWNrPXsoKSA9PiBvblNlbGVjdFRvb2woXCJzZWxlY3RcIil9PlxuICAgICAgPE1vdXNlUG9pbnRlcjIgc2l6ZT17MTZ9IC8+XG4gICAgPC9Eb2NrQnV0dG9uPlxuICAgIDxEb2NrQnV0dG9uIGxhYmVsPVwiSGFuZCB0b29sIChIKVwiIGFjdGl2ZT17YWN0aXZlVG9vbCA9PT0gXCJoYW5kXCJ9IG9uQ2xpY2s9eygpID0+IG9uU2VsZWN0VG9vbChcImhhbmRcIil9PlxuICAgICAgPEhhbmQgc2l6ZT17MTZ9IC8+XG4gICAgPC9Eb2NrQnV0dG9uPlxuICAgIDxkaXYgY2xhc3NOYW1lPVwibXgtMSBoLTYgdy1weCBzaHJpbmstMCBiZy1bIzRiNGI0Yl1cIiAvPlxuICAgIDxEb2NrQnV0dG9uIGxhYmVsPXtncmlkVmlzaWJsZSA/IFwiSGlkZSBncmlkXCIgOiBcIlNob3cgZ3JpZFwifSBhY3RpdmU9e2dyaWRWaXNpYmxlfSBvbkNsaWNrPXtvblRvZ2dsZUdyaWR9PlxuICAgICAgPEdyaWQzWDMgc2l6ZT17MTZ9IC8+XG4gICAgPC9Eb2NrQnV0dG9uPlxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJyZWxhdGl2ZVwiPlxuICAgICAgICA8RG9ja0J1dHRvblxuICAgICAgICAgIGxhYmVsPVwiQWRkIHNoYXBlXCJcbiAgICAgICAgICBhY3RpdmU9e3NoYXBlTWVudU9wZW59XG4gICAgICAgICAgb25DbGljaz17KCkgPT4ge1xuICAgICAgICAgICAgc2V0U2hhcGVNZW51T3Blbigob3BlbikgPT4gIW9wZW4pO1xuICAgICAgICAgICAgc2V0VGV4dE1lbnVPcGVuKGZhbHNlKTtcbiAgICAgICAgICB9fVxuICAgICAgICA+XG4gICAgICAgICAgPFNxdWFyZSBzaXplPXsxNn0gLz5cbiAgICAgICAgPC9Eb2NrQnV0dG9uPlxuICAgICAgICB7c2hhcGVNZW51T3BlbiA/IChcbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImFic29sdXRlIGJvdHRvbS1mdWxsIGxlZnQtMCBtYi0yIGdyaWQgdy1bMjM4cHhdIGdyaWQtY29scy0zIGdhcC0xIHJvdW5kZWQtbWQgYm9yZGVyIGJvcmRlci1bIzQ5NDk0OV0gYmctWyMyYzJjMmNdIHAtMiBzaGFkb3ctMnhsXCI+XG4gICAgICAgICAgICB7c2hhcGVQcmVzZXRzLm1hcCgocHJlc2V0KSA9PiAoXG4gICAgICAgICAgICAgIDxidXR0b25cbiAgICAgICAgICAgICAgICBrZXk9e3ByZXNldC5pZH1cbiAgICAgICAgICAgICAgICB0eXBlPVwiYnV0dG9uXCJcbiAgICAgICAgICAgICAgICBvbkNsaWNrPXsoKSA9PiB7XG4gICAgICAgICAgICAgICAgICBvbkluc2VydFNoYXBlKHByZXNldC5pZCk7XG4gICAgICAgICAgICAgICAgICBzZXRTaGFwZU1lbnVPcGVuKGZhbHNlKTtcbiAgICAgICAgICAgICAgICB9fVxuICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cImZsZXggaC0xNiBmbGV4LWNvbCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgZ2FwLTEgcm91bmRlZCB0ZXh0LVsxMHB4XSB0ZXh0LVsjZDhkOGQ4XSBob3ZlcjpiZy13aGl0ZS8xMCBob3Zlcjp0ZXh0LXdoaXRlXCJcbiAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgIHtwcmVzZXQuaWNvbn1cbiAgICAgICAgICAgICAgICA8c3Bhbj57cHJlc2V0LmxhYmVsfTwvc3Bhbj5cbiAgICAgICAgICAgICAgPC9idXR0b24+XG4gICAgICAgICAgICApKX1cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgKSA6IG51bGx9XG4gICAgICA8L2Rpdj5cbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwicmVsYXRpdmVcIj5cbiAgICAgICAgPERvY2tCdXR0b25cbiAgICAgICAgICBsYWJlbD1cIkFkZCB0ZXh0XCJcbiAgICAgICAgICBhY3RpdmU9e3RleHRNZW51T3Blbn1cbiAgICAgICAgICBvbkNsaWNrPXsoKSA9PiB7XG4gICAgICAgICAgICBzZXRUZXh0TWVudU9wZW4oKG9wZW4pID0+ICFvcGVuKTtcbiAgICAgICAgICAgIHNldFNoYXBlTWVudU9wZW4oZmFsc2UpO1xuICAgICAgICAgIH19XG4gICAgICAgID5cbiAgICAgICAgICA8VHlwZSBzaXplPXsxNn0gLz5cbiAgICAgICAgPC9Eb2NrQnV0dG9uPlxuICAgICAgICB7dGV4dE1lbnVPcGVuID8gKFxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiYWJzb2x1dGUgYm90dG9tLWZ1bGwgbGVmdC0wIG1iLTIgdy1bMjEwcHhdIHJvdW5kZWQtbWQgYm9yZGVyIGJvcmRlci1bIzQ5NDk0OV0gYmctWyMyYzJjMmNdIHAtMiBzaGFkb3ctMnhsXCI+XG4gICAgICAgICAgICB7dGV4dFByZXNldHMubWFwKChwcmVzZXQpID0+IChcbiAgICAgICAgICAgICAgPGJ1dHRvblxuICAgICAgICAgICAgICAgIGtleT17cHJlc2V0LmlkfVxuICAgICAgICAgICAgICAgIHR5cGU9XCJidXR0b25cIlxuICAgICAgICAgICAgICAgIG9uQ2xpY2s9eygpID0+IHtcbiAgICAgICAgICAgICAgICAgIG9uSW5zZXJ0VGV4dChwcmVzZXQuaWQpO1xuICAgICAgICAgICAgICAgICAgc2V0VGV4dE1lbnVPcGVuKGZhbHNlKTtcbiAgICAgICAgICAgICAgICB9fVxuICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cImZsZXggaC0xMSB3LWZ1bGwgaXRlbXMtY2VudGVyIGp1c3RpZnktYmV0d2VlbiByb3VuZGVkIHB4LTIgdGV4dC1sZWZ0IGhvdmVyOmJnLXdoaXRlLzEwXCJcbiAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cInRleHQteHMgZm9udC1zZW1pYm9sZCB0ZXh0LXdoaXRlXCI+e3ByZXNldC5sYWJlbH08L3NwYW4+XG4gICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwidGV4dC1bOXB4XSB0ZXh0LVsjOWE5YTlhXVwiPntwcmVzZXQuc2FtcGxlfTwvc3Bhbj5cbiAgICAgICAgICAgICAgPC9idXR0b24+XG4gICAgICAgICAgICApKX1cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgKSA6IG51bGx9XG4gICAgICA8L2Rpdj5cbiAgICAgIDxEb2NrQnV0dG9uIGxhYmVsPVwiVXBsb2FkIGltYWdlXCIgb25DbGljaz17KCkgPT4gaW1hZ2VJbnB1dFJlZi5jdXJyZW50Py5jbGljaygpfT5cbiAgICAgICAgPEltYWdlUGx1cyBzaXplPXsxNn0gLz5cbiAgICAgIDwvRG9ja0J1dHRvbj5cbiAgICAgIDxpbnB1dCByZWY9e2ltYWdlSW5wdXRSZWZ9IHR5cGU9XCJmaWxlXCIgYWNjZXB0PVwiaW1hZ2UvKlwiIG9uQ2hhbmdlPXtoYW5kbGVJbWFnZX0gY2xhc3NOYW1lPVwiaGlkZGVuXCIgLz5cbiAgICA8ZGl2IGNsYXNzTmFtZT1cIm14LTEgaC02IHctcHggc2hyaW5rLTAgYmctWyM0YjRiNGJdXCIgLz5cbiAgICA8RG9ja0J1dHRvbiBsYWJlbD1cIlpvb20gb3V0XCIgZGlzYWJsZWQ9e3pvb20gPD0gMC4xfSBvbkNsaWNrPXtvblpvb21PdXR9PlxuICAgICAgPFpvb21PdXQgc2l6ZT17MTZ9IC8+XG4gICAgPC9Eb2NrQnV0dG9uPlxuICAgIDxzcGFuIGNsYXNzTmFtZT1cInctMTEgc2hyaW5rLTAgdGV4dC1jZW50ZXIgdGV4dC1bMTFweF0gdGFidWxhci1udW1zIHRleHQtWyNlNGU0ZTRdXCI+XG4gICAgICB7TWF0aC5yb3VuZCh6b29tICogMTAwKX0lXG4gICAgPC9zcGFuPlxuICAgIDxEb2NrQnV0dG9uIGxhYmVsPVwiWm9vbSBpblwiIGRpc2FibGVkPXt6b29tID49IDR9IG9uQ2xpY2s9e29uWm9vbUlufT5cbiAgICAgIDxab29tSW4gc2l6ZT17MTZ9IC8+XG4gICAgPC9Eb2NrQnV0dG9uPlxuICAgIDwvZGl2PlxuICApO1xufTtcbiJdLCJmaWxlIjoiL3NyYy91aS90b29sYmFyL0NhbnZhc1Rvb2xEb2NrLnRzeCJ9

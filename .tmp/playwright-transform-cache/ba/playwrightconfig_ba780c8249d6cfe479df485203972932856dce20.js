@@ -1,0 +1,26 @@
+import { defineConfig } from "@playwright/test";
+const chromePath = process.platform === "win32" ? "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe" : undefined;
+export default defineConfig({
+  testDir: "./tests/e2e",
+  outputDir: "./test-results/playwright",
+  fullyParallel: false,
+  workers: 1,
+  retries: 0,
+  reporter: "list",
+  use: {
+    baseURL: "http://127.0.0.1:8082",
+    headless: true,
+    trace: "retain-on-failure",
+    screenshot: "only-on-failure",
+    launchOptions: chromePath ? {
+      executablePath: chromePath
+    } : undefined
+  },
+  webServer: {
+    command: "npm run dev -- --host 127.0.0.1 --port 8082",
+    url: "http://127.0.0.1:8082",
+    reuseExistingServer: true,
+    timeout: 120000
+  }
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJkZWZpbmVDb25maWciLCJjaHJvbWVQYXRoIiwicHJvY2VzcyIsInBsYXRmb3JtIiwidW5kZWZpbmVkIiwidGVzdERpciIsIm91dHB1dERpciIsImZ1bGx5UGFyYWxsZWwiLCJ3b3JrZXJzIiwicmV0cmllcyIsInJlcG9ydGVyIiwidXNlIiwiYmFzZVVSTCIsImhlYWRsZXNzIiwidHJhY2UiLCJzY3JlZW5zaG90IiwibGF1bmNoT3B0aW9ucyIsImV4ZWN1dGFibGVQYXRoIiwid2ViU2VydmVyIiwiY29tbWFuZCIsInVybCIsInJldXNlRXhpc3RpbmdTZXJ2ZXIiLCJ0aW1lb3V0Il0sInNvdXJjZXMiOlsicGxheXdyaWdodC5jb25maWcudHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgZGVmaW5lQ29uZmlnIH0gZnJvbSBcIkBwbGF5d3JpZ2h0L3Rlc3RcIjtcblxuY29uc3QgY2hyb21lUGF0aCA9IHByb2Nlc3MucGxhdGZvcm0gPT09IFwid2luMzJcIlxuICA/IFwiQzpcXFxcUHJvZ3JhbSBGaWxlc1xcXFxHb29nbGVcXFxcQ2hyb21lXFxcXEFwcGxpY2F0aW9uXFxcXGNocm9tZS5leGVcIlxuICA6IHVuZGVmaW5lZDtcblxuZXhwb3J0IGRlZmF1bHQgZGVmaW5lQ29uZmlnKHtcbiAgdGVzdERpcjogXCIuL3Rlc3RzL2UyZVwiLFxuICBvdXRwdXREaXI6IFwiLi90ZXN0LXJlc3VsdHMvcGxheXdyaWdodFwiLFxuICBmdWxseVBhcmFsbGVsOiBmYWxzZSxcbiAgd29ya2VyczogMSxcbiAgcmV0cmllczogMCxcbiAgcmVwb3J0ZXI6IFwibGlzdFwiLFxuICB1c2U6IHtcbiAgICBiYXNlVVJMOiBcImh0dHA6Ly8xMjcuMC4wLjE6ODA4MlwiLFxuICAgIGhlYWRsZXNzOiB0cnVlLFxuICAgIHRyYWNlOiBcInJldGFpbi1vbi1mYWlsdXJlXCIsXG4gICAgc2NyZWVuc2hvdDogXCJvbmx5LW9uLWZhaWx1cmVcIixcbiAgICBsYXVuY2hPcHRpb25zOiBjaHJvbWVQYXRoID8geyBleGVjdXRhYmxlUGF0aDogY2hyb21lUGF0aCB9IDogdW5kZWZpbmVkLFxuICB9LFxuICB3ZWJTZXJ2ZXI6IHtcbiAgICBjb21tYW5kOiBcIm5wbSBydW4gZGV2IC0tIC0taG9zdCAxMjcuMC4wLjEgLS1wb3J0IDgwODJcIixcbiAgICB1cmw6IFwiaHR0cDovLzEyNy4wLjAuMTo4MDgyXCIsXG4gICAgcmV1c2VFeGlzdGluZ1NlcnZlcjogdHJ1ZSxcbiAgICB0aW1lb3V0OiAxMjBfMDAwLFxuICB9LFxufSk7XG5cbiJdLCJtYXBwaW5ncyI6IkFBQUEsU0FBU0EsWUFBWSxRQUFRLGtCQUFrQjtBQUUvQyxNQUFNQyxVQUFVLEdBQUdDLE9BQU8sQ0FBQ0MsUUFBUSxLQUFLLE9BQU8sR0FDM0MsNERBQTRELEdBQzVEQyxTQUFTO0FBRWIsZUFBZUosWUFBWSxDQUFDO0VBQzFCSyxPQUFPLEVBQUUsYUFBYTtFQUN0QkMsU0FBUyxFQUFFLDJCQUEyQjtFQUN0Q0MsYUFBYSxFQUFFLEtBQUs7RUFDcEJDLE9BQU8sRUFBRSxDQUFDO0VBQ1ZDLE9BQU8sRUFBRSxDQUFDO0VBQ1ZDLFFBQVEsRUFBRSxNQUFNO0VBQ2hCQyxHQUFHLEVBQUU7SUFDSEMsT0FBTyxFQUFFLHVCQUF1QjtJQUNoQ0MsUUFBUSxFQUFFLElBQUk7SUFDZEMsS0FBSyxFQUFFLG1CQUFtQjtJQUMxQkMsVUFBVSxFQUFFLGlCQUFpQjtJQUM3QkMsYUFBYSxFQUFFZixVQUFVLEdBQUc7TUFBRWdCLGNBQWMsRUFBRWhCO0lBQVcsQ0FBQyxHQUFHRztFQUMvRCxDQUFDO0VBQ0RjLFNBQVMsRUFBRTtJQUNUQyxPQUFPLEVBQUUsNkNBQTZDO0lBQ3REQyxHQUFHLEVBQUUsdUJBQXVCO0lBQzVCQyxtQkFBbUIsRUFBRSxJQUFJO0lBQ3pCQyxPQUFPLEVBQUU7RUFDWDtBQUNGLENBQUMsQ0FBQyIsImlnbm9yZUxpc3QiOltdfQ==

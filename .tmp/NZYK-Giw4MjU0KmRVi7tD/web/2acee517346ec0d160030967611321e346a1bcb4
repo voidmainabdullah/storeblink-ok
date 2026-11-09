@@ -1,0 +1,4 @@
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/src/document/pages/PageDocumentSystem.ts");__vite_ssr_exportAll__(__vite_ssr_import_0__);
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6IkFBQUEiLCJuYW1lcyI6W10sImlnbm9yZUxpc3QiOltdLCJzb3VyY2VzIjpbImluZGV4LnRzIl0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCAqIGZyb20gXCIuL1BhZ2VEb2N1bWVudFN5c3RlbVwiO1xuIl0sImZpbGUiOiIvc3JjL2RvY3VtZW50L3BhZ2VzL2luZGV4LnRzIn0=

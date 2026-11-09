@@ -1,0 +1,450 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/pages/Auth.tsx");import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+
+let prevRefreshReg;
+let prevRefreshSig;
+
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react-swc can't detect preamble. Something is wrong."
+    );
+  }
+
+  prevRefreshReg = window.$RefreshReg$;
+  prevRefreshSig = window.$RefreshSig$;
+  window.$RefreshReg$ = RefreshRuntime.getRefreshReg("F:/Storeblink/src/pages/Auth.tsx");
+  window.$RefreshSig$ = RefreshRuntime.createSignatureFunctionForTransform;
+}
+
+import __vite__cjsImport2_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=55d3bc10"; const _jsxDEV = __vite__cjsImport2_react_jsxDevRuntime["jsxDEV"]; const _Fragment = __vite__cjsImport2_react_jsxDevRuntime["Fragment"];
+var _s = $RefreshSig$();
+import __vite__cjsImport3_react from "/node_modules/.vite/deps/react.js?v=55d3bc10"; const useState = __vite__cjsImport3_react["useState"]; const useEffect = __vite__cjsImport3_react["useEffect"];
+import { Link, useNavigate, useSearchParams } from "/node_modules/.vite/deps/react-router-dom.js?v=55d3bc10";
+import { z } from "/node_modules/.vite/deps/zod.js?v=55d3bc10";
+import { supabase } from "/src/integrations/supabase/client.ts";
+import { Button } from "/src/components/ui/button.tsx";
+import { Input } from "/src/components/ui/input.tsx";
+import { Label } from "/src/components/ui/label.tsx";
+import { Logo } from "/src/components/marketing/Logo.tsx";
+import { useToast } from "/src/hooks/use-toast.ts";
+import { useAuth } from "/src/hooks/useAuth.tsx";
+const signUpSchema = z.object({
+    fullName: z.string().trim().min(1, "Name required").max(100),
+    businessName: z.string().trim().min(1, "Business name required").max(100),
+    email: z.string().trim().email("Invalid email").max(255),
+    password: z.string().min(8, "At least 8 characters").max(72)
+});
+const signInSchema = z.object({
+    email: z.string().trim().email("Invalid email").max(255),
+    password: z.string().min(1, "Password required").max(72)
+});
+const Auth = ()=>{
+    _s();
+    const [params] = useSearchParams();
+    const navigate = useNavigate();
+    const { user } = useAuth();
+    const { toast } = useToast();
+    const [mode, setMode] = useState(params.get("mode") === "signup" ? "signup" : "signin");
+    const [loading, setLoading] = useState(false);
+    const [form, setForm] = useState({
+        fullName: "",
+        businessName: "",
+        email: "",
+        password: ""
+    });
+    useEffect(()=>{
+        if (user) navigate("/dashboard");
+    }, [
+        user,
+        navigate
+    ]);
+    const onSubmit = async (e)=>{
+        e.preventDefault();
+        setLoading(true);
+        try {
+            if (mode === "signup") {
+                const parsed = signUpSchema.safeParse(form);
+                if (!parsed.success) {
+                    toast({
+                        title: "Check your details",
+                        description: parsed.error.issues[0].message,
+                        variant: "destructive"
+                    });
+                    return;
+                }
+                const redirectUrl = `${window.location.origin}/dashboard`;
+                const { error } = await supabase.auth.signUp({
+                    email: form.email,
+                    password: form.password,
+                    options: {
+                        emailRedirectTo: redirectUrl,
+                        data: {
+                            full_name: form.fullName,
+                            business_name: form.businessName
+                        }
+                    }
+                });
+                if (error) throw error;
+                toast({
+                    title: "Welcome to Storeblink!",
+                    description: "Your account is ready."
+                });
+                navigate("/dashboard");
+            } else {
+                const parsed = signInSchema.safeParse(form);
+                if (!parsed.success) {
+                    toast({
+                        title: "Check your details",
+                        description: parsed.error.issues[0].message,
+                        variant: "destructive"
+                    });
+                    return;
+                }
+                const { error } = await supabase.auth.signInWithPassword({
+                    email: form.email,
+                    password: form.password
+                });
+                if (error) throw error;
+                navigate("/dashboard");
+            }
+        } catch (err) {
+            toast({
+                title: "Authentication failed",
+                description: err.message ?? "Try again",
+                variant: "destructive"
+            });
+        } finally{
+            setLoading(false);
+        }
+    };
+    return /*#__PURE__*/ _jsxDEV("div", {
+        className: "min-h-screen grid lg:grid-cols-2 bg-background",
+        children: [
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "hidden lg:flex flex-col justify-between p-10 bg-gradient-ink text-background",
+                children: [
+                    /*#__PURE__*/ _jsxDEV(Logo, {
+                        inverted: true
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                        lineNumber: 76,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ _jsxDEV("div", {
+                        children: [
+                            /*#__PURE__*/ _jsxDEV("h2", {
+                                className: "text-headline mb-4 max-w-md",
+                                children: "Run your business with Storeblink."
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                                lineNumber: 78,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ _jsxDEV("p", {
+                                className: "text-background/70 max-w-md",
+                                children: "Take payments, manage inventory, and see your numbers in real time. Free to start."
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                                lineNumber: 79,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                        lineNumber: 77,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ _jsxDEV("p", {
+                        className: "text-background/40 text-xs",
+                        children: [
+                            "© ",
+                            new Date().getFullYear(),
+                            " Storeblink"
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                        lineNumber: 81,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                lineNumber: 75,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "flex flex-col p-6 sm:p-10",
+                children: [
+                    /*#__PURE__*/ _jsxDEV("div", {
+                        className: "lg:hidden mb-8",
+                        children: /*#__PURE__*/ _jsxDEV(Logo, {}, void 0, false, {
+                            fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                            lineNumber: 85,
+                            columnNumber: 41
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                        lineNumber: 85,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ _jsxDEV("div", {
+                        className: "flex-1 grid place-items-center",
+                        children: /*#__PURE__*/ _jsxDEV("form", {
+                            onSubmit: onSubmit,
+                            className: "w-full max-w-sm space-y-5",
+                            children: [
+                                /*#__PURE__*/ _jsxDEV("div", {
+                                    children: [
+                                        /*#__PURE__*/ _jsxDEV("h1", {
+                                            className: "text-3xl font-semibold tracking-tight mb-1",
+                                            children: mode === "signup" ? "Create your account" : "Welcome back"
+                                        }, void 0, false, {
+                                            fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                                            lineNumber: 89,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("p", {
+                                            className: "text-sm text-muted-foreground",
+                                            children: mode === "signup" ? "Start selling in minutes." : "Sign in to your dashboard."
+                                        }, void 0, false, {
+                                            fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                                            lineNumber: 90,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                                    lineNumber: 88,
+                                    columnNumber: 13
+                                }, this),
+                                mode === "signup" && /*#__PURE__*/ _jsxDEV(_Fragment, {
+                                    children: [
+                                        /*#__PURE__*/ _jsxDEV("div", {
+                                            children: [
+                                                /*#__PURE__*/ _jsxDEV(Label, {
+                                                    htmlFor: "fullName",
+                                                    children: "Full name"
+                                                }, void 0, false, {
+                                                    fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                                                    lineNumber: 98,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ _jsxDEV(Input, {
+                                                    id: "fullName",
+                                                    value: form.fullName,
+                                                    onChange: (e)=>setForm({
+                                                            ...form,
+                                                            fullName: e.target.value
+                                                        }),
+                                                    required: true,
+                                                    maxLength: 100
+                                                }, void 0, false, {
+                                                    fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                                                    lineNumber: 99,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                                            lineNumber: 97,
+                                            columnNumber: 17
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("div", {
+                                            children: [
+                                                /*#__PURE__*/ _jsxDEV(Label, {
+                                                    htmlFor: "businessName",
+                                                    children: "Business name"
+                                                }, void 0, false, {
+                                                    fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                                                    lineNumber: 102,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ _jsxDEV(Input, {
+                                                    id: "businessName",
+                                                    value: form.businessName,
+                                                    onChange: (e)=>setForm({
+                                                            ...form,
+                                                            businessName: e.target.value
+                                                        }),
+                                                    required: true,
+                                                    maxLength: 100
+                                                }, void 0, false, {
+                                                    fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                                                    lineNumber: 103,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                                            lineNumber: 101,
+                                            columnNumber: 17
+                                        }, this)
+                                    ]
+                                }, void 0, true),
+                                /*#__PURE__*/ _jsxDEV("div", {
+                                    children: [
+                                        /*#__PURE__*/ _jsxDEV(Label, {
+                                            htmlFor: "email",
+                                            children: "Email"
+                                        }, void 0, false, {
+                                            fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                                            lineNumber: 108,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV(Input, {
+                                            id: "email",
+                                            type: "email",
+                                            value: form.email,
+                                            onChange: (e)=>setForm({
+                                                    ...form,
+                                                    email: e.target.value
+                                                }),
+                                            required: true,
+                                            maxLength: 255
+                                        }, void 0, false, {
+                                            fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                                            lineNumber: 109,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                                    lineNumber: 107,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("div", {
+                                    children: [
+                                        /*#__PURE__*/ _jsxDEV(Label, {
+                                            htmlFor: "password",
+                                            children: "Password"
+                                        }, void 0, false, {
+                                            fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                                            lineNumber: 112,
+                                            columnNumber: 15
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV(Input, {
+                                            id: "password",
+                                            type: "password",
+                                            value: form.password,
+                                            onChange: (e)=>setForm({
+                                                    ...form,
+                                                    password: e.target.value
+                                                }),
+                                            required: true,
+                                            minLength: mode === "signup" ? 8 : 1,
+                                            maxLength: 72
+                                        }, void 0, false, {
+                                            fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                                            lineNumber: 113,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                                    lineNumber: 111,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV(Button, {
+                                    type: "submit",
+                                    className: "w-full",
+                                    size: "lg",
+                                    disabled: loading,
+                                    children: loading ? "Please wait…" : mode === "signup" ? "Create account" : "Sign in"
+                                }, void 0, false, {
+                                    fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                                    lineNumber: 116,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("p", {
+                                    className: "text-sm text-center text-muted-foreground",
+                                    children: [
+                                        mode === "signup" ? "Already have an account? " : "New to Storeblink? ",
+                                        /*#__PURE__*/ _jsxDEV("button", {
+                                            type: "button",
+                                            onClick: ()=>setMode(mode === "signup" ? "signin" : "signup"),
+                                            className: "font-semibold text-foreground hover:underline",
+                                            children: mode === "signup" ? "Sign in" : "Create one"
+                                        }, void 0, false, {
+                                            fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                                            lineNumber: 122,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                                    lineNumber: 120,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV("p", {
+                                    className: "text-xs text-center text-muted-foreground",
+                                    children: /*#__PURE__*/ _jsxDEV(Link, {
+                                        to: "/",
+                                        className: "hover:underline",
+                                        children: "← Back to home"
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                                        lineNumber: 127,
+                                        columnNumber: 15
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                                    lineNumber: 126,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                            lineNumber: 87,
+                            columnNumber: 11
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                        lineNumber: 86,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "F:/Storeblink/src/pages/Auth.tsx",
+                lineNumber: 84,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "F:/Storeblink/src/pages/Auth.tsx",
+        lineNumber: 74,
+        columnNumber: 5
+    }, this);
+};
+_s(Auth, "V1nJA0VS+DYB0X261UEr5v6E5lg=", false, function() {
+    return [
+        useSearchParams,
+        useNavigate,
+        useAuth,
+        useToast
+    ];
+});
+_c = Auth;
+export default Auth;
+var _c;
+$RefreshReg$(_c, "Auth");
+
+
+if (import.meta.hot && !inWebWorker) {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+
+
+if (import.meta.hot && !inWebWorker) {
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("F:/Storeblink/src/pages/Auth.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("F:/Storeblink/src/pages/Auth.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkF1dGgudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IHVzZVN0YXRlLCB1c2VFZmZlY3QgfSBmcm9tIFwicmVhY3RcIjtcbmltcG9ydCB7IExpbmssIHVzZU5hdmlnYXRlLCB1c2VTZWFyY2hQYXJhbXMgfSBmcm9tIFwicmVhY3Qtcm91dGVyLWRvbVwiO1xuaW1wb3J0IHsgeiB9IGZyb20gXCJ6b2RcIjtcbmltcG9ydCB7IHN1cGFiYXNlIH0gZnJvbSBcIkAvaW50ZWdyYXRpb25zL3N1cGFiYXNlL2NsaWVudFwiO1xuaW1wb3J0IHsgQnV0dG9uIH0gZnJvbSBcIkAvY29tcG9uZW50cy91aS9idXR0b25cIjtcbmltcG9ydCB7IElucHV0IH0gZnJvbSBcIkAvY29tcG9uZW50cy91aS9pbnB1dFwiO1xuaW1wb3J0IHsgTGFiZWwgfSBmcm9tIFwiQC9jb21wb25lbnRzL3VpL2xhYmVsXCI7XG5pbXBvcnQgeyBMb2dvIH0gZnJvbSBcIkAvY29tcG9uZW50cy9tYXJrZXRpbmcvTG9nb1wiO1xuaW1wb3J0IHsgdXNlVG9hc3QgfSBmcm9tIFwiQC9ob29rcy91c2UtdG9hc3RcIjtcbmltcG9ydCB7IHVzZUF1dGggfSBmcm9tIFwiQC9ob29rcy91c2VBdXRoXCI7XG5cbmNvbnN0IHNpZ25VcFNjaGVtYSA9IHoub2JqZWN0KHtcbiAgZnVsbE5hbWU6IHouc3RyaW5nKCkudHJpbSgpLm1pbigxLCBcIk5hbWUgcmVxdWlyZWRcIikubWF4KDEwMCksXG4gIGJ1c2luZXNzTmFtZTogei5zdHJpbmcoKS50cmltKCkubWluKDEsIFwiQnVzaW5lc3MgbmFtZSByZXF1aXJlZFwiKS5tYXgoMTAwKSxcbiAgZW1haWw6IHouc3RyaW5nKCkudHJpbSgpLmVtYWlsKFwiSW52YWxpZCBlbWFpbFwiKS5tYXgoMjU1KSxcbiAgcGFzc3dvcmQ6IHouc3RyaW5nKCkubWluKDgsIFwiQXQgbGVhc3QgOCBjaGFyYWN0ZXJzXCIpLm1heCg3MiksXG59KTtcbmNvbnN0IHNpZ25JblNjaGVtYSA9IHoub2JqZWN0KHtcbiAgZW1haWw6IHouc3RyaW5nKCkudHJpbSgpLmVtYWlsKFwiSW52YWxpZCBlbWFpbFwiKS5tYXgoMjU1KSxcbiAgcGFzc3dvcmQ6IHouc3RyaW5nKCkubWluKDEsIFwiUGFzc3dvcmQgcmVxdWlyZWRcIikubWF4KDcyKSxcbn0pO1xuXG5jb25zdCBBdXRoID0gKCkgPT4ge1xuICBjb25zdCBbcGFyYW1zXSA9IHVzZVNlYXJjaFBhcmFtcygpO1xuICBjb25zdCBuYXZpZ2F0ZSA9IHVzZU5hdmlnYXRlKCk7XG4gIGNvbnN0IHsgdXNlciB9ID0gdXNlQXV0aCgpO1xuICBjb25zdCB7IHRvYXN0IH0gPSB1c2VUb2FzdCgpO1xuICBjb25zdCBbbW9kZSwgc2V0TW9kZV0gPSB1c2VTdGF0ZTxcInNpZ25pblwiIHwgXCJzaWdudXBcIj4ocGFyYW1zLmdldChcIm1vZGVcIikgPT09IFwic2lnbnVwXCIgPyBcInNpZ251cFwiIDogXCJzaWduaW5cIik7XG4gIGNvbnN0IFtsb2FkaW5nLCBzZXRMb2FkaW5nXSA9IHVzZVN0YXRlKGZhbHNlKTtcbiAgY29uc3QgW2Zvcm0sIHNldEZvcm1dID0gdXNlU3RhdGUoeyBmdWxsTmFtZTogXCJcIiwgYnVzaW5lc3NOYW1lOiBcIlwiLCBlbWFpbDogXCJcIiwgcGFzc3dvcmQ6IFwiXCIgfSk7XG5cbiAgdXNlRWZmZWN0KCgpID0+IHsgaWYgKHVzZXIpIG5hdmlnYXRlKFwiL2Rhc2hib2FyZFwiKTsgfSwgW3VzZXIsIG5hdmlnYXRlXSk7XG5cbiAgY29uc3Qgb25TdWJtaXQgPSBhc3luYyAoZTogUmVhY3QuRm9ybUV2ZW50KSA9PiB7XG4gICAgZS5wcmV2ZW50RGVmYXVsdCgpO1xuICAgIHNldExvYWRpbmcodHJ1ZSk7XG4gICAgdHJ5IHtcbiAgICAgIGlmIChtb2RlID09PSBcInNpZ251cFwiKSB7XG4gICAgICAgIGNvbnN0IHBhcnNlZCA9IHNpZ25VcFNjaGVtYS5zYWZlUGFyc2UoZm9ybSk7XG4gICAgICAgIGlmICghcGFyc2VkLnN1Y2Nlc3MpIHtcbiAgICAgICAgICB0b2FzdCh7IHRpdGxlOiBcIkNoZWNrIHlvdXIgZGV0YWlsc1wiLCBkZXNjcmlwdGlvbjogcGFyc2VkLmVycm9yLmlzc3Vlc1swXS5tZXNzYWdlLCB2YXJpYW50OiBcImRlc3RydWN0aXZlXCIgfSk7XG4gICAgICAgICAgcmV0dXJuO1xuICAgICAgICB9XG4gICAgICAgIGNvbnN0IHJlZGlyZWN0VXJsID0gYCR7d2luZG93LmxvY2F0aW9uLm9yaWdpbn0vZGFzaGJvYXJkYDtcbiAgICAgICAgY29uc3QgeyBlcnJvciB9ID0gYXdhaXQgc3VwYWJhc2UuYXV0aC5zaWduVXAoe1xuICAgICAgICAgIGVtYWlsOiBmb3JtLmVtYWlsLFxuICAgICAgICAgIHBhc3N3b3JkOiBmb3JtLnBhc3N3b3JkLFxuICAgICAgICAgIG9wdGlvbnM6IHtcbiAgICAgICAgICAgIGVtYWlsUmVkaXJlY3RUbzogcmVkaXJlY3RVcmwsXG4gICAgICAgICAgICBkYXRhOiB7IGZ1bGxfbmFtZTogZm9ybS5mdWxsTmFtZSwgYnVzaW5lc3NfbmFtZTogZm9ybS5idXNpbmVzc05hbWUgfSxcbiAgICAgICAgICB9LFxuICAgICAgICB9KTtcbiAgICAgICAgaWYgKGVycm9yKSB0aHJvdyBlcnJvcjtcbiAgICAgICAgdG9hc3QoeyB0aXRsZTogXCJXZWxjb21lIHRvIFNxdWFyZWx5IVwiLCBkZXNjcmlwdGlvbjogXCJZb3VyIGFjY291bnQgaXMgcmVhZHkuXCIgfSk7XG4gICAgICAgIG5hdmlnYXRlKFwiL2Rhc2hib2FyZFwiKTtcbiAgICAgIH0gZWxzZSB7XG4gICAgICAgIGNvbnN0IHBhcnNlZCA9IHNpZ25JblNjaGVtYS5zYWZlUGFyc2UoZm9ybSk7XG4gICAgICAgIGlmICghcGFyc2VkLnN1Y2Nlc3MpIHtcbiAgICAgICAgICB0b2FzdCh7IHRpdGxlOiBcIkNoZWNrIHlvdXIgZGV0YWlsc1wiLCBkZXNjcmlwdGlvbjogcGFyc2VkLmVycm9yLmlzc3Vlc1swXS5tZXNzYWdlLCB2YXJpYW50OiBcImRlc3RydWN0aXZlXCIgfSk7XG4gICAgICAgICAgcmV0dXJuO1xuICAgICAgICB9XG4gICAgICAgIGNvbnN0IHsgZXJyb3IgfSA9IGF3YWl0IHN1cGFiYXNlLmF1dGguc2lnbkluV2l0aFBhc3N3b3JkKHsgZW1haWw6IGZvcm0uZW1haWwsIHBhc3N3b3JkOiBmb3JtLnBhc3N3b3JkIH0pO1xuICAgICAgICBpZiAoZXJyb3IpIHRocm93IGVycm9yO1xuICAgICAgICBuYXZpZ2F0ZShcIi9kYXNoYm9hcmRcIik7XG4gICAgICB9XG4gICAgfSBjYXRjaCAoZXJyOiBhbnkpIHtcbiAgICAgIHRvYXN0KHsgdGl0bGU6IFwiQXV0aGVudGljYXRpb24gZmFpbGVkXCIsIGRlc2NyaXB0aW9uOiBlcnIubWVzc2FnZSA/PyBcIlRyeSBhZ2FpblwiLCB2YXJpYW50OiBcImRlc3RydWN0aXZlXCIgfSk7XG4gICAgfSBmaW5hbGx5IHtcbiAgICAgIHNldExvYWRpbmcoZmFsc2UpO1xuICAgIH1cbiAgfTtcblxuICByZXR1cm4gKFxuICAgIDxkaXYgY2xhc3NOYW1lPVwibWluLWgtc2NyZWVuIGdyaWQgbGc6Z3JpZC1jb2xzLTIgYmctYmFja2dyb3VuZFwiPlxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJoaWRkZW4gbGc6ZmxleCBmbGV4LWNvbCBqdXN0aWZ5LWJldHdlZW4gcC0xMCBiZy1ncmFkaWVudC1pbmsgdGV4dC1iYWNrZ3JvdW5kXCI+XG4gICAgICAgIDxMb2dvIGludmVydGVkIC8+XG4gICAgICAgIDxkaXY+XG4gICAgICAgICAgPGgyIGNsYXNzTmFtZT1cInRleHQtaGVhZGxpbmUgbWItNCBtYXgtdy1tZFwiPlJ1biB5b3VyIGJ1c2luZXNzIHdpdGggU3F1YXJlbHkuPC9oMj5cbiAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LWJhY2tncm91bmQvNzAgbWF4LXctbWRcIj5UYWtlIHBheW1lbnRzLCBtYW5hZ2UgaW52ZW50b3J5LCBhbmQgc2VlIHlvdXIgbnVtYmVycyBpbiByZWFsIHRpbWUuIEZyZWUgdG8gc3RhcnQuPC9wPlxuICAgICAgICA8L2Rpdj5cbiAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC1iYWNrZ3JvdW5kLzQwIHRleHQteHNcIj7CqSB7bmV3IERhdGUoKS5nZXRGdWxsWWVhcigpfSBTcXVhcmVseTwvcD5cbiAgICAgIDwvZGl2PlxuXG4gICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggZmxleC1jb2wgcC02IHNtOnAtMTBcIj5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJsZzpoaWRkZW4gbWItOFwiPjxMb2dvIC8+PC9kaXY+XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleC0xIGdyaWQgcGxhY2UtaXRlbXMtY2VudGVyXCI+XG4gICAgICAgICAgPGZvcm0gb25TdWJtaXQ9e29uU3VibWl0fSBjbGFzc05hbWU9XCJ3LWZ1bGwgbWF4LXctc20gc3BhY2UteS01XCI+XG4gICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICA8aDEgY2xhc3NOYW1lPVwidGV4dC0zeGwgZm9udC1zZW1pYm9sZCB0cmFja2luZy10aWdodCBtYi0xXCI+e21vZGUgPT09IFwic2lnbnVwXCIgPyBcIkNyZWF0ZSB5b3VyIGFjY291bnRcIiA6IFwiV2VsY29tZSBiYWNrXCJ9PC9oMT5cbiAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC1zbSB0ZXh0LW11dGVkLWZvcmVncm91bmRcIj5cbiAgICAgICAgICAgICAgICB7bW9kZSA9PT0gXCJzaWdudXBcIiA/IFwiU3RhcnQgc2VsbGluZyBpbiBtaW51dGVzLlwiIDogXCJTaWduIGluIHRvIHlvdXIgZGFzaGJvYXJkLlwifVxuICAgICAgICAgICAgICA8L3A+XG4gICAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgICAge21vZGUgPT09IFwic2lnbnVwXCIgJiYgKFxuICAgICAgICAgICAgICA8PlxuICAgICAgICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICAgICAgICA8TGFiZWwgaHRtbEZvcj1cImZ1bGxOYW1lXCI+RnVsbCBuYW1lPC9MYWJlbD5cbiAgICAgICAgICAgICAgICAgIDxJbnB1dCBpZD1cImZ1bGxOYW1lXCIgdmFsdWU9e2Zvcm0uZnVsbE5hbWV9IG9uQ2hhbmdlPXsoZSkgPT4gc2V0Rm9ybSh7IC4uLmZvcm0sIGZ1bGxOYW1lOiBlLnRhcmdldC52YWx1ZSB9KX0gcmVxdWlyZWQgbWF4TGVuZ3RoPXsxMDB9IC8+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgPGRpdj5cbiAgICAgICAgICAgICAgICAgIDxMYWJlbCBodG1sRm9yPVwiYnVzaW5lc3NOYW1lXCI+QnVzaW5lc3MgbmFtZTwvTGFiZWw+XG4gICAgICAgICAgICAgICAgICA8SW5wdXQgaWQ9XCJidXNpbmVzc05hbWVcIiB2YWx1ZT17Zm9ybS5idXNpbmVzc05hbWV9IG9uQ2hhbmdlPXsoZSkgPT4gc2V0Rm9ybSh7IC4uLmZvcm0sIGJ1c2luZXNzTmFtZTogZS50YXJnZXQudmFsdWUgfSl9IHJlcXVpcmVkIG1heExlbmd0aD17MTAwfSAvPlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8Lz5cbiAgICAgICAgICAgICl9XG4gICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICA8TGFiZWwgaHRtbEZvcj1cImVtYWlsXCI+RW1haWw8L0xhYmVsPlxuICAgICAgICAgICAgICA8SW5wdXQgaWQ9XCJlbWFpbFwiIHR5cGU9XCJlbWFpbFwiIHZhbHVlPXtmb3JtLmVtYWlsfSBvbkNoYW5nZT17KGUpID0+IHNldEZvcm0oeyAuLi5mb3JtLCBlbWFpbDogZS50YXJnZXQudmFsdWUgfSl9IHJlcXVpcmVkIG1heExlbmd0aD17MjU1fSAvPlxuICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICA8TGFiZWwgaHRtbEZvcj1cInBhc3N3b3JkXCI+UGFzc3dvcmQ8L0xhYmVsPlxuICAgICAgICAgICAgICA8SW5wdXQgaWQ9XCJwYXNzd29yZFwiIHR5cGU9XCJwYXNzd29yZFwiIHZhbHVlPXtmb3JtLnBhc3N3b3JkfSBvbkNoYW5nZT17KGUpID0+IHNldEZvcm0oeyAuLi5mb3JtLCBwYXNzd29yZDogZS50YXJnZXQudmFsdWUgfSl9IHJlcXVpcmVkIG1pbkxlbmd0aD17bW9kZSA9PT0gXCJzaWdudXBcIiA/IDggOiAxfSBtYXhMZW5ndGg9ezcyfSAvPlxuICAgICAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgICAgIDxCdXR0b24gdHlwZT1cInN1Ym1pdFwiIGNsYXNzTmFtZT1cInctZnVsbFwiIHNpemU9XCJsZ1wiIGRpc2FibGVkPXtsb2FkaW5nfT5cbiAgICAgICAgICAgICAge2xvYWRpbmcgPyBcIlBsZWFzZSB3YWl04oCmXCIgOiBtb2RlID09PSBcInNpZ251cFwiID8gXCJDcmVhdGUgYWNjb3VudFwiIDogXCJTaWduIGluXCJ9XG4gICAgICAgICAgICA8L0J1dHRvbj5cblxuICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC1zbSB0ZXh0LWNlbnRlciB0ZXh0LW11dGVkLWZvcmVncm91bmRcIj5cbiAgICAgICAgICAgICAge21vZGUgPT09IFwic2lnbnVwXCIgPyBcIkFscmVhZHkgaGF2ZSBhbiBhY2NvdW50PyBcIiA6IFwiTmV3IHRvIFNxdWFyZWx5PyBcIn1cbiAgICAgICAgICAgICAgPGJ1dHRvbiB0eXBlPVwiYnV0dG9uXCIgb25DbGljaz17KCkgPT4gc2V0TW9kZShtb2RlID09PSBcInNpZ251cFwiID8gXCJzaWduaW5cIiA6IFwic2lnbnVwXCIpfSBjbGFzc05hbWU9XCJmb250LXNlbWlib2xkIHRleHQtZm9yZWdyb3VuZCBob3Zlcjp1bmRlcmxpbmVcIj5cbiAgICAgICAgICAgICAgICB7bW9kZSA9PT0gXCJzaWdudXBcIiA/IFwiU2lnbiBpblwiIDogXCJDcmVhdGUgb25lXCJ9XG4gICAgICAgICAgICAgIDwvYnV0dG9uPlxuICAgICAgICAgICAgPC9wPlxuICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC14cyB0ZXh0LWNlbnRlciB0ZXh0LW11dGVkLWZvcmVncm91bmRcIj5cbiAgICAgICAgICAgICAgPExpbmsgdG89XCIvXCIgY2xhc3NOYW1lPVwiaG92ZXI6dW5kZXJsaW5lXCI+4oaQIEJhY2sgdG8gaG9tZTwvTGluaz5cbiAgICAgICAgICAgIDwvcD5cbiAgICAgICAgICA8L2Zvcm0+XG4gICAgICAgIDwvZGl2PlxuICAgICAgPC9kaXY+XG4gICAgPC9kaXY+XG4gICk7XG59O1xuXG5leHBvcnQgZGVmYXVsdCBBdXRoO1xuIl0sIm5hbWVzIjpbInVzZVN0YXRlIiwidXNlRWZmZWN0IiwiTGluayIsInVzZU5hdmlnYXRlIiwidXNlU2VhcmNoUGFyYW1zIiwieiIsInN1cGFiYXNlIiwiQnV0dG9uIiwiSW5wdXQiLCJMYWJlbCIsIkxvZ28iLCJ1c2VUb2FzdCIsInVzZUF1dGgiLCJzaWduVXBTY2hlbWEiLCJvYmplY3QiLCJmdWxsTmFtZSIsInN0cmluZyIsInRyaW0iLCJtaW4iLCJtYXgiLCJidXNpbmVzc05hbWUiLCJlbWFpbCIsInBhc3N3b3JkIiwic2lnbkluU2NoZW1hIiwiQXV0aCIsInBhcmFtcyIsIm5hdmlnYXRlIiwidXNlciIsInRvYXN0IiwibW9kZSIsInNldE1vZGUiLCJnZXQiLCJsb2FkaW5nIiwic2V0TG9hZGluZyIsImZvcm0iLCJzZXRGb3JtIiwib25TdWJtaXQiLCJlIiwicHJldmVudERlZmF1bHQiLCJwYXJzZWQiLCJzYWZlUGFyc2UiLCJzdWNjZXNzIiwidGl0bGUiLCJkZXNjcmlwdGlvbiIsImVycm9yIiwiaXNzdWVzIiwibWVzc2FnZSIsInZhcmlhbnQiLCJyZWRpcmVjdFVybCIsIndpbmRvdyIsImxvY2F0aW9uIiwib3JpZ2luIiwiYXV0aCIsInNpZ25VcCIsIm9wdGlvbnMiLCJlbWFpbFJlZGlyZWN0VG8iLCJkYXRhIiwiZnVsbF9uYW1lIiwiYnVzaW5lc3NfbmFtZSIsInNpZ25JbldpdGhQYXNzd29yZCIsImVyciIsImRpdiIsImNsYXNzTmFtZSIsImludmVydGVkIiwiaDIiLCJwIiwiRGF0ZSIsImdldEZ1bGxZZWFyIiwiaDEiLCJodG1sRm9yIiwiaWQiLCJ2YWx1ZSIsIm9uQ2hhbmdlIiwidGFyZ2V0IiwicmVxdWlyZWQiLCJtYXhMZW5ndGgiLCJ0eXBlIiwibWluTGVuZ3RoIiwic2l6ZSIsImRpc2FibGVkIiwiYnV0dG9uIiwib25DbGljayIsInRvIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxTQUFTQSxRQUFRLEVBQUVDLFNBQVMsUUFBUSxRQUFRO0FBQzVDLFNBQVNDLElBQUksRUFBRUMsV0FBVyxFQUFFQyxlQUFlLFFBQVEsbUJBQW1CO0FBQ3RFLFNBQVNDLENBQUMsUUFBUSxNQUFNO0FBQ3hCLFNBQVNDLFFBQVEsUUFBUSxpQ0FBaUM7QUFDMUQsU0FBU0MsTUFBTSxRQUFRLHlCQUF5QjtBQUNoRCxTQUFTQyxLQUFLLFFBQVEsd0JBQXdCO0FBQzlDLFNBQVNDLEtBQUssUUFBUSx3QkFBd0I7QUFDOUMsU0FBU0MsSUFBSSxRQUFRLDhCQUE4QjtBQUNuRCxTQUFTQyxRQUFRLFFBQVEsb0JBQW9CO0FBQzdDLFNBQVNDLE9BQU8sUUFBUSxrQkFBa0I7QUFFMUMsTUFBTUMsZUFBZVIsRUFBRVMsTUFBTSxDQUFDO0lBQzVCQyxVQUFVVixFQUFFVyxNQUFNLEdBQUdDLElBQUksR0FBR0MsR0FBRyxDQUFDLEdBQUcsaUJBQWlCQyxHQUFHLENBQUM7SUFDeERDLGNBQWNmLEVBQUVXLE1BQU0sR0FBR0MsSUFBSSxHQUFHQyxHQUFHLENBQUMsR0FBRywwQkFBMEJDLEdBQUcsQ0FBQztJQUNyRUUsT0FBT2hCLEVBQUVXLE1BQU0sR0FBR0MsSUFBSSxHQUFHSSxLQUFLLENBQUMsaUJBQWlCRixHQUFHLENBQUM7SUFDcERHLFVBQVVqQixFQUFFVyxNQUFNLEdBQUdFLEdBQUcsQ0FBQyxHQUFHLHlCQUF5QkMsR0FBRyxDQUFDO0FBQzNEO0FBQ0EsTUFBTUksZUFBZWxCLEVBQUVTLE1BQU0sQ0FBQztJQUM1Qk8sT0FBT2hCLEVBQUVXLE1BQU0sR0FBR0MsSUFBSSxHQUFHSSxLQUFLLENBQUMsaUJBQWlC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

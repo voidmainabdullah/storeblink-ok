@@ -1,0 +1,135 @@
+import type { ThemeManifest } from "@/theme-engine/contracts";
+import previewImage from "./assets/noir-watch-hero.webp";
+import { noirChronoHomePreset } from "./presets";
+import { noirChronoTokens } from "./tokens";
+
+export const noirChronoThemeManifest: ThemeManifest = {
+  id: "noir-chrono",
+  name: "Noir Chrono",
+  description:
+    "A futuristic luxury watch storefront with dark editorial staging, blush-metal accents and live catalog cards.",
+  version: "1.0.0",
+  schemaVersion: 1,
+  minimumPlatformVersion: "1.0.0",
+  previewImage,
+  category: ["Watches", "Jewelry", "Luxury", "Fashion"],
+  designStyle: ["Futuristic", "Editorial", "Dark", "Premium"],
+  family: "editorial",
+  capabilities: {
+    stickyHeader: true,
+    transparentHeader: true,
+    megaMenu: false,
+    predictiveSearch: true,
+    cartDrawer: true,
+    productHotspots: false,
+    productQuickView: true,
+    quickAdd: true,
+    collectionFilters: true,
+    collectionSorting: true,
+    customerAccountDrawer: true,
+    appBlocks: true,
+    editorialTypography: true,
+    productCompare: false,
+    stickyAddToCart: true,
+    productFilters: true,
+    colorSwatches: true,
+    customerDrawer: true,
+    announcementSlider: false,
+  },
+  designTokens: noirChronoTokens,
+  templates: [
+    {
+      key: "home-default",
+      name: "Modern watch home",
+      pageType: "home",
+      defaultSections: noirChronoHomePreset,
+      allowedSectionTypes: [
+        "site-header",
+        "immersive-product-hero",
+        "featured-product-collection",
+        "image-with-text",
+        "rich-text",
+        "newsletter",
+        "site-footer",
+      ],
+      requiredSectionTypes: ["site-header", "site-footer"],
+      removable: false,
+      maximumSections: 20,
+    },
+    {
+      key: "product-default",
+      name: "Product",
+      pageType: "product",
+      allowedSectionTypes: [
+        "site-header",
+        "immersive-product-hero",
+        "featured-product-collection",
+        "site-footer",
+      ],
+      requiredSectionTypes: ["site-header", "site-footer"],
+      removable: false,
+    },
+    {
+      key: "collection-default",
+      name: "Collection",
+      pageType: "collection",
+      allowedSectionTypes: [
+        "site-header",
+        "featured-product-collection",
+        "site-footer",
+      ],
+      requiredSectionTypes: ["site-header", "site-footer"],
+      removable: false,
+    },
+    {
+      key: "page-default",
+      name: "Page",
+      pageType: "page",
+      allowedSectionTypes: [
+        "site-header",
+        "rich-text",
+        "image-with-text",
+        "newsletter",
+        "site-footer",
+      ],
+      requiredSectionTypes: ["site-header", "site-footer"],
+      removable: false,
+    },
+  ],
+  features: [
+    "predictive-search",
+    "cart-drawer",
+    "product-quick-view",
+    "quick-add",
+  ],
+  editor: {
+    catalogOrder: 5,
+    badge: "New",
+  },
+  globalSettingsSchema: [
+    {
+      key: "primaryColor",
+      type: "color",
+      label: "Metal accent",
+      defaultValue: noirChronoTokens.colors.primary,
+      mode: "simple",
+    },
+    {
+      key: "headingFont",
+      type: "font",
+      label: "Display typeface",
+      defaultValue: noirChronoTokens.typography.headingFont,
+      mode: "advanced",
+    },
+    {
+      key: "sectionSpacing",
+      type: "responsive",
+      label: "Section spacing",
+      defaultValue: { base: 112, tablet: 80, mobile: 56 },
+      responsive: true,
+      mode: "advanced",
+    },
+  ],
+};
+
+export default noirChronoThemeManifest;

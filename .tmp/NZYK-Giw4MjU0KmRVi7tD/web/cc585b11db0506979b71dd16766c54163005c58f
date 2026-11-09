@@ -1,0 +1,44 @@
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/vitest/dist/index.js", {"importedNames":["describe","expect","it"]});
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/src/core/commerce/ProductViewModel.ts", {"importedNames":["createProductCardViewModel"]});
+const product = (handle)=>({
+        id: "product-1",
+        handle,
+        name: "Lumen chair",
+        category: "Seating",
+        description: "Solid ash lounge chair",
+        image_url: "https://images.example/lumen.webp",
+        images: [],
+        is_published: true,
+        price_cents: 125000,
+        original_price_cents: 149000,
+        stock: 3,
+        badge: "New",
+        sale_tag: null
+    });
+(0,__vite_ssr_import_0__.describe)("createProductCardViewModel", ()=>{
+    (0,__vite_ssr_import_0__.it)("normalizes catalog data without copying routing behavior into themes", ()=>{
+        const model = (0,__vite_ssr_import_1__.createProductCardViewModel)(product("lumen-chair"), "north objects");
+        (0,__vite_ssr_import_0__.expect)(model).toMatchObject({
+            id: "product-1",
+            title: "Lumen chair",
+            handle: "lumen-chair",
+            url: "/store/north%20objects/products/lumen-chair",
+            available: true,
+            quickAddSupported: true,
+            badges: [
+                "New"
+            ]
+        });
+        (0,__vite_ssr_import_0__.expect)(model.primaryImage?.alt).toBe("Lumen chair");
+        (0,__vite_ssr_import_0__.expect)(model.compareAtPrice?.amount).toBe(149000);
+    });
+    (0,__vite_ssr_import_0__.it)("re-resolves links when a product handle changes", ()=>{
+        const first = (0,__vite_ssr_import_1__.createProductCardViewModel)(product("lumen-chair"), "north");
+        const renamed = (0,__vite_ssr_import_1__.createProductCardViewModel)(product("lumen-lounge"), "north");
+        (0,__vite_ssr_import_0__.expect)(first.url).toBe("/store/north/products/lumen-chair");
+        (0,__vite_ssr_import_0__.expect)(renamed.url).toBe("/store/north/products/lumen-lounge");
+    });
+});
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6IkFBQUE7QUFFQTtBQUVBLE1BQU1BLFVBQVUsQ0FBQ0MsU0FBdUM7UUFDdERDLElBQUk7UUFDSkQ7UUFDQUUsTUFBTTtRQUNOQyxVQUFVO1FBQ1ZDLGFBQWE7UUFDYkMsV0FBVztRQUNYQyxRQUFRLEVBQUU7UUFDVkMsY0FBYztRQUNkQyxhQUFhO1FBQ2JDLHNCQUFzQjtRQUN0QkMsT0FBTztRQUNQQyxPQUFPO1FBQ1BDLFVBQVU7SUFDWjtHQUVBQyxnQ0FBUyw4QkFBOEI7T0FDckNDLDBCQUFHLHdFQUF3RTtRQUN6RSxNQUFNQyxXQUFRQyxrREFBMkJqQixRQUFRLGdCQUFnQjtXQUVqRWtCLDhCQUFPRixPQUFPRyxhQUFhLENBQUM7WUFDMUJqQixJQUFJO1lBQ0prQixPQUFPO1lBQ1BuQixRQUFRO1lBQ1JvQixLQUFLO1lBQ0xDLFdBQVc7WUFDWEMsbUJBQW1CO1lBQ25CQyxRQUFRO2dCQUFDOztRQUNYO1dBQ0FOLDhCQUFPRixNQUFNUyxZQUFZLEVBQUVDLEtBQUtDLElBQUksQ0FBQztXQUNyQ1QsOEJBQU9GLE1BQU1ZLGNBQWMsRUFBRUMsUUFBUUYsSUFBSSxDQUFDO0lBQzVDO09BRUFaLDBCQUFHLG1EQUFtRDtRQUNwRCxNQUFNZSxXQUFRYixrREFBMkJqQixRQUFRLGdCQUFnQjtRQUNqRSxNQUFNK0IsYUFBVWQsa0RBQTJCakIsUUFBUSxpQkFBaUI7V0FFcEVrQiw4QkFBT1ksTUFBTVQsR0FBRyxFQUFFTSxJQUFJLENBQUM7V0FDdkJULDhCQUFPYSxRQUFRVixHQUFHLEVBQUVNLElBQUksQ0FBQztJQUMzQjtBQUNGIiwibmFtZXMiOlsicHJvZHVjdCIsImhhbmRsZSIsImlkIiwibmFtZSIsImNhdGVnb3J5IiwiZGVzY3JpcHRpb24iLCJpbWFnZV91cmwiLCJpbWFnZXMiLCJpc19wdWJsaXNoZWQiLCJwcmljZV9jZW50cyIsIm9yaWdpbmFsX3ByaWNlX2NlbnRzIiwic3RvY2siLCJiYWRnZSIsInNhbGVfdGFnIiwiZGVzY3JpYmUiLCJpdCIsIm1vZGVsIiwiY3JlYXRlUHJvZHVjdENhcmRWaWV3TW9kZWwiLCJleHBlY3QiLCJ0b01hdGNoT2JqZWN0IiwidGl0bGUiLCJ1cmwiLCJhdmFpbGFibGUiLCJxdWlja0FkZFN1cHBvcnRlZCIsImJhZGdlcyIsInByaW1hcnlJbWFnZSIsImFsdCIsInRvQmUiLCJjb21wYXJlQXRQcmljZSIsImFtb3VudCIsImZpcnN0IiwicmVuYW1lZCJdLCJpZ25vcmVMaXN0IjpbXSwic291cmNlcyI6WyJQcm9kdWN0Vmlld01vZGVsLnRlc3QudHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgZGVzY3JpYmUsIGV4cGVjdCwgaXQgfSBmcm9tIFwidml0ZXN0XCI7XG5pbXBvcnQgdHlwZSB7IFN0b3JlZnJvbnRQcm9kdWN0IH0gZnJvbSBcIkAvc3RvcmVmcm9udC9kYXRhLXJlc29sdmVyc1wiO1xuaW1wb3J0IHsgY3JlYXRlUHJvZHVjdENhcmRWaWV3TW9kZWwgfSBmcm9tIFwiLi9Qcm9kdWN0Vmlld01vZGVsXCI7XG5cbmNvbnN0IHByb2R1Y3QgPSAoaGFuZGxlOiBzdHJpbmcpOiBTdG9yZWZyb250UHJvZHVjdCA9PiAoe1xuICBpZDogXCJwcm9kdWN0LTFcIixcbiAgaGFuZGxlLFxuICBuYW1lOiBcIkx1bWVuIGNoYWlyXCIsXG4gIGNhdGVnb3J5OiBcIlNlYXRpbmdcIixcbiAgZGVzY3JpcHRpb246IFwiU29saWQgYXNoIGxvdW5nZSBjaGFpclwiLFxuICBpbWFnZV91cmw6IFwiaHR0cHM6Ly9pbWFnZXMuZXhhbXBsZS9sdW1lbi53ZWJwXCIsXG4gIGltYWdlczogW10sXG4gIGlzX3B1Ymxpc2hlZDogdHJ1ZSxcbiAgcHJpY2VfY2VudHM6IDEyNTAwMCxcbiAgb3JpZ2luYWxfcHJpY2VfY2VudHM6IDE0OTAwMCxcbiAgc3RvY2s6IDMsXG4gIGJhZGdlOiBcIk5ld1wiLFxuICBzYWxlX3RhZzogbnVsbCxcbn0pO1xuXG5kZXNjcmliZShcImNyZWF0ZVByb2R1Y3RDYXJkVmlld01vZGVsXCIsICgpID0+IHtcbiAgaXQoXCJub3JtYWxpemVzIGNhdGFsb2cgZGF0YSB3aXRob3V0IGNvcHlpbmcgcm91dGluZyBiZWhhdmlvciBpbnRvIHRoZW1lc1wiLCAoKSA9PiB7XG4gICAgY29uc3QgbW9kZWwgPSBjcmVhdGVQcm9kdWN0Q2FyZFZpZXdNb2RlbChwcm9kdWN0KFwibHVtZW4tY2hhaXJcIiksIFwibm9ydGggb2JqZWN0c1wiKTtcblxuICAgIGV4cGVjdChtb2RlbCkudG9NYXRjaE9iamVjdCh7XG4gICAgICBpZDogXCJwcm9kdWN0LTFcIixcbiAgICAgIHRpdGxlOiBcIkx1bWVuIGNoYWlyXCIsXG4gICAgICBoYW5kbGU6IFwibHVtZW4tY2hhaXJcIixcbiAgICAgIHVybDogXCIvc3RvcmUvbm9ydGglMjBvYmplY3RzL3Byb2R1Y3RzL2x1bWVuLWNoYWlyXCIsXG4gICAgICBhdmFpbGFibGU6IHRydWUsXG4gICAgICBxdWlja0FkZFN1cHBvcnRlZDogdHJ1ZSxcbiAgICAgIGJhZGdlczogW1wiTmV3XCJdLFxuICAgIH0pO1xuICAgIGV4cGVjdChtb2RlbC5wcmltYXJ5SW1hZ2U/LmFsdCkudG9CZShcIkx1bWVuIGNoYWlyXCIpO1xuICAgIGV4cGVjdChtb2RlbC5jb21wYXJlQXRQcmljZT8uYW1vdW50KS50b0JlKDE0OTAwMCk7XG4gIH0pO1xuXG4gIGl0KFwicmUtcmVzb2x2ZXMgbGlua3Mgd2hlbiBhIHByb2R1Y3QgaGFuZGxlIGNoYW5nZXNcIiwgKCkgPT4ge1xuICAgIGNvbnN0IGZpcnN0ID0gY3JlYXRlUHJvZHVjdENhcmRWaWV3TW9kZWwocHJvZHVjdChcImx1bWVuLWNoYWlyXCIpLCBcIm5vcnRoXCIpO1xuICAgIGNvbnN0IHJlbmFtZWQgPSBjcmVhdGVQcm9kdWN0Q2FyZFZpZXdNb2RlbChwcm9kdWN0KFwibHVtZW4tbG91bmdlXCIpLCBcIm5vcnRoXCIpO1xuXG4gICAgZXhwZWN0KGZpcnN0LnVybCkudG9CZShcIi9zdG9yZS9ub3J0aC9wcm9kdWN0cy9sdW1lbi1jaGFpclwiKTtcbiAgICBleHBlY3QocmVuYW1lZC51cmwpLnRvQmUoXCIvc3RvcmUvbm9ydGgvcHJvZHVjdHMvbHVtZW4tbG91bmdlXCIpO1xuICB9KTtcbn0pO1xuIl0sImZpbGUiOiJGOi9TdG9yZWJsaW5rL3NyYy9jb3JlL2NvbW1lcmNlL1Byb2R1Y3RWaWV3TW9kZWwudGVzdC50cyJ9

@@ -1,0 +1,353 @@
+Object.defineProperty(__vite_ssr_exports__, "TransformInspector", { enumerable: true, configurable: true, get(){ try { return TransformInspector } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/react/jsx-dev-runtime.js", {"importedNames":["jsxDEV","Fragment"]});
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/lucide-react/dist/cjs/lucide-react.js", {"importedNames":["AlignHorizontalJustifyCenter","AlignHorizontalJustifyEnd","AlignHorizontalJustifyStart","AlignVerticalJustifyCenter","AlignVerticalJustifyEnd","AlignVerticalJustifyStart","FlipHorizontal2","FlipVertical2","Ratio","RotateCcw"]});
+const __vite_ssr_import_2__ = await __vite_ssr_import__("/src/ui/inspector-panel/InspectorControls.tsx", {"importedNames":["InspectorIconButton","InspectorSection","NumberField","SegmentedControl"]});
+const safeRatio = (node)=>node.transform.height > 0 ? node.transform.width / node.transform.height : 1;
+const TransformInspector = ({ node, parent, breakpointLabel, onUpdateTransform, onUpdateProps, onUpdateExtensions })=>{
+    const aspectRequired = node.extensions?.aspectRatioRequired === true;
+    const aspectLocked = aspectRequired || node.extensions?.aspectRatioLocked === true;
+    const aspectRatio = Math.max(0.0001, Number(node.extensions?.aspectRatio ?? safeRatio(node)));
+    const parentWidth = parent?.transform.width ?? node.transform.width;
+    const parentHeight = parent?.transform.height ?? node.transform.height;
+    const alignX = (mode)=>{
+        const x = mode === "start" ? 0 : mode === "center" ? (parentWidth - node.transform.width) / 2 : parentWidth - node.transform.width;
+        onUpdateTransform({
+            x
+        });
+    };
+    const alignY = (mode)=>{
+        const y = mode === "start" ? 0 : mode === "center" ? (parentHeight - node.transform.height) / 2 : parentHeight - node.transform.height;
+        onUpdateTransform({
+            y
+        });
+    };
+    const updateWidth = (width)=>{
+        const safeWidth = Math.max(1, width);
+        onUpdateTransform(aspectLocked ? {
+            width: safeWidth,
+            height: Math.max(1, safeWidth / aspectRatio)
+        } : {
+            width: safeWidth
+        });
+    };
+    const updateHeight = (height)=>{
+        const safeHeight = Math.max(1, height);
+        onUpdateTransform(aspectLocked ? {
+            height: safeHeight,
+            width: Math.max(1, safeHeight * aspectRatio)
+        } : {
+            height: safeHeight
+        });
+    };
+    return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_0__.Fragment), {
+        children: [
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.InspectorSection), {
+                title: "Position",
+                actions: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                    className: "text-[8px] font-medium text-[#70bfff]",
+                    children: breakpointLabel
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                    lineNumber: 93,
+                    columnNumber: 18
+                }, void 0),
+                children: [
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        children: [
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                className: "mb-1 text-[9px] font-medium text-[#a6a6a6]",
+                                children: "Alignment"
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                                lineNumber: 96,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                className: "grid grid-cols-6 gap-1 rounded bg-[#242424] p-1",
+                                children: [
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.InspectorIconButton), {
+                                        icon: __vite_ssr_import_1__.AlignHorizontalJustifyStart,
+                                        title: "Align left",
+                                        onClick: ()=>alignX("start")
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                                        lineNumber: 98,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.InspectorIconButton), {
+                                        icon: __vite_ssr_import_1__.AlignHorizontalJustifyCenter,
+                                        title: "Align horizontal center",
+                                        onClick: ()=>alignX("center")
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                                        lineNumber: 99,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.InspectorIconButton), {
+                                        icon: __vite_ssr_import_1__.AlignHorizontalJustifyEnd,
+                                        title: "Align right",
+                                        onClick: ()=>alignX("end")
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                                        lineNumber: 100,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.InspectorIconButton), {
+                                        icon: __vite_ssr_import_1__.AlignVerticalJustifyStart,
+                                        title: "Align top",
+                                        onClick: ()=>alignY("start")
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                                        lineNumber: 101,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.InspectorIconButton), {
+                                        icon: __vite_ssr_import_1__.AlignVerticalJustifyCenter,
+                                        title: "Align vertical center",
+                                        onClick: ()=>alignY("center")
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                                        lineNumber: 102,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.InspectorIconButton), {
+                                        icon: __vite_ssr_import_1__.AlignVerticalJustifyEnd,
+                                        title: "Align bottom",
+                                        onClick: ()=>alignY("end")
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                                        lineNumber: 103,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                                lineNumber: 97,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                        lineNumber: 95,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "grid grid-cols-2 gap-2",
+                        children: [
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.NumberField), {
+                                label: "X",
+                                value: node.transform.x,
+                                onCommit: (x)=>onUpdateTransform({
+                                        x
+                                    })
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                                lineNumber: 107,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.NumberField), {
+                                label: "Y",
+                                value: node.transform.y,
+                                onCommit: (y)=>onUpdateTransform({
+                                        y
+                                    })
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                                lineNumber: 108,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                        lineNumber: 106,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        children: [
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                className: "mb-1 text-[9px] font-medium text-[#a6a6a6]",
+                                children: "Rotation"
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                                lineNumber: 111,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                className: "grid grid-cols-[1fr_auto_auto_auto] gap-1",
+                                children: [
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.NumberField), {
+                                        label: "Angle",
+                                        value: node.transform.rotation,
+                                        onCommit: (rotation)=>onUpdateTransform({
+                                                rotation
+                                            }),
+                                        suffix: "deg"
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                                        lineNumber: 113,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.InspectorIconButton), {
+                                        icon: __vite_ssr_import_1__.FlipHorizontal2,
+                                        title: "Flip horizontal",
+                                        onClick: ()=>onUpdateTransform({
+                                                scaleX: node.transform.scaleX === 0 ? -1 : -node.transform.scaleX
+                                            }),
+                                        className: "mt-4"
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                                        lineNumber: 119,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.InspectorIconButton), {
+                                        icon: __vite_ssr_import_1__.FlipVertical2,
+                                        title: "Flip vertical",
+                                        onClick: ()=>onUpdateTransform({
+                                                scaleY: node.transform.scaleY === 0 ? -1 : -node.transform.scaleY
+                                            }),
+                                        className: "mt-4"
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                                        lineNumber: 125,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.InspectorIconButton), {
+                                        icon: __vite_ssr_import_1__.RotateCcw,
+                                        title: "Reset rotation and flips",
+                                        onClick: ()=>onUpdateTransform({
+                                                rotation: 0,
+                                                scaleX: Math.abs(node.transform.scaleX) || 1,
+                                                scaleY: Math.abs(node.transform.scaleY) || 1
+                                            }),
+                                        className: "mt-4"
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                                        lineNumber: 131,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                                lineNumber: 112,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                        lineNumber: 110,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                lineNumber: 91,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.InspectorSection), {
+                title: "Layout",
+                children: [
+                    node.type === "text" ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.SegmentedControl), {
+                        label: "Resizing",
+                        value: String(node.props.textResizeMode ?? "fixed"),
+                        options: [
+                            {
+                                value: "auto-width",
+                                label: "Auto width"
+                            },
+                            {
+                                value: "auto-height",
+                                label: "Auto height"
+                            },
+                            {
+                                value: "fixed",
+                                label: "Fixed"
+                            }
+                        ],
+                        onChange: (textResizeMode)=>onUpdateProps({
+                                textResizeMode
+                            })
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                        lineNumber: 147,
+                        columnNumber: 11
+                    }, this) : null,
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        children: [
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                className: "mb-1 flex items-center justify-between",
+                                children: [
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                        className: "text-[9px] font-medium text-[#a6a6a6]",
+                                        children: "Dimensions"
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                                        lineNumber: 160,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.InspectorIconButton), {
+                                        icon: __vite_ssr_import_1__.Ratio,
+                                        active: aspectLocked,
+                                        disabled: aspectRequired,
+                                        title: aspectRequired ? "This element preserves its aspect ratio" : aspectLocked ? "Unlock aspect ratio" : "Lock aspect ratio",
+                                        onClick: ()=>onUpdateExtensions({
+                                                aspectRatioLocked: !aspectLocked,
+                                                aspectRatio: safeRatio(node)
+                                            })
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                                        lineNumber: 161,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                                lineNumber: 159,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                className: "grid grid-cols-2 gap-2",
+                                children: [
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.NumberField), {
+                                        label: "W",
+                                        value: node.transform.width,
+                                        min: 1,
+                                        onCommit: updateWidth
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                                        lineNumber: 181,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.NumberField), {
+                                        label: "H",
+                                        value: node.transform.height,
+                                        min: 1,
+                                        onCommit: updateHeight
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                                        lineNumber: 182,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                                lineNumber: 180,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                        lineNumber: 158,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "F:/Storeblink/src/ui/inspector-panel/TransformInspector.tsx",
+                lineNumber: 145,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true);
+};
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,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Ozs7OztxREFDdEUsaUNBQUNtQjt3Q0FBWUMsT0FBTTt3Q0FBSUMsT0FBTy9DLEtBQUtDLFNBQVMsQ0FBQ0MsTUFBTTt3Q0FBRWlFLEtBQUs7d0NBQUduQixVQUFVcEI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBTW5GIiwibmFtZXMiOlsic2FmZVJhdGlvIiwibm9kZSIsInRyYW5zZm9ybSIsImhlaWdodCIsIndpZHRoIiwiVHJhbnNmb3JtSW5zcGVjdG9yIiwicGFyZW50IiwiYnJlYWtwb2ludExhYmVsIiwib25VcGRhdGVUcmFuc2Zvcm0iLCJvblVwZGF0ZVByb3BzIiwib25VcGRhdGVFeHRlbnNpb25zIiwiYXNwZWN0UmVxdWlyZWQiLCJleHRlbnNpb25zIiwiYXNwZWN0UmF0aW9SZXF1aXJlZCIsImFzcGVjdExvY2tlZCIsImFzcGVjdFJhdGlvTG9ja2VkIiwiYXNwZWN0UmF0aW8iLCJNYXRoIiwibWF4IiwiTnVtYmVyIiwicGFyZW50V2lkdGgiLCJwYXJlbnRIZWlnaHQiLCJhbGlnblgiLCJtb2RlIiwieCIsImFsaWduWSIsInkiLCJ1cGRhdGVXaWR0aCIsInNhZmVXaWR0aCIsInVwZGF0ZUhlaWdodCIsInNhZmVIZWlnaHQiLCJJbnNwZWN0b3JTZWN0aW9uIiwidGl0bGUiLCJhY3Rpb25zIiwic3BhbiIsImNsYXNzTmFtZSIsImRpdiIsIkluc3BlY3Rvckljb25CdXR0b24iLCJpY29uIiwiQWxpZ25Ib3Jpem9udGFsSnVzdGlmeVN0YXJ0Iiwib25DbGljayIsIkFsaWduSG9yaXpvbnRhbEp1c3RpZnlDZW50ZXIiLCJBbGlnbkhvcml6b250YWxKdXN0aWZ5RW5kIiwiQWxpZ25WZXJ0aWNhbEp1c3RpZnlTdGFydCIsIkFsaWduVmVydGljYWxKdXN0aWZ5Q2VudGVyIiwiQWxpZ25WZXJ0aWNhbEp1c3RpZnlFbmQiLCJOdW1iZXJGaWVsZCIsImxhYmVsIiwidmFsdWUiLCJvbkNvbW1pdCIsInJvdGF0aW9uIiwic3VmZml4IiwiRmxpcEhvcml6b250YWwyIiwic2NhbGVYIiwiRmxpcFZlcnRpY2FsMiIsInNjYWxlWSIsIlJvdGF0ZUNjdyIsImFicyIsInR5cGUiLCJTZWdtZW50ZWRDb250cm9sIiwiU3RyaW5nIiwicHJvcHMiLCJ0ZXh0UmVzaXplTW9kZSIsIm9wdGlvbnMiLCJvbkNoYW5nZSIsIlJhdGlvIiwiYWN0aXZlIiwiZGlzYWJsZWQiLCJtaW4iXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZXMiOlsiVHJhbnNmb3JtSW5zcGVjdG9yLnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQge1xuICBBbGlnbkhvcml6b250YWxKdXN0aWZ5Q2VudGVyLFxuICBBbGlnbkhvcml6b250YWxKdXN0aWZ5RW5kLFxuICBBbGlnbkhvcml6b250YWxKdXN0aWZ5U3RhcnQsXG4gIEFsaWduVmVydGljYWxKdXN0aWZ5Q2VudGVyLFxuICBBbGlnblZlcnRpY2FsSnVzdGlmeUVuZCxcbiAgQWxpZ25WZXJ0aWNhbEp1c3RpZnlTdGFydCxcbiAgRmxpcEhvcml6b250YWwyLFxuICBGbGlwVmVydGljYWwyLFxuICBSYXRpbyxcbiAgUm90YXRlQ2N3LFxufSBmcm9tIFwibHVjaWRlLXJlYWN0XCI7XG5pbXBvcnQgdHlwZSB7IFNjZW5lTm9kZSwgVHJhbnNmb3JtRGF0YSB9IGZyb20gXCJAL3R5cGVzXCI7XG5pbXBvcnQge1xuICBJbnNwZWN0b3JJY29uQnV0dG9uLFxuICBJbnNwZWN0b3JTZWN0aW9uLFxuICBOdW1iZXJGaWVsZCxcbiAgU2VnbWVudGVkQ29udHJvbCxcbn0gZnJvbSBcIi4vSW5zcGVjdG9yQ29udHJvbHNcIjtcblxuZXhwb3J0IHR5cGUgVHJhbnNmb3JtSW5zcGVjdG9yUHJvcHMgPSB7XG4gIG5vZGU6IFNjZW5lTm9kZTtcbiAgcGFyZW50OiBTY2VuZU5vZGUgfCBudWxsO1xuICBicmVha3BvaW50TGFiZWw6IHN0cmluZztcbiAgb25VcGRhdGVUcmFuc2Zvcm06IChwYXRjaDogUGFydGlhbDxUcmFuc2Zvcm1EYXRhPikgPT4gdm9pZDtcbiAgb25VcGRhdGVQcm9wczogKHBhdGNoOiBSZWNvcmQ8c3RyaW5nLCB1bmtub3duPikgPT4gdm9pZDtcbiAgb25VcGRhdGVFeHRlbnNpb25zOiAocGF0Y2g6IFJlY29yZDxzdHJpbmcsIHVua25vd24+KSA9PiB2b2lkO1xufTtcblxuY29uc3Qgc2FmZVJhdGlvID0gKG5vZGU6IFNjZW5lTm9kZSkgPT5cbiAgbm9kZS50cmFuc2Zvcm0uaGVpZ2h0ID4gMCA/IG5vZGUudHJhbnNmb3JtLndpZHRoIC8gbm9kZS50cmFuc2Zvcm0uaGVpZ2h0IDogMTtcblxuZXhwb3J0IGNvbnN0IFRyYW5zZm9ybUluc3BlY3RvciA9ICh7XG4gIG5vZGUsXG4gIHBhcmVudCxcbiAgYnJlYWtwb2ludExhYmVsLFxuICBvblVwZGF0ZVRyYW5zZm9ybSxcbiAgb25VcGRhdGVQcm9wcyxcbiAgb25VcGRhdGVFeHRlbnNpb25zLFxufTogVHJhbnNmb3JtSW5zcGVjdG9yUHJvcHMpID0+IHtcbiAgY29uc3QgYXNwZWN0UmVxdWlyZWQgPSBub2RlLmV4dGVuc2lvbnM/LmFzcGVjdFJhdGlvUmVxdWlyZWQgPT09IHRydWU7XG4gIGNvbnN0IGFzcGVjdExvY2tlZCA9XG4gICAgYXNwZWN0UmVxdWlyZWQgfHwgbm9kZS5leHRlbnNpb25zPy5hc3BlY3RSYXRpb0xvY2tlZCA9PT0gdHJ1ZTtcbiAgY29uc3QgYXNwZWN0UmF0aW8gPSBNYXRoLm1heChcbiAgICAwLjAwMDEsXG4gICAgTnVtYmVyKG5vZGUuZXh0ZW5zaW9ucz8uYXNwZWN0UmF0aW8gPz8gc2FmZVJhdGlvKG5vZGUpKSxcbiAgKTtcbiAgY29uc3QgcGFyZW50V2lkdGggPSBwYXJlbnQ/LnRyYW5zZm9ybS53aWR0aCA/PyBub2RlLnRyYW5zZm9ybS53aWR0aDtcbiAgY29uc3QgcGFyZW50SGVpZ2h0ID0gcGFyZW50Py50cmFuc2Zvcm0uaGVpZ2h0ID8/IG5vZGUudHJhbnNmb3JtLmhlaWdodDtcblxuICBjb25zdCBhbGlnblggPSAobW9kZTogXCJzdGFydFwiIHwgXCJjZW50ZXJcIiB8IFwiZW5kXCIpID0+IHtcbiAgICBjb25zdCB4ID1cbiAgICAgIG1vZGUgPT09IFwic3RhcnRcIlxuICAgICAgICA/IDBcbiAgICAgICAgOiBtb2RlID09PSBcImNlbnRlclwiXG4gICAgICAgICAgPyAocGFyZW50V2lkdGggLSBub2RlLnRyYW5zZm9ybS53aWR0aCkgLyAyXG4gICAgICAgICAgOiBwYXJlbnRXaWR0aCAtIG5vZGUudHJhbnNmb3JtLndpZHRoO1xuICAgIG9uVXBkYXRlVHJhbnNmb3JtKHsgeCB9KTtcbiAgfTtcblxuICBjb25zdCBhbGlnblkgPSAobW9kZTogXCJzdGFydFwiIHwgXCJjZW50ZXJcIiB8IFwiZW5kXCIpID0+IHtcbiAgICBjb25zdCB5ID1cbiAgICAgIG1vZGUgPT09IFwic3RhcnRcIlxuICAgICAgICA/IDBcbiAgICAgICAgOiBtb2RlID09PSBcImNlbnRlclwiXG4gICAgICAgICAgPyAocGFyZW50SGVpZ2h0IC0gbm9kZS50cmFuc2Zvcm0uaGVpZ2h0KSAvIDJcbiAgICAgICAgICA6IHBhcmVudEhlaWdodCAtIG5vZGUudHJhbnNmb3JtLmhlaWdodDtcbiAgICBvblVwZGF0ZVRyYW5zZm9ybSh7IHkgfSk7XG4gIH07XG5cbiAgY29uc3QgdXBkYXRlV2lkdGggPSAod2lkdGg6IG51bWJlcikgPT4ge1xuICAgIGNvbnN0IHNhZmVXaWR0aCA9IE1hdGgubWF4KDEsIHdpZHRoKTtcbiAgICBvblVwZGF0ZVRyYW5zZm9ybShcbiAgICAgIGFzcGVjdExvY2tlZFxuICAgICAgICA/IHsgd2lkdGg6IHNhZmVXaWR0aCwgaGVpZ2h0OiBNYXRoLm1heCgxLCBzYWZlV2lkdGggLyBhc3BlY3RSYXRpbykgfVxuICAgICAgICA6IHsgd2lkdGg6IHNhZmVXaWR0aCB9LFxuICAgICk7XG4gIH07XG5cbiAgY29uc3QgdXBkYXRlSGVpZ2h0ID0gKGhlaWdodDogbnVtYmVyKSA9PiB7XG4gICAgY29uc3Qgc2FmZUhlaWdodCA9IE1hdGgubWF4KDEsIGhlaWdodCk7XG4gICAgb25VcGRhdGVUcmFuc2Zvcm0oXG4gICAgICBhc3BlY3RMb2NrZWRcbiAgICAgICAgPyB7IGhlaWdodDogc2FmZUhlaWdodCwgd2lkdGg6IE1hdGgubWF4KDEsIHNhZmVIZWlnaHQgKiBhc3BlY3RSYXRpbykgfVxuICAgICAgICA6IHsgaGVpZ2h0OiBzYWZlSGVpZ2h0IH0sXG4gICAgKTtcbiAgfTtcblxuICByZXR1cm4gKFxuICAgIDw+XG4gICAgICA8SW5zcGVjdG9yU2VjdGlvblxuICAgICAgICB0aXRsZT1cIlBvc2l0aW9uXCJcbiAgICAgICAgYWN0aW9ucz17PHNwYW4gY2xhc3NOYW1lPVwidGV4dC1bOHB4XSBmb250LW1lZGl1bSB0ZXh0LVsjNzBiZmZmXVwiPnticmVha3BvaW50TGFiZWx9PC9zcGFuPn1cbiAgICAgID5cbiAgICAgICAgPGRpdj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm1iLTEgdGV4dC1bOXB4XSBmb250LW1lZGl1bSB0ZXh0LVsjYTZhNmE2XVwiPkFsaWdubWVudDwvZGl2PlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBncmlkLWNvbHMtNiBnYXAtMSByb3VuZGVkIGJnLVsjMjQyNDI0XSBwLTFcIj5cbiAgICAgICAgICAgIDxJbnNwZWN0b3JJY29uQnV0dG9uIGljb249e0FsaWduSG9yaXpvbnRhbEp1c3RpZnlTdGFydH0gdGl0bGU9XCJBbGlnbiBsZWZ0XCIgb25DbGljaz17KCkgPT4gYWxpZ25YKFwic3RhcnRcIil9IC8+XG4gICAgICAgICAgICA8SW5zcGVjdG9ySWNvbkJ1dHRvbiBpY29uPXtBbGlnbkhvcml6b250YWxKdXN0aWZ5Q2VudGVyfSB0aXRsZT1cIkFsaWduIGhvcml6b250YWwgY2VudGVyXCIgb25DbGljaz17KCkgPT4gYWxpZ25YKFwiY2VudGVyXCIpfSAvPlxuICAgICAgICAgICAgPEluc3BlY3Rvckljb25CdXR0b24gaWNvbj17QWxpZ25Ib3Jpem9udGFsSnVzdGlmeUVuZH0gdGl0bGU9XCJBbGlnbiByaWdodFwiIG9uQ2xpY2s9eygpID0+IGFsaWduWChcImVuZFwiKX0gLz5cbiAgICAgICAgICAgIDxJbnNwZWN0b3JJY29uQnV0dG9uIGljb249e0FsaWduVmVydGljYWxKdXN0aWZ5U3RhcnR9IHRpdGxlPVwiQWxpZ24gdG9wXCIgb25DbGljaz17KCkgPT4gYWxpZ25ZKFwic3RhcnRcIil9IC8+XG4gICAgICAgICAgICA8SW5zcGVjdG9ySWNvbkJ1dHRvbiBpY29uPXtBbGlnblZlcnRpY2FsSnVzdGlmeUNlbnRlcn0gdGl0bGU9XCJBbGlnbiB2ZXJ0aWNhbCBjZW50ZXJcIiBvbkNsaWNrPXsoKSA9PiBhbGlnblkoXCJjZW50ZXJcIil9IC8+XG4gICAgICAgICAgICA8SW5zcGVjdG9ySWNvbkJ1dHRvbiBpY29uPXtBbGlnblZlcnRpY2FsSnVzdGlmeUVuZH0gdGl0bGU9XCJBbGlnbiBib3R0b21cIiBvbkNsaWNrPXsoKSA9PiBhbGlnblkoXCJlbmRcIil9IC8+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgIDwvZGl2PlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ3JpZC1jb2xzLTIgZ2FwLTJcIj5cbiAgICAgICAgICA8TnVtYmVyRmllbGQgbGFiZWw9XCJYXCIgdmFsdWU9e25vZGUudHJhbnNmb3JtLnh9IG9uQ29tbWl0PXsoeCkgPT4gb25VcGRhdGVUcmFuc2Zvcm0oeyB4IH0pfSAvPlxuICAgICAgICAgIDxOdW1iZXJGaWVsZCBsYWJlbD1cIllcIiB2YWx1ZT17bm9kZS50cmFuc2Zvcm0ueX0gb25Db21taXQ9eyh5KSA9PiBvblVwZGF0ZVRyYW5zZm9ybSh7IHkgfSl9IC8+XG4gICAgICAgIDwvZGl2PlxuICAgICAgICA8ZGl2PlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibWItMSB0ZXh0LVs5cHhdIGZvbnQtbWVkaXVtIHRleHQtWyNhNmE2YTZdXCI+Um90YXRpb248L2Rpdj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ3JpZC1jb2xzLVsxZnJfYXV0b19hdXRvX2F1dG9dIGdhcC0xXCI+XG4gICAgICAgICAgICA8TnVtYmVyRmllbGRcbiAgICAgICAgICAgICAgbGFiZWw9XCJBbmdsZVwiXG4gICAgICAgICAgICAgIHZhbHVlPXtub2RlLnRyYW5zZm9ybS5yb3RhdGlvbn1cbiAgICAgICAgICAgICAgb25Db21taXQ9eyhyb3RhdGlvbikgPT4gb25VcGRhdGVUcmFuc2Zvcm0oeyByb3RhdGlvbiB9KX1cbiAgICAgICAgICAgICAgc3VmZml4PVwiZGVnXCJcbiAgICAgICAgICAgIC8+XG4gICAgICAgICAgICA8SW5zcGVjdG9ySWNvbkJ1dHRvblxuICAgICAgICAgICAgICBpY29uPXtGbGlwSG9yaXpvbnRhbDJ9XG4gICAgICAgICAgICAgIHRpdGxlPVwiRmxpcCBob3Jpem9udGFsXCJcbiAgICAgICAgICAgICAgb25DbGljaz17KCkgPT4gb25VcGRhdGVUcmFuc2Zvcm0oeyBzY2FsZVg6IG5vZGUudHJhbnNmb3JtLnNjYWxlWCA9PT0gMCA/IC0xIDogLW5vZGUudHJhbnNmb3JtLnNjYWxlWCB9KX1cbiAgICAgICAgICAgICAgY2xhc3NOYW1lPVwibXQtNFwiXG4gICAgICAgICAgICAvPlxuICAgICAgICAgICAgPEluc3BlY3Rvckljb25CdXR0b25cbiAgICAgICAgICAgICAgaWNvbj17RmxpcFZlcnRpY2FsMn1cbiAgICAgICAgICAgICAgdGl0bGU9XCJGbGlwIHZlcnRpY2FsXCJcbiAgICAgICAgICAgICAgb25DbGljaz17KCkgPT4gb25VcGRhdGVUcmFuc2Zvcm0oeyBzY2FsZVk6IG5vZGUudHJhbnNmb3JtLnNjYWxlWSA9PT0gMCA/IC0xIDogLW5vZGUudHJhbnNmb3JtLnNjYWxlWSB9KX1cbiAgICAgICAgICAgICAgY2xhc3NOYW1lPVwibXQtNFwiXG4gICAgICAgICAgICAvPlxuICAgICAgICAgICAgPEluc3BlY3Rvckljb25CdXR0b25cbiAgICAgICAgICAgICAgaWNvbj17Um90YXRlQ2N3fVxuICAgICAgICAgICAgICB0aXRsZT1cIlJlc2V0IHJvdGF0aW9uIGFuZCBmbGlwc1wiXG4gICAgICAgICAgICAgIG9uQ2xpY2s9eygpID0+IG9uVXBkYXRlVHJhbnNmb3JtKHtcbiAgICAgICAgICAgICAgICByb3RhdGlvbjogMCxcbiAgICAgICAgICAgICAgICBzY2FsZVg6IE1hdGguYWJzKG5vZGUudHJhbnNmb3JtLnNjYWxlWCkgfHwgMSxcbiAgICAgICAgICAgICAgICBzY2FsZVk6IE1hdGguYWJzKG5vZGUudHJhbnNmb3JtLnNjYWxlWSkgfHwgMSxcbiAgICAgICAgICAgICAgfSl9XG4gICAgICAgICAgICAgIGNsYXNzTmFtZT1cIm10LTRcIlxuICAgICAgICAgICAgLz5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgPC9kaXY+XG4gICAgICA8L0luc3BlY3RvclNlY3Rpb24+XG5cbiAgICAgIDxJbnNwZWN0b3JTZWN0aW9uIHRpdGxlPVwiTGF5b3V0XCI+XG4gICAgICAgIHtub2RlLnR5cGUgPT09IFwidGV4dFwiID8gKFxuICAgICAgICAgIDxTZWdtZW50ZWRDb250cm9sXG4gICAgICAgICAgICBsYWJlbD1cIlJlc2l6aW5nXCJcbiAgICAgICAgICAgIHZhbHVlPXtTdHJpbmcobm9kZS5wcm9wcy50ZXh0UmVzaXplTW9kZSA/PyBcImZpeGVkXCIpfVxuICAgICAgICAgICAgb3B0aW9ucz17W1xuICAgICAgICAgICAgICB7IHZhbHVlOiBcImF1dG8td2lkdGhcIiwgbGFiZWw6IFwiQXV0byB3aWR0aFwiIH0sXG4gICAgICAgICAgICAgIHsgdmFsdWU6IFwiYXV0by1oZWlnaHRcIiwgbGFiZWw6IFwiQXV0byBoZWlnaHRcIiB9LFxuICAgICAgICAgICAgICB7IHZhbHVlOiBcImZpeGVkXCIsIGxhYmVsOiBcIkZpeGVkXCIgfSxcbiAgICAgICAgICAgIF19XG4gICAgICAgICAgICBvbkNoYW5nZT17KHRleHRSZXNpemVNb2RlKSA9PiBvblVwZGF0ZVByb3BzKHsgdGV4dFJlc2l6ZU1vZGUgfSl9XG4gICAgICAgICAgLz5cbiAgICAgICAgKSA6IG51bGx9XG4gICAgICAgIDxkaXY+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYi0xIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktYmV0d2VlblwiPlxuICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwidGV4dC1bOXB4XSBmb250LW1lZGl1bSB0ZXh0LVsjYTZhNmE2XVwiPkRpbWVuc2lvbnM8L3NwYW4+XG4gICAgICAgICAgICA8SW5zcGVjdG9ySWNvbkJ1dHRvblxuICAgICAgICAgICAgICBpY29uPXtSYXRpb31cbiAgICAgICAgICAgICAgYWN0aXZlPXthc3BlY3RMb2NrZWR9XG4gICAgICAgICAgICAgIGRpc2FibGVkPXthc3BlY3RSZXF1aXJlZH1cbiAgICAgICAgICAgICAgdGl0bGU9e1xuICAgICAgICAgICAgICAgIGFzcGVjdFJlcXVpcmVkXG4gICAgICAgICAgICAgICAgICA/IFwiVGhpcyBlbGVtZW50IHByZXNlcnZlcyBpdHMgYXNwZWN0IHJhdGlvXCJcbiAgICAgICAgICAgICAgICAgIDogYXNwZWN0TG9ja2VkXG4gICAgICAgICAgICAgICAgICAgID8gXCJVbmxvY2sgYXNwZWN0IHJhdGlvXCJcbiAgICAgICAgICAgICAgICAgICAgOiBcIkxvY2sgYXNwZWN0IHJhdGlvXCJcbiAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICBvbkNsaWNrPXsoKSA9PlxuICAgICAgICAgICAgICAgIG9uVXBkYXRlRXh0ZW5zaW9ucyh7XG4gICAgICAgICAgICAgICAgICBhc3BlY3RSYXRpb0xvY2tlZDogIWFzcGVjdExvY2tlZCxcbiAgICAgICAgICAgICAgICAgIGFzcGVjdFJhdGlvOiBzYWZlUmF0aW8obm9kZSksXG4gICAgICAgICAgICAgICAgfSlcbiAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgLz5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ3JpZC1jb2xzLTIgZ2FwLTJcIj5cbiAgICAgICAgICAgIDxOdW1iZXJGaWVsZCBsYWJlbD1cIldcIiB2YWx1ZT17bm9kZS50cmFuc2Zvcm0ud2lkdGh9IG1pbj17MX0gb25Db21taXQ9e3VwZGF0ZVdpZHRofSAvPlxuICAgICAgICAgICAgPE51bWJlckZpZWxkIGxhYmVsPVwiSFwiIHZhbHVlPXtub2RlLnRyYW5zZm9ybS5oZWlnaHR9IG1pbj17MX0gb25Db21taXQ9e3VwZGF0ZUhlaWdodH0gLz5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgPC9kaXY+XG4gICAgICA8L0luc3BlY3RvclNlY3Rpb24+XG4gICAgPC8+XG4gICk7XG59O1xuIl0sImZpbGUiOiIvc3JjL3VpL2luc3BlY3Rvci1wYW5lbC9UcmFuc2Zvcm1JbnNwZWN0b3IudHN4In0=

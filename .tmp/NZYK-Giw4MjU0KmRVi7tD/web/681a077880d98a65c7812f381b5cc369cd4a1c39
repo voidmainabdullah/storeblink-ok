@@ -1,0 +1,645 @@
+Object.defineProperty(__vite_ssr_exports__, "ImageInspector", { enumerable: true, configurable: true, get(){ try { return ImageInspector } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/react/jsx-dev-runtime.js", {"importedNames":["jsxDEV","Fragment"]});
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/react/index.js", {"importedNames":["useRef","useState"]});
+const __vite_ssr_import_2__ = await __vite_ssr_import__("/node_modules/lucide-react/dist/cjs/lucide-react.js", {"importedNames":["Download","ImagePlus","RotateCcw","ScanLine","Sparkles"]});
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/src/components/ui/button.tsx", {"importedNames":["Button"]});
+const __vite_ssr_import_4__ = await __vite_ssr_import__("/src/editor/components/toolbars/FigmaColorPicker.tsx", {"importedNames":["FigmaColorPicker"]});
+const __vite_ssr_import_5__ = await __vite_ssr_import__("/src/elements/image/imageAdjustments.ts", {"importedNames":["DEFAULT_IMAGE_ADJUSTMENTS","DEFAULT_IMAGE_EFFECTS","readImageAdjustments","readImageEffects"]});
+const __vite_ssr_import_6__ = await __vite_ssr_import__("/src/ui/inspector-panel/InspectorControls.tsx", {"importedNames":["InspectorSection","NumberField","RangeField","SelectField","ToggleRow"]});
+const __vite_ssr_import_7__ = await __vite_ssr_import__("/src/ui/inspector-panel/imageExport.ts", {"importedNames":["exportImageNode"]});
+const adjustmentRanges = [
+    {
+        key: "exposure",
+        label: "Exposure",
+        min: -100,
+        max: 100
+    },
+    {
+        key: "brightness",
+        label: "Brightness",
+        min: -100,
+        max: 100
+    },
+    {
+        key: "contrast",
+        label: "Contrast",
+        min: -100,
+        max: 100
+    },
+    {
+        key: "saturation",
+        label: "Saturation",
+        min: -100,
+        max: 100
+    },
+    {
+        key: "vibrance",
+        label: "Vibrance",
+        min: -100,
+        max: 100
+    },
+    {
+        key: "temperature",
+        label: "Temperature",
+        min: -100,
+        max: 100
+    },
+    {
+        key: "tint",
+        label: "Tint",
+        min: -100,
+        max: 100
+    },
+    {
+        key: "blur",
+        label: "Blur",
+        min: 0,
+        max: 40
+    },
+    {
+        key: "sharpness",
+        label: "Sharpness",
+        min: 0,
+        max: 100
+    }
+];
+const ImageInspector = ({ node, brandColors, onUpdateProps, onRemoveBackground, onEnhance, appearanceBefore, strokeEffectsAfter })=>{
+    const inputRef = (0,__vite_ssr_import_1__.useRef)(null);
+    const [processing, setProcessing] = (0,__vite_ssr_import_1__.useState)(null);
+    const [status, setStatus] = (0,__vite_ssr_import_1__.useState)("");
+    const [exportOptions, setExportOptions] = (0,__vite_ssr_import_1__.useState)({
+        format: "png",
+        scale: 1,
+        quality: 92,
+        transparent: true
+    });
+    const adjustments = (0,__vite_ssr_import_5__.readImageAdjustments)(node.props.imageAdjustments);
+    const effects = (0,__vite_ssr_import_5__.readImageEffects)(node.props.imageEffects);
+    const positionX = Math.max(0, Math.min(100, Number(node.props.imagePositionX ?? 50)));
+    const positionY = Math.max(0, Math.min(100, Number(node.props.imagePositionY ?? 50)));
+    const replaceImage = (event)=>{
+        const file = event.target.files?.[0];
+        event.target.value = "";
+        if (!file || !file.type.startsWith("image/")) return;
+        const reader = new FileReader();
+        reader.onload = ()=>{
+            if (typeof reader.result !== "string") return;
+            onUpdateProps({
+                src: reader.result,
+                alt: file.name
+            });
+        };
+        reader.readAsDataURL(file);
+    };
+    const updateAdjustments = (patch)=>onUpdateProps({
+            imageAdjustments: {
+                ...adjustments,
+                ...patch
+            }
+        });
+    const updateEffects = (patch)=>onUpdateProps({
+            imageEffects: {
+                ...effects,
+                ...patch
+            }
+        });
+    const updatePosition = (axis, value)=>{
+        const nextX = axis === "x" ? value : positionX;
+        const nextY = axis === "y" ? value : positionY;
+        onUpdateProps({
+            imagePositionX: nextX,
+            imagePositionY: nextY,
+            objectPosition: `${nextX}% ${nextY}%`
+        });
+    };
+    const runProcessor = async (kind, processor)=>{
+        if (!processor) return;
+        setProcessing(kind);
+        setStatus("");
+        try {
+            const src = await processor(node);
+            onUpdateProps({
+                src
+            });
+            setStatus(kind === "remove" ? "Background removed" : "Image enhanced");
+        } catch (error) {
+            setStatus(error instanceof Error ? error.message : "Image processing failed");
+        } finally{
+            setProcessing(null);
+        }
+    };
+    const runExport = async ()=>{
+        setStatus("Exporting...");
+        try {
+            await (0,__vite_ssr_import_7__.exportImageNode)(node, exportOptions);
+            setStatus("Export ready");
+        } catch (error) {
+            setStatus(error instanceof Error ? error.message : "Export failed");
+        }
+    };
+    return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_0__.Fragment), {
+        children: [
+            appearanceBefore,
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_6__.InspectorSection), {
+                title: "Image",
+                children: [
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.Button), {
+                        variant: "outline",
+                        className: "h-8 w-full border-[#4a4a4a] bg-transparent text-[10px] text-white hover:bg-white/10",
+                        onClick: ()=>inputRef.current?.click(),
+                        children: [
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.ImagePlus), {
+                                size: 13,
+                                className: "mr-2"
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                                lineNumber: 149,
+                                columnNumber: 11
+                            }, this),
+                            " Replace image"
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                        lineNumber: 144,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("input", {
+                        ref: inputRef,
+                        type: "file",
+                        accept: "image/*",
+                        onChange: replaceImage,
+                        className: "hidden"
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                        lineNumber: 151,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_6__.SelectField), {
+                        label: "Fill mode",
+                        value: String(node.props.objectFit ?? "cover"),
+                        options: [
+                            {
+                                value: "cover",
+                                label: "Cover"
+                            },
+                            {
+                                value: "contain",
+                                label: "Contain"
+                            },
+                            {
+                                value: "fill",
+                                label: "Stretch"
+                            },
+                            {
+                                value: "none",
+                                label: "Original size"
+                            },
+                            {
+                                value: "scale-down",
+                                label: "Scale down"
+                            }
+                        ],
+                        onChange: (objectFit)=>onUpdateProps({
+                                objectFit
+                            })
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                        lineNumber: 152,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_6__.ToggleRow), {
+                        label: "Crop",
+                        checked: node.props.cropEnabled === true,
+                        description: "Use scale and position to choose the visible image area.",
+                        onChange: (cropEnabled)=>onUpdateProps({
+                                cropEnabled,
+                                ...cropEnabled ? {
+                                    objectFit: "cover"
+                                } : {}
+                            })
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                        lineNumber: 164,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_6__.RangeField), {
+                        label: "Scale",
+                        value: Number(node.props.imageScale ?? 100),
+                        min: 10,
+                        max: 400,
+                        onChange: (imageScale)=>onUpdateProps({
+                                imageScale
+                            })
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                        lineNumber: 173,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "grid grid-cols-2 gap-2",
+                        children: [
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_6__.NumberField), {
+                                label: "Position X",
+                                value: positionX,
+                                min: 0,
+                                max: 100,
+                                suffix: "%",
+                                onCommit: (value)=>updatePosition("x", value)
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                                lineNumber: 181,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_6__.NumberField), {
+                                label: "Position Y",
+                                value: positionY,
+                                min: 0,
+                                max: 100,
+                                suffix: "%",
+                                onCommit: (value)=>updatePosition("y", value)
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                                lineNumber: 182,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                        lineNumber: 180,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_6__.RangeField), {
+                        label: "Image opacity",
+                        value: adjustments.opacity,
+                        min: 0,
+                        max: 100,
+                        onChange: (opacity)=>updateAdjustments({
+                                opacity
+                            })
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                        lineNumber: 184,
+                        columnNumber: 9
+                    }, this),
+                    adjustmentRanges.map((field)=>/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_6__.RangeField), {
+                            label: field.label,
+                            value: adjustments[field.key],
+                            min: field.min,
+                            max: field.max,
+                            onChange: (value)=>updateAdjustments({
+                                    [field.key]: value
+                                })
+                        }, field.key, false, {
+                            fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                            lineNumber: 186,
+                            columnNumber: 11
+                        }, this)),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "grid grid-cols-2 gap-2",
+                        children: [
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.Button), {
+                                variant: "outline",
+                                disabled: !onRemoveBackground || Boolean(processing),
+                                title: onRemoveBackground ? "Remove image background" : "Configure an image-processing provider to enable background removal",
+                                className: "h-8 border-[#4a4a4a] bg-transparent px-2 text-[9px] text-white hover:bg-white/10",
+                                onClick: ()=>runProcessor("remove", onRemoveBackground),
+                                children: [
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.ScanLine), {
+                                        size: 12,
+                                        className: "mr-1.5"
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                                        lineNumber: 203,
+                                        columnNumber: 13
+                                    }, this),
+                                    " Remove BG"
+                                ]
+                            }, void 0, true, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                                lineNumber: 196,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.Button), {
+                                variant: "outline",
+                                disabled: !onEnhance || Boolean(processing),
+                                title: onEnhance ? "Enhance image" : "Configure an image-processing provider to enable AI enhancement",
+                                className: "h-8 border-[#4a4a4a] bg-transparent px-2 text-[9px] text-white hover:bg-white/10",
+                                onClick: ()=>runProcessor("enhance", onEnhance),
+                                children: [
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.Sparkles), {
+                                        size: 12,
+                                        className: "mr-1.5"
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                                        lineNumber: 212,
+                                        columnNumber: 13
+                                    }, this),
+                                    " AI enhance"
+                                ]
+                            }, void 0, true, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                                lineNumber: 205,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                        lineNumber: 195,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.Button), {
+                        variant: "ghost",
+                        className: "h-7 w-full text-[9px] text-[#bbb] hover:bg-white/10 hover:text-white",
+                        onClick: ()=>onUpdateProps({
+                                imageAdjustments: __vite_ssr_import_5__.DEFAULT_IMAGE_ADJUSTMENTS,
+                                imageEffects: __vite_ssr_import_5__.DEFAULT_IMAGE_EFFECTS,
+                                imageScale: 100,
+                                imagePositionX: 50,
+                                imagePositionY: 50,
+                                objectPosition: "50% 50%",
+                                cropEnabled: false
+                            }),
+                        children: [
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.RotateCcw), {
+                                size: 12,
+                                className: "mr-1.5"
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                                lineNumber: 228,
+                                columnNumber: 11
+                            }, this),
+                            " Reset image"
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                        lineNumber: 215,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                lineNumber: 143,
+                columnNumber: 7
+            }, this),
+            strokeEffectsAfter,
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_6__.InspectorSection), {
+                title: "Image effects",
+                defaultOpen: false,
+                children: [
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_6__.RangeField), {
+                        label: "Noise",
+                        value: effects.noise,
+                        min: 0,
+                        max: 100,
+                        onChange: (noise)=>updateEffects({
+                                noise
+                            })
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                        lineNumber: 235,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_6__.RangeField), {
+                        label: "Texture",
+                        value: effects.texture,
+                        min: 0,
+                        max: 100,
+                        onChange: (texture)=>updateEffects({
+                                texture
+                            })
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                        lineNumber: 236,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_6__.RangeField), {
+                        label: "Glass",
+                        value: effects.glass,
+                        min: 0,
+                        max: 100,
+                        onChange: (glass)=>updateEffects({
+                                glass
+                            })
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                        lineNumber: 237,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_6__.RangeField), {
+                        label: "Glow",
+                        value: effects.glow,
+                        min: 0,
+                        max: 100,
+                        onChange: (glow)=>updateEffects({
+                                glow
+                            })
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                        lineNumber: 238,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "flex items-center justify-between rounded bg-[#383838] px-2 py-1",
+                        children: [
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                className: "text-[10px] text-[#ddd]",
+                                children: "Glow color"
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                                lineNumber: 240,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_4__.FigmaColorPicker), {
+                                value: effects.glowColor,
+                                label: "Glow color",
+                                brandColors: brandColors,
+                                onChange: (glowColor)=>updateEffects({
+                                        glowColor
+                                    })
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                                lineNumber: 241,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                        lineNumber: 239,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_6__.SelectField), {
+                        label: "Blend mode",
+                        value: String(effects.blendMode ?? "normal"),
+                        options: [
+                            {
+                                value: "normal",
+                                label: "Normal"
+                            },
+                            {
+                                value: "multiply",
+                                label: "Multiply"
+                            },
+                            {
+                                value: "screen",
+                                label: "Screen"
+                            },
+                            {
+                                value: "overlay",
+                                label: "Overlay"
+                            },
+                            {
+                                value: "darken",
+                                label: "Darken"
+                            },
+                            {
+                                value: "lighten",
+                                label: "Lighten"
+                            },
+                            {
+                                value: "color-dodge",
+                                label: "Color dodge"
+                            },
+                            {
+                                value: "color-burn",
+                                label: "Color burn"
+                            },
+                            {
+                                value: "difference",
+                                label: "Difference"
+                            }
+                        ],
+                        onChange: (blendMode)=>updateEffects({
+                                blendMode: blendMode
+                            })
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                        lineNumber: 248,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                lineNumber: 234,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_6__.InspectorSection), {
+                title: "Export",
+                defaultOpen: false,
+                children: [
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "grid grid-cols-2 gap-2",
+                        children: [
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_6__.SelectField), {
+                                label: "Format",
+                                value: exportOptions.format,
+                                options: [
+                                    {
+                                        value: "png",
+                                        label: "PNG"
+                                    },
+                                    {
+                                        value: "jpeg",
+                                        label: "JPG"
+                                    },
+                                    {
+                                        value: "webp",
+                                        label: "WebP"
+                                    }
+                                ],
+                                onChange: (format)=>setExportOptions((current)=>({
+                                            ...current,
+                                            format: format
+                                        }))
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                                lineNumber: 268,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_6__.NumberField), {
+                                label: "Scale",
+                                value: exportOptions.scale,
+                                min: 0.25,
+                                max: 4,
+                                step: 0.25,
+                                suffix: "x",
+                                onCommit: (scale)=>setExportOptions((current)=>({
+                                            ...current,
+                                            scale
+                                        }))
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                                lineNumber: 278,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                        lineNumber: 267,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_6__.RangeField), {
+                        label: "Quality",
+                        value: exportOptions.quality,
+                        min: 10,
+                        max: 100,
+                        onChange: (quality)=>setExportOptions((current)=>({
+                                    ...current,
+                                    quality
+                                }))
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                        lineNumber: 288,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_6__.ToggleRow), {
+                        label: "Transparent background",
+                        checked: exportOptions.transparent,
+                        onChange: (transparent)=>setExportOptions((current)=>({
+                                    ...current,
+                                    transparent
+                                }))
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                        lineNumber: 295,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.Button), {
+                        className: "h-8 w-full bg-[#0178ff] text-[10px] text-white hover:bg-[#0b87df]",
+                        onClick: runExport,
+                        children: [
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.Download), {
+                                size: 13,
+                                className: "mr-2"
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                                lineNumber: 301,
+                                columnNumber: 11
+                            }, this),
+                            " Export image"
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                        lineNumber: 300,
+                        columnNumber: 9
+                    }, this),
+                    status ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        role: "status",
+                        className: "text-[9px] text-[#aaa]",
+                        children: status
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                        lineNumber: 303,
+                        columnNumber: 19
+                    }, this) : null
+                ]
+            }, void 0, true, {
+                fileName: "F:/Storeblink/src/ui/inspector-panel/ImageInspector.tsx",
+                lineNumber: 266,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true);
+};
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,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QUFDMEU7Z0NBQ0M5RixPQUFNO2dDQUNOMEMsT0FBT3hCLGNBQWNHLEtBQUs7Z0NBQzFCcEIsS0FBSztnQ0FDTEMsS0FBSztnQ0FDTGtILE1BQU07Z0NBQ05yQixRQUFPO2dDQUNQQyxVQUFVLENBQUMzRSxRQUFVRixpQkFBaUIsQ0FBQ3dELFVBQWE7NENBQUUsR0FBR0EsT0FBTzs0Q0FBRXREO3dDQUFNOzs7Ozs7Ozs7Ozs7cUNBRzVFLGlDQUFDc0U7d0JBQ0MzRixPQUFNO3dCQUNOMEMsT0FBT3hCLGNBQWNJLE9BQU87d0JBQzVCckIsS0FBSzt3QkFDTEMsS0FBSzt3QkFDTGdGLFVBQVUsQ0FBQzVELFVBQVlILGlCQUFpQixDQUFDd0QsVUFBYTtvQ0FBRSxHQUFHQSxPQUFPO29DQUFFckQ7Z0NBQVE7Ozs7OztxQ0FFOUUsaUNBQUNpRTt3QkFDQ3ZGLE9BQU07d0JBQ053RixTQUFTdEUsY0FBY0ssV0FBVzt3QkFDbEMyRCxVQUFVLENBQUMzRCxjQUFnQkosaUJBQWlCLENBQUN3RCxVQUFhO29DQUFFLEdBQUdBLE9BQU87b0NBQUVwRDtnQ0FBWTs7Ozs7O3FDQUV0RixpQ0FBQ2dEO3dCQUFPRSxXQUFVO3dCQUFvRUMsU0FBU1A7OzZDQUM3RixpQ0FBQ2tEO2dDQUFTdkMsTUFBTTtnQ0FBSUwsV0FBVTs7Ozs7OzRCQUFTOzs7Ozs7O29CQUV4Q3pELDBCQUFTLDhCQUFDNkU7d0JBQUl5QixNQUFLO3dCQUFTN0MsV0FBVTtrQ0FBMEJ6RDs7Ozs7K0JBQWdCOzs7Ozs7Ozs7QUFJekYiLCJuYW1lcyI6WyJhZGp1c3RtZW50UmFuZ2VzIiwia2V5IiwibGFiZWwiLCJtaW4iLCJtYXgiLCJJbWFnZUluc3BlY3RvciIsIm5vZGUiLCJicmFuZENvbG9ycyIsIm9uVXBkYXRlUHJvcHMiLCJvblJlbW92ZUJhY2tncm91bmQiLCJvbkVuaGFuY2UiLCJhcHBlYXJhbmNlQmVmb3JlIiwic3Ryb2tlRWZmZWN0c0FmdGVyIiwiaW5wdXRSZWYiLCJ1c2VSZWYiLCJwcm9jZXNzaW5nIiwic2V0UHJvY2Vzc2luZyIsInVzZVN0YXRlIiwic3RhdHVzIiwic2V0U3RhdHVzIiwiZXhwb3J0T3B0aW9ucyIsInNldEV4cG9ydE9wdGlvbnMiLCJmb3JtYXQiLCJzY2FsZSIsInF1YWxpdHkiLCJ0cmFuc3BhcmVudCIsImFkanVzdG1lbnRzIiwicmVhZEltYWdlQWRqdXN0bWVudHMiLCJwcm9wcyIsImltYWdlQWRqdXN0bWVudHMiLCJlZmZlY3RzIiwicmVhZEltYWdlRWZmZWN0cyIsImltYWdlRWZmZWN0cyIsInBvc2l0aW9uWCIsIk1hdGgiLCJOdW1iZXIiLCJpbWFnZVBvc2l0aW9uWCIsInBvc2l0aW9uWSIsImltYWdlUG9zaXRpb25ZIiwicmVwbGFjZUltYWdlIiwiZXZlbnQiLCJmaWxlIiwidGFyZ2V0IiwiZmlsZXMiLCJ2YWx1ZSIsInR5cGUiLCJzdGFydHNXaXRoIiwicmVhZGVyIiwiRmlsZVJlYWRlciIsIm9ubG9hZCIsInJlc3VsdCIsInNyYyIsImFsdCIsIm5hbWUiLCJyZWFkQXNEYXRhVVJMIiwidXBkYXRlQWRqdXN0bWVudHMiLCJwYXRjaCIsInVwZGF0ZUVmZmVjdHMiLCJ1cGRhdGVQb3NpdGlvbiIsImF4aXMiLCJuZXh0WCIsIm5leHRZIiwib2JqZWN0UG9zaXRpb24iLCJydW5Qcm9jZXNzb3IiLCJraW5kIiwicHJvY2Vzc29yIiwiZXJyb3IiLCJFcnJvciIsIm1lc3NhZ2UiLCJydW5FeHBvcnQiLCJleHBvcnRJbWFnZU5vZGUiLCJJbnNwZWN0b3JTZWN0aW9uIiwidGl0bGUiLCJCdXR0b24iLCJ2YXJpYW50IiwiY2xhc3NOYW1lIiwib25DbGljayIsImN1cnJlbnQiLCJjbGljayIsIkltYWdlUGx1cyIsInNpemUiLCJpbnB1dCIsInJlZiIsImFjY2VwdCIsIm9uQ2hhbmdlIiwiU2VsZWN0RmllbGQiLCJTdHJpbmciLCJvYmplY3RGaXQiLCJvcHRpb25zIiwiVG9nZ2xlUm93IiwiY2hlY2tlZCIsImNyb3BFbmFibGVkIiwiZGVzY3JpcHRpb24iLCJSYW5nZUZpZWxkIiwiaW1hZ2VTY2FsZSIsImRpdiIsIk51bWJlckZpZWxkIiwic3VmZml4Iiwib25Db21taXQiLCJvcGFjaXR5IiwibWFwIiwiZmllbGQiLCJkaXNhYmxlZCIsIkJvb2xlYW4iLCJTY2FuTGluZSIsIlNwYXJrbGVzIiwiREVGQVVMVF9JTUFHRV9BREpVU1RNRU5UUyIsIkRFRkFVTFRfSU1BR0VfRUZGRUNUUyIsIlJvdGF0ZUNjdyIsImRlZmF1bHRPcGVuIiwibm9pc2UiLCJ0ZXh0dXJlIiwiZ2xhc3MiLCJnbG93Iiwic3BhbiIsIkZpZ21hQ29sb3JQaWNrZXIiLCJnbG93Q29sb3IiLCJibGVuZE1vZGUiLCJzdGVwIiwiRG93bmxvYWQiLCJyb2xlIl0sImlnbm9yZUxpc3QiOltdLCJzb3VyY2VzIjpbIkltYWdlSW5zcGVjdG9yLnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyB1c2VSZWYsIHVzZVN0YXRlLCB0eXBlIENoYW5nZUV2ZW50LCB0eXBlIFJlYWN0Tm9kZSB9IGZyb20gXCJyZWFjdFwiO1xuaW1wb3J0IHtcbiAgQ3JvcCxcbiAgRG93bmxvYWQsXG4gIEltYWdlUGx1cyxcbiAgUm90YXRlQ2N3LFxuICBTY2FuTGluZSxcbiAgU3BhcmtsZXMsXG59IGZyb20gXCJsdWNpZGUtcmVhY3RcIjtcbmltcG9ydCB7IEJ1dHRvbiB9IGZyb20gXCJAL2NvbXBvbmVudHMvdWkvYnV0dG9uXCI7XG5pbXBvcnQgeyBGaWdtYUNvbG9yUGlja2VyIH0gZnJvbSBcIkAvZWRpdG9yL2NvbXBvbmVudHMvdG9vbGJhcnMvRmlnbWFDb2xvclBpY2tlclwiO1xuaW1wb3J0IHtcbiAgREVGQVVMVF9JTUFHRV9BREpVU1RNRU5UUyxcbiAgREVGQVVMVF9JTUFHRV9FRkZFQ1RTLFxuICByZWFkSW1hZ2VBZGp1c3RtZW50cyxcbiAgcmVhZEltYWdlRWZmZWN0cyxcbiAgdHlwZSBJbWFnZUFkanVzdG1lbnRzLFxuICB0eXBlIEltYWdlRWZmZWN0cyxcbn0gZnJvbSBcIkAvZWxlbWVudHMvaW1hZ2UvaW1hZ2VBZGp1c3RtZW50c1wiO1xuaW1wb3J0IHR5cGUgeyBTY2VuZU5vZGUgfSBmcm9tIFwiQC90eXBlc1wiO1xuaW1wb3J0IHtcbiAgSW5zcGVjdG9yU2VjdGlvbixcbiAgTnVtYmVyRmllbGQsXG4gIFJhbmdlRmllbGQsXG4gIFNlbGVjdEZpZWxkLFxuICBUb2dnbGVSb3csXG59IGZyb20gXCIuL0luc3BlY3RvckNvbnRyb2xzXCI7XG5pbXBvcnQge1xuICBleHBvcnRJbWFnZU5vZGUsXG4gIHR5cGUgSW1hZ2VFeHBvcnRGb3JtYXQsXG4gIHR5cGUgSW1hZ2VFeHBvcnRPcHRpb25zLFxufSBmcm9tIFwiLi9pbWFnZUV4cG9ydFwiO1xuXG5leHBvcnQgdHlwZSBJbWFnZUluc3BlY3RvclByb3BzID0ge1xuICBub2RlOiBTY2VuZU5vZGU7XG4gIGJyYW5kQ29sb3JzOiBzdHJpbmdbXTtcbiAgb25VcGRhdGVQcm9wczogKHBhdGNoOiBSZWNvcmQ8c3RyaW5nLCB1bmtub3duPikgPT4gdm9pZDtcbiAgb25SZW1vdmVCYWNrZ3JvdW5kPzogKG5vZGU6IFNjZW5lTm9kZSkgPT4gUHJvbWlzZTxzdHJpbmc+O1xuICBvbkVuaGFuY2U/OiAobm9kZTogU2NlbmVOb2RlKSA9PiBQcm9taXNlPHN0cmluZz47XG4gIGFwcGVhcmFuY2VCZWZvcmU/OiBSZWFjdE5vZGU7XG4gIHN0cm9rZUVmZmVjdHNBZnRlcj86IFJlYWN0Tm9kZTtcbn07XG5cbmNvbnN0IGFkanVzdG1lbnRSYW5nZXM6IEFycmF5PHtcbiAga2V5OiBrZXlvZiBJbWFnZUFkanVzdG1lbnRzO1xuICBsYWJlbDogc3RyaW5nO1xuICBtaW46IG51bWJlcjtcbiAgbWF4OiBudW1iZXI7XG59PiA9IFtcbiAgeyBrZXk6IFwiZXhwb3N1cmVcIiwgbGFiZWw6IFwiRXhwb3N1cmVcIiwgbWluOiAtMTAwLCBtYXg6IDEwMCB9LFxuICB7IGtleTogXCJicmlnaHRuZXNzXCIsIGxhYmVsOiBcIkJyaWdodG5lc3NcIiwgbWluOiAtMTAwLCBtYXg6IDEwMCB9LFxuICB7IGtleTogXCJjb250cmFzdFwiLCBsYWJlbDogXCJDb250cmFzdFwiLCBtaW46IC0xMDAsIG1heDogMTAwIH0sXG4gIHsga2V5OiBcInNhdHVyYXRpb25cIiwgbGFiZWw6IFwiU2F0dXJhdGlvblwiLCBtaW46IC0xMDAsIG1heDogMTAwIH0sXG4gIHsga2V5OiBcInZpYnJhbmNlXCIsIGxhYmVsOiBcIlZpYnJhbmNlXCIsIG1pbjogLTEwMCwgbWF4OiAxMDAgfSxcbiAgeyBrZXk6IFwidGVtcGVyYXR1cmVcIiwgbGFiZWw6IFwiVGVtcGVyYXR1cmVcIiwgbWluOiAtMTAwLCBtYXg6IDEwMCB9LFxuICB7IGtleTogXCJ0aW50XCIsIGxhYmVsOiBcIlRpbnRcIiwgbWluOiAtMTAwLCBtYXg6IDEwMCB9LFxuICB7IGtleTogXCJibHVyXCIsIGxhYmVsOiBcIkJsdXJcIiwgbWluOiAwLCBtYXg6IDQwIH0sXG4gIHsga2V5OiBcInNoYXJwbmVzc1wiLCBsYWJlbDogXCJTaGFycG5lc3NcIiwgbWluOiAwLCBtYXg6IDEwMCB9LFxuXTtcblxuZXhwb3J0IGNvbnN0IEltYWdlSW5zcGVjdG9yID0gKHtcbiAgbm9kZSxcbiAgYnJhbmRDb2xvcnMsXG4gIG9uVXBkYXRlUHJvcHMsXG4gIG9uUmVtb3ZlQmFja2dyb3VuZCxcbiAgb25FbmhhbmNlLFxuICBhcHBlYXJhbmNlQmVmb3JlLFxuICBzdHJva2VFZmZlY3RzQWZ0ZXIsXG59OiBJbWFnZUluc3BlY3RvclByb3BzKSA9PiB7XG4gIGNvbnN0IGlucHV0UmVmID0gdXNlUmVmPEhUTUxJbnB1dEVsZW1lbnQ+KG51bGwpO1xuICBjb25zdCBbcHJvY2Vzc2luZywgc2V0UHJvY2Vzc2luZ10gPSB1c2VTdGF0ZTxcInJlbW92ZVwiIHwgXCJlbmhhbmNlXCIgfCBudWxsPihudWxsKTtcbiAgY29uc3QgW3N0YXR1cywgc2V0U3RhdHVzXSA9IHVzZVN0YXRlKFwiXCIpO1xuICBjb25zdCBbZXhwb3J0T3B0aW9ucywgc2V0RXhwb3J0T3B0aW9uc10gPSB1c2VTdGF0ZTxJbWFnZUV4cG9ydE9wdGlvbnM+KHtcbiAgICBmb3JtYXQ6IFwicG5nXCIsXG4gICAgc2NhbGU6IDEsXG4gICAgcXVhbGl0eTogOTIsXG4gICAgdHJhbnNwYXJlbnQ6IHRydWUsXG4gIH0pO1xuICBjb25zdCBhZGp1c3RtZW50cyA9IHJlYWRJbWFnZUFkanVzdG1lbnRzKG5vZGUucHJvcHMuaW1hZ2VBZGp1c3RtZW50cyk7XG4gIGNvbnN0IGVmZmVjdHMgPSByZWFkSW1hZ2VFZmZlY3RzKG5vZGUucHJvcHMuaW1hZ2VFZmZlY3RzKTtcbiAgY29uc3QgcG9zaXRpb25YID0gTWF0aC5tYXgoMCwgTWF0aC5taW4oMTAwLCBOdW1iZXIobm9kZS5wcm9wcy5pbWFnZVBvc2l0aW9uWCA/PyA1MCkpKTtcbiAgY29uc3QgcG9zaXRpb25ZID0gTWF0aC5tYXgoMCwgTWF0aC5taW4oMTAwLCBOdW1iZXIobm9kZS5wcm9wcy5pbWFnZVBvc2l0aW9uWSA/PyA1MCkpKTtcblxuICBjb25zdCByZXBsYWNlSW1hZ2UgPSAoZXZlbnQ6IENoYW5nZUV2ZW50PEhUTUxJbnB1dEVsZW1lbnQ+KSA9PiB7XG4gICAgY29uc3QgZmlsZSA9IGV2ZW50LnRhcmdldC5maWxlcz8uWzBdO1xuICAgIGV2ZW50LnRhcmdldC52YWx1ZSA9IFwiXCI7XG4gICAgaWYgKCFmaWxlIHx8ICFmaWxlLnR5cGUuc3RhcnRzV2l0aChcImltYWdlL1wiKSkgcmV0dXJuO1xuICAgIGNvbnN0IHJlYWRlciA9IG5ldyBGaWxlUmVhZGVyKCk7XG4gICAgcmVhZGVyLm9ubG9hZCA9ICgpID0+IHtcbiAgICAgIGlmICh0eXBlb2YgcmVhZGVyLnJlc3VsdCAhPT0gXCJzdHJpbmdcIikgcmV0dXJuO1xuICAgICAgb25VcGRhdGVQcm9wcyh7IHNyYzogcmVhZGVyLnJlc3VsdCwgYWx0OiBmaWxlLm5hbWUgfSk7XG4gICAgfTtcbiAgICByZWFkZXIucmVhZEFzRGF0YVVSTChmaWxlKTtcbiAgfTtcblxuICBjb25zdCB1cGRhdGVBZGp1c3RtZW50cyA9IChwYXRjaDogUGFydGlhbDxJbWFnZUFkanVzdG1lbnRzPikgPT5cbiAgICBvblVwZGF0ZVByb3BzKHsgaW1hZ2VBZGp1c3RtZW50czogeyAuLi5hZGp1c3RtZW50cywgLi4ucGF0Y2ggfSB9KTtcblxuICBjb25zdCB1cGRhdGVFZmZlY3RzID0gKHBhdGNoOiBQYXJ0aWFsPEltYWdlRWZmZWN0cz4pID0+XG4gICAgb25VcGRhdGVQcm9wcyh7IGltYWdlRWZmZWN0czogeyAuLi5lZmZlY3RzLCAuLi5wYXRjaCB9IH0pO1xuXG4gIGNvbnN0IHVwZGF0ZVBvc2l0aW9uID0gKGF4aXM6IFwieFwiIHwgXCJ5XCIsIHZhbHVlOiBudW1iZXIpID0+IHtcbiAgICBjb25zdCBuZXh0WCA9IGF4aXMgPT09IFwieFwiID8gdmFsdWUgOiBwb3NpdGlvblg7XG4gICAgY29uc3QgbmV4dFkgPSBheGlzID09PSBcInlcIiA/IHZhbHVlIDogcG9zaXRpb25ZO1xuICAgIG9uVXBkYXRlUHJvcHMoe1xuICAgICAgaW1hZ2VQb3NpdGlvblg6IG5leHRYLFxuICAgICAgaW1hZ2VQb3NpdGlvblk6IG5leHRZLFxuICAgICAgb2JqZWN0UG9zaXRpb246IGAke25leHRYfSUgJHtuZXh0WX0lYCxcbiAgICB9KTtcbiAgfTtcblxuICBjb25zdCBydW5Qcm9jZXNzb3IgPSBhc3luYyAoXG4gICAga2luZDogXCJyZW1vdmVcIiB8IFwiZW5oYW5jZVwiLFxuICAgIHByb2Nlc3NvcjogKChub2RlOiBTY2VuZU5vZGUpID0+IFByb21pc2U8c3RyaW5nPikgfCB1bmRlZmluZWQsXG4gICkgPT4ge1xuICAgIGlmICghcHJvY2Vzc29yKSByZXR1cm47XG4gICAgc2V0UHJvY2Vzc2luZyhraW5kKTtcbiAgICBzZXRTdGF0dXMoXCJcIik7XG4gICAgdHJ5IHtcbiAgICAgIGNvbnN0IHNyYyA9IGF3YWl0IHByb2Nlc3Nvcihub2RlKTtcbiAgICAgIG9uVXBkYXRlUHJvcHMoeyBzcmMgfSk7XG4gICAgICBzZXRTdGF0dXMoa2luZCA9PT0gXCJyZW1vdmVcIiA/IFwiQmFja2dyb3VuZCByZW1vdmVkXCIgOiBcIkltYWdlIGVuaGFuY2VkXCIpO1xuICAgIH0gY2F0Y2ggKGVycm9yKSB7XG4gICAgICBzZXRTdGF0dXMoZXJyb3IgaW5zdGFuY2VvZiBFcnJvciA/IGVycm9yLm1lc3NhZ2UgOiBcIkltYWdlIHByb2Nlc3NpbmcgZmFpbGVkXCIpO1xuICAgIH0gZmluYWxseSB7XG4gICAgICBzZXRQcm9jZXNzaW5nKG51bGwpO1xuICAgIH1cbiAgfTtcblxuICBjb25zdCBydW5FeHBvcnQgPSBhc3luYyAoKSA9PiB7XG4gICAgc2V0U3RhdHVzKFwiRXhwb3J0aW5nLi4uXCIpO1xuICAgIHRyeSB7XG4gICAgICBhd2FpdCBleHBvcnRJbWFnZU5vZGUobm9kZSwgZXhwb3J0T3B0aW9ucyk7XG4gICAgICBzZXRTdGF0dXMoXCJFeHBvcnQgcmVhZHlcIik7XG4gICAgfSBjYXRjaCAoZXJyb3IpIHtcbiAgICAgIHNldFN0YXR1cyhlcnJvciBpbnN0YW5jZW9mIEVycm9yID8gZXJyb3IubWVzc2FnZSA6IFwiRXhwb3J0IGZhaWxlZFwiKTtcbiAgICB9XG4gIH07XG5cbiAgcmV0dXJuIChcbiAgICA8PlxuICAgICAge2FwcGVhcmFuY2VCZWZvcmV9XG4gICAgICA8SW5zcGVjdG9yU2VjdGlvbiB0aXRsZT1cIkltYWdlXCI+XG4gICAgICAgIDxCdXR0b25cbiAgICAgICAgICB2YXJpYW50PVwib3V0bGluZVwiXG4gICAgICAgICAgY2xhc3NOYW1lPVwiaC04IHctZnVsbCBib3JkZXItWyM0YTRhNGFdIGJnLXRyYW5zcGFyZW50IHRleHQtWzEwcHhdIHRleHQtd2hpdGUgaG92ZXI6Ymctd2hpdGUvMTBcIlxuICAgICAgICAgIG9uQ2xpY2s9eygpID0+IGlucHV0UmVmLmN1cnJlbnQ/LmNsaWNrKCl9XG4gICAgICAgID5cbiAgICAgICAgICA8SW1hZ2VQbHVzIHNpemU9ezEzfSBjbGFzc05hbWU9XCJtci0yXCIgLz4gUmVwbGFjZSBpbWFnZVxuICAgICAgICA8L0J1dHRvbj5cbiAgICAgICAgPGlucHV0IHJlZj17aW5wdXRSZWZ9IHR5cGU9XCJmaWxlXCIgYWNjZXB0PVwiaW1hZ2UvKlwiIG9uQ2hhbmdlPXtyZXBsYWNlSW1hZ2V9IGNsYXNzTmFtZT1cImhpZGRlblwiIC8+XG4gICAgICAgIDxTZWxlY3RGaWVsZFxuICAgICAgICAgIGxhYmVsPVwiRmlsbCBtb2RlXCJcbiAgICAgICAgICB2YWx1ZT17U3RyaW5nKG5vZGUucHJvcHMub2JqZWN0Rml0ID8/IFwiY292ZXJcIil9XG4gICAgICAgICAgb3B0aW9ucz17W1xuICAgICAgICAgICAgeyB2YWx1ZTogXCJjb3ZlclwiLCBsYWJlbDogXCJDb3ZlclwiIH0sXG4gICAgICAgICAgICB7IHZhbHVlOiBcImNvbnRhaW5cIiwgbGFiZWw6IFwiQ29udGFpblwiIH0sXG4gICAgICAgICAgICB7IHZhbHVlOiBcImZpbGxcIiwgbGFiZWw6IFwiU3RyZXRjaFwiIH0sXG4gICAgICAgICAgICB7IHZhbHVlOiBcIm5vbmVcIiwgbGFiZWw6IFwiT3JpZ2luYWwgc2l6ZVwiIH0sXG4gICAgICAgICAgICB7IHZhbHVlOiBcInNjYWxlLWRvd25cIiwgbGFiZWw6IFwiU2NhbGUgZG93blwiIH0sXG4gICAgICAgICAgXX1cbiAgICAgICAgICBvbkNoYW5nZT17KG9iamVjdEZpdCkgPT4gb25VcGRhdGVQcm9wcyh7IG9iamVjdEZpdCB9KX1cbiAgICAgICAgLz5cbiAgICAgICAgPFRvZ2dsZVJvd1xuICAgICAgICAgIGxhYmVsPVwiQ3JvcFwiXG4gICAgICAgICAgY2hlY2tlZD17bm9kZS5wcm9wcy5jcm9wRW5hYmxlZCA9PT0gdHJ1ZX1cbiAgICAgICAgICBkZXNjcmlwdGlvbj1cIlVzZSBzY2FsZSBhbmQgcG9zaXRpb24gdG8gY2hvb3NlIHRoZSB2aXNpYmxlIGltYWdlIGFyZWEuXCJcbiAgICAgICAgICBvbkNoYW5nZT17KGNyb3BFbmFibGVkKSA9PiBvblVwZGF0ZVByb3BzKHtcbiAgICAgICAgICAgIGNyb3BFbmFibGVkLFxuICAgICAgICAgICAgLi4uKGNyb3BFbmFibGVkID8geyBvYmplY3RGaXQ6IFwiY292ZXJcIiB9IDoge30pLFxuICAgICAgICAgIH0pfVxuICAgICAgICAvPlxuICAgICAgICA8UmFuZ2VGaWVsZFxuICAgICAgICAgIGxhYmVsPVwiU2NhbGVcIlxuICAgICAgICAgIHZhbHVlPXtOdW1iZXIobm9kZS5wcm9wcy5pbWFnZVNjYWxlID8/IDEwMCl9XG4gICAgICAgICAgbWluPXsxMH1cbiAgICAgICAgICBtYXg9ezQwMH1cbiAgICAgICAgICBvbkNoYW5nZT17KGltYWdlU2NhbGUpID0+IG9uVXBkYXRlUHJvcHMoeyBpbWFnZVNjYWxlIH0pfVxuICAgICAgICAvPlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ3JpZC1jb2xzLTIgZ2FwLTJcIj5cbiAgICAgICAgICA8TnVtYmVyRmllbGQgbGFiZWw9XCJQb3NpdGlvbiBYXCIgdmFsdWU9e3Bvc2l0aW9uWH0gbWluPXswfSBtYXg9ezEwMH0gc3VmZml4PVwiJVwiIG9uQ29tbWl0PXsodmFsdWUpID0+IHVwZGF0ZVBvc2l0aW9uKFwieFwiLCB2YWx1ZSl9IC8+XG4gICAgICAgICAgPE51bWJlckZpZWxkIGxhYmVsPVwiUG9zaXRpb24gWVwiIHZhbHVlPXtwb3NpdGlvbll9IG1pbj17MH0gbWF4PXsxMDB9IHN1ZmZpeD1cIiVcIiBvbkNvbW1pdD17KHZhbHVlKSA9PiB1cGRhdGVQb3NpdGlvbihcInlcIiwgdmFsdWUpfSAvPlxuICAgICAgICA8L2Rpdj5cbiAgICAgICAgPFJhbmdlRmllbGQgbGFiZWw9XCJJbWFnZSBvcGFjaXR5XCIgdmFsdWU9e2FkanVzdG1lbnRzLm9wYWNpdHl9IG1pbj17MH0gbWF4PXsxMDB9IG9uQ2hhbmdlPXsob3BhY2l0eSkgPT4gdXBkYXRlQWRqdXN0bWVudHMoeyBvcGFjaXR5IH0pfSAvPlxuICAgICAgICB7YWRqdXN0bWVudFJhbmdlcy5tYXAoKGZpZWxkKSA9PiAoXG4gICAgICAgICAgPFJhbmdlRmllbGRcbiAgICAgICAgICAgIGtleT17ZmllbGQua2V5fVxuICAgICAgICAgICAgbGFiZWw9e2ZpZWxkLmxhYmVsfVxuICAgICAgICAgICAgdmFsdWU9e2FkanVzdG1lbnRzW2ZpZWxkLmtleV19XG4gICAgICAgICAgICBtaW49e2ZpZWxkLm1pbn1cbiAgICAgICAgICAgIG1heD17ZmllbGQubWF4fVxuICAgICAgICAgICAgb25DaGFuZ2U9eyh2YWx1ZSkgPT4gdXBkYXRlQWRqdXN0bWVudHMoeyBbZmllbGQua2V5XTogdmFsdWUgfSl9XG4gICAgICAgICAgLz5cbiAgICAgICAgKSl9XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBncmlkLWNvbHMtMiBnYXAtMlwiPlxuICAgICAgICAgIDxCdXR0b25cbiAgICAgICAgICAgIHZhcmlhbnQ9XCJvdXRsaW5lXCJcbiAgICAgICAgICAgIGRpc2FibGVkPXshb25SZW1vdmVCYWNrZ3JvdW5kIHx8IEJvb2xlYW4ocHJvY2Vzc2luZyl9XG4gICAgICAgICAgICB0aXRsZT17b25SZW1vdmVCYWNrZ3JvdW5kID8gXCJSZW1vdmUgaW1hZ2UgYmFja2dyb3VuZFwiIDogXCJDb25maWd1cmUgYW4gaW1hZ2UtcHJvY2Vzc2luZyBwcm92aWRlciB0byBlbmFibGUgYmFja2dyb3VuZCByZW1vdmFsXCJ9XG4gICAgICAgICAgICBjbGFzc05hbWU9XCJoLTggYm9yZGVyLVsjNGE0YTRhXSBiZy10cmFuc3BhcmVudCBweC0yIHRleHQtWzlweF0gdGV4dC13aGl0ZSBob3ZlcjpiZy13aGl0ZS8xMFwiXG4gICAgICAgICAgICBvbkNsaWNrPXsoKSA9PiBydW5Qcm9jZXNzb3IoXCJyZW1vdmVcIiwgb25SZW1vdmVCYWNrZ3JvdW5kKX1cbiAgICAgICAgICA+XG4gICAgICAgICAgICA8U2NhbkxpbmUgc2l6ZT17MTJ9IGNsYXNzTmFtZT1cIm1yLTEuNVwiIC8+IFJlbW92ZSBCR1xuICAgICAgICAgIDwvQnV0dG9uPlxuICAgICAgICAgIDxCdXR0b25cbiAgICAgICAgICAgIHZhcmlhbnQ9XCJvdXRsaW5lXCJcbiAgICAgICAgICAgIGRpc2FibGVkPXshb25FbmhhbmNlIHx8IEJvb2xlYW4ocHJvY2Vzc2luZyl9XG4gICAgICAgICAgICB0aXRsZT17b25FbmhhbmNlID8gXCJFbmhhbmNlIGltYWdlXCIgOiBcIkNvbmZpZ3VyZSBhbiBpbWFnZS1wcm9jZXNzaW5nIHByb3ZpZGVyIHRvIGVuYWJsZSBBSSBlbmhhbmNlbWVudFwifVxuICAgICAgICAgICAgY2xhc3NOYW1lPVwiaC04IGJvcmRlci1bIzRhNGE0YV0gYmctdHJhbnNwYXJlbnQgcHgtMiB0ZXh0LVs5cHhdIHRleHQtd2hpdGUgaG92ZXI6Ymctd2hpdGUvMTBcIlxuICAgICAgICAgICAgb25DbGljaz17KCkgPT4gcnVuUHJvY2Vzc29yKFwiZW5oYW5jZVwiLCBvbkVuaGFuY2UpfVxuICAgICAgICAgID5cbiAgICAgICAgICAgIDxTcGFya2xlcyBzaXplPXsxMn0gY2xhc3NOYW1lPVwibXItMS41XCIgLz4gQUkgZW5oYW5jZVxuICAgICAgICAgIDwvQnV0dG9uPlxuICAgICAgICA8L2Rpdj5cbiAgICAgICAgPEJ1dHRvblxuICAgICAgICAgIHZhcmlhbnQ9XCJnaG9zdFwiXG4gICAgICAgICAgY2xhc3NOYW1lPVwiaC03IHctZnVsbCB0ZXh0LVs5cHhdIHRleHQtWyNiYmJdIGhvdmVyOmJnLXdoaXRlLzEwIGhvdmVyOnRleHQtd2hpdGVcIlxuICAgICAgICAgIG9uQ2xpY2s9eygpID0+IG9uVXBkYXRlUHJvcHMoe1xuICAgICAgICAgICAgaW1hZ2VBZGp1c3RtZW50czogREVGQVVMVF9JTUFHRV9BREpVU1RNRU5UUyxcbiAgICAgICAgICAgIGltYWdlRWZmZWN0czogREVGQVVMVF9JTUFHRV9FRkZFQ1RTLFxuICAgICAgICAgICAgaW1hZ2VTY2FsZTogMTAwLFxuICAgICAgICAgICAgaW1hZ2VQb3NpdGlvblg6IDUwLFxuICAgICAgICAgICAgaW1hZ2VQb3NpdGlvblk6IDUwLFxuICAgICAgICAgICAgb2JqZWN0UG9zaXRpb246IFwiNTAlIDUwJVwiLFxuICAgICAgICAgICAgY3JvcEVuYWJsZWQ6IGZhbHNlLFxuICAgICAgICAgIH0pfVxuICAgICAgICA+XG4gICAgICAgICAgPFJvdGF0ZUNjdyBzaXplPXsxMn0gY2xhc3NOYW1lPVwibXItMS41XCIgLz4gUmVzZXQgaW1hZ2VcbiAgICAgICAgPC9CdXR0b24+XG4gICAgICA8L0luc3BlY3RvclNlY3Rpb24+XG5cbiAgICAgIHtzdHJva2VFZmZlY3RzQWZ0ZXJ9XG5cbiAgICAgIDxJbnNwZWN0b3JTZWN0aW9uIHRpdGxlPVwiSW1hZ2UgZWZmZWN0c1wiIGRlZmF1bHRPcGVuPXtmYWxzZX0+XG4gICAgICAgIDxSYW5nZUZpZWxkIGxhYmVsPVwiTm9pc2VcIiB2YWx1ZT17ZWZmZWN0cy5ub2lzZX0gbWluPXswfSBtYXg9ezEwMH0gb25DaGFuZ2U9eyhub2lzZSkgPT4gdXBkYXRlRWZmZWN0cyh7IG5vaXNlIH0pfSAvPlxuICAgICAgICA8UmFuZ2VGaWVsZCBsYWJlbD1cIlRleHR1cmVcIiB2YWx1ZT17ZWZmZWN0cy50ZXh0dXJlfSBtaW49ezB9IG1heD17MTAwfSBvbkNoYW5nZT17KHRleHR1cmUpID0+IHVwZGF0ZUVmZmVjdHMoeyB0ZXh0dXJlIH0pfSAvPlxuICAgICAgICA8UmFuZ2VGaWVsZCBsYWJlbD1cIkdsYXNzXCIgdmFsdWU9e2VmZmVjdHMuZ2xhc3N9IG1pbj17MH0gbWF4PXsxMDB9IG9uQ2hhbmdlPXsoZ2xhc3MpID0+IHVwZGF0ZUVmZmVjdHMoeyBnbGFzcyB9KX0gLz5cbiAgICAgICAgPFJhbmdlRmllbGQgbGFiZWw9XCJHbG93XCIgdmFsdWU9e2VmZmVjdHMuZ2xvd30gbWluPXswfSBtYXg9ezEwMH0gb25DaGFuZ2U9eyhnbG93KSA9PiB1cGRhdGVFZmZlY3RzKHsgZ2xvdyB9KX0gLz5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWJldHdlZW4gcm91bmRlZCBiZy1bIzM4MzgzOF0gcHgtMiBweS0xXCI+XG4gICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwidGV4dC1bMTBweF0gdGV4dC1bI2RkZF1cIj5HbG93IGNvbG9yPC9zcGFuPlxuICAgICAgICAgIDxGaWdtYUNvbG9yUGlja2VyXG4gICAgICAgICAgICB2YWx1ZT17ZWZmZWN0cy5nbG93Q29sb3J9XG4gICAgICAgICAgICBsYWJlbD1cIkdsb3cgY29sb3JcIlxuICAgICAgICAgICAgYnJhbmRDb2xvcnM9e2JyYW5kQ29sb3JzfVxuICAgICAgICAgICAgb25DaGFuZ2U9eyhnbG93Q29sb3IpID0+IHVwZGF0ZUVmZmVjdHMoeyBnbG93Q29sb3IgfSl9XG4gICAgICAgICAgLz5cbiAgICAgICAgPC9kaXY+XG4gICAgICAgIDxTZWxlY3RGaWVsZFxuICAgICAgICAgIGxhYmVsPVwiQmxlbmQgbW9kZVwiXG4gICAgICAgICAgdmFsdWU9e1N0cmluZyhlZmZlY3RzLmJsZW5kTW9kZSA/PyBcIm5vcm1hbFwiKX1cbiAgICAgICAgICBvcHRpb25zPXtbXG4gICAgICAgICAgICB7IHZhbHVlOiBcIm5vcm1hbFwiLCBsYWJlbDogXCJOb3JtYWxcIiB9LFxuICAgICAgICAgICAgeyB2YWx1ZTogXCJtdWx0aXBseVwiLCBsYWJlbDogXCJNdWx0aXBseVwiIH0sXG4gICAgICAgICAgICB7IHZhbHVlOiBcInNjcmVlblwiLCBsYWJlbDogXCJTY3JlZW5cIiB9LFxuICAgICAgICAgICAgeyB2YWx1ZTogXCJvdmVybGF5XCIsIGxhYmVsOiBcIk92ZXJsYXlcIiB9LFxuICAgICAgICAgICAgeyB2YWx1ZTogXCJkYXJrZW5cIiwgbGFiZWw6IFwiRGFya2VuXCIgfSxcbiAgICAgICAgICAgIHsgdmFsdWU6IFwibGlnaHRlblwiLCBsYWJlbDogXCJMaWdodGVuXCIgfSxcbiAgICAgICAgICAgIHsgdmFsdWU6IFwiY29sb3ItZG9kZ2VcIiwgbGFiZWw6IFwiQ29sb3IgZG9kZ2VcIiB9LFxuICAgICAgICAgICAgeyB2YWx1ZTogXCJjb2xvci1idXJuXCIsIGxhYmVsOiBcIkNvbG9yIGJ1cm5cIiB9LFxuICAgICAgICAgICAgeyB2YWx1ZTogXCJkaWZmZXJlbmNlXCIsIGxhYmVsOiBcIkRpZmZlcmVuY2VcIiB9LFxuICAgICAgICAgIF19XG4gICAgICAgICAgb25DaGFuZ2U9eyhibGVuZE1vZGUpID0+IHVwZGF0ZUVmZmVjdHMoeyBibGVuZE1vZGU6IGJsZW5kTW9kZSBhcyBJbWFnZUVmZmVjdHNbXCJibGVuZE1vZGVcIl0gfSl9XG4gICAgICAgIC8+XG4gICAgICA8L0luc3BlY3RvclNlY3Rpb24+XG5cbiAgICAgIDxJbnNwZWN0b3JTZWN0aW9uIHRpdGxlPVwiRXhwb3J0XCIgZGVmYXVsdE9wZW49e2ZhbHNlfT5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJncmlkIGdyaWQtY29scy0yIGdhcC0yXCI+XG4gICAgICAgICAgPFNlbGVjdEZpZWxkXG4gICAgICAgICAgICBsYWJlbD1cIkZvcm1hdFwiXG4gICAgICAgICAgICB2YWx1ZT17ZXhwb3J0T3B0aW9ucy5mb3JtYXR9XG4gICAgICAgICAgICBvcHRpb25zPXtbXG4gICAgICAgICAgICAgIHsgdmFsdWU6IFwicG5nXCIsIGxhYmVsOiBcIlBOR1wiIH0sXG4gICAgICAgICAgICAgIHsgdmFsdWU6IFwianBlZ1wiLCBsYWJlbDogXCJKUEdcIiB9LFxuICAgICAgICAgICAgICB7IHZhbHVlOiBcIndlYnBcIiwgbGFiZWw6IFwiV2ViUFwiIH0sXG4gICAgICAgICAgICBdfVxuICAgICAgICAgICAgb25DaGFuZ2U9eyhmb3JtYXQpID0+IHNldEV4cG9ydE9wdGlvbnMoKGN1cnJlbnQpID0+ICh7IC4uLmN1cnJlbnQsIGZvcm1hdDogZm9ybWF0IGFzIEltYWdlRXhwb3J0Rm9ybWF0IH0pKX1cbiAgICAgICAgICAvPlxuICAgICAgICAgIDxOdW1iZXJGaWVsZFxuICAgICAgICAgICAgbGFiZWw9XCJTY2FsZVwiXG4gICAgICAgICAgICB2YWx1ZT17ZXhwb3J0T3B0aW9ucy5zY2FsZX1cbiAgICAgICAgICAgIG1pbj17MC4yNX1cbiAgICAgICAgICAgIG1heD17NH1cbiAgICAgICAgICAgIHN0ZXA9ezAuMjV9XG4gICAgICAgICAgICBzdWZmaXg9XCJ4XCJcbiAgICAgICAgICAgIG9uQ29tbWl0PXsoc2NhbGUpID0+IHNldEV4cG9ydE9wdGlvbnMoKGN1cnJlbnQpID0+ICh7IC4uLmN1cnJlbnQsIHNjYWxlIH0pKX1cbiAgICAgICAgICAvPlxuICAgICAgICA8L2Rpdj5cbiAgICAgICAgPFJhbmdlRmllbGRcbiAgICAgICAgICBsYWJlbD1cIlF1YWxpdHlcIlxuICAgICAgICAgIHZhbHVlPXtleHBvcnRPcHRpb25zLnF1YWxpdHl9XG4gICAgICAgICAgbWluPXsxMH1cbiAgICAgICAgICBtYXg9ezEwMH1cbiAgICAgICAgICBvbkNoYW5nZT17KHF1YWxpdHkpID0+IHNldEV4cG9ydE9wdGlvbnMoKGN1cnJlbnQpID0+ICh7IC4uLmN1cnJlbnQsIHF1YWxpdHkgfSkpfVxuICAgICAgICAvPlxuICAgICAgICA8VG9nZ2xlUm93XG4gICAgICAgICAgbGFiZWw9XCJUcmFuc3BhcmVudCBiYWNrZ3JvdW5kXCJcbiAgICAgICAgICBjaGVja2VkPXtleHBvcnRPcHRpb25zLnRyYW5zcGFyZW50fVxuICAgICAgICAgIG9uQ2hhbmdlPXsodHJhbnNwYXJlbnQpID0+IHNldEV4cG9ydE9wdGlvbnMoKGN1cnJlbnQpID0+ICh7IC4uLmN1cnJlbnQsIHRyYW5zcGFyZW50IH0pKX1cbiAgICAgICAgLz5cbiAgICAgICAgPEJ1dHRvbiBjbGFzc05hbWU9XCJoLTggdy1mdWxsIGJnLVsjMDE3OGZmXSB0ZXh0LVsxMHB4XSB0ZXh0LXdoaXRlIGhvdmVyOmJnLVsjMGI4N2RmXVwiIG9uQ2xpY2s9e3J1bkV4cG9ydH0+XG4gICAgICAgICAgPERvd25sb2FkIHNpemU9ezEzfSBjbGFzc05hbWU9XCJtci0yXCIgLz4gRXhwb3J0IGltYWdlXG4gICAgICAgIDwvQnV0dG9uPlxuICAgICAgICB7c3RhdHVzID8gPGRpdiByb2xlPVwic3RhdHVzXCIgY2xhc3NOYW1lPVwidGV4dC1bOXB4XSB0ZXh0LVsjYWFhXVwiPntzdGF0dXN9PC9kaXY+IDogbnVsbH1cbiAgICAgIDwvSW5zcGVjdG9yU2VjdGlvbj5cbiAgICA8Lz5cbiAgKTtcbn07XG4iXSwiZmlsZSI6Ii9zcmMvdWkvaW5zcGVjdG9yLXBhbmVsL0ltYWdlSW5zcGVjdG9yLnRzeCJ9

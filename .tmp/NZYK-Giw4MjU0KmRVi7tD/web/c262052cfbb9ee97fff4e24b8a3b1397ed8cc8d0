@@ -1,0 +1,38 @@
+Object.defineProperty(__vite_ssr_exports__, "createSceneStore", { enumerable: true, configurable: true, get(){ try { return createSceneStore } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "useSceneStore", { enumerable: true, configurable: true, get(){ try { return useSceneStore } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/zustand/esm/index.mjs", {"importedNames":["create"]});
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/src/types/index.ts", {"importedNames":["createEmptySceneTree"]});
+const __vite_ssr_import_2__ = await __vite_ssr_import__("/src/engine/validation/index.ts", {"importedNames":["validateSceneTree"]});
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/src/engine/scene-graph/index.ts", {"importedNames":["cloneSceneNode","cloneSceneTree"]});
+const initialTree = (0,__vite_ssr_import_1__.createEmptySceneTree)();
+const createSceneStore = ()=>(0,__vite_ssr_import_0__.create)()((set, get)=>({
+            rootNodeId: initialTree.rootNodeId,
+            nodes: initialTree.nodes,
+            revision: 0,
+            replaceSceneFromEngine: (tree)=>{
+                const validTree = (0,__vite_ssr_import_3__.cloneSceneTree)((0,__vite_ssr_import_2__.validateSceneTree)(tree));
+                set((state)=>({
+                        rootNodeId: validTree.rootNodeId,
+                        nodes: validTree.nodes,
+                        revision: state.revision + 1
+                    }));
+            },
+            clearSceneFromEngine: ()=>{
+                set((state)=>({
+                        ...(0,__vite_ssr_import_1__.createEmptySceneTree)(),
+                        revision: state.revision + 1
+                    }));
+            },
+            getNodeSnapshot: (id)=>{
+                const node = get().nodes[id];
+                return node ? (0,__vite_ssr_import_3__.cloneSceneNode)(node) : undefined;
+            },
+            getSceneSnapshot: ()=>(0,__vite_ssr_import_3__.cloneSceneTree)({
+                    rootNodeId: get().rootNodeId,
+                    nodes: get().nodes
+                })
+        }));
+const useSceneStore = createSceneStore();
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQVlBLE1BQU1BLGlCQUFjQztBQUViLE1BQU1DLG1CQUFtQixPQUFNQyxnQ0FBMEIsQ0FBQ0MsS0FBS0MsTUFBUztZQUM3RUMsWUFBWU4sWUFBWU0sVUFBVTtZQUNsQ0MsT0FBT1AsWUFBWU8sS0FBSztZQUN4QkMsVUFBVTtZQUNWQyx3QkFBd0IsQ0FBQ0M7Z0JBQ3ZCLE1BQU1DLGVBQVlDLHlDQUFlQyx5Q0FBa0JIO2dCQUNuRE4sSUFBSSxDQUFDVSxRQUFXO3dCQUNkUixZQUFZSyxVQUFVTCxVQUFVO3dCQUNoQ0MsT0FBT0ksVUFBVUosS0FBSzt3QkFDdEJDLFVBQVVNLE1BQU1OLFFBQVEsR0FBRztvQkFDN0I7WUFDRjtZQUNBTyxzQkFBc0I7Z0JBQ3BCWCxJQUFJLENBQUNVLFFBQVc7d0JBQUUsTUFBR2IsNkNBQXNCO3dCQUFFTyxVQUFVTSxNQUFNTixRQUFRLEdBQUc7b0JBQUU7WUFDNUU7WUFDQVEsaUJBQWlCLENBQUNDO2dCQUNoQixNQUFNQyxPQUFPYixNQUFNRSxLQUFLLENBQUNVLEdBQUc7Z0JBQzVCLE9BQU9DLFVBQU9DLHNDQUFlRCxRQUFRRTtZQUN2QztZQUNBQyxrQkFBa0IsT0FBTVQsc0NBQWU7b0JBQUVOLFlBQVlELE1BQU1DLFVBQVU7b0JBQUVDLE9BQU9GLE1BQU1FO2dCQUFNO1FBQzVGO0FBR08sTUFBTWUsZ0JBQWdCcEIiLCJuYW1lcyI6WyJpbml0aWFsVHJlZSIsImNyZWF0ZUVtcHR5U2NlbmVUcmVlIiwiY3JlYXRlU2NlbmVTdG9yZSIsImNyZWF0ZSIsInNldCIsImdldCIsInJvb3ROb2RlSWQiLCJub2RlcyIsInJldmlzaW9uIiwicmVwbGFjZVNjZW5lRnJvbUVuZ2luZSIsInRyZWUiLCJ2YWxpZFRyZWUiLCJjbG9uZVNjZW5lVHJlZSIsInZhbGlkYXRlU2NlbmVUcmVlIiwic3RhdGUiLCJjbGVhclNjZW5lRnJvbUVuZ2luZSIsImdldE5vZGVTbmFwc2hvdCIsImlkIiwibm9kZSIsImNsb25lU2NlbmVOb2RlIiwidW5kZWZpbmVkIiwiZ2V0U2NlbmVTbmFwc2hvdCIsInVzZVNjZW5lU3RvcmUiXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZXMiOlsic2NlbmUuc3RvcmUudHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgY3JlYXRlIH0gZnJvbSBcInp1c3RhbmRcIjtcbmltcG9ydCB7IGNyZWF0ZUVtcHR5U2NlbmVUcmVlLCB0eXBlIE5vZGVJZCwgdHlwZSBTY2VuZU5vZGUsIHR5cGUgU2NlbmVUcmVlIH0gZnJvbSBcIkAvdHlwZXNcIjtcbmltcG9ydCB7IHZhbGlkYXRlU2NlbmVUcmVlIH0gZnJvbSBcIkAvZW5naW5lL3ZhbGlkYXRpb25cIjtcbmltcG9ydCB7IGNsb25lU2NlbmVOb2RlLCBjbG9uZVNjZW5lVHJlZSB9IGZyb20gXCJAL2VuZ2luZS9zY2VuZS1ncmFwaFwiO1xuXG5leHBvcnQgdHlwZSBTY2VuZVN0b3JlU3RhdGUgPSB7XG4gIHJvb3ROb2RlSWQ6IE5vZGVJZCB8IG51bGw7XG4gIG5vZGVzOiBSZWNvcmQ8Tm9kZUlkLCBTY2VuZU5vZGU+O1xuICByZXZpc2lvbjogbnVtYmVyO1xuICByZXBsYWNlU2NlbmVGcm9tRW5naW5lOiAodHJlZTogU2NlbmVUcmVlKSA9PiB2b2lkO1xuICBjbGVhclNjZW5lRnJvbUVuZ2luZTogKCkgPT4gdm9pZDtcbiAgZ2V0Tm9kZVNuYXBzaG90OiAoaWQ6IE5vZGVJZCkgPT4gU2NlbmVOb2RlIHwgdW5kZWZpbmVkO1xuICBnZXRTY2VuZVNuYXBzaG90OiAoKSA9PiBTY2VuZVRyZWU7XG59O1xuXG5jb25zdCBpbml0aWFsVHJlZSA9IGNyZWF0ZUVtcHR5U2NlbmVUcmVlKCk7XG5cbmV4cG9ydCBjb25zdCBjcmVhdGVTY2VuZVN0b3JlID0gKCkgPT4gY3JlYXRlPFNjZW5lU3RvcmVTdGF0ZT4oKSgoc2V0LCBnZXQpID0+ICh7XG4gIHJvb3ROb2RlSWQ6IGluaXRpYWxUcmVlLnJvb3ROb2RlSWQsXG4gIG5vZGVzOiBpbml0aWFsVHJlZS5ub2RlcyxcbiAgcmV2aXNpb246IDAsXG4gIHJlcGxhY2VTY2VuZUZyb21FbmdpbmU6ICh0cmVlKSA9PiB7XG4gICAgY29uc3QgdmFsaWRUcmVlID0gY2xvbmVTY2VuZVRyZWUodmFsaWRhdGVTY2VuZVRyZWUodHJlZSkpO1xuICAgIHNldCgoc3RhdGUpID0+ICh7XG4gICAgICByb290Tm9kZUlkOiB2YWxpZFRyZWUucm9vdE5vZGVJZCxcbiAgICAgIG5vZGVzOiB2YWxpZFRyZWUubm9kZXMsXG4gICAgICByZXZpc2lvbjogc3RhdGUucmV2aXNpb24gKyAxLFxuICAgIH0pKTtcbiAgfSxcbiAgY2xlYXJTY2VuZUZyb21FbmdpbmU6ICgpID0+IHtcbiAgICBzZXQoKHN0YXRlKSA9PiAoeyAuLi5jcmVhdGVFbXB0eVNjZW5lVHJlZSgpLCByZXZpc2lvbjogc3RhdGUucmV2aXNpb24gKyAxIH0pKTtcbiAgfSxcbiAgZ2V0Tm9kZVNuYXBzaG90OiAoaWQpID0+IHtcbiAgICBjb25zdCBub2RlID0gZ2V0KCkubm9kZXNbaWRdO1xuICAgIHJldHVybiBub2RlID8gY2xvbmVTY2VuZU5vZGUobm9kZSkgOiB1bmRlZmluZWQ7XG4gIH0sXG4gIGdldFNjZW5lU25hcHNob3Q6ICgpID0+IGNsb25lU2NlbmVUcmVlKHsgcm9vdE5vZGVJZDogZ2V0KCkucm9vdE5vZGVJZCwgbm9kZXM6IGdldCgpLm5vZGVzIH0pLFxufSkpO1xuXG5leHBvcnQgdHlwZSBTY2VuZVN0b3JlID0gUmV0dXJuVHlwZTx0eXBlb2YgY3JlYXRlU2NlbmVTdG9yZT47XG5leHBvcnQgY29uc3QgdXNlU2NlbmVTdG9yZSA9IGNyZWF0ZVNjZW5lU3RvcmUoKTtcbiJdLCJmaWxlIjoiL3NyYy9zdG9yZXMvc2NlbmUuc3RvcmUudHMifQ==

@@ -1,0 +1,1 @@
+This folder contains the built output assets for the worker "vite-react-shadcn-ts" generated at 2026-08-12T21:54:21.937Z.

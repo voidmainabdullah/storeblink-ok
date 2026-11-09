@@ -1,0 +1,43 @@
+project_id = "shflnrznleodviqphvfg"
+
+[auth]
+site_url = "https://storeblink.com"
+additional_redirect_urls = [
+  "https://storeblink.com/auth",
+  "https://storeblink.com/auth/callback",
+]
+
+[auth.email]
+enable_confirmations = true
+max_frequency = "1m"
+otp_length = 8
+
+[auth.mfa.totp]
+enroll_enabled = true
+verify_enabled = true
+
+[auth.captcha]
+enabled = true
+provider = "turnstile"
+secret = "env(SUPABASE_AUTH_CAPTCHA_SECRET)"
+
+[functions.domain-orchestrator]
+verify_jwt = false
+
+[functions.storefront-seo]
+verify_jwt = false
+
+[functions.storefront-rum]
+verify_jwt = false
+
+[functions.plan-adaptive-storefront]
+verify_jwt = false
+
+[functions.compile-adaptive-storefront]
+verify_jwt = false
+
+[functions.publish-reviewed-adaptive-storefront]
+verify_jwt = false
+
+[functions.evaluate-adaptive-rollouts]
+verify_jwt = false

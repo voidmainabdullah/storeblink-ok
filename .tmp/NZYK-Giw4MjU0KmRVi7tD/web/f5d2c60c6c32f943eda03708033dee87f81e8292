@@ -1,0 +1,23 @@
+Object.defineProperty(__vite_ssr_exports__, "ensureBuiltInThemePackages", { enumerable: true, configurable: true, get(){ try { return ensureBuiltInThemePackages } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/src/theme-engine/registry/index.ts", {"importedNames":["themePackageRegistry"]});
+let registered = false;
+const ensureBuiltInThemePackages = ()=>{
+    if (registered) return;
+    registered = true;
+    const loaders = /* #__PURE__ */ Object.assign({"./atelier/package.ts": () => __vite_ssr_dynamic_import__("/src/themes/atelier/package.ts"),"./basic/package.ts": () => __vite_ssr_dynamic_import__("/src/themes/basic/package.ts"),"./noir-chrono/package.ts": () => __vite_ssr_dynamic_import__("/src/themes/noir-chrono/package.ts")});
+    Object.entries(loaders).forEach(([path, loader])=>{
+        const themeId = path.match(/^\.\/([^/]+)\/package\.ts$/)?.[1];
+        if (!themeId) return;
+        __vite_ssr_import_0__.themePackageRegistry.registerLoader(themeId, async ()=>{
+            const module = await loader();
+            const themePackage = module.default ?? Object.entries(module).find(([key])=>key.endsWith("ThemePackage"))?.[1];
+            if (!themePackage) throw new Error(`Theme package ${themeId} has no exported package.`);
+            return themePackage;
+        }, {
+            source: "platform"
+        });
+    });
+};
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6IjtBQUFBO0FBRUEsSUFBSUEsYUFBYTtBQUVWLE1BQU1DLDZCQUE2QjtJQUN4QyxJQUFJRCxZQUFZO0lBQ2hCQSxhQUFhO0lBQ2IsTUFBTUUsVUFBVSxZQUFZQyxJQUFJLE1BQUM7SUFJakNDLE9BQU9DLE9BQU8sQ0FBQ0gsU0FBU0ksT0FBTyxDQUFDLENBQUMsQ0FBQ0MsTUFBTUMsT0FBTztRQUM3QyxNQUFNQyxVQUFVRixLQUFLRyxLQUFLLENBQUMsK0JBQStCLENBQUMsRUFBRTtRQUM3RCxJQUFJLENBQUNELFNBQVM7UUFDZEUsMkNBQXFCQyxjQUFjLENBQ2pDSCxTQUNBO1lBQ0UsTUFBTUksU0FBUyxNQUFNTDtZQUNyQixNQUFNTSxlQUNKRCxPQUFPRSxPQUFPLElBQ2RYLE9BQU9DLE9BQU8sQ0FBQ1EsUUFBUUcsSUFBSSxDQUFDLENBQUMsQ0FBQ0MsSUFBSSxHQUFLQSxJQUFJQyxRQUFRLENBQUMsa0JBQWtCLENBQUMsRUFBRTtZQUMzRSxJQUFJLENBQUNKLGNBQWMsTUFBTSxJQUFJSyxNQUFNLENBQUMsY0FBYyxFQUFFVixRQUFRLHlCQUF5QixDQUFDO1lBQ3RGLE9BQU9LO1FBQ1QsR0FDQTtZQUFFTSxRQUFRO1FBQVc7SUFFekI7QUFDRiIsIm5hbWVzIjpbInJlZ2lzdGVyZWQiLCJlbnN1cmVCdWlsdEluVGhlbWVQYWNrYWdlcyIsImxvYWRlcnMiLCJnbG9iIiwiT2JqZWN0IiwiZW50cmllcyIsImZvckVhY2giLCJwYXRoIiwibG9hZGVyIiwidGhlbWVJZCIsIm1hdGNoIiwidGhlbWVQYWNrYWdlUmVnaXN0cnkiLCJyZWdpc3RlckxvYWRlciIsIm1vZHVsZSIsInRoZW1lUGFja2FnZSIsImRlZmF1bHQiLCJmaW5kIiwia2V5IiwiZW5kc1dpdGgiLCJFcnJvciIsInNvdXJjZSJdLCJpZ25vcmVMaXN0IjpbXSwic291cmNlcyI6WyJyZWdpc3RlckJ1aWx0SW5UaGVtZVBhY2thZ2VzLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IHRoZW1lUGFja2FnZVJlZ2lzdHJ5IH0gZnJvbSBcIkAvdGhlbWUtZW5naW5lL3JlZ2lzdHJ5XCI7XG5cbmxldCByZWdpc3RlcmVkID0gZmFsc2U7XG5cbmV4cG9ydCBjb25zdCBlbnN1cmVCdWlsdEluVGhlbWVQYWNrYWdlcyA9ICgpID0+IHtcbiAgaWYgKHJlZ2lzdGVyZWQpIHJldHVybjtcbiAgcmVnaXN0ZXJlZCA9IHRydWU7XG4gIGNvbnN0IGxvYWRlcnMgPSBpbXBvcnQubWV0YS5nbG9iKFwiLi8qL3BhY2thZ2UudHNcIikgYXMgUmVjb3JkPFxuICAgIHN0cmluZyxcbiAgICAoKSA9PiBQcm9taXNlPFJlY29yZDxzdHJpbmcsIHVua25vd24+PlxuICA+O1xuICBPYmplY3QuZW50cmllcyhsb2FkZXJzKS5mb3JFYWNoKChbcGF0aCwgbG9hZGVyXSkgPT4ge1xuICAgIGNvbnN0IHRoZW1lSWQgPSBwYXRoLm1hdGNoKC9eXFwuXFwvKFteL10rKVxcL3BhY2thZ2VcXC50cyQvKT8uWzFdO1xuICAgIGlmICghdGhlbWVJZCkgcmV0dXJuO1xuICAgIHRoZW1lUGFja2FnZVJlZ2lzdHJ5LnJlZ2lzdGVyTG9hZGVyKFxuICAgICAgdGhlbWVJZCxcbiAgICAgIGFzeW5jICgpID0+IHtcbiAgICAgICAgY29uc3QgbW9kdWxlID0gYXdhaXQgbG9hZGVyKCk7XG4gICAgICAgIGNvbnN0IHRoZW1lUGFja2FnZSA9XG4gICAgICAgICAgbW9kdWxlLmRlZmF1bHQgPz9cbiAgICAgICAgICBPYmplY3QuZW50cmllcyhtb2R1bGUpLmZpbmQoKFtrZXldKSA9PiBrZXkuZW5kc1dpdGgoXCJUaGVtZVBhY2thZ2VcIikpPy5bMV07XG4gICAgICAgIGlmICghdGhlbWVQYWNrYWdlKSB0aHJvdyBuZXcgRXJyb3IoYFRoZW1lIHBhY2thZ2UgJHt0aGVtZUlkfSBoYXMgbm8gZXhwb3J0ZWQgcGFja2FnZS5gKTtcbiAgICAgICAgcmV0dXJuIHRoZW1lUGFja2FnZSBhcyBBd2FpdGVkPFJldHVyblR5cGU8UGFyYW1ldGVyczx0eXBlb2YgdGhlbWVQYWNrYWdlUmVnaXN0cnkucmVnaXN0ZXJMb2FkZXI+WzFdPj47XG4gICAgICB9LFxuICAgICAgeyBzb3VyY2U6IFwicGxhdGZvcm1cIiB9LFxuICAgICk7XG4gIH0pO1xufTtcbiJdLCJmaWxlIjoiL3NyYy90aGVtZXMvcmVnaXN0ZXJCdWlsdEluVGhlbWVQYWNrYWdlcy50cyJ9

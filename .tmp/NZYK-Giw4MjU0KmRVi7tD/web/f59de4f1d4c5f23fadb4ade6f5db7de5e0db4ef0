@@ -1,0 +1,92 @@
+Object.defineProperty(__vite_ssr_exports__, "themeIdForScene", { enumerable: true, configurable: true, get(){ try { return themeIdForScene } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "StorefrontRuntime", { enumerable: true, configurable: true, get(){ try { return StorefrontRuntime } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/react/jsx-dev-runtime.js", {"importedNames":["jsxDEV"]});
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/src/document/dynamic-sources/index.ts", {"importedNames":["DynamicSourceProvider"]});
+const __vite_ssr_import_2__ = await __vite_ssr_import__("/src/infrastructure/error-boundary/index.ts", {"importedNames":["SceneRenderErrorBoundary"]});
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/src/rendering/renderer/index.ts", {"importedNames":["RenderNode","SceneRenderProvider"]});
+const __vite_ssr_import_4__ = await __vite_ssr_import__("/src/theme-engine/extensions/index.ts", {"importedNames":["ExtensionSlot"]});
+const __vite_ssr_import_5__ = await __vite_ssr_import__("/src/theme-engine/runtime/ThemeRuntimeProvider.tsx", {"importedNames":["ThemeRuntimeProvider"]});
+const themeIdForScene = (scene)=>{
+    const root = scene.rootNodeId ? scene.nodes[scene.rootNodeId] : undefined;
+    const themeId = root?.extensions?.themeId ?? root?.extensions?.template;
+    return typeof themeId === "string" && themeId.trim() ? themeId : "universal";
+};
+const StorefrontRuntime = ({ scene, breakpoint, viewportWidth, linkContext, dynamicData, visibilityOverrides = {}, pageType, storeId, className, style })=>{
+    const rootNodeId = scene.rootNodeId;
+    if (!rootNodeId) return null;
+    const extensionContext = {
+        pageType,
+        storeId
+    };
+    return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+        "data-storefront-runtime": true,
+        "data-active-theme": themeIdForScene(scene),
+        className: className,
+        style: style,
+        children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_5__.ThemeRuntimeProvider), {
+            themeId: themeIdForScene(scene),
+            mode: "storefront",
+            children: [
+                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_4__.ExtensionSlot), {
+                    target: "main-before",
+                    context: extensionContext
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/theme-engine/runtime/StorefrontRuntime.tsx",
+                    lineNumber: 54,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.SceneRenderErrorBoundary), {
+                    surfaceName: "Storefront",
+                    children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.DynamicSourceProvider), {
+                        data: dynamicData,
+                        children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.SceneRenderProvider), {
+                            scene: scene,
+                            breakpoint: breakpoint,
+                            viewportWidth: viewportWidth,
+                            linkContext: linkContext,
+                            visibilityOverrides: visibilityOverrides,
+                            children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.RenderNode), {
+                                nodeId: rootNodeId
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/theme-engine/runtime/StorefrontRuntime.tsx",
+                                lineNumber: 64,
+                                columnNumber: 15
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/theme-engine/runtime/StorefrontRuntime.tsx",
+                            lineNumber: 57,
+                            columnNumber: 13
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/theme-engine/runtime/StorefrontRuntime.tsx",
+                        lineNumber: 56,
+                        columnNumber: 11
+                    }, this)
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/theme-engine/runtime/StorefrontRuntime.tsx",
+                    lineNumber: 55,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_4__.ExtensionSlot), {
+                    target: "main-after",
+                    context: extensionContext
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/theme-engine/runtime/StorefrontRuntime.tsx",
+                    lineNumber: 68,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "F:/Storeblink/src/theme-engine/runtime/StorefrontRuntime.tsx",
+            lineNumber: 53,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
+        fileName: "F:/Storeblink/src/theme-engine/runtime/StorefrontRuntime.tsx",
+        lineNumber: 47,
+        columnNumber: 5
+    }, this);
+};
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7O0FBRUE7QUFDQTtBQUNBO0FBRUE7QUFFQTtBQWVPLE1BQU1BLGtCQUFrQixDQUFDQztJQUM5QixNQUFNQyxPQUFPRCxNQUFNRSxVQUFVLEdBQUdGLE1BQU1HLEtBQUssQ0FBQ0gsTUFBTUUsVUFBVSxDQUFDLEdBQUdFO0lBQ2hFLE1BQU1DLFVBQVVKLE1BQU1LLFlBQVlELFdBQVdKLE1BQU1LLFlBQVlDO0lBQy9ELE9BQU8sT0FBT0YsWUFBWSxZQUFZQSxRQUFRRyxJQUFJLEtBQUtILFVBQVU7QUFDbkU7QUFFTyxNQUFNSSxvQkFBb0IsQ0FBQyxFQUNoQ1QsS0FBSyxFQUNMVSxVQUFVLEVBQ1ZDLGFBQWEsRUFDYkMsV0FBVyxFQUNYQyxXQUFXLEVBQ1hDLHNCQUFzQixDQUFDLENBQUMsRUFDeEJDLFFBQVEsRUFDUkMsT0FBTyxFQUNQQyxTQUFTLEVBQ1RDLEtBQUssRUFDa0I7SUFDdkIsTUFBTWhCLGFBQWFGLE1BQU1FLFVBQVU7SUFDbkMsSUFBSSxDQUFDQSxZQUFZLE9BQU87SUFDeEIsTUFBTWlCLG1CQUFtQjtRQUFFSjtRQUFVQztJQUFRO0lBRTdDLHdCQUNFLDhCQUFDSTtRQUNDQyx5QkFBdUI7UUFDdkJDLHFCQUFtQnZCLGdCQUFnQkM7UUFDbkNpQixXQUFXQTtRQUNYQyxPQUFPQTtrQkFFUCxrREFBQ0s7WUFBcUJsQixTQUFTTixnQkFBZ0JDO1lBQVF3QixNQUFLOztpQ0FDMUQsaUNBQUNDO29CQUFjQyxRQUFPO29CQUFjQyxTQUFTUjs7Ozs7O2lDQUM3QyxpQ0FBQ1M7b0JBQXlCQyxhQUFZOzhCQUNwQyxrREFBQ0M7d0JBQXNCQyxNQUFNbEI7a0NBQzNCLGtEQUFDbUI7NEJBQ0NoQyxPQUFPQTs0QkFDUFUsWUFBWUE7NEJBQ1pDLGVBQWVBOzRCQUNmQyxhQUFhQTs0QkFDYkUscUJBQXFCQTtzQ0FFckIsa0RBQUNtQjtnQ0FBV0MsUUFBUWhDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7aUNBSTFCLGlDQUFDdUI7b0JBQWNDLFFBQU87b0JBQWFDLFNBQVNSOzs7Ozs7Ozs7Ozs7Ozs7OztBQUlwRCIsIm5hbWVzIjpbInRoZW1lSWRGb3JTY2VuZSIsInNjZW5lIiwicm9vdCIsInJvb3ROb2RlSWQiLCJub2RlcyIsInVuZGVmaW5lZCIsInRoZW1lSWQiLCJleHRlbnNpb25zIiwidGVtcGxhdGUiLCJ0cmltIiwiU3RvcmVmcm9udFJ1bnRpbWUiLCJicmVha3BvaW50Iiwidmlld3BvcnRXaWR0aCIsImxpbmtDb250ZXh0IiwiZHluYW1pY0RhdGEiLCJ2aXNpYmlsaXR5T3ZlcnJpZGVzIiwicGFnZVR5cGUiLCJzdG9yZUlkIiwiY2xhc3NOYW1lIiwic3R5bGUiLCJleHRlbnNpb25Db250ZXh0IiwiZGl2IiwiZGF0YS1zdG9yZWZyb250LXJ1bnRpbWUiLCJkYXRhLWFjdGl2ZS10aGVtZSIsIlRoZW1lUnVudGltZVByb3ZpZGVyIiwibW9kZSIsIkV4dGVuc2lvblNsb3QiLCJ0YXJnZXQiLCJjb250ZXh0IiwiU2NlbmVSZW5kZXJFcnJvckJvdW5kYXJ5Iiwic3VyZmFjZU5hbWUiLCJEeW5hbWljU291cmNlUHJvdmlkZXIiLCJkYXRhIiwiU2NlbmVSZW5kZXJQcm92aWRlciIsIlJlbmRlck5vZGUiLCJub2RlSWQiXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZXMiOlsiU3RvcmVmcm9udFJ1bnRpbWUudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB0eXBlIHsgQ1NTUHJvcGVydGllcyB9IGZyb20gXCJyZWFjdFwiO1xuaW1wb3J0IHR5cGUgeyBTdG9yZWZyb250TGlua0NvbnRleHQgfSBmcm9tIFwiQC9jb250ZW50L21lbnVzXCI7XG5pbXBvcnQgeyBEeW5hbWljU291cmNlUHJvdmlkZXIsIHR5cGUgRHluYW1pY1NvdXJjZURhdGEgfSBmcm9tIFwiQC9kb2N1bWVudC9keW5hbWljLXNvdXJjZXNcIjtcbmltcG9ydCB7IFNjZW5lUmVuZGVyRXJyb3JCb3VuZGFyeSB9IGZyb20gXCJAL2luZnJhc3RydWN0dXJlL2Vycm9yLWJvdW5kYXJ5XCI7XG5pbXBvcnQgeyBSZW5kZXJOb2RlLCBTY2VuZVJlbmRlclByb3ZpZGVyIH0gZnJvbSBcIkAvcmVuZGVyaW5nL3JlbmRlcmVyXCI7XG5pbXBvcnQgdHlwZSB7IFJlc3BvbnNpdmVCcmVha3BvaW50IH0gZnJvbSBcIkAvc3RvcmVzL3Jlc3BvbnNpdmUuc3RvcmVcIjtcbmltcG9ydCB7IEV4dGVuc2lvblNsb3QgfSBmcm9tIFwiQC90aGVtZS1lbmdpbmUvZXh0ZW5zaW9uc1wiO1xuaW1wb3J0IHR5cGUgeyBTY2VuZVRyZWUgfSBmcm9tIFwiQC90eXBlc1wiO1xuaW1wb3J0IHsgVGhlbWVSdW50aW1lUHJvdmlkZXIgfSBmcm9tIFwiLi9UaGVtZVJ1bnRpbWVQcm92aWRlclwiO1xuXG5leHBvcnQgdHlwZSBTdG9yZWZyb250UnVudGltZVByb3BzID0ge1xuICBzY2VuZTogU2NlbmVUcmVlO1xuICBicmVha3BvaW50OiBSZXNwb25zaXZlQnJlYWtwb2ludDtcbiAgdmlld3BvcnRXaWR0aD86IG51bWJlcjtcbiAgbGlua0NvbnRleHQ/OiBTdG9yZWZyb250TGlua0NvbnRleHQ7XG4gIGR5bmFtaWNEYXRhOiBEeW5hbWljU291cmNlRGF0YTtcbiAgdmlzaWJpbGl0eU92ZXJyaWRlcz86IFJlY29yZDxzdHJpbmcsIGJvb2xlYW4+O1xuICBwYWdlVHlwZT86IHN0cmluZztcbiAgc3RvcmVJZD86IHN0cmluZztcbiAgY2xhc3NOYW1lPzogc3RyaW5nO1xuICBzdHlsZT86IENTU1Byb3BlcnRpZXM7XG59O1xuXG5leHBvcnQgY29uc3QgdGhlbWVJZEZvclNjZW5lID0gKHNjZW5lOiBTY2VuZVRyZWUpOiBzdHJpbmcgPT4ge1xuICBjb25zdCByb290ID0gc2NlbmUucm9vdE5vZGVJZCA/IHNjZW5lLm5vZGVzW3NjZW5lLnJvb3ROb2RlSWRdIDogdW5kZWZpbmVkO1xuICBjb25zdCB0aGVtZUlkID0gcm9vdD8uZXh0ZW5zaW9ucz8udGhlbWVJZCA/PyByb290Py5leHRlbnNpb25zPy50ZW1wbGF0ZTtcbiAgcmV0dXJuIHR5cGVvZiB0aGVtZUlkID09PSBcInN0cmluZ1wiICYmIHRoZW1lSWQudHJpbSgpID8gdGhlbWVJZCA6IFwidW5pdmVyc2FsXCI7XG59O1xuXG5leHBvcnQgY29uc3QgU3RvcmVmcm9udFJ1bnRpbWUgPSAoe1xuICBzY2VuZSxcbiAgYnJlYWtwb2ludCxcbiAgdmlld3BvcnRXaWR0aCxcbiAgbGlua0NvbnRleHQsXG4gIGR5bmFtaWNEYXRhLFxuICB2aXNpYmlsaXR5T3ZlcnJpZGVzID0ge30sXG4gIHBhZ2VUeXBlLFxuICBzdG9yZUlkLFxuICBjbGFzc05hbWUsXG4gIHN0eWxlLFxufTogU3RvcmVmcm9udFJ1bnRpbWVQcm9wcykgPT4ge1xuICBjb25zdCByb290Tm9kZUlkID0gc2NlbmUucm9vdE5vZGVJZDtcbiAgaWYgKCFyb290Tm9kZUlkKSByZXR1cm4gbnVsbDtcbiAgY29uc3QgZXh0ZW5zaW9uQ29udGV4dCA9IHsgcGFnZVR5cGUsIHN0b3JlSWQgfTtcblxuICByZXR1cm4gKFxuICAgIDxkaXZcbiAgICAgIGRhdGEtc3RvcmVmcm9udC1ydW50aW1lXG4gICAgICBkYXRhLWFjdGl2ZS10aGVtZT17dGhlbWVJZEZvclNjZW5lKHNjZW5lKX1cbiAgICAgIGNsYXNzTmFtZT17Y2xhc3NOYW1lfVxuICAgICAgc3R5bGU9e3N0eWxlfVxuICAgID5cbiAgICAgIDxUaGVtZVJ1bnRpbWVQcm92aWRlciB0aGVtZUlkPXt0aGVtZUlkRm9yU2NlbmUoc2NlbmUpfSBtb2RlPVwic3RvcmVmcm9udFwiPlxuICAgICAgICA8RXh0ZW5zaW9uU2xvdCB0YXJnZXQ9XCJtYWluLWJlZm9yZVwiIGNvbnRleHQ9e2V4dGVuc2lvbkNvbnRleHR9IC8+XG4gICAgICAgIDxTY2VuZVJlbmRlckVycm9yQm91bmRhcnkgc3VyZmFjZU5hbWU9XCJTdG9yZWZyb250XCI+XG4gICAgICAgICAgPER5bmFtaWNTb3VyY2VQcm92aWRlciBkYXRhPXtkeW5hbWljRGF0YX0+XG4gICAgICAgICAgICA8U2NlbmVSZW5kZXJQcm92aWRlclxuICAgICAgICAgICAgICBzY2VuZT17c2NlbmV9XG4gICAgICAgICAgICAgIGJyZWFrcG9pbnQ9e2JyZWFrcG9pbnR9XG4gICAgICAgICAgICAgIHZpZXdwb3J0V2lkdGg9e3ZpZXdwb3J0V2lkdGh9XG4gICAgICAgICAgICAgIGxpbmtDb250ZXh0PXtsaW5rQ29udGV4dH1cbiAgICAgICAgICAgICAgdmlzaWJpbGl0eU92ZXJyaWRlcz17dmlzaWJpbGl0eU92ZXJyaWRlc31cbiAgICAgICAgICAgID5cbiAgICAgICAgICAgICAgPFJlbmRlck5vZGUgbm9kZUlkPXtyb290Tm9kZUlkfSAvPlxuICAgICAgICAgICAgPC9TY2VuZVJlbmRlclByb3ZpZGVyPlxuICAgICAgICAgIDwvRHluYW1pY1NvdXJjZVByb3ZpZGVyPlxuICAgICAgICA8L1NjZW5lUmVuZGVyRXJyb3JCb3VuZGFyeT5cbiAgICAgICAgPEV4dGVuc2lvblNsb3QgdGFyZ2V0PVwibWFpbi1hZnRlclwiIGNvbnRleHQ9e2V4dGVuc2lvbkNvbnRleHR9IC8+XG4gICAgICA8L1RoZW1lUnVudGltZVByb3ZpZGVyPlxuICAgIDwvZGl2PlxuICApO1xufTtcbiJdLCJmaWxlIjoiL3NyYy90aGVtZS1lbmdpbmUvcnVudGltZS9TdG9yZWZyb250UnVudGltZS50c3gifQ==

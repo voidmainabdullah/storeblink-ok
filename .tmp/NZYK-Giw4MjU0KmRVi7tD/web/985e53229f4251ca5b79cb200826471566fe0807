@@ -1,0 +1,35 @@
+Object.defineProperty(__vite_ssr_exports__, "EngineProvider", { enumerable: true, configurable: true, get(){ try { return EngineProvider } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/react/jsx-dev-runtime.js", {"importedNames":["jsxDEV"]});
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/react/index.js", {"importedNames":["useEffect","useMemo","useState"]});
+const __vite_ssr_import_2__ = await __vite_ssr_import__("/src/engine/kernel/EngineKernel.ts", {"importedNames":["createEngineKernel"]});
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/src/engine/kernel/EngineReactContext.ts", {"importedNames":["EngineReactContext"]});
+const EngineProvider = ({ kernel, children })=>{
+    const stableKernel = (0,__vite_ssr_import_1__.useMemo)(()=>kernel ?? (0,__vite_ssr_import_2__.createEngineKernel)(), [
+        kernel
+    ]);
+    const [initializationError, setInitializationError] = (0,__vite_ssr_import_1__.useState)(null);
+    (0,__vite_ssr_import_1__.useEffect)(()=>{
+        let active = true;
+        void stableKernel.init().catch((error)=>{
+            if (active) setInitializationError(error);
+        });
+        return ()=>{
+            active = false;
+            void stableKernel.dispose();
+        };
+    }, [
+        stableKernel
+    ]);
+    if (initializationError) throw initializationError;
+    return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(__vite_ssr_import_3__.EngineReactContext.Provider, {
+        value: stableKernel,
+        children: children
+    }, void 0, false, {
+        fileName: "F:/Storeblink/src/engine/kernel/EngineProvider.tsx",
+        lineNumber: 23,
+        columnNumber: 10
+    }, this);
+};
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7QUFBQTtBQUNBO0FBQ0E7QUFNTyxNQUFNQSxpQkFBaUIsQ0FBQyxFQUFFQyxNQUFNLEVBQUVDLFFBQVEsRUFBdUI7SUFDdEUsTUFBTUMsa0JBQWVDLCtCQUFRLElBQU1ILGFBQVVJLDZDQUFzQjtRQUFDSjtLQUFPO0lBQzNFLE1BQU0sQ0FBQ0sscUJBQXFCQyx1QkFBdUIsTUFBR0MsZ0NBQWtCO09BQ3hFQyxpQ0FBVTtRQUNSLElBQUlDLFNBQVM7UUFDYixLQUFLUCxhQUFhUSxJQUFJLEdBQUdDLEtBQUssQ0FBQyxDQUFDQztZQUM5QixJQUFJSCxRQUFRSCx1QkFBdUJNO1FBQ3JDO1FBQ0EsT0FBTztZQUNMSCxTQUFTO1lBQ1QsS0FBS1AsYUFBYVcsT0FBTztRQUMzQjtJQUNGLEdBQUc7UUFBQ1g7S0FBYTtJQUNqQixJQUFJRyxxQkFBcUIsTUFBTUE7SUFDL0Isd0JBQU8sOEJBQUNTLHlDQUFtQkMsUUFBUTtRQUFDQyxPQUFPZDtrQkFBZUQ7Ozs7OztBQUM1RCIsIm5hbWVzIjpbIkVuZ2luZVByb3ZpZGVyIiwia2VybmVsIiwiY2hpbGRyZW4iLCJzdGFibGVLZXJuZWwiLCJ1c2VNZW1vIiwiY3JlYXRlRW5naW5lS2VybmVsIiwiaW5pdGlhbGl6YXRpb25FcnJvciIsInNldEluaXRpYWxpemF0aW9uRXJyb3IiLCJ1c2VTdGF0ZSIsInVzZUVmZmVjdCIsImFjdGl2ZSIsImluaXQiLCJjYXRjaCIsImVycm9yIiwiZGlzcG9zZSIsIkVuZ2luZVJlYWN0Q29udGV4dCIsIlByb3ZpZGVyIiwidmFsdWUiXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZXMiOlsiRW5naW5lUHJvdmlkZXIudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IHVzZUVmZmVjdCwgdXNlTWVtbywgdXNlU3RhdGUsIHR5cGUgUHJvcHNXaXRoQ2hpbGRyZW4gfSBmcm9tIFwicmVhY3RcIjtcbmltcG9ydCB7IEVuZ2luZUtlcm5lbCwgY3JlYXRlRW5naW5lS2VybmVsIH0gZnJvbSBcIi4vRW5naW5lS2VybmVsXCI7XG5pbXBvcnQgeyBFbmdpbmVSZWFjdENvbnRleHQgfSBmcm9tIFwiLi9FbmdpbmVSZWFjdENvbnRleHRcIjtcblxuZXhwb3J0IHR5cGUgRW5naW5lUHJvdmlkZXJQcm9wcyA9IFByb3BzV2l0aENoaWxkcmVuPHtcbiAga2VybmVsPzogRW5naW5lS2VybmVsO1xufT47XG5cbmV4cG9ydCBjb25zdCBFbmdpbmVQcm92aWRlciA9ICh7IGtlcm5lbCwgY2hpbGRyZW4gfTogRW5naW5lUHJvdmlkZXJQcm9wcykgPT4ge1xuICBjb25zdCBzdGFibGVLZXJuZWwgPSB1c2VNZW1vKCgpID0+IGtlcm5lbCA/PyBjcmVhdGVFbmdpbmVLZXJuZWwoKSwgW2tlcm5lbF0pO1xuICBjb25zdCBbaW5pdGlhbGl6YXRpb25FcnJvciwgc2V0SW5pdGlhbGl6YXRpb25FcnJvcl0gPSB1c2VTdGF0ZTx1bmtub3duPihudWxsKTtcbiAgdXNlRWZmZWN0KCgpID0+IHtcbiAgICBsZXQgYWN0aXZlID0gdHJ1ZTtcbiAgICB2b2lkIHN0YWJsZUtlcm5lbC5pbml0KCkuY2F0Y2goKGVycm9yOiB1bmtub3duKSA9PiB7XG4gICAgICBpZiAoYWN0aXZlKSBzZXRJbml0aWFsaXphdGlvbkVycm9yKGVycm9yKTtcbiAgICB9KTtcbiAgICByZXR1cm4gKCkgPT4ge1xuICAgICAgYWN0aXZlID0gZmFsc2U7XG4gICAgICB2b2lkIHN0YWJsZUtlcm5lbC5kaXNwb3NlKCk7XG4gICAgfTtcbiAgfSwgW3N0YWJsZUtlcm5lbF0pO1xuICBpZiAoaW5pdGlhbGl6YXRpb25FcnJvcikgdGhyb3cgaW5pdGlhbGl6YXRpb25FcnJvcjtcbiAgcmV0dXJuIDxFbmdpbmVSZWFjdENvbnRleHQuUHJvdmlkZXIgdmFsdWU9e3N0YWJsZUtlcm5lbH0+e2NoaWxkcmVufTwvRW5naW5lUmVhY3RDb250ZXh0LlByb3ZpZGVyPjtcbn07XG4iXSwiZmlsZSI6Ii9zcmMvZW5naW5lL2tlcm5lbC9FbmdpbmVQcm92aWRlci50c3gifQ==

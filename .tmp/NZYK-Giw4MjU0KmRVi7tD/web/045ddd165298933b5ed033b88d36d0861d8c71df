@@ -1,0 +1,448 @@
+Object.defineProperty(__vite_ssr_exports__, "EngineTemplatePanel", { enumerable: true, configurable: true, get(){ try { return EngineTemplatePanel } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/react/jsx-dev-runtime.js", {"importedNames":["jsxDEV","Fragment"]});
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/lucide-react/dist/cjs/lucide-react.js", {"importedNames":["Check","LoaderCircle","RotateCcw"]});
+const __vite_ssr_import_2__ = await __vite_ssr_import__("/src/components/ui/button.tsx", {"importedNames":["Button"]});
+const TemplateFallbackPreview = ()=>/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+        className: "h-[148px] bg-white p-3",
+        children: [
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                className: "mb-3 flex items-center justify-between",
+                children: [
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "h-2 w-12 rounded-full bg-black"
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                        lineNumber: 22,
+                        columnNumber: 7
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "flex gap-1",
+                        children: [
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                className: "h-2 w-8 rounded-full bg-[#e8e8e8]"
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                lineNumber: 24,
+                                columnNumber: 9
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                className: "h-2 w-8 rounded-full bg-[#e8e8e8]"
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                lineNumber: 25,
+                                columnNumber: 9
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                className: "h-2 w-8 rounded-full bg-[#e8e8e8]"
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                lineNumber: 26,
+                                columnNumber: 9
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                        lineNumber: 23,
+                        columnNumber: 7
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                lineNumber: 21,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                className: "grid grid-cols-2 gap-2",
+                children: [
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "rounded bg-[#f1f1f1] p-3",
+                        children: [
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                className: "mx-auto h-2 w-20 rounded bg-black"
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                lineNumber: 31,
+                                columnNumber: 9
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                className: "mx-auto mt-1 h-2 w-24 rounded bg-black"
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                lineNumber: 32,
+                                columnNumber: 9
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                className: "mt-5 flex gap-1",
+                                children: [
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                        className: "h-3 w-8 rounded-full border border-black"
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                        lineNumber: 34,
+                                        columnNumber: 11
+                                    }, this),
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                        className: "h-3 w-8 rounded-full border border-[#bbb]"
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                        lineNumber: 35,
+                                        columnNumber: 11
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                lineNumber: 33,
+                                columnNumber: 9
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                className: "mt-3 h-7 rounded bg-white"
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                lineNumber: 37,
+                                columnNumber: 9
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                        lineNumber: 30,
+                        columnNumber: 7
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "relative rounded bg-[#c8c8c8]",
+                        children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                            className: "absolute bottom-2 left-2 right-2 h-7 rounded bg-[#8f8f8f]"
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                            lineNumber: 40,
+                            columnNumber: 9
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                        lineNumber: 39,
+                        columnNumber: 7
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                lineNumber: 29,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                className: "mt-3 grid grid-cols-3 gap-2",
+                children: [
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "h-9 rounded bg-[#c8c8c8]"
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                        lineNumber: 44,
+                        columnNumber: 7
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "h-9 rounded bg-[#c8c8c8]"
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                        lineNumber: 45,
+                        columnNumber: 7
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "h-9 rounded bg-[#c8c8c8]"
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                        lineNumber: 46,
+                        columnNumber: 7
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                lineNumber: 43,
+                columnNumber: 5
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+        lineNumber: 20,
+        columnNumber: 3
+    }, this);
+const EngineTemplatePanel = ({ templates, activeTemplateId, applyingTemplateId, onApply, recoveryPoints = [], restoringRecoveryPointId = null, onRestore })=>/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+        className: "space-y-3",
+        "data-engine-template-catalog": true,
+        children: [
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                className: "flex items-center justify-between px-1 text-[10px] text-[#a8a8a8]",
+                children: [
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                        children: [
+                            templates.length,
+                            " installed themes"
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                        lineNumber: 62,
+                        columnNumber: 7
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                        children: "Scene Graph templates"
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                        lineNumber: 63,
+                        columnNumber: 7
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                lineNumber: 61,
+                columnNumber: 5
+            }, this),
+            templates.map((template)=>{
+                const active = template.id === activeTemplateId;
+                const applying = template.id === applyingTemplateId;
+                return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("article", {
+                    "data-template-id": template.id,
+                    "data-template-active": active ? "true" : "false",
+                    className: `rounded-md border bg-[#242424] p-2 ${active ? "border-[#0178ff]" : "border-[#444]"}`,
+                    children: [
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("button", {
+                            type: "button",
+                            onClick: ()=>onApply(template.id),
+                            disabled: Boolean(applyingTemplateId),
+                            className: `relative block w-full overflow-hidden rounded border bg-[#efefef] text-left transition-colors ${active ? "border-[#0178ff]" : "border-[#555] hover:border-[#777]"}`,
+                            "aria-label": `Apply ${template.name}`,
+                            "aria-current": active ? "true" : undefined,
+                            children: [
+                                template.previewImage ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("img", {
+                                    src: template.previewImage,
+                                    alt: `${template.name} theme preview`,
+                                    loading: template.badge ? "eager" : "lazy",
+                                    className: "h-[148px] w-full object-cover"
+                                }, void 0, false, {
+                                    fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                    lineNumber: 88,
+                                    columnNumber: 15
+                                }, this) : /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(TemplateFallbackPreview, {}, void 0, false, {
+                                    fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                    lineNumber: 95,
+                                    columnNumber: 15
+                                }, this),
+                                active ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                    className: "absolute left-2 top-2 inline-flex h-6 items-center gap-1 rounded bg-[#0178ff] px-2 text-[10px] font-semibold text-white",
+                                    children: [
+                                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.Check), {
+                                            size: 12
+                                        }, void 0, false, {
+                                            fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                            lineNumber: 99,
+                                            columnNumber: 17
+                                        }, this),
+                                        " Active"
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                    lineNumber: 98,
+                                    columnNumber: 15
+                                }, this) : template.badge ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                    className: "absolute left-2 top-2 rounded bg-[#111] px-2 py-1 text-[10px] font-semibold text-white",
+                                    children: template.badge
+                                }, void 0, false, {
+                                    fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                    lineNumber: 102,
+                                    columnNumber: 15
+                                }, this) : null
+                            ]
+                        }, void 0, true, {
+                            fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                            lineNumber: 77,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                            className: "mt-2 flex items-start justify-between gap-2",
+                            children: [
+                                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                    className: "min-w-0",
+                                    children: [
+                                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                            className: "truncate text-xs font-bold text-white",
+                                            children: template.name
+                                        }, void 0, false, {
+                                            fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                            lineNumber: 109,
+                                            columnNumber: 15
+                                        }, this),
+                                        template.category?.length ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                            className: "mt-1 truncate text-[9px] uppercase text-[#7cc4ff]",
+                                            children: template.category.join(" / ")
+                                        }, void 0, false, {
+                                            fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                            lineNumber: 111,
+                                            columnNumber: 17
+                                        }, this) : null,
+                                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("p", {
+                                            className: "mt-1 line-clamp-2 text-[11px] leading-4 text-[#b8b8b8]",
+                                            children: template.description
+                                        }, void 0, false, {
+                                            fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                            lineNumber: 115,
+                                            columnNumber: 15
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                    lineNumber: 108,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.Button), {
+                                    type: "button",
+                                    size: "sm",
+                                    className: "h-7 shrink-0 bg-[#0178ff] px-3 text-[11px] text-white hover:bg-[#0b86df]",
+                                    onClick: ()=>onApply(template.id),
+                                    disabled: Boolean(applyingTemplateId),
+                                    children: applying ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_0__.Fragment), {
+                                        children: [
+                                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.LoaderCircle), {
+                                                size: 12,
+                                                className: "mr-1 animate-spin"
+                                            }, void 0, false, {
+                                                fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                                lineNumber: 128,
+                                                columnNumber: 19
+                                            }, this),
+                                            "Loading"
+                                        ]
+                                    }, void 0, true) : active ? "Reapply" : "Apply"
+                                }, void 0, false, {
+                                    fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                    lineNumber: 119,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                            lineNumber: 107,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, template.id, true, {
+                    fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                    lineNumber: 69,
+                    columnNumber: 9
+                }, this);
+            }),
+            onRestore && recoveryPoints.length ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("section", {
+                className: "rounded-md border border-[#444] bg-[#242424] p-2",
+                "aria-label": "Publication recovery",
+                children: [
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "mb-2 px-1",
+                        children: [
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                className: "text-[11px] font-bold text-white",
+                                children: "Publication recovery"
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                lineNumber: 144,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                className: "mt-0.5 text-[9px] text-[#9a9a9a]",
+                                children: "Restore as a new validated revision"
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                lineNumber: 145,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                        lineNumber: 143,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "space-y-1",
+                        children: recoveryPoints.slice(0, 5).map((point)=>{
+                            const restoring = point.id === restoringRecoveryPointId;
+                            return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                className: "flex items-center gap-2 rounded border border-[#3d3d3d] bg-[#202020] px-2 py-1.5",
+                                children: [
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                        className: "min-w-0 flex-1",
+                                        children: [
+                                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                                className: "truncate text-[10px] font-semibold text-[#ededed]",
+                                                children: [
+                                                    "Revision ",
+                                                    point.revision
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                                lineNumber: 156,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                                className: "truncate text-[9px] text-[#8f8f8f]",
+                                                children: point.reason === "loaded-publication" ? "Loaded publication" : "Before publish"
+                                            }, void 0, false, {
+                                                fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                                lineNumber: 159,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                        lineNumber: 155,
+                                        columnNumber: 17
+                                    }, this),
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.Button), {
+                                        type: "button",
+                                        variant: "ghost",
+                                        size: "sm",
+                                        className: "h-7 gap-1 px-2 text-[9px] text-[#cfcfcf] hover:bg-white/10 hover:text-white",
+                                        disabled: Boolean(restoringRecoveryPointId),
+                                        onClick: ()=>onRestore(point.id),
+                                        children: [
+                                            restoring ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.LoaderCircle), {
+                                                size: 11,
+                                                className: "animate-spin"
+                                            }, void 0, false, {
+                                                fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                                lineNumber: 172,
+                                                columnNumber: 21
+                                            }, this) : /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.RotateCcw), {
+                                                size: 11
+                                            }, void 0, false, {
+                                                fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                                lineNumber: 174,
+                                                columnNumber: 21
+                                            }, this),
+                                            "Restore"
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                        lineNumber: 163,
+                                        columnNumber: 17
+                                    }, this)
+                                ]
+                            }, point.id, true, {
+                                fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                                lineNumber: 151,
+                                columnNumber: 15
+                            }, this);
+                        })
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                        lineNumber: 147,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+                lineNumber: 142,
+                columnNumber: 7
+            }, this) : null
+        ]
+    }, void 0, true, {
+        fileName: "F:/Storeblink/src/ui/sidebar/EngineTemplatePanel.tsx",
+        lineNumber: 60,
+        columnNumber: 3
+    }, this);
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,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cEUsaUNBQUNQO3dDQUNDcEIsTUFBSzt3Q0FDTDRCLFNBQVE7d0NBQ1JiLE1BQUs7d0NBQ0xwQyxXQUFVO3dDQUNWdUIsVUFBVUMsUUFBUWpCO3dDQUNsQmUsU0FBUyxJQUFNZCxVQUFVcUMsTUFBTTlCLEVBQUU7OzRDQUVoQytCLDZCQUNDLGlDQUFDSjtnREFBYU4sTUFBTTtnREFBSXBDLFdBQVU7Ozs7O3dFQUVsQyxpQ0FBQ2tEO2dEQUFVZCxNQUFNOzs7Ozs7NENBQ2pCOzs7Ozs7OzsrQkF2QkNTLE1BQU05QixFQUFFOzs7Ozt3QkE0Qm5COzs7Ozs7Ozs7Ozt1QkFHRiIsIm5hbWVzIjpbIlRlbXBsYXRlRmFsbGJhY2tQcmV2aWV3IiwiZGl2IiwiY2xhc3NOYW1lIiwiRW5naW5lVGVtcGxhdGVQYW5lbCIsInRlbXBsYXRlcyIsImFjdGl2ZVRlbXBsYXRlSWQiLCJhcHBseWluZ1RlbXBsYXRlSWQiLCJvbkFwcGx5IiwicmVjb3ZlcnlQb2ludHMiLCJyZXN0b3JpbmdSZWNvdmVyeVBvaW50SWQiLCJvblJlc3RvcmUiLCJkYXRhLWVuZ2luZS10ZW1wbGF0ZS1jYXRhbG9nIiwic3BhbiIsImxlbmd0aCIsIm1hcCIsInRlbXBsYXRlIiwiYWN0aXZlIiwiaWQiLCJhcHBseWluZyIsImFydGljbGUiLCJkYXRhLXRlbXBsYXRlLWlkIiwiZGF0YS10ZW1wbGF0ZS1hY3RpdmUiLCJidXR0b24iLCJ0eXBlIiwib25DbGljayIsImRpc2FibGVkIiwiQm9vbGVhbiIsImFyaWEtbGFiZWwiLCJuYW1lIiwiYXJpYS1jdXJyZW50IiwidW5kZWZpbmVkIiwicHJldmlld0ltYWdlIiwiaW1nIiwic3JjIiwiYWx0IiwibG9hZGluZyIsImJhZGdlIiwiQ2hlY2siLCJzaXplIiwiY2F0ZWdvcnkiLCJqb2luIiwicCIsImRlc2NyaXB0aW9uIiwiQnV0dG9uIiwiTG9hZGVyQ2lyY2xlIiwic2VjdGlvbiIsInNsaWNlIiwicG9pbnQiLCJyZXN0b3JpbmciLCJyZXZpc2lvbiIsInJlYXNvbiIsInZhcmlhbnQiLCJSb3RhdGVDY3ciXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZXMiOlsiRW5naW5lVGVtcGxhdGVQYW5lbC50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQ2hlY2ssIExvYWRlckNpcmNsZSwgUm90YXRlQ2N3IH0gZnJvbSBcImx1Y2lkZS1yZWFjdFwiO1xuaW1wb3J0IHsgQnV0dG9uIH0gZnJvbSBcIkAvY29tcG9uZW50cy91aS9idXR0b25cIjtcbmltcG9ydCB0eXBlIHtcbiAgRW5naW5lU2NlbmVUZW1wbGF0ZUlkLFxuICBFbmdpbmVTY2VuZVRlbXBsYXRlTWV0YSxcbn0gZnJvbSBcIkAvZWRpdG9yL2VuZ2luZS9lbmdpbmVUZW1wbGF0ZXNcIjtcbmltcG9ydCB0eXBlIHsgUHVibGljYXRpb25SZWNvdmVyeVBvaW50IH0gZnJvbSBcIkAvcGxhdGZvcm0vcHVibGlzaGluZ1wiO1xuXG50eXBlIEVuZ2luZVRlbXBsYXRlUGFuZWxQcm9wcyA9IHtcbiAgdGVtcGxhdGVzOiByZWFkb25seSBFbmdpbmVTY2VuZVRlbXBsYXRlTWV0YVtdO1xuICBhY3RpdmVUZW1wbGF0ZUlkOiBFbmdpbmVTY2VuZVRlbXBsYXRlSWQgfCBudWxsO1xuICBhcHBseWluZ1RlbXBsYXRlSWQ6IEVuZ2luZVNjZW5lVGVtcGxhdGVJZCB8IG51bGw7XG4gIG9uQXBwbHk6ICh0ZW1wbGF0ZUlkOiBFbmdpbmVTY2VuZVRlbXBsYXRlSWQpID0+IHZvaWQ7XG4gIHJlY292ZXJ5UG9pbnRzPzogcmVhZG9ubHkgUHVibGljYXRpb25SZWNvdmVyeVBvaW50W107XG4gIHJlc3RvcmluZ1JlY292ZXJ5UG9pbnRJZD86IHN0cmluZyB8IG51bGw7XG4gIG9uUmVzdG9yZT86IChyZWNvdmVyeVBvaW50SWQ6IHN0cmluZykgPT4gdm9pZDtcbn07XG5cbmNvbnN0IFRlbXBsYXRlRmFsbGJhY2tQcmV2aWV3ID0gKCkgPT4gKFxuICA8ZGl2IGNsYXNzTmFtZT1cImgtWzE0OHB4XSBiZy13aGl0ZSBwLTNcIj5cbiAgICA8ZGl2IGNsYXNzTmFtZT1cIm1iLTMgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1iZXR3ZWVuXCI+XG4gICAgICA8ZGl2IGNsYXNzTmFtZT1cImgtMiB3LTEyIHJvdW5kZWQtZnVsbCBiZy1ibGFja1wiIC8+XG4gICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggZ2FwLTFcIj5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJoLTIgdy04IHJvdW5kZWQtZnVsbCBiZy1bI2U4ZThlOF1cIiAvPlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImgtMiB3LTggcm91bmRlZC1mdWxsIGJnLVsjZThlOGU4XVwiIC8+XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiaC0yIHctOCByb3VuZGVkLWZ1bGwgYmctWyNlOGU4ZThdXCIgLz5cbiAgICAgIDwvZGl2PlxuICAgIDwvZGl2PlxuICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBncmlkLWNvbHMtMiBnYXAtMlwiPlxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJyb3VuZGVkIGJnLVsjZjFmMWYxXSBwLTNcIj5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJteC1hdXRvIGgtMiB3LTIwIHJvdW5kZWQgYmctYmxhY2tcIiAvPlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm14LWF1dG8gbXQtMSBoLTIgdy0yNCByb3VuZGVkIGJnLWJsYWNrXCIgLz5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtdC01IGZsZXggZ2FwLTFcIj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImgtMyB3LTggcm91bmRlZC1mdWxsIGJvcmRlciBib3JkZXItYmxhY2tcIiAvPlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiaC0zIHctOCByb3VuZGVkLWZ1bGwgYm9yZGVyIGJvcmRlci1bI2JiYl1cIiAvPlxuICAgICAgICA8L2Rpdj5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtdC0zIGgtNyByb3VuZGVkIGJnLXdoaXRlXCIgLz5cbiAgICAgIDwvZGl2PlxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJyZWxhdGl2ZSByb3VuZGVkIGJnLVsjYzhjOGM4XVwiPlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImFic29sdXRlIGJvdHRvbS0yIGxlZnQtMiByaWdodC0yIGgtNyByb3VuZGVkIGJnLVsjOGY4ZjhmXVwiIC8+XG4gICAgICA8L2Rpdj5cbiAgICA8L2Rpdj5cbiAgICA8ZGl2IGNsYXNzTmFtZT1cIm10LTMgZ3JpZCBncmlkLWNvbHMtMyBnYXAtMlwiPlxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJoLTkgcm91bmRlZCBiZy1bI2M4YzhjOF1cIiAvPlxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJoLTkgcm91bmRlZCBiZy1bI2M4YzhjOF1cIiAvPlxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJoLTkgcm91bmRlZCBiZy1bI2M4YzhjOF1cIiAvPlxuICAgIDwvZGl2PlxuICA8L2Rpdj5cbik7XG5cbmV4cG9ydCBjb25zdCBFbmdpbmVUZW1wbGF0ZVBhbmVsID0gKHtcbiAgdGVtcGxhdGVzLFxuICBhY3RpdmVUZW1wbGF0ZUlkLFxuICBhcHBseWluZ1RlbXBsYXRlSWQsXG4gIG9uQXBwbHksXG4gIHJlY292ZXJ5UG9pbnRzID0gW10sXG4gIHJlc3RvcmluZ1JlY292ZXJ5UG9pbnRJZCA9IG51bGwsXG4gIG9uUmVzdG9yZSxcbn06IEVuZ2luZVRlbXBsYXRlUGFuZWxQcm9wcykgPT4gKFxuICA8ZGl2IGNsYXNzTmFtZT1cInNwYWNlLXktM1wiIGRhdGEtZW5naW5lLXRlbXBsYXRlLWNhdGFsb2c+XG4gICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWJldHdlZW4gcHgtMSB0ZXh0LVsxMHB4XSB0ZXh0LVsjYThhOGE4XVwiPlxuICAgICAgPHNwYW4+e3RlbXBsYXRlcy5sZW5ndGh9IGluc3RhbGxlZCB0aGVtZXM8L3NwYW4+XG4gICAgICA8c3Bhbj5TY2VuZSBHcmFwaCB0ZW1wbGF0ZXM8L3NwYW4+XG4gICAgPC9kaXY+XG4gICAge3RlbXBsYXRlcy5tYXAoKHRlbXBsYXRlKSA9PiB7XG4gICAgICBjb25zdCBhY3RpdmUgPSB0ZW1wbGF0ZS5pZCA9PT0gYWN0aXZlVGVtcGxhdGVJZDtcbiAgICAgIGNvbnN0IGFwcGx5aW5nID0gdGVtcGxhdGUuaWQgPT09IGFwcGx5aW5nVGVtcGxhdGVJZDtcbiAgICAgIHJldHVybiAoXG4gICAgICAgIDxhcnRpY2xlXG4gICAgICAgICAga2V5PXt0ZW1wbGF0ZS5pZH1cbiAgICAgICAgICBkYXRhLXRlbXBsYXRlLWlkPXt0ZW1wbGF0ZS5pZH1cbiAgICAgICAgICBkYXRhLXRlbXBsYXRlLWFjdGl2ZT17YWN0aXZlID8gXCJ0cnVlXCIgOiBcImZhbHNlXCJ9XG4gICAgICAgICAgY2xhc3NOYW1lPXtgcm91bmRlZC1tZCBib3JkZXIgYmctWyMyNDI0MjRdIHAtMiAke1xuICAgICAgICAgICAgYWN0aXZlID8gXCJib3JkZXItWyMwMTc4ZmZdXCIgOiBcImJvcmRlci1bIzQ0NF1cIlxuICAgICAgICAgIH1gfVxuICAgICAgICA+XG4gICAgICAgICAgPGJ1dHRvblxuICAgICAgICAgICAgdHlwZT1cImJ1dHRvblwiXG4gICAgICAgICAgICBvbkNsaWNrPXsoKSA9PiBvbkFwcGx5KHRlbXBsYXRlLmlkKX1cbiAgICAgICAgICAgIGRpc2FibGVkPXtCb29sZWFuKGFwcGx5aW5nVGVtcGxhdGVJZCl9XG4gICAgICAgICAgICBjbGFzc05hbWU9e2ByZWxhdGl2ZSBibG9jayB3LWZ1bGwgb3ZlcmZsb3ctaGlkZGVuIHJvdW5kZWQgYm9yZGVyIGJnLVsjZWZlZmVmXSB0ZXh0LWxlZnQgdHJhbnNpdGlvbi1jb2xvcnMgJHtcbiAgICAgICAgICAgICAgYWN0aXZlID8gXCJib3JkZXItWyMwMTc4ZmZdXCIgOiBcImJvcmRlci1bIzU1NV0gaG92ZXI6Ym9yZGVyLVsjNzc3XVwiXG4gICAgICAgICAgICB9YH1cbiAgICAgICAgICAgIGFyaWEtbGFiZWw9e2BBcHBseSAke3RlbXBsYXRlLm5hbWV9YH1cbiAgICAgICAgICAgIGFyaWEtY3VycmVudD17YWN0aXZlID8gXCJ0cnVlXCIgOiB1bmRlZmluZWR9XG4gICAgICAgICAgPlxuICAgICAgICAgICAge3RlbXBsYXRlLnByZXZpZXdJbWFnZSA/IChcbiAgICAgICAgICAgICAgPGltZ1xuICAgICAgICAgICAgICAgIHNyYz17dGVtcGxhdGUucHJldmlld0ltYWdlfVxuICAgICAgICAgICAgICAgIGFsdD17YCR7dGVtcGxhdGUubmFtZX0gdGhlbWUgcHJldmlld2B9XG4gICAgICAgICAgICAgICAgbG9hZGluZz17dGVtcGxhdGUuYmFkZ2UgPyBcImVhZ2VyXCIgOiBcImxhenlcIn1cbiAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJoLVsxNDhweF0gdy1mdWxsIG9iamVjdC1jb3ZlclwiXG4gICAgICAgICAgICAgIC8+XG4gICAgICAgICAgICApIDogKFxuICAgICAgICAgICAgICA8VGVtcGxhdGVGYWxsYmFja1ByZXZpZXcgLz5cbiAgICAgICAgICAgICl9XG4gICAgICAgICAgICB7YWN0aXZlID8gKFxuICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJhYnNvbHV0ZSBsZWZ0LTIgdG9wLTIgaW5saW5lLWZsZXggaC02IGl0ZW1zLWNlbnRlciBnYXAtMSByb3VuZGVkIGJnLVsjMDE3OGZmXSBweC0yIHRleHQtWzEwcHhdIGZvbnQtc2VtaWJvbGQgdGV4dC13aGl0ZVwiPlxuICAgICAgICAgICAgICAgIDxDaGVjayBzaXplPXsxMn0gLz4gQWN0aXZlXG4gICAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICAgICkgOiB0ZW1wbGF0ZS5iYWRnZSA/IChcbiAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiYWJzb2x1dGUgbGVmdC0yIHRvcC0yIHJvdW5kZWQgYmctWyMxMTFdIHB4LTIgcHktMSB0ZXh0LVsxMHB4XSBmb250LXNlbWlib2xkIHRleHQtd2hpdGVcIj5cbiAgICAgICAgICAgICAgICB7dGVtcGxhdGUuYmFkZ2V9XG4gICAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICAgICkgOiBudWxsfVxuICAgICAgICAgIDwvYnV0dG9uPlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibXQtMiBmbGV4IGl0ZW1zLXN0YXJ0IGp1c3RpZnktYmV0d2VlbiBnYXAtMlwiPlxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtaW4tdy0wXCI+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidHJ1bmNhdGUgdGV4dC14cyBmb250LWJvbGQgdGV4dC13aGl0ZVwiPnt0ZW1wbGF0ZS5uYW1lfTwvZGl2PlxuICAgICAgICAgICAgICB7dGVtcGxhdGUuY2F0ZWdvcnk/Lmxlbmd0aCA/IChcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm10LTEgdHJ1bmNhdGUgdGV4dC1bOXB4XSB1cHBlcmNhc2UgdGV4dC1bIzdjYzRmZl1cIj5cbiAgICAgICAgICAgICAgICAgIHt0ZW1wbGF0ZS5jYXRlZ29yeS5qb2luKFwiIC8gXCIpfVxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICApIDogbnVsbH1cbiAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwibXQtMSBsaW5lLWNsYW1wLTIgdGV4dC1bMTFweF0gbGVhZGluZy00IHRleHQtWyNiOGI4YjhdXCI+XG4gICAgICAgICAgICAgICAge3RlbXBsYXRlLmRlc2NyaXB0aW9ufVxuICAgICAgICAgICAgICA8L3A+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDxCdXR0b25cbiAgICAgICAgICAgICAgdHlwZT1cImJ1dHRvblwiXG4gICAgICAgICAgICAgIHNpemU9XCJzbVwiXG4gICAgICAgICAgICAgIGNsYXNzTmFtZT1cImgtNyBzaHJpbmstMCBiZy1bIzAxNzhmZl0gcHgtMyB0ZXh0LVsxMXB4XSB0ZXh0LXdoaXRlIGhvdmVyOmJnLVsjMGI4NmRmXVwiXG4gICAgICAgICAgICAgIG9uQ2xpY2s9eygpID0+IG9uQXBwbHkodGVtcGxhdGUuaWQpfVxuICAgICAgICAgICAgICBkaXNhYmxlZD17Qm9vbGVhbihhcHBseWluZ1RlbXBsYXRlSWQpfVxuICAgICAgICAgICAgPlxuICAgICAgICAgICAgICB7YXBwbHlpbmcgPyAoXG4gICAgICAgICAgICAgICAgPD5cbiAgICAgICAgICAgICAgICAgIDxMb2FkZXJDaXJjbGUgc2l6ZT17MTJ9IGNsYXNzTmFtZT1cIm1yLTEgYW5pbWF0ZS1zcGluXCIgLz5cbiAgICAgICAgICAgICAgICAgIExvYWRpbmdcbiAgICAgICAgICAgICAgICA8Lz5cbiAgICAgICAgICAgICAgKSA6IGFjdGl2ZSA/IChcbiAgICAgICAgICAgICAgICBcIlJlYXBwbHlcIlxuICAgICAgICAgICAgICApIDogKFxuICAgICAgICAgICAgICAgIFwiQXBwbHlcIlxuICAgICAgICAgICAgICApfVxuICAgICAgICAgICAgPC9CdXR0b24+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgIDwvYXJ0aWNsZT5cbiAgICAgICk7XG4gICAgfSl9XG4gICAge29uUmVzdG9yZSAmJiByZWNvdmVyeVBvaW50cy5sZW5ndGggPyAoXG4gICAgICA8c2VjdGlvbiBjbGFzc05hbWU9XCJyb3VuZGVkLW1kIGJvcmRlciBib3JkZXItWyM0NDRdIGJnLVsjMjQyNDI0XSBwLTJcIiBhcmlhLWxhYmVsPVwiUHVibGljYXRpb24gcmVjb3ZlcnlcIj5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYi0yIHB4LTFcIj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRleHQtWzExcHhdIGZvbnQtYm9sZCB0ZXh0LXdoaXRlXCI+UHVibGljYXRpb24gcmVjb3Zlcnk8L2Rpdj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm10LTAuNSB0ZXh0LVs5cHhdIHRleHQtWyM5YTlhOWFdXCI+UmVzdG9yZSBhcyBhIG5ldyB2YWxpZGF0ZWQgcmV2aXNpb248L2Rpdj5cbiAgICAgICAgPC9kaXY+XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwic3BhY2UteS0xXCI+XG4gICAgICAgICAge3JlY292ZXJ5UG9pbnRzLnNsaWNlKDAsIDUpLm1hcCgocG9pbnQpID0+IHtcbiAgICAgICAgICAgIGNvbnN0IHJlc3RvcmluZyA9IHBvaW50LmlkID09PSByZXN0b3JpbmdSZWNvdmVyeVBvaW50SWQ7XG4gICAgICAgICAgICByZXR1cm4gKFxuICAgICAgICAgICAgICA8ZGl2XG4gICAgICAgICAgICAgICAga2V5PXtwb2ludC5pZH1cbiAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLWNlbnRlciBnYXAtMiByb3VuZGVkIGJvcmRlciBib3JkZXItWyMzZDNkM2RdIGJnLVsjMjAyMDIwXSBweC0yIHB5LTEuNVwiXG4gICAgICAgICAgICAgID5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm1pbi13LTAgZmxleC0xXCI+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRydW5jYXRlIHRleHQtWzEwcHhdIGZvbnQtc2VtaWJvbGQgdGV4dC1bI2VkZWRlZF1cIj5cbiAgICAgICAgICAgICAgICAgICAgUmV2aXNpb24ge3BvaW50LnJldmlzaW9ufVxuICAgICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRydW5jYXRlIHRleHQtWzlweF0gdGV4dC1bIzhmOGY4Zl1cIj5cbiAgICAgICAgICAgICAgICAgICAge3BvaW50LnJlYXNvbiA9PT0gXCJsb2FkZWQtcHVibGljYXRpb25cIiA/IFwiTG9hZGVkIHB1YmxpY2F0aW9uXCIgOiBcIkJlZm9yZSBwdWJsaXNoXCJ9XG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8QnV0dG9uXG4gICAgICAgICAgICAgICAgICB0eXBlPVwiYnV0dG9uXCJcbiAgICAgICAgICAgICAgICAgIHZhcmlhbnQ9XCJnaG9zdFwiXG4gICAgICAgICAgICAgICAgICBzaXplPVwic21cIlxuICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwiaC03IGdhcC0xIHB4LTIgdGV4dC1bOXB4XSB0ZXh0LVsjY2ZjZmNmXSBob3ZlcjpiZy13aGl0ZS8xMCBob3Zlcjp0ZXh0LXdoaXRlXCJcbiAgICAgICAgICAgICAgICAgIGRpc2FibGVkPXtCb29sZWFuKHJlc3RvcmluZ1JlY292ZXJ5UG9pbnRJZCl9XG4gICAgICAgICAgICAgICAgICBvbkNsaWNrPXsoKSA9PiBvblJlc3RvcmUocG9pbnQuaWQpfVxuICAgICAgICAgICAgICAgID5cbiAgICAgICAgICAgICAgICAgIHtyZXN0b3JpbmcgPyAoXG4gICAgICAgICAgICAgICAgICAgIDxMb2FkZXJDaXJjbGUgc2l6ZT17MTF9IGNsYXNzTmFtZT1cImFuaW1hdGUtc3BpblwiIC8+XG4gICAgICAgICAgICAgICAgICApIDogKFxuICAgICAgICAgICAgICAgICAgICA8Um90YXRlQ2N3IHNpemU9ezExfSAvPlxuICAgICAgICAgICAgICAgICAgKX1cbiAgICAgICAgICAgICAgICAgIFJlc3RvcmVcbiAgICAgICAgICAgICAgICA8L0J1dHRvbj5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICApO1xuICAgICAgICAgIH0pfVxuICAgICAgICA8L2Rpdj5cbiAgICAgIDwvc2VjdGlvbj5cbiAgICApIDogbnVsbH1cbiAgPC9kaXY+XG4pO1xuIl0sImZpbGUiOiIvc3JjL3VpL3NpZGViYXIvRW5naW5lVGVtcGxhdGVQYW5lbC50c3gifQ==

@@ -1,0 +1,39 @@
+Object.defineProperty(__vite_ssr_exports__, "CommandManager", { enumerable: true, configurable: true, get(){ try { return CommandManager } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "createCommandManager", { enumerable: true, configurable: true, get(){ try { return createCommandManager } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "commandManager", { enumerable: true, configurable: true, get(){ try { return commandManager } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "dispatch", { enumerable: true, configurable: true, get(){ try { return dispatch } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/src/engine/history/index.ts", {"importedNames":["createHistoryManager","history"]});function _define_property(obj, key, value) {
+    if (key in obj) {
+        Object.defineProperty(obj, key, {
+            value: value,
+            enumerable: true,
+            configurable: true,
+            writable: true
+        });
+    } else {
+        obj[key] = value;
+    };
+    return obj;
+}
+
+class CommandManager {
+    dispatch(command, ctx) {
+        command.execute(ctx);
+        this.history.record(command);
+    }
+    constructor(options = {}){
+        _define_property(this, "history", void 0);
+        this.history = options.historyManager ?? (0,__vite_ssr_import_0__.createHistoryManager)();
+    }
+};
+const createCommandManager = (options)=>new CommandManager(options);
+// Compatibility service for code outside the active EngineContext migration.
+const commandManager = createCommandManager({
+    historyManager: __vite_ssr_import_0__.history
+});
+const dispatch = (command, ctx)=>{
+    commandManager.dispatch(command, ctx);
+};
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7OztBQUFBOzs7Ozs7Ozs7Ozs7OztBQU9PLE1BQU1BO0lBT1hDLFNBQW1CQyxPQUEwQixFQUFFQyxHQUFtQixFQUFRO1FBQ3hFRCxRQUFRRSxPQUFPLENBQUNEO1FBQ2hCLElBQUksQ0FBQ0UsT0FBTyxDQUFDQyxNQUFNLENBQUNKO0lBQ3RCO0lBUEEsWUFBWUssVUFBaUMsQ0FBQyxDQUFDLENBQUU7UUFGakQsdUJBQVNGLFdBQVQ7UUFHRSxJQUFJLENBQUNBLE9BQU8sR0FBR0UsUUFBUUMsY0FBYyxPQUFJQztJQUMzQztBQU1GO0FBRU8sTUFBTUMsdUJBQXVCLENBQUNILFVBQW9DLElBQUlQLGVBQWVPO0FBRTVGO0FBQ08sTUFBTUksaUJBQWlCRCxxQkFBcUI7SUFBRUYsZ0JBQWdCSDtBQUFRO0FBRXRFLE1BQU1KLFdBQVcsQ0FBV0MsU0FBNEJDO0lBQzdEUSxlQUFlVixRQUFRLENBQUNDLFNBQVNDO0FBQ25DIiwibmFtZXMiOlsiQ29tbWFuZE1hbmFnZXIiLCJkaXNwYXRjaCIsImNvbW1hbmQiLCJjdHgiLCJleGVjdXRlIiwiaGlzdG9yeSIsInJlY29yZCIsIm9wdGlvbnMiLCJoaXN0b3J5TWFuYWdlciIsImNyZWF0ZUhpc3RvcnlNYW5hZ2VyIiwiY3JlYXRlQ29tbWFuZE1hbmFnZXIiLCJjb21tYW5kTWFuYWdlciJdLCJpZ25vcmVMaXN0IjpbXSwic291cmNlcyI6WyJkaXNwYXRjaGVyLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IGNyZWF0ZUhpc3RvcnlNYW5hZ2VyLCBoaXN0b3J5LCB0eXBlIEhpc3RvcnlNYW5hZ2VyIH0gZnJvbSBcIkAvZW5naW5lL2hpc3RvcnlcIjtcbmltcG9ydCB0eXBlIHsgQ29tbWFuZCwgQ29tbWFuZENvbnRleHQgfSBmcm9tIFwiLi90eXBlc1wiO1xuXG5leHBvcnQgdHlwZSBDb21tYW5kTWFuYWdlck9wdGlvbnMgPSB7XG4gIGhpc3RvcnlNYW5hZ2VyPzogSGlzdG9yeU1hbmFnZXI7XG59O1xuXG5leHBvcnQgY2xhc3MgQ29tbWFuZE1hbmFnZXIge1xuICByZWFkb25seSBoaXN0b3J5OiBIaXN0b3J5TWFuYWdlcjtcblxuICBjb25zdHJ1Y3RvcihvcHRpb25zOiBDb21tYW5kTWFuYWdlck9wdGlvbnMgPSB7fSkge1xuICAgIHRoaXMuaGlzdG9yeSA9IG9wdGlvbnMuaGlzdG9yeU1hbmFnZXIgPz8gY3JlYXRlSGlzdG9yeU1hbmFnZXIoKTtcbiAgfVxuXG4gIGRpc3BhdGNoPFRQYXlsb2FkPihjb21tYW5kOiBDb21tYW5kPFRQYXlsb2FkPiwgY3R4OiBDb21tYW5kQ29udGV4dCk6IHZvaWQge1xuICAgIGNvbW1hbmQuZXhlY3V0ZShjdHgpO1xuICAgIHRoaXMuaGlzdG9yeS5yZWNvcmQoY29tbWFuZCk7XG4gIH1cbn1cblxuZXhwb3J0IGNvbnN0IGNyZWF0ZUNvbW1hbmRNYW5hZ2VyID0gKG9wdGlvbnM/OiBDb21tYW5kTWFuYWdlck9wdGlvbnMpID0+IG5ldyBDb21tYW5kTWFuYWdlcihvcHRpb25zKTtcblxuLy8gQ29tcGF0aWJpbGl0eSBzZXJ2aWNlIGZvciBjb2RlIG91dHNpZGUgdGhlIGFjdGl2ZSBFbmdpbmVDb250ZXh0IG1pZ3JhdGlvbi5cbmV4cG9ydCBjb25zdCBjb21tYW5kTWFuYWdlciA9IGNyZWF0ZUNvbW1hbmRNYW5hZ2VyKHsgaGlzdG9yeU1hbmFnZXI6IGhpc3RvcnkgfSk7XG5cbmV4cG9ydCBjb25zdCBkaXNwYXRjaCA9IDxUUGF5bG9hZD4oY29tbWFuZDogQ29tbWFuZDxUUGF5bG9hZD4sIGN0eDogQ29tbWFuZENvbnRleHQpOiB2b2lkID0+IHtcbiAgY29tbWFuZE1hbmFnZXIuZGlzcGF0Y2goY29tbWFuZCwgY3R4KTtcbn07XG4iXSwiZmlsZSI6Ii9zcmMvZW5naW5lL2NvbW1hbmQvZGlzcGF0Y2hlci50cyJ9

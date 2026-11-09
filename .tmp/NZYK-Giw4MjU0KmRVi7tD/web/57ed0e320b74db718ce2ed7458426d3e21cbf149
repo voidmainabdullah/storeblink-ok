@@ -1,0 +1,155 @@
+Object.defineProperty(__vite_ssr_exports__, "Countdown", { enumerable: true, configurable: true, get(){ try { return Countdown } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/react/jsx-dev-runtime.js", {"importedNames":["jsxDEV","Fragment"]});
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/react/index.js", {"importedNames":["useEffect","useState"]});
+const pad = (n)=>String(n).padStart(2, "0");
+/** Live HH:MM:SS countdown. Hidden when expired or no end date. */ const Countdown = ({ endsAt, className = "", compact = false })=>{
+    const [now, setNow] = (0,__vite_ssr_import_1__.useState)(()=>Date.now());
+    (0,__vite_ssr_import_1__.useEffect)(()=>{
+        if (!endsAt) return;
+        const id = setInterval(()=>setNow(Date.now()), 1000);
+        return ()=>clearInterval(id);
+    }, [
+        endsAt
+    ]);
+    if (!endsAt) return null;
+    const end = new Date(endsAt).getTime();
+    if (isNaN(end)) return null;
+    const diff = end - now;
+    if (diff <= 0) return null;
+    const totalSec = Math.floor(diff / 1000);
+    const days = Math.floor(totalSec / 86400);
+    const hours = Math.floor(totalSec % 86400 / 3600);
+    const mins = Math.floor(totalSec % 3600 / 60);
+    const secs = totalSec % 60;
+    if (compact) {
+        return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+            className: `inline-flex items-center gap-0.5 text-[9px] font-bold tabular-nums ${className}`,
+            children: [
+                days > 0 && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                    children: [
+                        days,
+                        "d"
+                    ]
+                }, void 0, true, {
+                    fileName: "F:/Storeblink/src/components/store/Countdown.tsx",
+                    lineNumber: 38,
+                    columnNumber: 22
+                }, this),
+                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                    children: [
+                        pad(hours),
+                        ":",
+                        pad(mins),
+                        ":",
+                        pad(secs)
+                    ]
+                }, void 0, true, {
+                    fileName: "F:/Storeblink/src/components/store/Countdown.tsx",
+                    lineNumber: 39,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "F:/Storeblink/src/components/store/Countdown.tsx",
+            lineNumber: 37,
+            columnNumber: 7
+        }, this);
+    };
+    const Cell = ({ v, l })=>/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+            className: "inline-flex flex-col items-center",
+            children: [
+                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                    className: "bg-foreground text-background px-1 py-0.5 rounded text-[10px] font-bold tabular-nums leading-none min-w-[18px] text-center",
+                    children: pad(v)
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/components/store/Countdown.tsx",
+                    lineNumber: 46,
+                    columnNumber: 7
+                }, this),
+                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                    className: "text-[8px] text-muted-foreground mt-0.5",
+                    children: l
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/components/store/Countdown.tsx",
+                    lineNumber: 49,
+                    columnNumber: 7
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "F:/Storeblink/src/components/store/Countdown.tsx",
+            lineNumber: 45,
+            columnNumber: 5
+        }, this);
+    return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+        className: `inline-flex items-center gap-0.5 ${className}`,
+        children: [
+            days > 0 && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_0__.Fragment), {
+                children: [
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(Cell, {
+                        v: days,
+                        l: "d"
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/components/store/Countdown.tsx",
+                        lineNumber: 55,
+                        columnNumber: 22
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                        className: "text-foreground font-bold mt-0 mb-2",
+                        children: ":"
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/components/store/Countdown.tsx",
+                        lineNumber: 55,
+                        columnNumber: 45
+                    }, this)
+                ]
+            }, void 0, true),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(Cell, {
+                v: hours,
+                l: "h"
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/components/store/Countdown.tsx",
+                lineNumber: 56,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                className: "text-foreground font-bold mt-0 mb-2",
+                children: ":"
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/components/store/Countdown.tsx",
+                lineNumber: 57,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(Cell, {
+                v: mins,
+                l: "m"
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/components/store/Countdown.tsx",
+                lineNumber: 58,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                className: "text-foreground font-bold mt-0 mb-2",
+                children: ":"
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/components/store/Countdown.tsx",
+                lineNumber: 59,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(Cell, {
+                v: secs,
+                l: "s"
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/components/store/Countdown.tsx",
+                lineNumber: 60,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "F:/Storeblink/src/components/store/Countdown.tsx",
+        lineNumber: 54,
+        columnNumber: 5
+    }, this);
+};
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7QUFBQTtBQUVBLE1BQU1BLE1BQU0sQ0FBQ0MsSUFBY0MsT0FBT0QsR0FBR0UsUUFBUSxDQUFDLEdBQUc7QUFFakQsaUVBQWlFLEdBQzFELE1BQU1DLFlBQVksQ0FBQyxFQUN4QkMsTUFBTSxFQUNOQyxZQUFZLEVBQUUsRUFDZEMsVUFBVSxLQUFLLEVBS2hCO0lBQ0MsTUFBTSxDQUFDQyxLQUFLQyxPQUFPLE1BQUdDLGdDQUFTLElBQU1DLEtBQUtILEdBQUc7T0FFN0NJLGlDQUFVO1FBQ1IsSUFBSSxDQUFDUCxRQUFRO1FBQ2IsTUFBTVEsS0FBS0MsWUFBWSxJQUFNTCxPQUFPRSxLQUFLSCxHQUFHLEtBQUs7UUFDakQsT0FBTyxJQUFNTyxjQUFjRjtJQUM3QixHQUFHO1FBQUNSO0tBQU87SUFFWCxJQUFJLENBQUNBLFFBQVEsT0FBTztJQUNwQixNQUFNVyxNQUFNLElBQUlMLEtBQUtOLFFBQVFZLE9BQU87SUFDcEMsSUFBSUMsTUFBTUYsTUFBTSxPQUFPO0lBQ3ZCLE1BQU1HLE9BQU9ILE1BQU1SO0lBQ25CLElBQUlXLFFBQVEsR0FBRyxPQUFPO0lBRXRCLE1BQU1DLFdBQVdDLEtBQUtDLEtBQUssQ0FBQ0gsT0FBTztJQUNuQyxNQUFNSSxPQUFPRixLQUFLQyxLQUFLLENBQUNGLFdBQVc7SUFDbkMsTUFBTUksUUFBUUgsS0FBS0MsS0FBSyxDQUFDLFFBQUNGLEdBQVcsUUFBUztJQUM5QyxNQUFNSyxPQUFPSixLQUFLQyxLQUFLLENBQUMsUUFBQ0YsR0FBVyxPQUFRO0lBQzVDLE1BQU1NLE9BQU9OLFdBQVc7SUFFeEIsSUFBSWIsU0FBUztRQUNYLHdCQUNFLDhCQUFDb0I7WUFBS3JCLFdBQVcsQ0FBQyxtRUFBbUUsRUFBRUEsV0FBVzs7Z0JBQy9GaUIsT0FBTyxzQkFBSyw4QkFBQ0k7O3dCQUFNSjt3QkFBSzs7Ozs7OztpQ0FDekIsOEJBQUNJOzt3QkFBTTNCLElBQUl3Qjt3QkFBTzt3QkFBRXhCLElBQUl5Qjt3QkFBTTt3QkFBRXpCLElBQUkwQjs7Ozs7Ozs7Ozs7OztJQUcxQztJQUVBLE1BQU1FLE9BQU8sQ0FBQyxFQUFFQyxDQUFDLEVBQUVDLENBQUMsRUFBNEIsb0JBQzlDLDhCQUFDSDtZQUFLckIsV0FBVTs7aUNBQ2QsOEJBQUNxQjtvQkFBS3JCLFdBQVU7OEJBQ2JOLElBQUk2Qjs7Ozs7O2lDQUVQLDhCQUFDRjtvQkFBS3JCLFdBQVU7OEJBQTJDd0I7Ozs7Ozs7Ozs7OztJQUkvRCx3QkFDRSw4QkFBQ0M7UUFBSXpCLFdBQVcsQ0FBQyxpQ0FBaUMsRUFBRUEsV0FBVzs7WUFDNURpQixPQUFPLHNCQUFLOztxQ0FBRSw4QkFBQ0s7d0JBQUtDLEdBQUdOO3dCQUFNTyxHQUFFOzs7Ozs7cUNBQU0sOEJBQUNIO3dCQUFLckIsV0FBVTtrQ0FBc0M7Ozs7Ozs7OzZCQUM1Riw4QkFBQ3NCO2dCQUFLQyxHQUFHTDtnQkFBT00sR0FBRTs7Ozs7OzZCQUNsQiw4QkFBQ0g7Z0JBQUtyQixXQUFVOzBCQUFzQzs7Ozs7OzZCQUN0RCw4QkFBQ3NCO2dCQUFLQyxHQUFHSjtnQkFBTUssR0FBRTs7Ozs7OzZCQUNqQiw4QkFBQ0g7Z0JBQUtyQixXQUFVOzBCQUFzQzs7Ozs7OzZCQUN0RCw4QkFBQ3NCO2dCQUFLQyxHQUFHSDtnQkFBTUksR0FBRTs7Ozs7Ozs7Ozs7O0FBR3ZCIiwibmFtZXMiOlsicGFkIiwibiIsIlN0cmluZyIsInBhZFN0YXJ0IiwiQ291bnRkb3duIiwiZW5kc0F0IiwiY2xhc3NOYW1lIiwiY29tcGFjdCIsIm5vdyIsInNldE5vdyIsInVzZVN0YXRlIiwiRGF0ZSIsInVzZUVmZmVjdCIsImlkIiwic2V0SW50ZXJ2YWwiLCJjbGVhckludGVydmFsIiwiZW5kIiwiZ2V0VGltZSIsImlzTmFOIiwiZGlmZiIsInRvdGFsU2VjIiwiTWF0aCIsImZsb29yIiwiZGF5cyIsImhvdXJzIiwibWlucyIsInNlY3MiLCJzcGFuIiwiQ2VsbCIsInYiLCJsIiwiZGl2Il0sImlnbm9yZUxpc3QiOltdLCJzb3VyY2VzIjpbIkNvdW50ZG93bi50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgdXNlRWZmZWN0LCB1c2VTdGF0ZSB9IGZyb20gXCJyZWFjdFwiO1xuXG5jb25zdCBwYWQgPSAobjogbnVtYmVyKSA9PiBTdHJpbmcobikucGFkU3RhcnQoMiwgXCIwXCIpO1xuXG4vKiogTGl2ZSBISDpNTTpTUyBjb3VudGRvd24uIEhpZGRlbiB3aGVuIGV4cGlyZWQgb3Igbm8gZW5kIGRhdGUuICovXG5leHBvcnQgY29uc3QgQ291bnRkb3duID0gKHtcbiAgZW5kc0F0LFxuICBjbGFzc05hbWUgPSBcIlwiLFxuICBjb21wYWN0ID0gZmFsc2UsXG59OiB7XG4gIGVuZHNBdDogc3RyaW5nIHwgbnVsbCB8IHVuZGVmaW5lZDtcbiAgY2xhc3NOYW1lPzogc3RyaW5nO1xuICBjb21wYWN0PzogYm9vbGVhbjtcbn0pID0+IHtcbiAgY29uc3QgW25vdywgc2V0Tm93XSA9IHVzZVN0YXRlKCgpID0+IERhdGUubm93KCkpO1xuXG4gIHVzZUVmZmVjdCgoKSA9PiB7XG4gICAgaWYgKCFlbmRzQXQpIHJldHVybjtcbiAgICBjb25zdCBpZCA9IHNldEludGVydmFsKCgpID0+IHNldE5vdyhEYXRlLm5vdygpKSwgMTAwMCk7XG4gICAgcmV0dXJuICgpID0+IGNsZWFySW50ZXJ2YWwoaWQpO1xuICB9LCBbZW5kc0F0XSk7XG5cbiAgaWYgKCFlbmRzQXQpIHJldHVybiBudWxsO1xuICBjb25zdCBlbmQgPSBuZXcgRGF0ZShlbmRzQXQpLmdldFRpbWUoKTtcbiAgaWYgKGlzTmFOKGVuZCkpIHJldHVybiBudWxsO1xuICBjb25zdCBkaWZmID0gZW5kIC0gbm93O1xuICBpZiAoZGlmZiA8PSAwKSByZXR1cm4gbnVsbDtcblxuICBjb25zdCB0b3RhbFNlYyA9IE1hdGguZmxvb3IoZGlmZiAvIDEwMDApO1xuICBjb25zdCBkYXlzID0gTWF0aC5mbG9vcih0b3RhbFNlYyAvIDg2NDAwKTtcbiAgY29uc3QgaG91cnMgPSBNYXRoLmZsb29yKCh0b3RhbFNlYyAlIDg2NDAwKSAvIDM2MDApO1xuICBjb25zdCBtaW5zID0gTWF0aC5mbG9vcigodG90YWxTZWMgJSAzNjAwKSAvIDYwKTtcbiAgY29uc3Qgc2VjcyA9IHRvdGFsU2VjICUgNjA7XG5cbiAgaWYgKGNvbXBhY3QpIHtcbiAgICByZXR1cm4gKFxuICAgICAgPHNwYW4gY2xhc3NOYW1lPXtgaW5saW5lLWZsZXggaXRlbXMtY2VudGVyIGdhcC0wLjUgdGV4dC1bOXB4XSBmb250LWJvbGQgdGFidWxhci1udW1zICR7Y2xhc3NOYW1lfWB9PlxuICAgICAgICB7ZGF5cyA+IDAgJiYgPHNwYW4+e2RheXN9ZDwvc3Bhbj59XG4gICAgICAgIDxzcGFuPntwYWQoaG91cnMpfTp7cGFkKG1pbnMpfTp7cGFkKHNlY3MpfTwvc3Bhbj5cbiAgICAgIDwvc3Bhbj5cbiAgICApO1xuICB9XG5cbiAgY29uc3QgQ2VsbCA9ICh7IHYsIGwgfTogeyB2OiBudW1iZXI7IGw6IHN0cmluZyB9KSA9PiAoXG4gICAgPHNwYW4gY2xhc3NOYW1lPVwiaW5saW5lLWZsZXggZmxleC1jb2wgaXRlbXMtY2VudGVyXCI+XG4gICAgICA8c3BhbiBjbGFzc05hbWU9XCJiZy1mb3JlZ3JvdW5kIHRleHQtYmFja2dyb3VuZCBweC0xIHB5LTAuNSByb3VuZGVkIHRleHQtWzEwcHhdIGZvbnQtYm9sZCB0YWJ1bGFyLW51bXMgbGVhZGluZy1ub25lIG1pbi13LVsxOHB4XSB0ZXh0LWNlbnRlclwiPlxuICAgICAgICB7cGFkKHYpfVxuICAgICAgPC9zcGFuPlxuICAgICAgPHNwYW4gY2xhc3NOYW1lPVwidGV4dC1bOHB4XSB0ZXh0LW11dGVkLWZvcmVncm91bmQgbXQtMC41XCI+e2x9PC9zcGFuPlxuICAgIDwvc3Bhbj5cbiAgKTtcblxuICByZXR1cm4gKFxuICAgIDxkaXYgY2xhc3NOYW1lPXtgaW5saW5lLWZsZXggaXRlbXMtY2VudGVyIGdhcC0wLjUgJHtjbGFzc05hbWV9YH0+XG4gICAgICB7ZGF5cyA+IDAgJiYgPD48Q2VsbCB2PXtkYXlzfSBsPVwiZFwiIC8+PHNwYW4gY2xhc3NOYW1lPVwidGV4dC1mb3JlZ3JvdW5kIGZvbnQtYm9sZCBtdC0wIG1iLTJcIj46PC9zcGFuPjwvPn1cbiAgICAgIDxDZWxsIHY9e2hvdXJzfSBsPVwiaFwiIC8+XG4gICAgICA8c3BhbiBjbGFzc05hbWU9XCJ0ZXh0LWZvcmVncm91bmQgZm9udC1ib2xkIG10LTAgbWItMlwiPjo8L3NwYW4+XG4gICAgICA8Q2VsbCB2PXttaW5zfSBsPVwibVwiIC8+XG4gICAgICA8c3BhbiBjbGFzc05hbWU9XCJ0ZXh0LWZvcmVncm91bmQgZm9udC1ib2xkIG10LTAgbWItMlwiPjo8L3NwYW4+XG4gICAgICA8Q2VsbCB2PXtzZWNzfSBsPVwic1wiIC8+XG4gICAgPC9kaXY+XG4gICk7XG59O1xuIl0sImZpbGUiOiIvc3JjL2NvbXBvbmVudHMvc3RvcmUvQ291bnRkb3duLnRzeCJ9

@@ -1,0 +1,4 @@
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/src/elements/container/ContainerRenderer.tsx");__vite_ssr_exportAll__(__vite_ssr_import_0__);
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6IkFBQUEiLCJuYW1lcyI6W10sImlnbm9yZUxpc3QiOltdLCJzb3VyY2VzIjpbImluZGV4LnRzIl0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCAqIGZyb20gXCIuL0NvbnRhaW5lclJlbmRlcmVyXCI7XG4iXSwiZmlsZSI6Ii9zcmMvZWxlbWVudHMvY29udGFpbmVyL2luZGV4LnRzIn0=

@@ -1,0 +1,43 @@
+Object.defineProperty(__vite_ssr_exports__, "SceneDependencyIndexer", { enumerable: true, configurable: true, get(){ try { return SceneDependencyIndexer } catch {} }});
+function _define_property(obj, key, value) {
+    if (key in obj) {
+        Object.defineProperty(obj, key, {
+            value: value,
+            enumerable: true,
+            configurable: true,
+            writable: true
+        });
+    } else {
+        obj[key] = value;
+    };
+    return obj;
+}
+class SceneDependencyIndexer {
+    init() {
+        if (this.unsubscriptions.length) return;
+        const rebuild = ()=>this.graph.rebuildScene(this.sceneGraph.serializeTree());
+        this.unsubscriptions = [
+            this.eventBus.on("scene:node:created", rebuild),
+            this.eventBus.on("scene:node:updated", rebuild),
+            this.eventBus.on("scene:node:deleted", rebuild)
+        ];
+        rebuild();
+    }
+    dispose() {
+        this.unsubscriptions.forEach((unsubscribe)=>unsubscribe());
+        this.unsubscriptions = [];
+    }
+    constructor(graph, sceneGraph, eventBus){
+        _define_property(this, "graph", void 0);
+        _define_property(this, "sceneGraph", void 0);
+        _define_property(this, "eventBus", void 0);
+        _define_property(this, "unsubscriptions", void 0);
+        this.graph = graph;
+        this.sceneGraph = sceneGraph;
+        this.eventBus = eventBus;
+        this.unsubscriptions = [];
+    }
+}
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7QUFJTyxNQUFNQTtJQVNYQyxPQUFhO1FBQ1gsSUFBSSxJQUFJLENBQUNDLGVBQWUsQ0FBQ0MsTUFBTSxFQUFFO1FBQ2pDLE1BQU1DLFVBQVUsSUFBTSxJQUFJLENBQUNDLEtBQUssQ0FBQ0MsWUFBWSxDQUFDLElBQUksQ0FBQ0MsVUFBVSxDQUFDQyxhQUFhO1FBQzNFLElBQUksQ0FBQ04sZUFBZSxHQUFHO1lBQ3JCLElBQUksQ0FBQ08sUUFBUSxDQUFDQyxFQUFFLENBQUMsc0JBQXNCTjtZQUN2QyxJQUFJLENBQUNLLFFBQVEsQ0FBQ0MsRUFBRSxDQUFDLHNCQUFzQk47WUFDdkMsSUFBSSxDQUFDSyxRQUFRLENBQUNDLEVBQUUsQ0FBQyxzQkFBc0JOO1NBQ3hDO1FBQ0RBO0lBQ0Y7SUFFQU8sVUFBZ0I7UUFDZCxJQUFJLENBQUNULGVBQWUsQ0FBQ1UsT0FBTyxDQUFDLENBQUNDLGNBQWdCQTtRQUM5QyxJQUFJLENBQUNYLGVBQWUsR0FBRyxFQUFFO0lBQzNCO0lBcEJBLFlBQ0UsS0FBdUMsRUFDdkMsVUFBMEMsRUFDMUMsUUFBeUQsQ0FDekQ7Ozs7UUFORix1QkFBUUEsbUJBQVI7YUFHbUJHO2FBQ0FFO2FBQ0FFO2FBTFhQLGtCQUFxQyxFQUFFO0lBTTVDO0FBaUJMIiwibmFtZXMiOlsiU2NlbmVEZXBlbmRlbmN5SW5kZXhlciIsImluaXQiLCJ1bnN1YnNjcmlwdGlvbnMiLCJsZW5ndGgiLCJyZWJ1aWxkIiwiZ3JhcGgiLCJyZWJ1aWxkU2NlbmUiLCJzY2VuZUdyYXBoIiwic2VyaWFsaXplVHJlZSIsImV2ZW50QnVzIiwib24iLCJkaXNwb3NlIiwiZm9yRWFjaCIsInVuc3Vic2NyaWJlIl0sImlnbm9yZUxpc3QiOltdLCJzb3VyY2VzIjpbIlNjZW5lRGVwZW5kZW5jeUluZGV4ZXIudHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHR5cGUgeyBFbmdpbmVFdmVudEJ1cywgRW5naW5lRXZlbnRNYXAgfSBmcm9tIFwiQC9lbmdpbmUvZXZlbnQtYnVzXCI7XG5pbXBvcnQgdHlwZSB7IFNjZW5lR3JhcGhBUEkgfSBmcm9tIFwiQC9lbmdpbmUvc2NlbmUtZ3JhcGhcIjtcbmltcG9ydCB0eXBlIHsgRGVwZW5kZW5jeUdyYXBoIH0gZnJvbSBcIi4vRGVwZW5kZW5jeUdyYXBoXCI7XG5cbmV4cG9ydCBjbGFzcyBTY2VuZURlcGVuZGVuY3lJbmRleGVyIHtcbiAgcHJpdmF0ZSB1bnN1YnNjcmlwdGlvbnM6IEFycmF5PCgpID0+IHZvaWQ+ID0gW107XG5cbiAgY29uc3RydWN0b3IoXG4gICAgcHJpdmF0ZSByZWFkb25seSBncmFwaDogRGVwZW5kZW5jeUdyYXBoLFxuICAgIHByaXZhdGUgcmVhZG9ubHkgc2NlbmVHcmFwaDogU2NlbmVHcmFwaEFQSSxcbiAgICBwcml2YXRlIHJlYWRvbmx5IGV2ZW50QnVzOiBFbmdpbmVFdmVudEJ1czxFbmdpbmVFdmVudE1hcD4sXG4gICkge31cblxuICBpbml0KCk6IHZvaWQge1xuICAgIGlmICh0aGlzLnVuc3Vic2NyaXB0aW9ucy5sZW5ndGgpIHJldHVybjtcbiAgICBjb25zdCByZWJ1aWxkID0gKCkgPT4gdGhpcy5ncmFwaC5yZWJ1aWxkU2NlbmUodGhpcy5zY2VuZUdyYXBoLnNlcmlhbGl6ZVRyZWUoKSk7XG4gICAgdGhpcy51bnN1YnNjcmlwdGlvbnMgPSBbXG4gICAgICB0aGlzLmV2ZW50QnVzLm9uKFwic2NlbmU6bm9kZTpjcmVhdGVkXCIsIHJlYnVpbGQpLFxuICAgICAgdGhpcy5ldmVudEJ1cy5vbihcInNjZW5lOm5vZGU6dXBkYXRlZFwiLCByZWJ1aWxkKSxcbiAgICAgIHRoaXMuZXZlbnRCdXMub24oXCJzY2VuZTpub2RlOmRlbGV0ZWRcIiwgcmVidWlsZCksXG4gICAgXTtcbiAgICByZWJ1aWxkKCk7XG4gIH1cblxuICBkaXNwb3NlKCk6IHZvaWQge1xuICAgIHRoaXMudW5zdWJzY3JpcHRpb25zLmZvckVhY2goKHVuc3Vic2NyaWJlKSA9PiB1bnN1YnNjcmliZSgpKTtcbiAgICB0aGlzLnVuc3Vic2NyaXB0aW9ucyA9IFtdO1xuICB9XG59XG4iXSwiZmlsZSI6Ii9zcmMvZW5naW5lL2RlcGVuZGVuY3ktZ3JhcGgvU2NlbmVEZXBlbmRlbmN5SW5kZXhlci50cyJ9

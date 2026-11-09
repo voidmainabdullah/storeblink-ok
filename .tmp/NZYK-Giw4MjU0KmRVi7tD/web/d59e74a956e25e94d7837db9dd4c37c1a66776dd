@@ -1,0 +1,6 @@
+Object.defineProperty(__vite_ssr_exports__, "EngineReactContext", { enumerable: true, configurable: true, get(){ try { return EngineReactContext } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/react/index.js", {"importedNames":["createContext"]});
+const EngineReactContext = (0,__vite_ssr_import_0__.createContext)(null);
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6IjtBQUFBO0FBR08sTUFBTUEsd0JBQXFCQyxxQ0FBbUMiLCJuYW1lcyI6WyJFbmdpbmVSZWFjdENvbnRleHQiLCJjcmVhdGVDb250ZXh0Il0sImlnbm9yZUxpc3QiOltdLCJzb3VyY2VzIjpbIkVuZ2luZVJlYWN0Q29udGV4dC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBjcmVhdGVDb250ZXh0IH0gZnJvbSBcInJlYWN0XCI7XG5pbXBvcnQgdHlwZSB7IEVuZ2luZUtlcm5lbCB9IGZyb20gXCIuL0VuZ2luZUtlcm5lbFwiO1xuXG5leHBvcnQgY29uc3QgRW5naW5lUmVhY3RDb250ZXh0ID0gY3JlYXRlQ29udGV4dDxFbmdpbmVLZXJuZWwgfCBudWxsPihudWxsKTtcbiJdLCJmaWxlIjoiL3NyYy9lbmdpbmUva2VybmVsL0VuZ2luZVJlYWN0Q29udGV4dC50cyJ9

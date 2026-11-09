@@ -1,0 +1,55 @@
+Object.defineProperty(__vite_ssr_exports__, "RendererRegistry", { enumerable: true, configurable: true, get(){ try { return RendererRegistry } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "rendererRegistry", { enumerable: true, configurable: true, get(){ try { return rendererRegistry } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "registerRenderer", { enumerable: true, configurable: true, get(){ try { return registerRenderer } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "getRenderer", { enumerable: true, configurable: true, get(){ try { return getRenderer } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "renderRegisteredNode", { enumerable: true, configurable: true, get(){ try { return renderRegisteredNode } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/react/index.js", {"importedNames":["createElement"]});const __vite_ssr_import_1__ = await __vite_ssr_import__("/src/rendering/registry/FallbackRenderer.tsx", {"importedNames":["FallbackRenderer"]});function _define_property(obj, key, value) {
+    if (key in obj) {
+        Object.defineProperty(obj, key, {
+            value: value,
+            enumerable: true,
+            configurable: true,
+            writable: true
+        });
+    } else {
+        obj[key] = value;
+    };
+    return obj;
+}
+
+
+class RendererRegistry {
+    register(type, renderer) {
+        this.renderers.set(type, renderer);
+        return ()=>{
+            if (this.renderers.get(type) === renderer) {
+                this.renderers.delete(type);
+            }
+        };
+    }
+    has(type) {
+        return this.renderers.has(type);
+    }
+    get(type) {
+        return this.renderers.get(type) ?? __vite_ssr_import_1__.FallbackRenderer;
+    }
+    renderNode(node) {
+        return (0,__vite_ssr_import_0__.createElement)(this.get(node.type), {
+            node,
+            key: node.id
+        });
+    }
+    clear() {
+        this.renderers.clear();
+    }
+    constructor(){
+        _define_property(this, "renderers", new Map());
+    }
+};
+const rendererRegistry = new RendererRegistry();
+const registerRenderer = (type, renderer)=>rendererRegistry.register(type, renderer);
+const getRenderer = (type)=>rendererRegistry.get(type);
+const renderRegisteredNode = (node)=>rendererRegistry.renderNode(node);
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQSw2SEFFQTs7Ozs7Ozs7Ozs7Ozs7O0FBR08sTUFBTUE7SUFHWEMsU0FBU0MsSUFBaUIsRUFBRUMsUUFBeUIsRUFBYztRQUNqRSxJQUFJLENBQUNDLFNBQVMsQ0FBQ0MsR0FBRyxDQUFDSCxNQUFNQztRQUN6QixPQUFPO1lBQ0wsSUFBSSxJQUFJLENBQUNDLFNBQVMsQ0FBQ0UsR0FBRyxDQUFDSixVQUFVQyxVQUFVO2dCQUN6QyxJQUFJLENBQUNDLFNBQVMsQ0FBQ0csTUFBTSxDQUFDTDtZQUN4QjtRQUNGO0lBQ0Y7SUFFQU0sSUFBSU4sSUFBaUIsRUFBVztRQUM5QixPQUFPLElBQUksQ0FBQ0UsU0FBUyxDQUFDSSxHQUFHLENBQUNOO0lBQzVCO0lBRUFJLElBQUlKLElBQWlCLEVBQW1CO1FBQ3RDLE9BQU8sSUFBSSxDQUFDRSxTQUFTLENBQUNFLEdBQUcsQ0FBQ0osU0FBU087SUFDckM7SUFFQUMsV0FBV0MsSUFBZSxFQUFFO1FBQzFCLFVBQU9DLHFDQUFjLElBQUksQ0FBQ04sR0FBRyxDQUFDSyxLQUFLVCxJQUFJLEdBQUc7WUFBRVM7WUFBTUUsS0FBS0YsS0FBS0c7UUFBRztJQUNqRTtJQUVBQyxRQUFjO1FBQ1osSUFBSSxDQUFDWCxTQUFTLENBQUNXLEtBQUs7SUFDdEI7O1FBekJBLHVCQUFpQlgsYUFBWSxJQUFJWTs7QUEwQm5DO0FBRU8sTUFBTUMsbUJBQW1CLElBQUlqQjtBQUU3QixNQUFNa0IsbUJBQW1CLENBQUNoQixNQUFtQkMsV0FDbERjLGlCQUFpQmhCLFFBQVEsQ0FBQ0MsTUFBTUM7QUFFM0IsTUFBTWdCLGNBQWMsQ0FBQ2pCLE9BQXNCZSxpQkFBaUJYLEdBQUcsQ0FBQ0o7QUFFaEUsTUFBTWtCLHVCQUF1QixDQUFDVCxPQUFvQk0saUJBQWlCUCxVQUFVLENBQUNDIiwibmFtZXMiOlsiUmVuZGVyZXJSZWdpc3RyeSIsInJlZ2lzdGVyIiwidHlwZSIsInJlbmRlcmVyIiwicmVuZGVyZXJzIiwic2V0IiwiZ2V0IiwiZGVsZXRlIiwiaGFzIiwiRmFsbGJhY2tSZW5kZXJlciIsInJlbmRlck5vZGUiLCJub2RlIiwiY3JlYXRlRWxlbWVudCIsImtleSIsImlkIiwiY2xlYXIiLCJNYXAiLCJyZW5kZXJlclJlZ2lzdHJ5IiwicmVnaXN0ZXJSZW5kZXJlciIsImdldFJlbmRlcmVyIiwicmVuZGVyUmVnaXN0ZXJlZE5vZGUiXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZXMiOlsiUmVuZGVyZXJSZWdpc3RyeS50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBjcmVhdGVFbGVtZW50IH0gZnJvbSBcInJlYWN0XCI7XG5pbXBvcnQgdHlwZSB7IEVsZW1lbnRUeXBlLCBTY2VuZU5vZGUgfSBmcm9tIFwiQC90eXBlc1wiO1xuaW1wb3J0IHsgRmFsbGJhY2tSZW5kZXJlciB9IGZyb20gXCIuL0ZhbGxiYWNrUmVuZGVyZXJcIjtcbmltcG9ydCB0eXBlIHsgRWxlbWVudFJlbmRlcmVyLCBSZW5kZXJlclJlZ2lzdHJ5QVBJIH0gZnJvbSBcIi4vdHlwZXNcIjtcblxuZXhwb3J0IGNsYXNzIFJlbmRlcmVyUmVnaXN0cnkgaW1wbGVtZW50cyBSZW5kZXJlclJlZ2lzdHJ5QVBJIHtcbiAgcHJpdmF0ZSByZWFkb25seSByZW5kZXJlcnMgPSBuZXcgTWFwPEVsZW1lbnRUeXBlLCBFbGVtZW50UmVuZGVyZXI+KCk7XG5cbiAgcmVnaXN0ZXIodHlwZTogRWxlbWVudFR5cGUsIHJlbmRlcmVyOiBFbGVtZW50UmVuZGVyZXIpOiAoKSA9PiB2b2lkIHtcbiAgICB0aGlzLnJlbmRlcmVycy5zZXQodHlwZSwgcmVuZGVyZXIpO1xuICAgIHJldHVybiAoKSA9PiB7XG4gICAgICBpZiAodGhpcy5yZW5kZXJlcnMuZ2V0KHR5cGUpID09PSByZW5kZXJlcikge1xuICAgICAgICB0aGlzLnJlbmRlcmVycy5kZWxldGUodHlwZSk7XG4gICAgICB9XG4gICAgfTtcbiAgfVxuXG4gIGhhcyh0eXBlOiBFbGVtZW50VHlwZSk6IGJvb2xlYW4ge1xuICAgIHJldHVybiB0aGlzLnJlbmRlcmVycy5oYXModHlwZSk7XG4gIH1cblxuICBnZXQodHlwZTogRWxlbWVudFR5cGUpOiBFbGVtZW50UmVuZGVyZXIge1xuICAgIHJldHVybiB0aGlzLnJlbmRlcmVycy5nZXQodHlwZSkgPz8gRmFsbGJhY2tSZW5kZXJlcjtcbiAgfVxuXG4gIHJlbmRlck5vZGUobm9kZTogU2NlbmVOb2RlKSB7XG4gICAgcmV0dXJuIGNyZWF0ZUVsZW1lbnQodGhpcy5nZXQobm9kZS50eXBlKSwgeyBub2RlLCBrZXk6IG5vZGUuaWQgfSk7XG4gIH1cblxuICBjbGVhcigpOiB2b2lkIHtcbiAgICB0aGlzLnJlbmRlcmVycy5jbGVhcigpO1xuICB9XG59XG5cbmV4cG9ydCBjb25zdCByZW5kZXJlclJlZ2lzdHJ5ID0gbmV3IFJlbmRlcmVyUmVnaXN0cnkoKTtcblxuZXhwb3J0IGNvbnN0IHJlZ2lzdGVyUmVuZGVyZXIgPSAodHlwZTogRWxlbWVudFR5cGUsIHJlbmRlcmVyOiBFbGVtZW50UmVuZGVyZXIpID0+XG4gIHJlbmRlcmVyUmVnaXN0cnkucmVnaXN0ZXIodHlwZSwgcmVuZGVyZXIpO1xuXG5leHBvcnQgY29uc3QgZ2V0UmVuZGVyZXIgPSAodHlwZTogRWxlbWVudFR5cGUpID0+IHJlbmRlcmVyUmVnaXN0cnkuZ2V0KHR5cGUpO1xuXG5leHBvcnQgY29uc3QgcmVuZGVyUmVnaXN0ZXJlZE5vZGUgPSAobm9kZTogU2NlbmVOb2RlKSA9PiByZW5kZXJlclJlZ2lzdHJ5LnJlbmRlck5vZGUobm9kZSk7XG4iXSwiZmlsZSI6Ii9zcmMvcmVuZGVyaW5nL3JlZ2lzdHJ5L1JlbmRlcmVyUmVnaXN0cnkudHMifQ==

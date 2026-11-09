@@ -1,0 +1,488 @@
+Object.defineProperty(__vite_ssr_exports__, "FigmaColorPicker", { enumerable: true, configurable: true, get(){ try { return FigmaColorPicker } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/react/jsx-dev-runtime.js", {"importedNames":["jsxDEV"]});
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/react/index.js", {"importedNames":["useEffect","useMemo","useState"]});
+const __vite_ssr_import_2__ = await __vite_ssr_import__("/node_modules/lucide-react/dist/cjs/lucide-react.js", {"importedNames":["Pipette","X"]});
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/src/assets/palettes/index.ts", {"importedNames":["normalizePaletteHex","paletteSystem"]});
+const __vite_ssr_import_4__ = await __vite_ssr_import__("/src/stores/palette.store.ts", {"importedNames":["usePaletteStore"]});
+const DEFAULT_SWATCHES = [
+    "#171A1F",
+    "#FFFFFF",
+    "#F3F4F6",
+    "#6B7280",
+    "#111827",
+    "#0178ff",
+    "#18A058",
+    "#F59E0B",
+    "#EF4444",
+    "#8B5CF6",
+    "#06B6D4",
+    "#EC4899",
+    "#F97316",
+    "#84CC16",
+    "#0F172A",
+    "#E5E7EB",
+    "#000000",
+    "#FAFAFA"
+];
+const normalizeHex = (value)=>(0,__vite_ssr_import_3__.normalizePaletteHex)(value ?? "") ?? "#171A1F";
+const clampChannel = (value)=>Math.max(0, Math.min(255, Math.round(Number.isFinite(value) ? value : 0)));
+const hexToRgb = (hex)=>{
+    const normalized = normalizeHex(hex).slice(1);
+    return {
+        r: Number.parseInt(normalized.slice(0, 2), 16),
+        g: Number.parseInt(normalized.slice(2, 4), 16),
+        b: Number.parseInt(normalized.slice(4, 6), 16)
+    };
+};
+const rgbToHex = ({ r, g, b })=>`#${[
+        r,
+        g,
+        b
+    ].map((channel)=>clampChannel(channel).toString(16).padStart(2, "0")).join("")}`.toUpperCase();
+const ColorSection = ({ title, colors, active, onSelect })=>{
+    if (!colors.length) return null;
+    return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("section", {
+        children: [
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                className: "mb-1.5 text-[10px] font-semibold text-[#b8b8b8]",
+                children: title
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                lineNumber: 57,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                className: "grid grid-cols-9 gap-1.5",
+                children: colors.map((color)=>/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("button", {
+                        type: "button",
+                        onClick: ()=>onSelect(color),
+                        className: `h-5 w-5 rounded border ${normalizeHex(color) === active ? "border-[#0178ff] ring-1 ring-[#0178ff]" : "border-[#565656]"}`,
+                        style: {
+                            background: color
+                        },
+                        "aria-label": `Set color ${color}`
+                    }, color, false, {
+                        fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                        lineNumber: 60,
+                        columnNumber: 11
+                    }, this))
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                lineNumber: 58,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+        lineNumber: 56,
+        columnNumber: 5
+    }, this);
+};
+const FigmaColorPicker = ({ value, label, onChange, align = "right", opacity, onOpacityChange, brandColors = [] })=>{
+    const [open, setOpen] = (0,__vite_ssr_import_1__.useState)(false);
+    const [draft, setDraft] = (0,__vite_ssr_import_1__.useState)(normalizeHex(value));
+    const [format, setFormat] = (0,__vite_ssr_import_1__.useState)("hex");
+    const [localOpacity, setLocalOpacity] = (0,__vite_ssr_import_1__.useState)(opacity ?? 100);
+    const recentColors = (0,__vite_ssr_import_4__.usePaletteStore)((state)=>state.recentColors);
+    const storedBrandColors = (0,__vite_ssr_import_4__.usePaletteStore)((state)=>state.brandColors);
+    const hex = normalizeHex(value ?? draft);
+    const rgb = hexToRgb(hex);
+    const resolvedOpacity = opacity ?? localOpacity;
+    (0,__vite_ssr_import_1__.useEffect)(()=>{
+        __vite_ssr_import_3__.paletteSystem.hydrate();
+    }, []);
+    (0,__vite_ssr_import_1__.useEffect)(()=>{
+        if (brandColors.length) __vite_ssr_import_3__.paletteSystem.setBrandColors(brandColors);
+    }, [
+        brandColors
+    ]);
+    (0,__vite_ssr_import_1__.useEffect)(()=>{
+        setDraft(hex);
+    }, [
+        hex
+    ]);
+    const palette = (0,__vite_ssr_import_1__.useMemo)(()=>Array.from(new Set([
+            hex,
+            ...DEFAULT_SWATCHES
+        ])).slice(0, 27), [
+        hex
+    ]);
+    const commit = (next)=>{
+        const normalized = normalizeHex(next);
+        setDraft(normalized);
+        __vite_ssr_import_3__.paletteSystem.recordColor(normalized);
+        onChange(normalized);
+    };
+    const commitOpacity = (next)=>{
+        const normalized = Math.max(0, Math.min(100, Math.round(next)));
+        setLocalOpacity(normalized);
+        onOpacityChange?.(normalized);
+    };
+    const updateRgbChannel = (channel, value)=>{
+        commit(rgbToHex({
+            ...rgb,
+            [channel]: clampChannel(value)
+        }));
+    };
+    const pickFromScreen = async ()=>{
+        if (typeof window === "undefined") return;
+        const EyeDropper = window.EyeDropper;
+        if (!EyeDropper) return;
+        try {
+            const result = await new EyeDropper().open();
+            commit(result.sRGBHex);
+        } catch  {
+        // The browser rejects when the user cancels the eyedropper.
+        }
+    };
+    const eyedropperSupported = typeof window !== "undefined" && Boolean(window.EyeDropper);
+    return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+        className: "relative",
+        children: [
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("button", {
+                type: "button",
+                "aria-label": label,
+                title: label,
+                onClick: ()=>setOpen((current)=>!current),
+                className: "grid h-7 w-7 place-items-center rounded hover:bg-muted",
+                children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                    className: "h-4 w-4 rounded border border-white/70 shadow-sm",
+                    style: {
+                        background: hex,
+                        opacity: resolvedOpacity / 100
+                    }
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                    lineNumber: 162,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                lineNumber: 155,
+                columnNumber: 7
+            }, this),
+            open && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                className: `absolute top-full z-[80] mt-2 w-[286px] rounded-md border border-[#454545] bg-[#2c2c2c] p-3 text-white shadow-2xl ${align === "right" ? "right-0" : "left-0"}`,
+                onMouseDown: (event)=>event.stopPropagation(),
+                children: [
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "mb-3 flex items-center justify-between",
+                        children: [
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                children: [
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                        className: "text-[12px] font-semibold",
+                                        children: label
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                        lineNumber: 171,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                        className: "text-[10px] text-[#9a9a9a]",
+                                        children: "Color and opacity"
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                        lineNumber: 172,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                lineNumber: 170,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("button", {
+                                type: "button",
+                                onClick: ()=>setOpen(false),
+                                className: "grid h-7 w-7 place-items-center rounded text-[#b8b8b8] hover:bg-white/10 hover:text-white",
+                                children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.X), {
+                                    size: 14
+                                }, void 0, false, {
+                                    fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                    lineNumber: 175,
+                                    columnNumber: 15
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                lineNumber: 174,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                        lineNumber: 169,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("label", {
+                        className: "relative block h-[150px] overflow-hidden rounded border border-[#444]",
+                        children: [
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                className: "absolute inset-0",
+                                style: {
+                                    background: `linear-gradient(to top, #000 0%, transparent 70%), linear-gradient(to right, #fff 0%, ${hex} 100%)`
+                                }
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                lineNumber: 180,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("input", {
+                                type: "color",
+                                value: hex,
+                                onChange: (event)=>commit(event.target.value),
+                                className: "absolute inset-0 h-full w-full cursor-crosshair opacity-0",
+                                "aria-label": `${label} visual picker`
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                lineNumber: 186,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                        lineNumber: 179,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "mt-3 flex items-center gap-2",
+                        children: [
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("button", {
+                                type: "button",
+                                onClick: pickFromScreen,
+                                disabled: !eyedropperSupported,
+                                className: "grid h-8 w-8 place-items-center rounded border border-[#4a4a4a] text-[#d8d8d8] hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-35",
+                                title: eyedropperSupported ? "Pick color from screen" : "Eyedropper is not supported by this browser",
+                                children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.Pipette), {
+                                    size: 14
+                                }, void 0, false, {
+                                    fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                    lineNumber: 203,
+                                    columnNumber: 15
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                lineNumber: 196,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("input", {
+                                type: "color",
+                                value: hex,
+                                onChange: (event)=>commit(event.target.value),
+                                className: "h-8 flex-1 cursor-pointer rounded border border-[#4a4a4a] bg-[#333] p-1",
+                                "aria-label": `${label} hue`
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                lineNumber: 205,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                className: "h-8 w-8 rounded border border-white/40",
+                                style: {
+                                    background: hex,
+                                    opacity: resolvedOpacity / 100
+                                }
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                lineNumber: 212,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                        lineNumber: 195,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "mt-3 flex rounded bg-[#202020] p-1",
+                        children: [
+                            "hex",
+                            "rgb"
+                        ].map((mode)=>/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("button", {
+                                type: "button",
+                                onClick: ()=>setFormat(mode),
+                                className: `h-7 flex-1 rounded text-[10px] font-bold uppercase ${format === mode ? "bg-[#444] text-white" : "text-[#a8a8a8] hover:text-white"}`,
+                                children: mode
+                            }, mode, false, {
+                                fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                lineNumber: 217,
+                                columnNumber: 15
+                            }, this))
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                        lineNumber: 215,
+                        columnNumber: 11
+                    }, this),
+                    format === "hex" ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("label", {
+                        className: "mt-2 block",
+                        children: [
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                className: "mb-1 block text-[9px] font-semibold uppercase text-[#9a9a9a]",
+                                children: "Hex"
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                lineNumber: 230,
+                                columnNumber: 15
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("input", {
+                                value: draft.replace("#", ""),
+                                onChange: (event)=>{
+                                    const next = event.target.value.replace(/[^0-9a-f]/gi, "").slice(0, 6);
+                                    setDraft(`#${next}`);
+                                    if (next.length === 6) commit(`#${next}`);
+                                },
+                                onBlur: ()=>setDraft(hex),
+                                className: "h-8 w-full rounded border border-[#4a4a4a] bg-[#333] px-2 text-[11px] font-semibold uppercase outline-none focus:border-[#0178ff]"
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                lineNumber: 231,
+                                columnNumber: 15
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                        lineNumber: 229,
+                        columnNumber: 13
+                    }, this) : /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "mt-2 grid grid-cols-3 gap-2",
+                        children: [
+                            "r",
+                            "g",
+                            "b"
+                        ].map((channel)=>/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("label", {
+                                children: [
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                        className: "mb-1 block text-[9px] font-semibold uppercase text-[#9a9a9a]",
+                                        children: channel
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                        lineNumber: 246,
+                                        columnNumber: 19
+                                    }, this),
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("input", {
+                                        type: "number",
+                                        min: 0,
+                                        max: 255,
+                                        value: rgb[channel],
+                                        onChange: (event)=>updateRgbChannel(channel, Number(event.target.value)),
+                                        className: "h-8 w-full rounded border border-[#4a4a4a] bg-[#333] px-2 text-[11px] font-semibold outline-none focus:border-[#0178ff]"
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                        lineNumber: 247,
+                                        columnNumber: 19
+                                    }, this)
+                                ]
+                            }, channel, true, {
+                                fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                lineNumber: 245,
+                                columnNumber: 17
+                            }, this))
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                        lineNumber: 243,
+                        columnNumber: 13
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "mt-3",
+                        children: [
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                                className: "mb-1 flex items-center justify-between text-[10px] text-[#b8b8b8]",
+                                children: [
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                        children: "Opacity"
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                        lineNumber: 262,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                        className: "tabular-nums",
+                                        children: [
+                                            resolvedOpacity,
+                                            "%"
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                        lineNumber: 263,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                lineNumber: 261,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("input", {
+                                type: "range",
+                                min: 0,
+                                max: 100,
+                                value: resolvedOpacity,
+                                onChange: (event)=>commitOpacity(Number(event.target.value)),
+                                className: "h-1.5 w-full cursor-pointer accent-[#0178ff]",
+                                "aria-label": `${label} opacity`
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                lineNumber: 265,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                        lineNumber: 260,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "mt-4 space-y-3 border-t border-[#454545] pt-3",
+                        children: [
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(ColorSection, {
+                                title: "Recent colors",
+                                colors: recentColors,
+                                active: hex,
+                                onSelect: commit
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                lineNumber: 277,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(ColorSection, {
+                                title: "Brand colors",
+                                colors: storedBrandColors,
+                                active: hex,
+                                onSelect: commit
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                lineNumber: 278,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(ColorSection, {
+                                title: "Color palette",
+                                colors: palette,
+                                active: hex,
+                                onSelect: commit
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                                lineNumber: 279,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                        lineNumber: 276,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+                lineNumber: 165,
+                columnNumber: 9
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "F:/Storeblink/src/editor/components/toolbars/FigmaColorPicker.tsx",
+        lineNumber: 154,
+        columnNumber: 5
+    }, this);
+};
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,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V0FUQ0hFUyIsIm5vcm1hbGl6ZUhleCIsInZhbHVlIiwibm9ybWFsaXplUGFsZXR0ZUhleCIsImNsYW1wQ2hhbm5lbCIsIk1hdGgiLCJtYXgiLCJtaW4iLCJyb3VuZCIsIk51bWJlciIsImlzRmluaXRlIiwiaGV4VG9SZ2IiLCJoZXgiLCJub3JtYWxpemVkIiwic2xpY2UiLCJyIiwicGFyc2VJbnQiLCJnIiwiYiIsInJnYlRvSGV4IiwibWFwIiwiY2hhbm5lbCIsInRvU3RyaW5nIiwicGFkU3RhcnQiLCJqb2luIiwidG9VcHBlckNhc2UiLCJDb2xvclNlY3Rpb24iLCJ0aXRsZSIsImNvbG9ycyIsImFjdGl2ZSIsIm9uU2VsZWN0IiwibGVuZ3RoIiwic2VjdGlvbiIsImRpdiIsImNsYXNzTmFtZSIsImNvbG9yIiwiYnV0dG9uIiwidHlwZSIsIm9uQ2xpY2siLCJzdHlsZSIsImJhY2tncm91bmQiLCJhcmlhLWxhYmVsIiwiRmlnbWFDb2xvclBpY2tlciIsImxhYmVsIiwib25DaGFuZ2UiLCJhbGlnbiIsIm9wYWNpdHkiLCJvbk9wYWNpdHlDaGFuZ2UiLCJicmFuZENvbG9ycyIsIm9wZW4iLCJzZXRPcGVuIiwidXNlU3RhdGUiLCJkcmFmdCIsInNldERyYWZ0IiwiZm9ybWF0Iiwic2V0Rm9ybWF0IiwibG9jYWxPcGFjaXR5Iiwic2V0TG9jYWxPcGFjaXR5IiwicmVjZW50Q29sb3JzIiwidXNlUGFsZXR0ZVN0b3JlIiwic3RhdGUiLCJzdG9yZWRCcmFuZENvbG9ycyIsInJnYiIsInJlc29sdmVkT3BhY2l0eSIsInVzZUVmZmVjdCIsInBhbGV0dGVTeXN0ZW0iLCJoeWRyYXRlIiwic2V0QnJhbmRDb2xvcnMiLCJwYWxldHRlIiwidXNlTWVtbyIsIkFycmF5IiwiZnJvbSIsIlNldCIsImNvbW1pdCIsIm5leHQiLCJyZWNvcmRDb2xvciIsImNvbW1pdE9wYWNpdHkiLCJ1cGRhdGVSZ2JDaGFubmVsIiwicGlja0Zyb21TY3JlZW4iLCJ3aW5kb3ciLCJFeWVEcm9wcGVyIiwicmVzdWx0Iiwic1JHQkhleCIsImV5ZWRyb3BwZXJTdXBwb3J0ZWQiLCJCb29sZWFuIiwiY3VycmVudCIsInNwYW4iLCJvbk1vdXNlRG93biIsImV2ZW50Iiwic3RvcFByb3BhZ2F0aW9uIiwiWCIsInNpemUiLCJpbnB1dCIsInRhcmdldCIsImRpc2FibGVkIiwiUGlwZXR0ZSIsIm1vZGUiLCJyZXBsYWNlIiwib25CbHVyIl0sImlnbm9yZUxpc3QiOltdLCJzb3VyY2VzIjpbIkZpZ21hQ29sb3JQaWNrZXIudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IHVzZUVmZmVjdCwgdXNlTWVtbywgdXNlU3RhdGUgfSBmcm9tIFwicmVhY3RcIjtcbmltcG9ydCB7IFBpcGV0dGUsIFggfSBmcm9tIFwibHVjaWRlLXJlYWN0XCI7XG5pbXBvcnQgeyBub3JtYWxpemVQYWxldHRlSGV4LCBwYWxldHRlU3lzdGVtIH0gZnJvbSBcIkAvYXNzZXRzL3BhbGV0dGVzXCI7XG5pbXBvcnQgeyB1c2VQYWxldHRlU3RvcmUgfSBmcm9tIFwiQC9zdG9yZXMvcGFsZXR0ZS5zdG9yZVwiO1xuXG5jb25zdCBERUZBVUxUX1NXQVRDSEVTID0gW1xuICBcIiMxNzFBMUZcIixcbiAgXCIjRkZGRkZGXCIsXG4gIFwiI0YzRjRGNlwiLFxuICBcIiM2QjcyODBcIixcbiAgXCIjMTExODI3XCIsXG4gIFwiIzAxNzhmZlwiLFxuICBcIiMxOEEwNThcIixcbiAgXCIjRjU5RTBCXCIsXG4gIFwiI0VGNDQ0NFwiLFxuICBcIiM4QjVDRjZcIixcbiAgXCIjMDZCNkQ0XCIsXG4gIFwiI0VDNDg5OVwiLFxuICBcIiNGOTczMTZcIixcbiAgXCIjODRDQzE2XCIsXG4gIFwiIzBGMTcyQVwiLFxuICBcIiNFNUU3RUJcIixcbiAgXCIjMDAwMDAwXCIsXG4gIFwiI0ZBRkFGQVwiLFxuXTtcblxudHlwZSBSZ2JDb2xvciA9IHsgcjogbnVtYmVyOyBnOiBudW1iZXI7IGI6IG51bWJlciB9O1xuXG50eXBlIEV5ZURyb3BwZXJSZXN1bHQgPSB7IHNSR0JIZXg6IHN0cmluZyB9O1xudHlwZSBFeWVEcm9wcGVySW5zdGFuY2UgPSB7IG9wZW46ICgpID0+IFByb21pc2U8RXllRHJvcHBlclJlc3VsdD4gfTtcbnR5cGUgRXllRHJvcHBlckNvbnN0cnVjdG9yID0gbmV3ICgpID0+IEV5ZURyb3BwZXJJbnN0YW5jZTtcblxuY29uc3Qgbm9ybWFsaXplSGV4ID0gKHZhbHVlPzogc3RyaW5nKSA9PiBub3JtYWxpemVQYWxldHRlSGV4KHZhbHVlID8/IFwiXCIpID8/IFwiIzE3MUExRlwiO1xuY29uc3QgY2xhbXBDaGFubmVsID0gKHZhbHVlOiBudW1iZXIpID0+IE1hdGgubWF4KDAsIE1hdGgubWluKDI1NSwgTWF0aC5yb3VuZChOdW1iZXIuaXNGaW5pdGUodmFsdWUpID8gdmFsdWUgOiAwKSkpO1xuXG5jb25zdCBoZXhUb1JnYiA9IChoZXg6IHN0cmluZyk6IFJnYkNvbG9yID0+IHtcbiAgY29uc3Qgbm9ybWFsaXplZCA9IG5vcm1hbGl6ZUhleChoZXgpLnNsaWNlKDEpO1xuICByZXR1cm4ge1xuICAgIHI6IE51bWJlci5wYXJzZUludChub3JtYWxpemVkLnNsaWNlKDAsIDIpLCAxNiksXG4gICAgZzogTnVtYmVyLnBhcnNlSW50KG5vcm1hbGl6ZWQuc2xpY2UoMiwgNCksIDE2KSxcbiAgICBiOiBOdW1iZXIucGFyc2VJbnQobm9ybWFsaXplZC5zbGljZSg0LCA2KSwgMTYpLFxuICB9O1xufTtcblxuY29uc3QgcmdiVG9IZXggPSAoeyByLCBnLCBiIH06IFJnYkNvbG9yKTogc3RyaW5nID0+XG4gIGAjJHtbciwgZywgYl0ubWFwKChjaGFubmVsKSA9PiBjbGFtcENoYW5uZWwoY2hhbm5lbCkudG9TdHJpbmcoMTYpLnBhZFN0YXJ0KDIsIFwiMFwiKSkuam9pbihcIlwiKX1gLnRvVXBwZXJDYXNlKCk7XG5cbmNvbnN0IENvbG9yU2VjdGlvbiA9ICh7IHRpdGxlLCBjb2xvcnMsIGFjdGl2ZSwgb25TZWxlY3QgfToge1xuICB0aXRsZTogc3RyaW5nO1xuICBjb2xvcnM6IHN0cmluZ1tdO1xuICBhY3RpdmU6IHN0cmluZztcbiAgb25TZWxlY3Q6IChjb2xvcjogc3RyaW5nKSA9PiB2b2lkO1xufSkgPT4ge1xuICBpZiAoIWNvbG9ycy5sZW5ndGgpIHJldHVybiBudWxsO1xuICByZXR1cm4gKFxuICAgIDxzZWN0aW9uPlxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYi0xLjUgdGV4dC1bMTBweF0gZm9udC1zZW1pYm9sZCB0ZXh0LVsjYjhiOGI4XVwiPnt0aXRsZX08L2Rpdj5cbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBncmlkLWNvbHMtOSBnYXAtMS41XCI+XG4gICAgICAgIHtjb2xvcnMubWFwKChjb2xvcikgPT4gKFxuICAgICAgICAgIDxidXR0b25cbiAgICAgICAgICAgIHR5cGU9XCJidXR0b25cIlxuICAgICAgICAgICAga2V5PXtjb2xvcn1cbiAgICAgICAgICAgIG9uQ2xpY2s9eygpID0+IG9uU2VsZWN0KGNvbG9yKX1cbiAgICAgICAgICAgIGNsYXNzTmFtZT17YGgtNSB3LTUgcm91bmRlZCBib3JkZXIgJHtub3JtYWxpemVIZXgoY29sb3IpID09PSBhY3RpdmUgPyBcImJvcmRlci1bIzAxNzhmZl0gcmluZy0xIHJpbmctWyMwMTc4ZmZdXCIgOiBcImJvcmRlci1bIzU2NTY1Nl1cIn1gfVxuICAgICAgICAgICAgc3R5bGU9e3sgYmFja2dyb3VuZDogY29sb3IgfX1cbiAgICAgICAgICAgIGFyaWEtbGFiZWw9e2BTZXQgY29sb3IgJHtjb2xvcn1gfVxuICAgICAgICAgIC8+XG4gICAgICAgICkpfVxuICAgICAgPC9kaXY+XG4gICAgPC9zZWN0aW9uPlxuICApO1xufTtcblxuZXhwb3J0IHR5cGUgRmlnbWFDb2xvclBpY2tlclByb3BzID0ge1xuICB2YWx1ZT86IHN0cmluZztcbiAgbGFiZWw6IHN0cmluZztcbiAgb25DaGFuZ2U6ICh2YWx1ZTogc3RyaW5nKSA9PiB2b2lkO1xuICBhbGlnbj86IFwibGVmdFwiIHwgXCJyaWdodFwiO1xuICBvcGFjaXR5PzogbnVtYmVyO1xuICBvbk9wYWNpdHlDaGFuZ2U/OiAob3BhY2l0eTogbnVtYmVyKSA9PiB2b2lkO1xuICBicmFuZENvbG9ycz86IHN0cmluZ1tdO1xufTtcblxuZXhwb3J0IGNvbnN0IEZpZ21hQ29sb3JQaWNrZXIgPSAoe1xuICB2YWx1ZSxcbiAgbGFiZWwsXG4gIG9uQ2hhbmdlLFxuICBhbGlnbiA9IFwicmlnaHRcIixcbiAgb3BhY2l0eSxcbiAgb25PcGFjaXR5Q2hhbmdlLFxuICBicmFuZENvbG9ycyA9IFtdLFxufTogRmlnbWFDb2xvclBpY2tlclByb3BzKSA9PiB7XG4gIGNvbnN0IFtvcGVuLCBzZXRPcGVuXSA9IHVzZVN0YXRlKGZhbHNlKTtcbiAgY29uc3QgW2RyYWZ0LCBzZXREcmFmdF0gPSB1c2VTdGF0ZShub3JtYWxpemVIZXgodmFsdWUpKTtcbiAgY29uc3QgW2Zvcm1hdCwgc2V0Rm9ybWF0XSA9IHVzZVN0YXRlPFwiaGV4XCIgfCBcInJnYlwiPihcImhleFwiKTtcbiAgY29uc3QgW2xvY2FsT3BhY2l0eSwgc2V0TG9jYWxPcGFjaXR5XSA9IHVzZVN0YXRlKG9wYWNpdHkgPz8gMTAwKTtcbiAgY29uc3QgcmVjZW50Q29sb3JzID0gdXNlUGFsZXR0ZVN0b3JlKChzdGF0ZSkgPT4gc3RhdGUucmVjZW50Q29sb3JzKTtcbiAgY29uc3Qgc3RvcmVkQnJhbmRDb2xvcnMgPSB1c2VQYWxldHRlU3RvcmUoKHN0YXRlKSA9PiBzdGF0ZS5icmFuZENvbG9ycyk7XG4gIGNvbnN0IGhleCA9IG5vcm1hbGl6ZUhleCh2YWx1ZSA/PyBkcmFmdCk7XG4gIGNvbnN0IHJnYiA9IGhleFRvUmdiKGhleCk7XG4gIGNvbnN0IHJlc29sdmVkT3BhY2l0eSA9IG9wYWNpdHkgPz8gbG9jYWxPcGFjaXR5O1xuXG4gIHVzZUVmZmVjdCgoKSA9PiB7XG4gICAgcGFsZXR0ZVN5c3RlbS5oeWRyYXRlKCk7XG4gIH0sIFtdKTtcblxuICB1c2VFZmZlY3QoKCkgPT4ge1xuICAgIGlmIChicmFuZENvbG9ycy5sZW5ndGgpIHBhbGV0dGVTeXN0ZW0uc2V0QnJhbmRDb2xvcnMoYnJhbmRDb2xvcnMpO1xuICB9LCBbYnJhbmRDb2xvcnNdKTtcblxuICB1c2VFZmZlY3QoKCkgPT4ge1xuICAgIHNldERyYWZ0KGhleCk7XG4gIH0sIFtoZXhdKTtcblxuICBjb25zdCBwYWxldHRlID0gdXNlTWVtbyhcbiAgICAoKSA9PiBBcnJheS5mcm9tKG5ldyBTZXQoW2hleCwgLi4uREVGQVVMVF9TV0FUQ0hFU10pKS5zbGljZSgwLCAyNyksXG4gICAgW2hleF0sXG4gICk7XG5cbiAgY29uc3QgY29tbWl0ID0gKG5leHQ6IHN0cmluZykgPT4ge1xuICAgIGNvbnN0IG5vcm1hbGl6ZWQgPSBub3JtYWxpemVIZXgobmV4dCk7XG4gICAgc2V0RHJhZnQobm9ybWFsaXplZCk7XG4gICAgcGFsZXR0ZVN5c3RlbS5yZWNvcmRDb2xvcihub3JtYWxpemVkKTtcbiAgICBvbkNoYW5nZShub3JtYWxpemVkKTtcbiAgfTtcblxuICBjb25zdCBjb21taXRPcGFjaXR5ID0gKG5leHQ6IG51bWJlcikgPT4ge1xuICAgIGNvbnN0IG5vcm1hbGl6ZWQgPSBNYXRoLm1heCgwLCBNYXRoLm1pbigxMDAsIE1hdGgucm91bmQobmV4dCkpKTtcbiAgICBzZXRMb2NhbE9wYWNpdHkobm9ybWFsaXplZCk7XG4gICAgb25PcGFjaXR5Q2hhbmdlPy4obm9ybWFsaXplZCk7XG4gIH07XG5cbiAgY29uc3QgdXBkYXRlUmdiQ2hhbm5lbCA9IChjaGFubmVsOiBrZXlvZiBSZ2JDb2xvciwgdmFsdWU6IG51bWJlcikgPT4ge1xuICAgIGNvbW1pdChyZ2JUb0hleCh7IC4uLnJnYiwgW2NoYW5uZWxdOiBjbGFtcENoYW5uZWwodmFsdWUpIH0pKTtcbiAgfTtcblxuICBjb25zdCBwaWNrRnJvbVNjcmVlbiA9IGFzeW5jICgpID0+IHtcbiAgICBpZiAodHlwZW9mIHdpbmRvdyA9PT0gXCJ1bmRlZmluZWRcIikgcmV0dXJuO1xuICAgIGNvbnN0IEV5ZURyb3BwZXIgPSAod2luZG93IGFzIHR5cGVvZiB3aW5kb3cgJiB7IEV5ZURyb3BwZXI/OiBFeWVEcm9wcGVyQ29uc3RydWN0b3IgfSkuRXllRHJvcHBlcjtcbiAgICBpZiAoIUV5ZURyb3BwZXIpIHJldHVybjtcbiAgICB0cnkge1xuICAgICAgY29uc3QgcmVzdWx0ID0gYXdhaXQgbmV3IEV5ZURyb3BwZXIoKS5vcGVuKCk7XG4gICAgICBjb21taXQocmVzdWx0LnNSR0JIZXgpO1xuICAgIH0gY2F0Y2gge1xuICAgICAgLy8gVGhlIGJyb3dzZXIgcmVqZWN0cyB3aGVuIHRoZSB1c2VyIGNhbmNlbHMgdGhlIGV5ZWRyb3BwZXIuXG4gICAgfVxuICB9O1xuXG4gIGNvbnN0IGV5ZWRyb3BwZXJTdXBwb3J0ZWQgPVxuICAgIHR5cGVvZiB3aW5kb3cgIT09IFwidW5kZWZpbmVkXCIgJiZcbiAgICBCb29sZWFuKCh3aW5kb3cgYXMgdHlwZW9mIHdpbmRvdyAmIHsgRXllRHJvcHBlcj86IEV5ZURyb3BwZXJDb25zdHJ1Y3RvciB9KS5FeWVEcm9wcGVyKTtcblxuICByZXR1cm4gKFxuICAgIDxkaXYgY2xhc3NOYW1lPVwicmVsYXRpdmVcIj5cbiAgICAgIDxidXR0b25cbiAgICAgICAgdHlwZT1cImJ1dHRvblwiXG4gICAgICAgIGFyaWEtbGFiZWw9e2xhYmVsfVxuICAgICAgICB0aXRsZT17bGFiZWx9XG4gICAgICAgIG9uQ2xpY2s9eygpID0+IHNldE9wZW4oKGN1cnJlbnQpID0+ICFjdXJyZW50KX1cbiAgICAgICAgY2xhc3NOYW1lPVwiZ3JpZCBoLTcgdy03IHBsYWNlLWl0ZW1zLWNlbnRlciByb3VuZGVkIGhvdmVyOmJnLW11dGVkXCJcbiAgICAgID5cbiAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiaC00IHctNCByb3VuZGVkIGJvcmRlciBib3JkZXItd2hpdGUvNzAgc2hhZG93LXNtXCIgc3R5bGU9e3sgYmFja2dyb3VuZDogaGV4LCBvcGFjaXR5OiByZXNvbHZlZE9wYWNpdHkgLyAxMDAgfX0gLz5cbiAgICAgIDwvYnV0dG9uPlxuICAgICAge29wZW4gJiYgKFxuICAgICAgICA8ZGl2XG4gICAgICAgICAgY2xhc3NOYW1lPXtgYWJzb2x1dGUgdG9wLWZ1bGwgei1bODBdIG10LTIgdy1bMjg2cHhdIHJvdW5kZWQtbWQgYm9yZGVyIGJvcmRlci1bIzQ1NDU0NV0gYmctWyMyYzJjMmNdIHAtMyB0ZXh0LXdoaXRlIHNoYWRvdy0yeGwgJHthbGlnbiA9PT0gXCJyaWdodFwiID8gXCJyaWdodC0wXCIgOiBcImxlZnQtMFwifWB9XG4gICAgICAgICAgb25Nb3VzZURvd249eyhldmVudCkgPT4gZXZlbnQuc3RvcFByb3BhZ2F0aW9uKCl9XG4gICAgICAgID5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm1iLTMgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1iZXR3ZWVuXCI+XG4gICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRleHQtWzEycHhdIGZvbnQtc2VtaWJvbGRcIj57bGFiZWx9PC9kaXY+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwidGV4dC1bMTBweF0gdGV4dC1bIzlhOWE5YV1cIj5Db2xvciBhbmQgb3BhY2l0eTwvZGl2PlxuICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICA8YnV0dG9uIHR5cGU9XCJidXR0b25cIiBvbkNsaWNrPXsoKSA9PiBzZXRPcGVuKGZhbHNlKX0gY2xhc3NOYW1lPVwiZ3JpZCBoLTcgdy03IHBsYWNlLWl0ZW1zLWNlbnRlciByb3VuZGVkIHRleHQtWyNiOGI4YjhdIGhvdmVyOmJnLXdoaXRlLzEwIGhvdmVyOnRleHQtd2hpdGVcIj5cbiAgICAgICAgICAgICAgPFggc2l6ZT17MTR9IC8+XG4gICAgICAgICAgICA8L2J1dHRvbj5cbiAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgIDxsYWJlbCBjbGFzc05hbWU9XCJyZWxhdGl2ZSBibG9jayBoLVsxNTBweF0gb3ZlcmZsb3ctaGlkZGVuIHJvdW5kZWQgYm9yZGVyIGJvcmRlci1bIzQ0NF1cIj5cbiAgICAgICAgICAgIDxzcGFuXG4gICAgICAgICAgICAgIGNsYXNzTmFtZT1cImFic29sdXRlIGluc2V0LTBcIlxuICAgICAgICAgICAgICBzdHlsZT17e1xuICAgICAgICAgICAgICAgIGJhY2tncm91bmQ6IGBsaW5lYXItZ3JhZGllbnQodG8gdG9wLCAjMDAwIDAlLCB0cmFuc3BhcmVudCA3MCUpLCBsaW5lYXItZ3JhZGllbnQodG8gcmlnaHQsICNmZmYgMCUsICR7aGV4fSAxMDAlKWAsXG4gICAgICAgICAgICAgIH19XG4gICAgICAgICAgICAvPlxuICAgICAgICAgICAgPGlucHV0XG4gICAgICAgICAgICAgIHR5cGU9XCJjb2xvclwiXG4gICAgICAgICAgICAgIHZhbHVlPXtoZXh9XG4gICAgICAgICAgICAgIG9uQ2hhbmdlPXsoZXZlbnQpID0+IGNvbW1pdChldmVudC50YXJnZXQudmFsdWUpfVxuICAgICAgICAgICAgICBjbGFzc05hbWU9XCJhYnNvbHV0ZSBpbnNldC0wIGgtZnVsbCB3LWZ1bGwgY3Vyc29yLWNyb3NzaGFpciBvcGFjaXR5LTBcIlxuICAgICAgICAgICAgICBhcmlhLWxhYmVsPXtgJHtsYWJlbH0gdmlzdWFsIHBpY2tlcmB9XG4gICAgICAgICAgICAvPlxuICAgICAgICAgIDwvbGFiZWw+XG5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm10LTMgZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTJcIj5cbiAgICAgICAgICAgIDxidXR0b25cbiAgICAgICAgICAgICAgdHlwZT1cImJ1dHRvblwiXG4gICAgICAgICAgICAgIG9uQ2xpY2s9e3BpY2tGcm9tU2NyZWVufVxuICAgICAgICAgICAgICBkaXNhYmxlZD17IWV5ZWRyb3BwZXJTdXBwb3J0ZWR9XG4gICAgICAgICAgICAgIGNsYXNzTmFtZT1cImdyaWQgaC04IHctOCBwbGFjZS1pdGVtcy1jZW50ZXIgcm91bmRlZCBib3JkZXIgYm9yZGVyLVsjNGE0YTRhXSB0ZXh0LVsjZDhkOGQ4XSBob3ZlcjpiZy13aGl0ZS8xMCBkaXNhYmxlZDpjdXJzb3Itbm90LWFsbG93ZWQgZGlzYWJsZWQ6b3BhY2l0eS0zNVwiXG4gICAgICAgICAgICAgIHRpdGxlPXtleWVkcm9wcGVyU3VwcG9ydGVkID8gXCJQaWNrIGNvbG9yIGZyb20gc2NyZWVuXCIgOiBcIkV5ZWRyb3BwZXIgaXMgbm90IHN1cHBvcnRlZCBieSB0aGlzIGJyb3dzZXJcIn1cbiAgICAgICAgICAgID5cbiAgICAgICAgICAgICAgPFBpcGV0dGUgc2l6ZT17MTR9IC8+XG4gICAgICAgICAgICA8L2J1dHRvbj5cbiAgICAgICAgICAgIDxpbnB1dFxuICAgICAgICAgICAgICB0eXBlPVwiY29sb3JcIlxuICAgICAgICAgICAgICB2YWx1ZT17aGV4fVxuICAgICAgICAgICAgICBvbkNoYW5nZT17KGV2ZW50KSA9PiBjb21taXQoZXZlbnQudGFyZ2V0LnZhbHVlKX1cbiAgICAgICAgICAgICAgY2xhc3NOYW1lPVwiaC04IGZsZXgtMSBjdXJzb3ItcG9pbnRlciByb3VuZGVkIGJvcmRlciBib3JkZXItWyM0YTRhNGFdIGJnLVsjMzMzXSBwLTFcIlxuICAgICAgICAgICAgICBhcmlhLWxhYmVsPXtgJHtsYWJlbH0gaHVlYH1cbiAgICAgICAgICAgIC8+XG4gICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJoLTggdy04IHJvdW5kZWQgYm9yZGVyIGJvcmRlci13aGl0ZS80MFwiIHN0eWxlPXt7IGJhY2tncm91bmQ6IGhleCwgb3BhY2l0eTogcmVzb2x2ZWRPcGFjaXR5IC8gMTAwIH19IC8+XG4gICAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm10LTMgZmxleCByb3VuZGVkIGJnLVsjMjAyMDIwXSBwLTFcIj5cbiAgICAgICAgICAgIHsoW1wiaGV4XCIsIFwicmdiXCJdIGFzIGNvbnN0KS5tYXAoKG1vZGUpID0+IChcbiAgICAgICAgICAgICAgPGJ1dHRvblxuICAgICAgICAgICAgICAgIGtleT17bW9kZX1cbiAgICAgICAgICAgICAgICB0eXBlPVwiYnV0dG9uXCJcbiAgICAgICAgICAgICAgICBvbkNsaWNrPXsoKSA9PiBzZXRGb3JtYXQobW9kZSl9XG4gICAgICAgICAgICAgICAgY2xhc3NOYW1lPXtgaC03IGZsZXgtMSByb3VuZGVkIHRleHQtWzEwcHhdIGZvbnQtYm9sZCB1cHBlcmNhc2UgJHtmb3JtYXQgPT09IG1vZGUgPyBcImJnLVsjNDQ0XSB0ZXh0LXdoaXRlXCIgOiBcInRleHQtWyNhOGE4YThdIGhvdmVyOnRleHQtd2hpdGVcIn1gfVxuICAgICAgICAgICAgICA+XG4gICAgICAgICAgICAgICAge21vZGV9XG4gICAgICAgICAgICAgIDwvYnV0dG9uPlxuICAgICAgICAgICAgKSl9XG4gICAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgICB7Zm9ybWF0ID09PSBcImhleFwiID8gKFxuICAgICAgICAgICAgPGxhYmVsIGNsYXNzTmFtZT1cIm10LTIgYmxvY2tcIj5cbiAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwibWItMSBibG9jayB0ZXh0LVs5cHhdIGZvbnQtc2VtaWJvbGQgdXBwZXJjYXNlIHRleHQtWyM5YTlhOWFdXCI+SGV4PC9zcGFuPlxuICAgICAgICAgICAgICA8aW5wdXRcbiAgICAgICAgICAgICAgICB2YWx1ZT17ZHJhZnQucmVwbGFjZShcIiNcIiwgXCJcIil9XG4gICAgICAgICAgICAgICAgb25DaGFuZ2U9eyhldmVudCkgPT4ge1xuICAgICAgICAgICAgICAgICAgY29uc3QgbmV4dCA9IGV2ZW50LnRhcmdldC52YWx1ZS5yZXBsYWNlKC9bXjAtOWEtZl0vZ2ksIFwiXCIpLnNsaWNlKDAsIDYpO1xuICAgICAgICAgICAgICAgICAgc2V0RHJhZnQoYCMke25leHR9YCk7XG4gICAgICAgICAgICAgICAgICBpZiAobmV4dC5sZW5ndGggPT09IDYpIGNvbW1pdChgIyR7bmV4dH1gKTtcbiAgICAgICAgICAgICAgICB9fVxuICAgICAgICAgICAgICAgIG9uQmx1cj17KCkgPT4gc2V0RHJhZnQoaGV4KX1cbiAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJoLTggdy1mdWxsIHJvdW5kZWQgYm9yZGVyIGJvcmRlci1bIzRhNGE0YV0gYmctWyMzMzNdIHB4LTIgdGV4dC1bMTFweF0gZm9udC1zZW1pYm9sZCB1cHBlcmNhc2Ugb3V0bGluZS1ub25lIGZvY3VzOmJvcmRlci1bIzAxNzhmZl1cIlxuICAgICAgICAgICAgICAvPlxuICAgICAgICAgICAgPC9sYWJlbD5cbiAgICAgICAgICApIDogKFxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtdC0yIGdyaWQgZ3JpZC1jb2xzLTMgZ2FwLTJcIj5cbiAgICAgICAgICAgICAgeyhbXCJyXCIsIFwiZ1wiLCBcImJcIl0gYXMgY29uc3QpLm1hcCgoY2hhbm5lbCkgPT4gKFxuICAgICAgICAgICAgICAgIDxsYWJlbCBrZXk9e2NoYW5uZWx9PlxuICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwibWItMSBibG9jayB0ZXh0LVs5cHhdIGZvbnQtc2VtaWJvbGQgdXBwZXJjYXNlIHRleHQtWyM5YTlhOWFdXCI+e2NoYW5uZWx9PC9zcGFuPlxuICAgICAgICAgICAgICAgICAgPGlucHV0XG4gICAgICAgICAgICAgICAgICAgIHR5cGU9XCJudW1iZXJcIlxuICAgICAgICAgICAgICAgICAgICBtaW49ezB9XG4gICAgICAgICAgICAgICAgICAgIG1heD17MjU1fVxuICAgICAgICAgICAgICAgICAgICB2YWx1ZT17cmdiW2NoYW5uZWxdfVxuICAgICAgICAgICAgICAgICAgICBvbkNoYW5nZT17KGV2ZW50KSA9PiB1cGRhdGVSZ2JDaGFubmVsKGNoYW5uZWwsIE51bWJlcihldmVudC50YXJnZXQudmFsdWUpKX1cbiAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwiaC04IHctZnVsbCByb3VuZGVkIGJvcmRlciBib3JkZXItWyM0YTRhNGFdIGJnLVsjMzMzXSBweC0yIHRleHQtWzExcHhdIGZvbnQtc2VtaWJvbGQgb3V0bGluZS1ub25lIGZvY3VzOmJvcmRlci1bIzAxNzhmZl1cIlxuICAgICAgICAgICAgICAgICAgLz5cbiAgICAgICAgICAgICAgICA8L2xhYmVsPlxuICAgICAgICAgICAgICApKX1cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICl9XG5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm10LTNcIj5cbiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibWItMSBmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWJldHdlZW4gdGV4dC1bMTBweF0gdGV4dC1bI2I4YjhiOF1cIj5cbiAgICAgICAgICAgICAgPHNwYW4+T3BhY2l0eTwvc3Bhbj5cbiAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwidGFidWxhci1udW1zXCI+e3Jlc29sdmVkT3BhY2l0eX0lPC9zcGFuPlxuICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICA8aW5wdXRcbiAgICAgICAgICAgICAgdHlwZT1cInJhbmdlXCJcbiAgICAgICAgICAgICAgbWluPXswfVxuICAgICAgICAgICAgICBtYXg9ezEwMH1cbiAgICAgICAgICAgICAgdmFsdWU9e3Jlc29sdmVkT3BhY2l0eX1cbiAgICAgICAgICAgICAgb25DaGFuZ2U9eyhldmVudCkgPT4gY29tbWl0T3BhY2l0eShOdW1iZXIoZXZlbnQudGFyZ2V0LnZhbHVlKSl9XG4gICAgICAgICAgICAgIGNsYXNzTmFtZT1cImgtMS41IHctZnVsbCBjdXJzb3ItcG9pbnRlciBhY2NlbnQtWyMwMTc4ZmZdXCJcbiAgICAgICAgICAgICAgYXJpYS1sYWJlbD17YCR7bGFiZWx9IG9wYWNpdHlgfVxuICAgICAgICAgICAgLz5cbiAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibXQtNCBzcGFjZS15LTMgYm9yZGVyLXQgYm9yZGVyLVsjNDU0NTQ1XSBwdC0zXCI+XG4gICAgICAgICAgICA8Q29sb3JTZWN0aW9uIHRpdGxlPVwiUmVjZW50IGNvbG9yc1wiIGNvbG9ycz17cmVjZW50Q29sb3JzfSBhY3RpdmU9e2hleH0gb25TZWxlY3Q9e2NvbW1pdH0gLz5cbiAgICAgICAgICAgIDxDb2xvclNlY3Rpb24gdGl0bGU9XCJCcmFuZCBjb2xvcnNcIiBjb2xvcnM9e3N0b3JlZEJyYW5kQ29sb3JzfSBhY3RpdmU9e2hleH0gb25TZWxlY3Q9e2NvbW1pdH0gLz5cbiAgICAgICAgICAgIDxDb2xvclNlY3Rpb24gdGl0bGU9XCJDb2xvciBwYWxldHRlXCIgY29sb3JzPXtwYWxldHRlfSBhY3RpdmU9e2hleH0gb25TZWxlY3Q9e2NvbW1pdH0gLz5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgPC9kaXY+XG4gICAgICApfVxuICAgIDwvZGl2PlxuICApO1xufTtcbiJdLCJmaWxlIjoiL3NyYy9lZGl0b3IvY29tcG9uZW50cy90b29sYmFycy9GaWdtYUNvbG9yUGlja2VyLnRzeCJ9

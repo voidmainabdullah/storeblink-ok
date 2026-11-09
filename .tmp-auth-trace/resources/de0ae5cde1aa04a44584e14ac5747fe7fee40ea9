@@ -1,0 +1,132 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: auth-platform.spec.ts >> signup transport failure is rendered as an actionable inline error
+- Location: tests\e2e\auth-platform.spec.ts:32:1
+
+# Error details
+
+```
+Error: expect(locator).toContainText(expected) failed
+
+Locator: getByRole('alert')
+Expected substring: "Authentication service is temporarily unavailable"
+Received string:    "Authentication could not be completed. Try again."
+Timeout: 5000ms
+
+Call log:
+  - Expect "toContainText" with timeout 5000ms
+  - waiting for getByRole('alert')
+    8 × locator resolved to <div role="alert" aria-live="polite" class="border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm text-destructive">Authentication could not be completed. Try again.</div>
+      - unexpected value "Authentication could not be completed. Try again."
+
+```
+
+```yaml
+- alert: Authentication could not be completed. Try again.
+```
+
+# Test source
+
+```ts
+  1  | import { expect, test } from "@playwright/test";
+  2  | 
+  3  | test("public storefront has no merchant auth or dashboard-bootstrap dependency", async ({ page }) => {
+  4  |   const forbiddenRequests: string[] = [];
+  5  |   page.on("request", (request) => {
+  6  |     const url = request.url();
+  7  |     if (/\/auth\/v1\//.test(url) || /\/rpc\/get_dashboard_bootstrap(?:\?|$)/.test(url)) {
+  8  |       forbiddenRequests.push(url);
+  9  |     }
+  10 |   });
+  11 | 
+  12 |   await page.goto("/store/public-auth-boundary-probe", { waitUntil: "domcontentloaded" });
+  13 |   await page.waitForTimeout(750);
+  14 | 
+  15 |   expect(forbiddenRequests).toEqual([]);
+  16 | });
+  17 | 
+  18 | test("dashboard route redirects an anonymous browser to sign in", async ({ page }) => {
+  19 |   await page.goto("/dashboard/store");
+  20 | 
+  21 |   await expect(page).toHaveURL(/\/auth\?returnTo=%2Fdashboard%2Fstore$/);
+  22 |   await expect(page.getByRole("heading", { name: "Welcome back" })).toBeVisible();
+  23 | });
+  24 | 
+  25 | test("domain administration redirects an anonymous browser to sign in", async ({ page }) => {
+  26 |   await page.goto("/domain/connect");
+  27 | 
+  28 |   await expect(page).toHaveURL(/\/auth\?returnTo=%2Fdomain%2Fconnect$/);
+  29 |   await expect(page.getByRole("heading", { name: "Welcome back" })).toBeVisible();
+  30 | });
+  31 | 
+  32 | test("signup transport failure is rendered as an actionable inline error", async ({ page }) => {
+  33 |   await page.addInitScript(() => {
+  34 |     (window as typeof window & { turnstile: unknown }).turnstile = {
+  35 |       render: (_container: HTMLElement, options: { callback: (token: string) => void }) => {
+  36 |         queueMicrotask(() => options.callback("playwright-turnstile-token"));
+  37 |         return "playwright-turnstile-widget";
+  38 |       },
+  39 |       remove: () => undefined,
+  40 |     };
+  41 |   });
+  42 |   await page.route("**/auth/v1/signup", async (route) => route.abort("failed"));
+  43 |   await page.goto("/auth?mode=signup");
+  44 |   await page.getByLabel("Full name").fill("Domain Test User");
+  45 |   await page.getByLabel("Business name").fill("Domain Test Store");
+  46 |   await page.getByLabel("Email").fill("signup-network-test@example.com");
+  47 |   await page.getByLabel("Password").fill("StrongPassword123");
+  48 |   await page.getByRole("button", { name: "Create account" }).click();
+  49 | 
+  50 |   const alert = page.getByRole("alert");
+> 51 |   await expect(alert).toContainText("Authentication service is temporarily unavailable");
+     |                       ^ Error: expect(locator).toContainText(expected) failed
+  52 |   await expect(alert).not.toContainText("Failed to fetch");
+  53 | });
+  54 | 
+  55 | test("custom storefront hosts cannot render platform auth routes", async ({ page }) => {
+  56 |   await page.route("**/rest/v1/rpc/resolve_public_storefront_by_domain", async (route) => {
+  57 |     await route.fulfill({
+  58 |       status: 200,
+  59 |       contentType: "application/json",
+  60 |       headers: { "Access-Control-Allow-Origin": "*" },
+  61 |       body: JSON.stringify({
+  62 |         storeId: "11111111-1111-4111-8111-111111111111",
+  63 |         storeHandle: "domain-route-probe",
+  64 |         requestedHostname: "localtest.me",
+  65 |         primaryHostname: "localtest.me",
+  66 |         redirectRequired: false,
+  67 |       }),
+  68 |     });
+  69 |   });
+  70 | 
+  71 |   await page.goto("http://localtest.me:8082/auth");
+  72 | 
+  73 |   await expect(page.getByRole("heading", { name: "Page not found" })).toBeVisible();
+  74 |   await expect(page.getByRole("heading", { name: "Welcome back" })).toHaveCount(0);
+  75 | });
+  76 | 
+  77 | test("staging account persists through refresh and can sign out", async ({ page }) => {
+  78 |   const email = process.env.E2E_AUTH_EMAIL;
+  79 |   const password = process.env.E2E_AUTH_PASSWORD;
+  80 |   test.skip(!email || !password, "E2E_AUTH_EMAIL and E2E_AUTH_PASSWORD are required.");
+  81 | 
+  82 |   await page.goto("/auth?returnTo=%2Fdashboard");
+  83 |   await page.getByLabel("Email").fill(email!);
+  84 |   await page.getByLabel("Password").fill(password!);
+  85 |   await page.getByRole("button", { name: "Sign in" }).click();
+  86 |   await expect(page).toHaveURL(/\/dashboard$/, { timeout: 30_000 });
+  87 | 
+  88 |   await page.reload();
+  89 |   await expect(page).toHaveURL(/\/dashboard$/);
+  90 |   await page.getByRole("button", { name: "Open account menu" }).click();
+  91 |   await page.getByRole("button", { name: "Sign out" }).click();
+  92 |   await expect(page).toHaveURL(/\/$/);
+  93 | });
+  94 | 
+```

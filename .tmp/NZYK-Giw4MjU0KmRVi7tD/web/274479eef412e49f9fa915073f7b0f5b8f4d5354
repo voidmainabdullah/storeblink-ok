@@ -1,0 +1,15 @@
+Object.defineProperty(__vite_ssr_exports__, "usePaletteStore", { enumerable: true, configurable: true, get(){ try { return usePaletteStore } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/zustand/esm/index.mjs", {"importedNames":["create"]});
+const usePaletteStore = (0,__vite_ssr_import_0__.create)()((set)=>({
+        recentColors: [],
+        brandColors: [],
+        setRecentColorsFromPaletteSystem: (recentColors)=>set({
+                recentColors
+            }),
+        setBrandColorsFromPaletteSystem: (brandColors)=>set({
+                brandColors
+            })
+    }));
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6IjtBQUFBO0FBU08sTUFBTUEscUJBQWtCQyxnQ0FBNEIsQ0FBQ0MsTUFBUztRQUNuRUMsY0FBYyxFQUFFO1FBQ2hCQyxhQUFhLEVBQUU7UUFDZkMsa0NBQWtDLENBQUNGLGVBQWlCRCxJQUFJO2dCQUFFQztZQUFhO1FBQ3ZFRyxpQ0FBaUMsQ0FBQ0YsY0FBZ0JGLElBQUk7Z0JBQUVFO1lBQVk7SUFDdEUiLCJuYW1lcyI6WyJ1c2VQYWxldHRlU3RvcmUiLCJjcmVhdGUiLCJzZXQiLCJyZWNlbnRDb2xvcnMiLCJicmFuZENvbG9ycyIsInNldFJlY2VudENvbG9yc0Zyb21QYWxldHRlU3lzdGVtIiwic2V0QnJhbmRDb2xvcnNGcm9tUGFsZXR0ZVN5c3RlbSJdLCJpZ25vcmVMaXN0IjpbXSwic291cmNlcyI6WyJwYWxldHRlLnN0b3JlLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IGNyZWF0ZSB9IGZyb20gXCJ6dXN0YW5kXCI7XG5cbmV4cG9ydCB0eXBlIFBhbGV0dGVTdG9yZVN0YXRlID0ge1xuICByZWNlbnRDb2xvcnM6IHN0cmluZ1tdO1xuICBicmFuZENvbG9yczogc3RyaW5nW107XG4gIHNldFJlY2VudENvbG9yc0Zyb21QYWxldHRlU3lzdGVtOiAocmVjZW50Q29sb3JzOiBzdHJpbmdbXSkgPT4gdm9pZDtcbiAgc2V0QnJhbmRDb2xvcnNGcm9tUGFsZXR0ZVN5c3RlbTogKGJyYW5kQ29sb3JzOiBzdHJpbmdbXSkgPT4gdm9pZDtcbn07XG5cbmV4cG9ydCBjb25zdCB1c2VQYWxldHRlU3RvcmUgPSBjcmVhdGU8UGFsZXR0ZVN0b3JlU3RhdGU+KCkoKHNldCkgPT4gKHtcbiAgcmVjZW50Q29sb3JzOiBbXSxcbiAgYnJhbmRDb2xvcnM6IFtdLFxuICBzZXRSZWNlbnRDb2xvcnNGcm9tUGFsZXR0ZVN5c3RlbTogKHJlY2VudENvbG9ycykgPT4gc2V0KHsgcmVjZW50Q29sb3JzIH0pLFxuICBzZXRCcmFuZENvbG9yc0Zyb21QYWxldHRlU3lzdGVtOiAoYnJhbmRDb2xvcnMpID0+IHNldCh7IGJyYW5kQ29sb3JzIH0pLFxufSkpO1xuIl0sImZpbGUiOiIvc3JjL3N0b3Jlcy9wYWxldHRlLnN0b3JlLnRzIn0=

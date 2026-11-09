@@ -1,0 +1,344 @@
+Object.defineProperty(__vite_ssr_exports__, "inspectorInputClass", { enumerable: true, configurable: true, get(){ try { return inspectorInputClass } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "InspectorSection", { enumerable: true, configurable: true, get(){ try { return InspectorSection } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "InspectorIconButton", { enumerable: true, configurable: true, get(){ try { return InspectorIconButton } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "NumberField", { enumerable: true, configurable: true, get(){ try { return NumberField } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "SelectField", { enumerable: true, configurable: true, get(){ try { return SelectField } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "RangeField", { enumerable: true, configurable: true, get(){ try { return RangeField } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "SegmentedControl", { enumerable: true, configurable: true, get(){ try { return SegmentedControl } catch {} }});
+Object.defineProperty(__vite_ssr_exports__, "ToggleRow", { enumerable: true, configurable: true, get(){ try { return ToggleRow } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/react/jsx-dev-runtime.js", {"importedNames":["jsxDEV"]});
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/react/index.js", {"importedNames":["useEffect","forwardRef","useState"]});
+const __vite_ssr_import_2__ = await __vite_ssr_import__("/node_modules/lucide-react/dist/cjs/lucide-react.js", {"importedNames":["ChevronDown","ChevronRight"]});
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/src/lib/utils.ts", {"importedNames":["cn"]});
+const inspectorInputClass = "h-7 min-w-0 rounded border border-transparent bg-[#383838] px-2 text-[11px] text-[#f1f1f1] outline-none transition-colors hover:border-[#4a4a4a] focus:border-[#0178ff]";
+const InspectorSection = ({ title, actions, children, defaultOpen = true })=>{
+    const [open, setOpen] = (0,__vite_ssr_import_1__.useState)(defaultOpen);
+    return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("section", {
+        className: "border-b border-[#414141]",
+        children: [
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                className: "flex h-10 items-center gap-1 px-3",
+                children: [
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("button", {
+                        type: "button",
+                        "aria-expanded": open,
+                        onClick: ()=>setOpen((current)=>!current),
+                        className: "flex min-w-0 flex-1 items-center gap-1.5 text-left text-[11px] font-semibold text-white",
+                        children: [
+                            open ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.ChevronDown), {
+                                size: 12
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                                lineNumber: 37,
+                                columnNumber: 19
+                            }, this) : /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.ChevronRight), {
+                                size: 12
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                                lineNumber: 37,
+                                columnNumber: 47
+                            }, this),
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                className: "truncate",
+                                children: title
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                                lineNumber: 38,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                        lineNumber: 31,
+                        columnNumber: 9
+                    }, this),
+                    actions
+                ]
+            }, void 0, true, {
+                fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                lineNumber: 30,
+                columnNumber: 7
+            }, this),
+            open ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                className: "space-y-2.5 px-3 pb-3",
+                children: children
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                lineNumber: 42,
+                columnNumber: 15
+            }, this) : null
+        ]
+    }, void 0, true, {
+        fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+        lineNumber: 29,
+        columnNumber: 5
+    }, this);
+};
+const InspectorIconButton = /*#__PURE__*/ (0,__vite_ssr_import_1__.forwardRef)(({ icon: Icon, active, className, ...props }, ref)=>/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("button", {
+        ref: ref,
+        type: "button",
+        className: (0,__vite_ssr_import_3__.cn)("grid h-7 w-7 shrink-0 place-items-center rounded text-[#c8c8c8] hover:bg-[#444] hover:text-white disabled:cursor-not-allowed disabled:opacity-35", active && "bg-[#0178ff] text-white hover:bg-[#0178ff]", className),
+        ...props,
+        children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(Icon, {
+            size: 13,
+            strokeWidth: 1.8
+        }, void 0, false, {
+            fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+            lineNumber: 68,
+            columnNumber: 5
+        }, this)
+    }, void 0, false, {
+        fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+        lineNumber: 58,
+        columnNumber: 3
+    }, this));
+InspectorIconButton.displayName = "InspectorIconButton";
+const formatNumber = (value)=>{
+    if (!Number.isFinite(value)) return "0";
+    const rounded = Math.round(value * 100) / 100;
+    return String(Object.is(rounded, -0) ? 0 : rounded);
+};
+const NumberField = ({ label, value, onCommit, min, max, step = 1, suffix })=>{
+    const [draft, setDraft] = (0,__vite_ssr_import_1__.useState)(formatNumber(value));
+    (0,__vite_ssr_import_1__.useEffect)(()=>setDraft(formatNumber(value)), [
+        value
+    ]);
+    const commit = ()=>{
+        const parsed = Number(draft);
+        if (!Number.isFinite(parsed)) {
+            setDraft(formatNumber(value));
+            return;
+        };
+        const next = Math.min(max ?? Number.POSITIVE_INFINITY, Math.max(min ?? Number.NEGATIVE_INFINITY, parsed));
+        setDraft(formatNumber(next));
+        if (next !== value) onCommit(next);
+    };
+    return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("label", {
+        className: "min-w-0",
+        children: [
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                className: "mb-1 block text-[9px] font-medium text-[#a6a6a6]",
+                children: label
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                lineNumber: 113,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                className: "relative block",
+                children: [
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("input", {
+                        "aria-label": label,
+                        type: "number",
+                        min: min,
+                        max: max,
+                        step: step,
+                        value: draft,
+                        onChange: (event)=>setDraft(event.target.value),
+                        onBlur: commit,
+                        onKeyDown: (event)=>{
+                            if (event.key === "Enter") event.currentTarget.blur();
+                            if (event.key === "Escape") {
+                                setDraft(formatNumber(value));
+                                event.currentTarget.blur();
+                            }
+                        },
+                        className: (0,__vite_ssr_import_3__.cn)(inspectorInputClass, "w-full pr-7 tabular-nums")
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                        lineNumber: 115,
+                        columnNumber: 9
+                    }, this),
+                    suffix ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                        className: "pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-[9px] text-[#909090]",
+                        children: suffix
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                        lineNumber: 134,
+                        columnNumber: 11
+                    }, this) : null
+                ]
+            }, void 0, true, {
+                fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                lineNumber: 114,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+        lineNumber: 112,
+        columnNumber: 5
+    }, this);
+};
+const SelectField = ({ label, value, options, onChange })=>/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("label", {
+        className: "block min-w-0",
+        children: [
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                className: "mb-1 block text-[9px] font-medium text-[#a6a6a6]",
+                children: label
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                lineNumber: 155,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("select", {
+                "aria-label": label,
+                value: value,
+                onChange: (event)=>onChange(event.target.value),
+                className: (0,__vite_ssr_import_3__.cn)(inspectorInputClass, "w-full"),
+                children: options.map((option)=>/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("option", {
+                        value: option.value,
+                        children: option.label
+                    }, option.value, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                        lineNumber: 163,
+                        columnNumber: 9
+                    }, this))
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                lineNumber: 156,
+                columnNumber: 5
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+        lineNumber: 154,
+        columnNumber: 3
+    }, this);
+const RangeField = ({ label, value, min, max, step = 1, onChange })=>/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("label", {
+        className: "block",
+        children: [
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                className: "mb-1 flex items-center justify-between text-[9px] font-medium text-[#a6a6a6]",
+                children: [
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                        children: label
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                        lineNumber: 186,
+                        columnNumber: 7
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                        className: "tabular-nums text-[#d8d8d8]",
+                        children: Math.round(value * 100) / 100
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                        lineNumber: 187,
+                        columnNumber: 7
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                lineNumber: 185,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("input", {
+                "aria-label": label,
+                type: "range",
+                min: min,
+                max: max,
+                step: step,
+                value: value,
+                onChange: (event)=>onChange(Number(event.target.value)),
+                className: "h-1.5 w-full cursor-pointer accent-[#0178ff]"
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                lineNumber: 189,
+                columnNumber: 5
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+        lineNumber: 184,
+        columnNumber: 3
+    }, this);
+const SegmentedControl = ({ label, options, value, onChange })=>/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+        children: [
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                className: "mb-1 text-[9px] font-medium text-[#a6a6a6]",
+                children: label
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                lineNumber: 214,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                className: "grid auto-cols-fr grid-flow-col gap-px overflow-hidden rounded bg-[#242424] p-px",
+                children: options.map((option)=>{
+                    const Icon = option.icon;
+                    return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("button", {
+                        type: "button",
+                        title: option.label,
+                        "aria-label": option.label,
+                        onClick: ()=>onChange(option.value),
+                        className: (0,__vite_ssr_import_3__.cn)("grid h-7 place-items-center rounded-sm text-[10px] text-[#aaa] hover:bg-[#414141] hover:text-white", value === option.value && "bg-[#4a4a4a] text-white"),
+                        children: Icon ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(Icon, {
+                            size: 13
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                            lineNumber: 230,
+                            columnNumber: 21
+                        }, this) : option.label
+                    }, option.value, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                        lineNumber: 219,
+                        columnNumber: 11
+                    }, this);
+                })
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                lineNumber: 215,
+                columnNumber: 5
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+        lineNumber: 213,
+        columnNumber: 3
+    }, this);
+const ToggleRow = ({ label, checked, onChange, description })=>/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("label", {
+        className: "flex cursor-pointer items-center justify-between gap-3 py-0.5 text-[10px] text-[#ddd]",
+        children: [
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                children: [
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                        className: "block",
+                        children: label
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                        lineNumber: 251,
+                        columnNumber: 7
+                    }, this),
+                    description ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                        className: "mt-0.5 block text-[9px] text-[#8f8f8f]",
+                        children: description
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                        lineNumber: 252,
+                        columnNumber: 22
+                    }, this) : null
+                ]
+            }, void 0, true, {
+                fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                lineNumber: 250,
+                columnNumber: 5
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("input", {
+                type: "checkbox",
+                checked: checked,
+                onChange: (event)=>onChange(event.target.checked),
+                className: "h-3.5 w-3.5 accent-[#0178ff]"
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+                lineNumber: 254,
+                columnNumber: 5
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "F:/Storeblink/src/ui/inspector-panel/InspectorControls.tsx",
+        lineNumber: 249,
+        columnNumber: 3
+    }, this);
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQUE7QUFTQTtBQUNBO0FBRU8sTUFBTUEsc0JBQ1g7QUFFSyxNQUFNQyxtQkFBbUIsQ0FBQyxFQUMvQkMsS0FBSyxFQUNMQyxPQUFPLEVBQ1BDLFFBQVEsRUFDUkMsY0FBYyxJQUFJLEVBTW5CO0lBQ0MsTUFBTSxDQUFDQyxNQUFNQyxRQUFRLE1BQUdDLGdDQUFTSDtJQUNqQyx3QkFDRSw4QkFBQ0k7UUFBUUMsV0FBVTs7NkJBQ2pCLDhCQUFDQztnQkFBSUQsV0FBVTs7cUNBQ2IsOEJBQUNFO3dCQUNDQyxNQUFLO3dCQUNMQyxpQkFBZVI7d0JBQ2ZTLFNBQVMsSUFBTVIsUUFBUSxDQUFDUyxVQUFZLENBQUNBO3dCQUNyQ04sV0FBVTs7NEJBRVRKLHdCQUFPLGlDQUFDVztnQ0FBWUMsTUFBTTs7Ozs7d0RBQVMsaUNBQUNDO2dDQUFhRCxNQUFNOzs7Ozs7NkNBQ3hELDhCQUFDRTtnQ0FBS1YsV0FBVTswQ0FBWVI7Ozs7Ozs7Ozs7OztvQkFFN0JDOzs7Ozs7O1lBRUZHLHdCQUFPLDhCQUFDSztnQkFBSUQsV0FBVTswQkFBeUJOOzs7Ozt1QkFBa0I7Ozs7Ozs7QUFHeEU7QUFPTyxNQUFNaUIsdUNBQXNCQyxrQ0FBd0QsQ0FBQyxFQUMxRkMsTUFBTUMsSUFBSSxFQUNWQyxNQUFNLEVBQ05mLFNBQVMsRUFDVCxHQUFHZ0IsT0FDSixFQUFFQyx1QkFDRCw4QkFBQ2Y7UUFDQ2UsS0FBS0E7UUFDTGQsTUFBSztRQUNMSCxjQUFXa0IsMEJBQ1Qsb0pBQ0FILFVBQVUsOENBQ1ZmO1FBRUQsR0FBR2dCLEtBQUs7a0JBRVQsK0NBQUNGO1lBQUtOLE1BQU07WUFBSVcsYUFBYTs7Ozs7Ozs7Ozs7QUFJakNSLG9CQUFvQlMsV0FBVyxHQUFHO0FBRWxDLE1BQU1DLGVBQWUsQ0FBQ0M7SUFDcEIsSUFBSSxDQUFDQyxPQUFPQyxRQUFRLENBQUNGLFFBQVEsT0FBTztJQUNwQyxNQUFNRyxVQUFVQyxLQUFLQyxLQUFLLENBQUNMLFFBQVEsT0FBTztJQUMxQyxPQUFPTSxPQUFPQyxPQUFPQyxFQUFFLENBQUNMLFNBQVMsQ0FBQyxLQUFLLElBQUlBO0FBQzdDO0FBRU8sTUFBTU0sY0FBYyxDQUFDLEVBQzFCQyxLQUFLLEVBQ0xWLEtBQUssRUFDTFcsUUFBUSxFQUNSQyxHQUFHLEVBQ0hDLEdBQUcsRUFDSEMsT0FBTyxDQUFDLEVBQ1JDLE1BQU0sRUFTUDtJQUNDLE1BQU0sQ0FBQ0MsT0FBT0MsU0FBUyxNQUFHekMsZ0NBQVN1QixhQUFhQztPQUNoRGtCLGlDQUFVLElBQU1ELFNBQVNsQixhQUFhQyxTQUFTO1FBQUNBO0tBQU07SUFFdEQsTUFBTW1CLFNBQVM7UUFDYixNQUFNQyxTQUFTbkIsT0FBT2U7UUFDdEIsSUFBSSxDQUFDZixPQUFPQyxRQUFRLENBQUNrQixTQUFTO1lBQzVCSCxTQUFTbEIsYUFBYUM7WUFDdEI7UUFDRjtRQUNBLE1BQU1xQixPQUFPakIsS0FBS1EsR0FBRyxDQUFDQyxPQUFPWixPQUFPcUIsaUJBQWlCLEVBQUVsQixLQUFLUyxHQUFHLENBQUNELE9BQU9YLE9BQU9zQixpQkFBaUIsRUFBRUg7UUFDakdILFNBQVNsQixhQUFhc0I7UUFDdEIsSUFBSUEsU0FBU3JCLE9BQU9XLFNBQVNVO0lBQy9CO0lBRUEsd0JBQ0UsOEJBQUNYO1FBQU1oQyxXQUFVOzs2QkFDZiw4QkFBQ1U7Z0JBQUtWLFdBQVU7MEJBQW9EZ0M7Ozs7Ozs2QkFDcEUsOEJBQUN0QjtnQkFBS1YsV0FBVTs7cUNBQ2QsOEJBQUM4Qzt3QkFDQ0MsY0FBWWY7d0JBQ1o3QixNQUFLO3dCQUNMK0IsS0FBS0E7d0JBQ0xDLEtBQUtBO3dCQUNMQyxNQUFNQTt3QkFDTmQsT0FBT2dCO3dCQUNQVSxVQUFVLENBQUNDLFFBQVVWLFNBQVNVLE1BQU1DLE1BQU0sQ0FBQzVCLEtBQUs7d0JBQ2hENkIsUUFBUVY7d0JBQ1JXLFdBQVcsQ0FBQ0g7NEJBQ1YsSUFBSUEsTUFBTUksR0FBRyxLQUFLLFNBQVNKLE1BQU1LLGFBQWEsQ0FBQ0MsSUFBSTs0QkFDbkQsSUFBSU4sTUFBTUksR0FBRyxLQUFLLFVBQVU7Z0NBQzFCZCxTQUFTbEIsYUFBYUM7Z0NBQ3RCMkIsTUFBTUssYUFBYSxDQUFDQyxJQUFJOzRCQUMxQjt3QkFDRjt3QkFDQXZELGNBQVdrQiwwQkFBRzVCLHFCQUFxQjs7Ozs7O29CQUVwQytDLDBCQUNDLDhCQUFDM0I7d0JBQUtWLFdBQVU7a0NBQ2JxQzs7Ozs7K0JBRUQ7Ozs7Ozs7Ozs7Ozs7QUFJWjtBQUVPLE1BQU1tQixjQUFjLENBQUMsRUFDMUJ4QixLQUFLLEVBQ0xWLEtBQUssRUFDTG1DLE9BQU8sRUFDUFQsUUFBUSxFQU1ULG9CQUNDLDhCQUFDaEI7UUFBTWhDLFdBQVU7OzZCQUNmLDhCQUFDVTtnQkFBS1YsV0FBVTswQkFBb0RnQzs7Ozs7OzZCQUNwRSw4QkFBQzBCO2dCQUNDWCxjQUFZZjtnQkFDWlYsT0FBT0E7Z0JBQ1AwQixVQUFVLENBQUNDLFFBQVVELFNBQVNDLE1BQU1DLE1BQU0sQ0FBQzVCLEtBQUs7Z0JBQ2hEdEIsY0FBV2tCLDBCQUFHNUIscUJBQXFCOzBCQUVsQ21FLFFBQVFFLEdBQUcsQ0FBQyxDQUFDQywwQkFDWiw4QkFBQ0E7d0JBQTBCdEMsT0FBT3NDLE9BQU90QyxLQUFLO2tDQUFHc0MsT0FBTzVCO3VCQUEzQzRCLE9BQU90QyxLQUFLOzs7Ozs7Ozs7Ozs7Ozs7O0FBTTFCLE1BQU11QyxhQUFhLENBQUMsRUFDekI3QixLQUFLLEVBQ0xWLEtBQUssRUFDTFksR0FBRyxFQUNIQyxHQUFHLEVBQ0hDLE9BQU8sQ0FBQyxFQUNSWSxRQUFRLEVBUVQsb0JBQ0MsOEJBQUNoQjtRQUFNaEMsV0FBVTs7NkJBQ2YsOEJBQUNVO2dCQUFLVixXQUFVOztxQ0FDZCw4QkFBQ1U7a0NBQU1zQjs7Ozs7O3FDQUNQLDhCQUFDdEI7d0JBQUtWLFdBQVU7a0NBQStCMEIsS0FBS0MsS0FBSyxDQUFDTCxRQUFRLE9BQU87Ozs7Ozs7Ozs7Ozs2QkFFM0UsOEJBQUN3QjtnQkFDQ0MsY0FBWWY7Z0JBQ1o3QixNQUFLO2dCQUNMK0IsS0FBS0E7Z0JBQ0xDLEtBQUtBO2dCQUNMQyxNQUFNQTtnQkFDTmQsT0FBT0E7Z0JBQ1AwQixVQUFVLENBQUNDLFFBQVVELFNBQVN6QixPQUFPMEIsTUFBTUMsTUFBTSxDQUFDNUIsS0FBSztnQkFDdkR0QixXQUFVOzs7Ozs7Ozs7Ozs7QUFLVCxNQUFNOEQsbUJBQW1CLENBQUMsRUFDL0I5QixLQUFLLEVBQ0x5QixPQUFPLEVBQ1BuQyxLQUFLLEVBQ0wwQixRQUFRLEVBTVQsb0JBQ0MsOEJBQUMvQzs7NkJBQ0MsOEJBQUNBO2dCQUFJRCxXQUFVOzBCQUE4Q2dDOzs7Ozs7NkJBQzdELDhCQUFDL0I7Z0JBQUlELFdBQVU7MEJBQ1p5RCxRQUFRRSxHQUFHLENBQUMsQ0FBQ0M7b0JBQ1osTUFBTTlDLE9BQU84QyxPQUFPL0MsSUFBSTtvQkFDeEIsd0JBQ0UsOEJBQUNYO3dCQUVDQyxNQUFLO3dCQUNMWCxPQUFPb0UsT0FBTzVCLEtBQUs7d0JBQ25CZSxjQUFZYSxPQUFPNUIsS0FBSzt3QkFDeEIzQixTQUFTLElBQU0yQyxTQUFTWSxPQUFPdEMsS0FBSzt3QkFDcEN0QixjQUFXa0IsMEJBQ1Qsc0dBQ0FJLFVBQVVzQyxPQUFPdEMsS0FBSyxJQUFJO2tDQUczQlIsd0JBQU8sOEJBQUNBOzRCQUFLTixNQUFNOzs7OzttQ0FBU29ELE9BQU81Qjt1QkFWL0I0QixPQUFPdEMsS0FBSzs7Ozs7Z0JBYXZCOzs7Ozs7Ozs7Ozs7QUFLQyxNQUFNeUMsWUFBWSxDQUFDLEVBQ3hCL0IsS0FBSyxFQUNMZ0MsT0FBTyxFQUNQaEIsUUFBUSxFQUNSaUIsV0FBVyxFQU1aLG9CQUNDLDhCQUFDakM7UUFBTWhDLFdBQVU7OzZCQUNmLDhCQUFDVTs7cUNBQ0MsOEJBQUNBO3dCQUFLVixXQUFVO2tDQUFTZ0M7Ozs7OztvQkFDeEJpQywrQkFBYyw4QkFBQ3ZEO3dCQUFLVixXQUFVO2tDQUEwQ2lFOzs7OzsrQkFBc0I7Ozs7Ozs7NkJBRWpHLDhCQUFDbkI7Z0JBQ0MzQyxNQUFLO2dCQUNMNkQsU0FBU0E7Z0JBQ1RoQixVQUFVLENBQUNDLFFBQVVELFNBQVNDLE1BQU1DLE1BQU0sQ0FBQ2MsT0FBTztnQkFDbERoRSxXQUFVIiwibmFtZXMiOlsiaW5zcGVjdG9ySW5wdXRDbGFzcyIsIkluc3BlY3RvclNlY3Rpb24iLCJ0aXRsZSIsImFjdGlvbnMiLCJjaGlsZHJlbiIsImRlZmF1bHRPcGVuIiwib3BlbiIsInNldE9wZW4iLCJ1c2VTdGF0ZSIsInNlY3Rpb24iLCJjbGFzc05hbWUiLCJkaXYiLCJidXR0b24iLCJ0eXBlIiwiYXJpYS1leHBhbmRlZCIsIm9uQ2xpY2siLCJjdXJyZW50IiwiQ2hldnJvbkRvd24iLCJzaXplIiwiQ2hldnJvblJpZ2h0Iiwic3BhbiIsIkluc3BlY3Rvckljb25CdXR0b24iLCJmb3J3YXJkUmVmIiwiaWNvbiIsIkljb24iLCJhY3RpdmUiLCJwcm9wcyIsInJlZiIsImNuIiwic3Ryb2tlV2lkdGgiLCJkaXNwbGF5TmFtZSIsImZvcm1hdE51bWJlciIsInZhbHVlIiwiTnVtYmVyIiwiaXNGaW5pdGUiLCJyb3VuZGVkIiwiTWF0aCIsInJvdW5kIiwiU3RyaW5nIiwiT2JqZWN0IiwiaXMiLCJOdW1iZXJGaWVsZCIsImxhYmVsIiwib25Db21taXQiLCJtaW4iLCJtYXgiLCJzdGVwIiwic3VmZml4IiwiZHJhZnQiLCJzZXREcmFmdCIsInVzZUVmZmVjdCIsImNvbW1pdCIsInBhcnNlZCIsIm5leHQiLCJQT1NJVElWRV9JTkZJTklUWSIsIk5FR0FUSVZFX0lORklOSVRZIiwiaW5wdXQiLCJhcmlhLWxhYmVsIiwib25DaGFuZ2UiLCJldmVudCIsInRhcmdldCIsIm9uQmx1ciIsIm9uS2V5RG93biIsImtleSIsImN1cnJlbnRUYXJnZXQiLCJibHVyIiwiU2VsZWN0RmllbGQiLCJvcHRpb25zIiwic2VsZWN0IiwibWFwIiwib3B0aW9uIiwiUmFuZ2VGaWVsZCIsIlNlZ21lbnRlZENvbnRyb2wiLCJUb2dnbGVSb3ciLCJjaGVja2VkIiwiZGVzY3JpcHRpb24iXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZXMiOlsiSW5zcGVjdG9yQ29udHJvbHMudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7XG4gIHVzZUVmZmVjdCxcbiAgZm9yd2FyZFJlZixcbiAgdXNlU3RhdGUsXG4gIHR5cGUgQnV0dG9uSFRNTEF0dHJpYnV0ZXMsXG4gIHR5cGUgQ29tcG9uZW50VHlwZSxcbiAgdHlwZSBSZWFjdE5vZGUsXG59IGZyb20gXCJyZWFjdFwiO1xuaW1wb3J0IHR5cGUgeyBMdWNpZGVJY29uIH0gZnJvbSBcImx1Y2lkZS1yZWFjdFwiO1xuaW1wb3J0IHsgQ2hldnJvbkRvd24sIENoZXZyb25SaWdodCB9IGZyb20gXCJsdWNpZGUtcmVhY3RcIjtcbmltcG9ydCB7IGNuIH0gZnJvbSBcIkAvbGliL3V0aWxzXCI7XG5cbmV4cG9ydCBjb25zdCBpbnNwZWN0b3JJbnB1dENsYXNzID1cbiAgXCJoLTcgbWluLXctMCByb3VuZGVkIGJvcmRlciBib3JkZXItdHJhbnNwYXJlbnQgYmctWyMzODM4MzhdIHB4LTIgdGV4dC1bMTFweF0gdGV4dC1bI2YxZjFmMV0gb3V0bGluZS1ub25lIHRyYW5zaXRpb24tY29sb3JzIGhvdmVyOmJvcmRlci1bIzRhNGE0YV0gZm9jdXM6Ym9yZGVyLVsjMDE3OGZmXVwiO1xuXG5leHBvcnQgY29uc3QgSW5zcGVjdG9yU2VjdGlvbiA9ICh7XG4gIHRpdGxlLFxuICBhY3Rpb25zLFxuICBjaGlsZHJlbixcbiAgZGVmYXVsdE9wZW4gPSB0cnVlLFxufToge1xuICB0aXRsZTogc3RyaW5nO1xuICBhY3Rpb25zPzogUmVhY3ROb2RlO1xuICBjaGlsZHJlbjogUmVhY3ROb2RlO1xuICBkZWZhdWx0T3Blbj86IGJvb2xlYW47XG59KSA9PiB7XG4gIGNvbnN0IFtvcGVuLCBzZXRPcGVuXSA9IHVzZVN0YXRlKGRlZmF1bHRPcGVuKTtcbiAgcmV0dXJuIChcbiAgICA8c2VjdGlvbiBjbGFzc05hbWU9XCJib3JkZXItYiBib3JkZXItWyM0MTQxNDFdXCI+XG4gICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggaC0xMCBpdGVtcy1jZW50ZXIgZ2FwLTEgcHgtM1wiPlxuICAgICAgICA8YnV0dG9uXG4gICAgICAgICAgdHlwZT1cImJ1dHRvblwiXG4gICAgICAgICAgYXJpYS1leHBhbmRlZD17b3Blbn1cbiAgICAgICAgICBvbkNsaWNrPXsoKSA9PiBzZXRPcGVuKChjdXJyZW50KSA9PiAhY3VycmVudCl9XG4gICAgICAgICAgY2xhc3NOYW1lPVwiZmxleCBtaW4tdy0wIGZsZXgtMSBpdGVtcy1jZW50ZXIgZ2FwLTEuNSB0ZXh0LWxlZnQgdGV4dC1bMTFweF0gZm9udC1zZW1pYm9sZCB0ZXh0LXdoaXRlXCJcbiAgICAgICAgPlxuICAgICAgICAgIHtvcGVuID8gPENoZXZyb25Eb3duIHNpemU9ezEyfSAvPiA6IDxDaGV2cm9uUmlnaHQgc2l6ZT17MTJ9IC8+fVxuICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cInRydW5jYXRlXCI+e3RpdGxlfTwvc3Bhbj5cbiAgICAgICAgPC9idXR0b24+XG4gICAgICAgIHthY3Rpb25zfVxuICAgICAgPC9kaXY+XG4gICAgICB7b3BlbiA/IDxkaXYgY2xhc3NOYW1lPVwic3BhY2UteS0yLjUgcHgtMyBwYi0zXCI+e2NoaWxkcmVufTwvZGl2PiA6IG51bGx9XG4gICAgPC9zZWN0aW9uPlxuICApO1xufTtcblxuZXhwb3J0IHR5cGUgSW5zcGVjdG9ySWNvbkJ1dHRvblByb3BzID0gQnV0dG9uSFRNTEF0dHJpYnV0ZXM8SFRNTEJ1dHRvbkVsZW1lbnQ+ICYge1xuICBpY29uOiBMdWNpZGVJY29uO1xuICBhY3RpdmU/OiBib29sZWFuO1xufTtcblxuZXhwb3J0IGNvbnN0IEluc3BlY3Rvckljb25CdXR0b24gPSBmb3J3YXJkUmVmPEhUTUxCdXR0b25FbGVtZW50LCBJbnNwZWN0b3JJY29uQnV0dG9uUHJvcHM+KCh7XG4gIGljb246IEljb24sXG4gIGFjdGl2ZSxcbiAgY2xhc3NOYW1lLFxuICAuLi5wcm9wc1xufSwgcmVmKSA9PiAoXG4gIDxidXR0b25cbiAgICByZWY9e3JlZn1cbiAgICB0eXBlPVwiYnV0dG9uXCJcbiAgICBjbGFzc05hbWU9e2NuKFxuICAgICAgXCJncmlkIGgtNyB3LTcgc2hyaW5rLTAgcGxhY2UtaXRlbXMtY2VudGVyIHJvdW5kZWQgdGV4dC1bI2M4YzhjOF0gaG92ZXI6YmctWyM0NDRdIGhvdmVyOnRleHQtd2hpdGUgZGlzYWJsZWQ6Y3Vyc29yLW5vdC1hbGxvd2VkIGRpc2FibGVkOm9wYWNpdHktMzVcIixcbiAgICAgIGFjdGl2ZSAmJiBcImJnLVsjMDE3OGZmXSB0ZXh0LXdoaXRlIGhvdmVyOmJnLVsjMDE3OGZmXVwiLFxuICAgICAgY2xhc3NOYW1lLFxuICAgICl9XG4gICAgey4uLnByb3BzfVxuICA+XG4gICAgPEljb24gc2l6ZT17MTN9IHN0cm9rZVdpZHRoPXsxLjh9IC8+XG4gIDwvYnV0dG9uPlxuKSk7XG5cbkluc3BlY3Rvckljb25CdXR0b24uZGlzcGxheU5hbWUgPSBcIkluc3BlY3Rvckljb25CdXR0b25cIjtcblxuY29uc3QgZm9ybWF0TnVtYmVyID0gKHZhbHVlOiBudW1iZXIpID0+IHtcbiAgaWYgKCFOdW1iZXIuaXNGaW5pdGUodmFsdWUpKSByZXR1cm4gXCIwXCI7XG4gIGNvbnN0IHJvdW5kZWQgPSBNYXRoLnJvdW5kKHZhbHVlICogMTAwKSAvIDEwMDtcbiAgcmV0dXJuIFN0cmluZyhPYmplY3QuaXMocm91bmRlZCwgLTApID8gMCA6IHJvdW5kZWQpO1xufTtcblxuZXhwb3J0IGNvbnN0IE51bWJlckZpZWxkID0gKHtcbiAgbGFiZWwsXG4gIHZhbHVlLFxuICBvbkNvbW1pdCxcbiAgbWluLFxuICBtYXgsXG4gIHN0ZXAgPSAxLFxuICBzdWZmaXgsXG59OiB7XG4gIGxhYmVsOiBzdHJpbmc7XG4gIHZhbHVlOiBudW1iZXI7XG4gIG9uQ29tbWl0OiAodmFsdWU6IG51bWJlcikgPT4gdm9pZDtcbiAgbWluPzogbnVtYmVyO1xuICBtYXg/OiBudW1iZXI7XG4gIHN0ZXA/OiBudW1iZXI7XG4gIHN1ZmZpeD86IHN0cmluZztcbn0pID0+IHtcbiAgY29uc3QgW2RyYWZ0LCBzZXREcmFmdF0gPSB1c2VTdGF0ZShmb3JtYXROdW1iZXIodmFsdWUpKTtcbiAgdXNlRWZmZWN0KCgpID0+IHNldERyYWZ0KGZvcm1hdE51bWJlcih2YWx1ZSkpLCBbdmFsdWVdKTtcblxuICBjb25zdCBjb21taXQgPSAoKSA9PiB7XG4gICAgY29uc3QgcGFyc2VkID0gTnVtYmVyKGRyYWZ0KTtcbiAgICBpZiAoIU51bWJlci5pc0Zpbml0ZShwYXJzZWQpKSB7XG4gICAgICBzZXREcmFmdChmb3JtYXROdW1iZXIodmFsdWUpKTtcbiAgICAgIHJldHVybjtcbiAgICB9XG4gICAgY29uc3QgbmV4dCA9IE1hdGgubWluKG1heCA/PyBOdW1iZXIuUE9TSVRJVkVfSU5GSU5JVFksIE1hdGgubWF4KG1pbiA/PyBOdW1iZXIuTkVHQVRJVkVfSU5GSU5JVFksIHBhcnNlZCkpO1xuICAgIHNldERyYWZ0KGZvcm1hdE51bWJlcihuZXh0KSk7XG4gICAgaWYgKG5leHQgIT09IHZhbHVlKSBvbkNvbW1pdChuZXh0KTtcbiAgfTtcblxuICByZXR1cm4gKFxuICAgIDxsYWJlbCBjbGFzc05hbWU9XCJtaW4tdy0wXCI+XG4gICAgICA8c3BhbiBjbGFzc05hbWU9XCJtYi0xIGJsb2NrIHRleHQtWzlweF0gZm9udC1tZWRpdW0gdGV4dC1bI2E2YTZhNl1cIj57bGFiZWx9PC9zcGFuPlxuICAgICAgPHNwYW4gY2xhc3NOYW1lPVwicmVsYXRpdmUgYmxvY2tcIj5cbiAgICAgICAgPGlucHV0XG4gICAgICAgICAgYXJpYS1sYWJlbD17bGFiZWx9XG4gICAgICAgICAgdHlwZT1cIm51bWJlclwiXG4gICAgICAgICAgbWluPXttaW59XG4gICAgICAgICAgbWF4PXttYXh9XG4gICAgICAgICAgc3RlcD17c3RlcH1cbiAgICAgICAgICB2YWx1ZT17ZHJhZnR9XG4gICAgICAgICAgb25DaGFuZ2U9eyhldmVudCkgPT4gc2V0RHJhZnQoZXZlbnQudGFyZ2V0LnZhbHVlKX1cbiAgICAgICAgICBvbkJsdXI9e2NvbW1pdH1cbiAgICAgICAgICBvbktleURvd249eyhldmVudCkgPT4ge1xuICAgICAgICAgICAgaWYgKGV2ZW50LmtleSA9PT0gXCJFbnRlclwiKSBldmVudC5jdXJyZW50VGFyZ2V0LmJsdXIoKTtcbiAgICAgICAgICAgIGlmIChldmVudC5rZXkgPT09IFwiRXNjYXBlXCIpIHtcbiAgICAgICAgICAgICAgc2V0RHJhZnQoZm9ybWF0TnVtYmVyKHZhbHVlKSk7XG4gICAgICAgICAgICAgIGV2ZW50LmN1cnJlbnRUYXJnZXQuYmx1cigpO1xuICAgICAgICAgICAgfVxuICAgICAgICAgIH19XG4gICAgICAgICAgY2xhc3NOYW1lPXtjbihpbnNwZWN0b3JJbnB1dENsYXNzLCBcInctZnVsbCBwci03IHRhYnVsYXItbnVtc1wiKX1cbiAgICAgICAgLz5cbiAgICAgICAge3N1ZmZpeCA/IChcbiAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJwb2ludGVyLWV2ZW50cy1ub25lIGFic29sdXRlIHJpZ2h0LTIgdG9wLTEvMiAtdHJhbnNsYXRlLXktMS8yIHRleHQtWzlweF0gdGV4dC1bIzkwOTA5MF1cIj5cbiAgICAgICAgICAgIHtzdWZmaXh9XG4gICAgICAgICAgPC9zcGFuPlxuICAgICAgICApIDogbnVsbH1cbiAgICAgIDwvc3Bhbj5cbiAgICA8L2xhYmVsPlxuICApO1xufTtcblxuZXhwb3J0IGNvbnN0IFNlbGVjdEZpZWxkID0gKHtcbiAgbGFiZWwsXG4gIHZhbHVlLFxuICBvcHRpb25zLFxuICBvbkNoYW5nZSxcbn06IHtcbiAgbGFiZWw6IHN0cmluZztcbiAgdmFsdWU6IHN0cmluZztcbiAgb3B0aW9uczogQXJyYXk8eyB2YWx1ZTogc3RyaW5nOyBsYWJlbDogc3RyaW5nIH0+O1xuICBvbkNoYW5nZTogKHZhbHVlOiBzdHJpbmcpID0+IHZvaWQ7XG59KSA9PiAoXG4gIDxsYWJlbCBjbGFzc05hbWU9XCJibG9jayBtaW4tdy0wXCI+XG4gICAgPHNwYW4gY2xhc3NOYW1lPVwibWItMSBibG9jayB0ZXh0LVs5cHhdIGZvbnQtbWVkaXVtIHRleHQtWyNhNmE2YTZdXCI+e2xhYmVsfTwvc3Bhbj5cbiAgICA8c2VsZWN0XG4gICAgICBhcmlhLWxhYmVsPXtsYWJlbH1cbiAgICAgIHZhbHVlPXt2YWx1ZX1cbiAgICAgIG9uQ2hhbmdlPXsoZXZlbnQpID0+IG9uQ2hhbmdlKGV2ZW50LnRhcmdldC52YWx1ZSl9XG4gICAgICBjbGFzc05hbWU9e2NuKGluc3BlY3RvcklucHV0Q2xhc3MsIFwidy1mdWxsXCIpfVxuICAgID5cbiAgICAgIHtvcHRpb25zLm1hcCgob3B0aW9uKSA9PiAoXG4gICAgICAgIDxvcHRpb24ga2V5PXtvcHRpb24udmFsdWV9IHZhbHVlPXtvcHRpb24udmFsdWV9PntvcHRpb24ubGFiZWx9PC9vcHRpb24+XG4gICAgICApKX1cbiAgICA8L3NlbGVjdD5cbiAgPC9sYWJlbD5cbik7XG5cbmV4cG9ydCBjb25zdCBSYW5nZUZpZWxkID0gKHtcbiAgbGFiZWwsXG4gIHZhbHVlLFxuICBtaW4sXG4gIG1heCxcbiAgc3RlcCA9IDEsXG4gIG9uQ2hhbmdlLFxufToge1xuICBsYWJlbDogc3RyaW5nO1xuICB2YWx1ZTogbnVtYmVyO1xuICBtaW46IG51bWJlcjtcbiAgbWF4OiBudW1iZXI7XG4gIHN0ZXA/OiBudW1iZXI7XG4gIG9uQ2hhbmdlOiAodmFsdWU6IG51bWJlcikgPT4gdm9pZDtcbn0pID0+IChcbiAgPGxhYmVsIGNsYXNzTmFtZT1cImJsb2NrXCI+XG4gICAgPHNwYW4gY2xhc3NOYW1lPVwibWItMSBmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWJldHdlZW4gdGV4dC1bOXB4XSBmb250LW1lZGl1bSB0ZXh0LVsjYTZhNmE2XVwiPlxuICAgICAgPHNwYW4+e2xhYmVsfTwvc3Bhbj5cbiAgICAgIDxzcGFuIGNsYXNzTmFtZT1cInRhYnVsYXItbnVtcyB0ZXh0LVsjZDhkOGQ4XVwiPntNYXRoLnJvdW5kKHZhbHVlICogMTAwKSAvIDEwMH08L3NwYW4+XG4gICAgPC9zcGFuPlxuICAgIDxpbnB1dFxuICAgICAgYXJpYS1sYWJlbD17bGFiZWx9XG4gICAgICB0eXBlPVwicmFuZ2VcIlxuICAgICAgbWluPXttaW59XG4gICAgICBtYXg9e21heH1cbiAgICAgIHN0ZXA9e3N0ZXB9XG4gICAgICB2YWx1ZT17dmFsdWV9XG4gICAgICBvbkNoYW5nZT17KGV2ZW50KSA9PiBvbkNoYW5nZShOdW1iZXIoZXZlbnQudGFyZ2V0LnZhbHVlKSl9XG4gICAgICBjbGFzc05hbWU9XCJoLTEuNSB3LWZ1bGwgY3Vyc29yLXBvaW50ZXIgYWNjZW50LVsjMDE3OGZmXVwiXG4gICAgLz5cbiAgPC9sYWJlbD5cbik7XG5cbmV4cG9ydCBjb25zdCBTZWdtZW50ZWRDb250cm9sID0gKHtcbiAgbGFiZWwsXG4gIG9wdGlvbnMsXG4gIHZhbHVlLFxuICBvbkNoYW5nZSxcbn06IHtcbiAgbGFiZWw6IHN0cmluZztcbiAgb3B0aW9uczogQXJyYXk8eyB2YWx1ZTogc3RyaW5nOyBsYWJlbDogc3RyaW5nOyBpY29uPzogQ29tcG9uZW50VHlwZTx7IHNpemU/OiBudW1iZXIgfT4gfT47XG4gIHZhbHVlOiBzdHJpbmc7XG4gIG9uQ2hhbmdlOiAodmFsdWU6IHN0cmluZykgPT4gdm9pZDtcbn0pID0+IChcbiAgPGRpdj5cbiAgICA8ZGl2IGNsYXNzTmFtZT1cIm1iLTEgdGV4dC1bOXB4XSBmb250LW1lZGl1bSB0ZXh0LVsjYTZhNmE2XVwiPntsYWJlbH08L2Rpdj5cbiAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgYXV0by1jb2xzLWZyIGdyaWQtZmxvdy1jb2wgZ2FwLXB4IG92ZXJmbG93LWhpZGRlbiByb3VuZGVkIGJnLVsjMjQyNDI0XSBwLXB4XCI+XG4gICAgICB7b3B0aW9ucy5tYXAoKG9wdGlvbikgPT4ge1xuICAgICAgICBjb25zdCBJY29uID0gb3B0aW9uLmljb247XG4gICAgICAgIHJldHVybiAoXG4gICAgICAgICAgPGJ1dHRvblxuICAgICAgICAgICAga2V5PXtvcHRpb24udmFsdWV9XG4gICAgICAgICAgICB0eXBlPVwiYnV0dG9uXCJcbiAgICAgICAgICAgIHRpdGxlPXtvcHRpb24ubGFiZWx9XG4gICAgICAgICAgICBhcmlhLWxhYmVsPXtvcHRpb24ubGFiZWx9XG4gICAgICAgICAgICBvbkNsaWNrPXsoKSA9PiBvbkNoYW5nZShvcHRpb24udmFsdWUpfVxuICAgICAgICAgICAgY2xhc3NOYW1lPXtjbihcbiAgICAgICAgICAgICAgXCJncmlkIGgtNyBwbGFjZS1pdGVtcy1jZW50ZXIgcm91bmRlZC1zbSB0ZXh0LVsxMHB4XSB0ZXh0LVsjYWFhXSBob3ZlcjpiZy1bIzQxNDE0MV0gaG92ZXI6dGV4dC13aGl0ZVwiLFxuICAgICAgICAgICAgICB2YWx1ZSA9PT0gb3B0aW9uLnZhbHVlICYmIFwiYmctWyM0YTRhNGFdIHRleHQtd2hpdGVcIixcbiAgICAgICAgICAgICl9XG4gICAgICAgICAgPlxuICAgICAgICAgICAge0ljb24gPyA8SWNvbiBzaXplPXsxM30gLz4gOiBvcHRpb24ubGFiZWx9XG4gICAgICAgICAgPC9idXR0b24+XG4gICAgICAgICk7XG4gICAgICB9KX1cbiAgICA8L2Rpdj5cbiAgPC9kaXY+XG4pO1xuXG5leHBvcnQgY29uc3QgVG9nZ2xlUm93ID0gKHtcbiAgbGFiZWwsXG4gIGNoZWNrZWQsXG4gIG9uQ2hhbmdlLFxuICBkZXNjcmlwdGlvbixcbn06IHtcbiAgbGFiZWw6IHN0cmluZztcbiAgY2hlY2tlZDogYm9vbGVhbjtcbiAgb25DaGFuZ2U6IChjaGVja2VkOiBib29sZWFuKSA9PiB2b2lkO1xuICBkZXNjcmlwdGlvbj86IHN0cmluZztcbn0pID0+IChcbiAgPGxhYmVsIGNsYXNzTmFtZT1cImZsZXggY3Vyc29yLXBvaW50ZXIgaXRlbXMtY2VudGVyIGp1c3RpZnktYmV0d2VlbiBnYXAtMyBweS0wLjUgdGV4dC1bMTBweF0gdGV4dC1bI2RkZF1cIj5cbiAgICA8c3Bhbj5cbiAgICAgIDxzcGFuIGNsYXNzTmFtZT1cImJsb2NrXCI+e2xhYmVsfTwvc3Bhbj5cbiAgICAgIHtkZXNjcmlwdGlvbiA/IDxzcGFuIGNsYXNzTmFtZT1cIm10LTAuNSBibG9jayB0ZXh0LVs5cHhdIHRleHQtWyM4ZjhmOGZdXCI+e2Rlc2NyaXB0aW9ufTwvc3Bhbj4gOiBudWxsfVxuICAgIDwvc3Bhbj5cbiAgICA8aW5wdXRcbiAgICAgIHR5cGU9XCJjaGVja2JveFwiXG4gICAgICBjaGVja2VkPXtjaGVja2VkfVxuICAgICAgb25DaGFuZ2U9eyhldmVudCkgPT4gb25DaGFuZ2UoZXZlbnQudGFyZ2V0LmNoZWNrZWQpfVxuICAgICAgY2xhc3NOYW1lPVwiaC0zLjUgdy0zLjUgYWNjZW50LVsjMDE3OGZmXVwiXG4gICAgLz5cbiAgPC9sYWJlbD5cbik7XG4iXSwiZmlsZSI6Ii9zcmMvdWkvaW5zcGVjdG9yLXBhbmVsL0luc3BlY3RvckNvbnRyb2xzLnRzeCJ9

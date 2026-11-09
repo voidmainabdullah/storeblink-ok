@@ -1,0 +1,526 @@
+Object.defineProperty(__vite_ssr_exports__, "AppearanceInspector", { enumerable: true, configurable: true, get(){ try { return AppearanceInspector } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/react/jsx-dev-runtime.js", {"importedNames":["jsxDEV","Fragment"]});
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/lucide-react/dist/cjs/lucide-react.js", {"importedNames":["Eye","EyeOff","Plus","Trash2"]});
+const __vite_ssr_import_2__ = await __vite_ssr_import__("/src/editor/components/toolbars/FigmaColorPicker.tsx", {"importedNames":["FigmaColorPicker"]});
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/src/ui/inspector-panel/InspectorControls.tsx", {"importedNames":["InspectorIconButton","InspectorSection","NumberField","SelectField","ToggleRow"]});
+const primaryFillColor = (node)=>{
+    if (node.type === "button" && typeof node.props.background === "string") return node.props.background;
+    const fill = node.style.fills[0];
+    return fill?.type === "solid" ? fill.color : "#FFFFFF";
+};
+const effectKind = (effect)=>String(effect.value.kind ?? (effect.type === "shadow" ? "drop-shadow" : effect.type === "blur" ? "layer-blur" : effect.type));
+const AppearanceInspector = ({ node, brandColors, showAppearance = true, showFill = true, showStroke = true, showEffects = true, effectExtras, onUpdateProps, onUpdateStyle })=>{
+    const fill = node.style.fills[0];
+    const stroke = node.style.strokes[0];
+    const fillVisible = node.type === "button" ? node.props.backgroundVisible !== false : fill?.visible !== false;
+    const updateFill = (patch)=>{
+        const current = fill ?? {
+            type: "solid",
+            color: "#FFFFFF"
+        };
+        onUpdateStyle({
+            fills: [
+                Object.assign({}, current, patch),
+                ...node.style.fills.slice(1)
+            ]
+        });
+    };
+    const setFillColor = (color)=>{
+        if (node.type === "button") {
+            onUpdateProps({
+                background: color
+            });
+            return;
+        };
+        updateFill({
+            type: "solid",
+            color
+        });
+    };
+    const updateStroke = (patch)=>{
+        const current = stroke ?? {
+            color: "#000000",
+            width: 1,
+            style: "solid"
+        };
+        onUpdateStyle({
+            strokes: [
+                {
+                    ...current,
+                    ...patch
+                },
+                ...node.style.strokes.slice(1)
+            ]
+        });
+    };
+    const toggleEffect = (kind, enabled)=>{
+        const next = node.style.effects.filter((effect)=>effectKind(effect) !== kind);
+        if (enabled) {
+            if (kind === "drop-shadow" || kind === "inner-shadow") {
+                next.push({
+                    type: "shadow",
+                    value: {
+                        kind,
+                        x: 0,
+                        y: kind === "drop-shadow" ? 4 : 2,
+                        blur: 12,
+                        spread: 0,
+                        color: kind === "drop-shadow" ? "rgba(0,0,0,0.22)" : "rgba(0,0,0,0.18)"
+                    }
+                });
+            } else {
+                next.push({
+                    type: "blur",
+                    value: {
+                        kind,
+                        radius: kind === "layer-blur" ? 4 : 12
+                    }
+                });
+            }
+        };
+        onUpdateStyle({
+            effects: next
+        });
+    };
+    const updateEffect = (kind, patch)=>{
+        onUpdateStyle({
+            effects: node.style.effects.map((effect)=>effectKind(effect) === kind ? {
+                    ...effect,
+                    value: {
+                        ...effect.value,
+                        ...patch
+                    }
+                } : effect)
+        });
+    };
+    const dropShadow = node.style.effects.find((effect)=>effectKind(effect) === "drop-shadow");
+    const innerShadow = node.style.effects.find((effect)=>effectKind(effect) === "inner-shadow");
+    const layerBlur = node.style.effects.find((effect)=>effectKind(effect) === "layer-blur");
+    const backgroundBlur = node.style.effects.find((effect)=>effectKind(effect) === "background-blur");
+    return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_0__.Fragment), {
+        children: [
+            showAppearance ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.InspectorSection), {
+                title: "Appearance",
+                children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                    className: "grid grid-cols-2 gap-2",
+                    children: [
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.NumberField), {
+                            label: "Opacity",
+                            value: Math.round(node.style.opacity * 100),
+                            min: 0,
+                            max: 100,
+                            suffix: "%",
+                            onCommit: (opacity)=>onUpdateStyle({
+                                    opacity: opacity / 100
+                                })
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                            lineNumber: 116,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.NumberField), {
+                            label: "Corner radius",
+                            value: typeof node.style.cornerRadius === "number" ? node.style.cornerRadius : 0,
+                            min: 0,
+                            onCommit: (cornerRadius)=>onUpdateStyle({
+                                    cornerRadius
+                                })
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                            lineNumber: 124,
+                            columnNumber: 13
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                    lineNumber: 115,
+                    columnNumber: 11
+                }, this)
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                lineNumber: 114,
+                columnNumber: 9
+            }, this) : null,
+            showFill ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.InspectorSection), {
+                title: "Fill",
+                actions: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.InspectorIconButton), {
+                    icon: __vite_ssr_import_1__.Plus,
+                    title: "Add fill",
+                    onClick: ()=>node.type === "button" ? onUpdateProps({
+                            background: "#FFFFFF",
+                            backgroundVisible: true
+                        }) : onUpdateStyle({
+                            fills: [
+                                {
+                                    type: "solid",
+                                    color: "#FFFFFF"
+                                },
+                                ...node.style.fills
+                            ]
+                        })
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                    lineNumber: 138,
+                    columnNumber: 13
+                }, void 0),
+                children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                    className: "grid grid-cols-[auto_1fr_auto_auto] items-center gap-1 rounded bg-[#383838] px-1.5 py-1",
+                    children: [
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                            className: "h-4 w-4 rounded-sm border border-white/30",
+                            style: {
+                                background: primaryFillColor(node)
+                            }
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                            lineNumber: 150,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                            className: "truncate text-[10px] text-[#ddd]",
+                            children: fill?.type === "gradient" ? "Gradient" : fill?.type === "image" ? "Image" : primaryFillColor(node)
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                            lineNumber: 151,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                            className: "text-[9px] text-[#aaa]",
+                            children: [
+                                Math.round((node.type === "button" ? Number(node.props.backgroundOpacity ?? 1) : fill?.opacity ?? 1) * 100),
+                                "%"
+                            ]
+                        }, void 0, true, {
+                            fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                            lineNumber: 154,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.FigmaColorPicker), {
+                            value: primaryFillColor(node),
+                            label: "Fill color",
+                            brandColors: brandColors,
+                            opacity: Math.round((node.type === "button" ? Number(node.props.backgroundOpacity ?? 1) : fill?.opacity ?? 1) * 100),
+                            onOpacityChange: (opacity)=>node.type === "button" ? onUpdateProps({
+                                    backgroundOpacity: opacity / 100
+                                }) : updateFill({
+                                    opacity: opacity / 100
+                                }),
+                            onChange: setFillColor
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                            lineNumber: 157,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {}, void 0, false, {
+                            fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                            lineNumber: 169,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {}, void 0, false, {
+                            fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                            lineNumber: 170,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.InspectorIconButton), {
+                            icon: fillVisible ? __vite_ssr_import_1__.Eye : __vite_ssr_import_1__.EyeOff,
+                            title: fillVisible ? "Hide fill" : "Show fill",
+                            onClick: ()=>node.type === "button" ? onUpdateProps({
+                                    backgroundVisible: !fillVisible
+                                }) : updateFill({
+                                    visible: !fillVisible
+                                })
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                            lineNumber: 171,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.InspectorIconButton), {
+                            icon: __vite_ssr_import_1__.Trash2,
+                            title: "Delete fill",
+                            disabled: node.type !== "button" && !node.style.fills.length,
+                            onClick: ()=>node.type === "button" ? onUpdateProps({
+                                    background: undefined,
+                                    backgroundVisible: false
+                                }) : onUpdateStyle({
+                                    fills: node.style.fills.slice(1)
+                                })
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                            lineNumber: 180,
+                            columnNumber: 13
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                    lineNumber: 149,
+                    columnNumber: 11
+                }, this)
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                lineNumber: 135,
+                columnNumber: 9
+            }, this) : null,
+            showStroke ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.InspectorSection), {
+                title: "Stroke",
+                defaultOpen: Boolean(stroke),
+                actions: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.InspectorIconButton), {
+                    icon: __vite_ssr_import_1__.Plus,
+                    title: "Add stroke",
+                    onClick: ()=>onUpdateStyle({
+                            strokes: [
+                                {
+                                    color: "#000000",
+                                    width: 1,
+                                    style: "solid",
+                                    position: "inside"
+                                },
+                                ...node.style.strokes
+                            ]
+                        })
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                    lineNumber: 199,
+                    columnNumber: 13
+                }, void 0),
+                children: stroke ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_0__.Fragment), {
+                    children: [
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                            className: "flex items-center justify-between rounded bg-[#383838] px-2 py-1",
+                            children: [
+                                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                    className: "text-[10px] text-[#ddd]",
+                                    children: "Color"
+                                }, void 0, false, {
+                                    fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                                    lineNumber: 216,
+                                    columnNumber: 17
+                                }, this),
+                                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.FigmaColorPicker), {
+                                    value: stroke.color,
+                                    label: "Stroke color",
+                                    brandColors: brandColors,
+                                    opacity: Math.round((stroke.opacity ?? 1) * 100),
+                                    onOpacityChange: (opacity)=>updateStroke({
+                                            opacity: opacity / 100
+                                        }),
+                                    onChange: (color)=>updateStroke({
+                                            color
+                                        })
+                                }, void 0, false, {
+                                    fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                                    lineNumber: 217,
+                                    columnNumber: 17
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                            lineNumber: 215,
+                            columnNumber: 15
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                            className: "grid grid-cols-2 gap-2",
+                            children: [
+                                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.SelectField), {
+                                    label: "Position",
+                                    value: stroke.position ?? "inside",
+                                    options: [
+                                        {
+                                            value: "inside",
+                                            label: "Inside"
+                                        },
+                                        {
+                                            value: "center",
+                                            label: "Center"
+                                        },
+                                        {
+                                            value: "outside",
+                                            label: "Outside"
+                                        }
+                                    ],
+                                    onChange: (position)=>updateStroke({
+                                            position: position
+                                        })
+                                }, void 0, false, {
+                                    fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                                    lineNumber: 227,
+                                    columnNumber: 17
+                                }, this),
+                                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.NumberField), {
+                                    label: "Weight",
+                                    value: stroke.width,
+                                    min: 0,
+                                    onCommit: (width)=>updateStroke({
+                                            width
+                                        })
+                                }, void 0, false, {
+                                    fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                                    lineNumber: 237,
+                                    columnNumber: 17
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                            lineNumber: 226,
+                            columnNumber: 15
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                            className: "grid grid-cols-[1fr_auto] items-end gap-2",
+                            children: [
+                                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.SelectField), {
+                                    label: "Dash",
+                                    value: stroke.style ?? "solid",
+                                    options: [
+                                        {
+                                            value: "solid",
+                                            label: "Solid"
+                                        },
+                                        {
+                                            value: "dashed",
+                                            label: "Dashed"
+                                        },
+                                        {
+                                            value: "dotted",
+                                            label: "Dotted"
+                                        }
+                                    ],
+                                    onChange: (style)=>updateStroke({
+                                            style: style
+                                        })
+                                }, void 0, false, {
+                                    fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                                    lineNumber: 240,
+                                    columnNumber: 17
+                                }, this),
+                                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.InspectorIconButton), {
+                                    icon: __vite_ssr_import_1__.Trash2,
+                                    title: "Delete stroke",
+                                    onClick: ()=>onUpdateStyle({
+                                            strokes: node.style.strokes.slice(1)
+                                        }),
+                                    className: "mb-0"
+                                }, void 0, false, {
+                                    fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                                    lineNumber: 250,
+                                    columnNumber: 17
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                            lineNumber: 239,
+                            columnNumber: 15
+                        }, this)
+                    ]
+                }, void 0, true) : /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                    className: "text-[9px] text-[#888]",
+                    children: "No stroke"
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                    lineNumber: 258,
+                    columnNumber: 15
+                }, this)
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                lineNumber: 195,
+                columnNumber: 9
+            }, this) : null,
+            showEffects ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.InspectorSection), {
+                title: "Effects",
+                defaultOpen: false,
+                children: [
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.ToggleRow), {
+                        label: "Drop shadow",
+                        checked: Boolean(dropShadow),
+                        onChange: (enabled)=>toggleEffect("drop-shadow", enabled)
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                        lineNumber: 264,
+                        columnNumber: 11
+                    }, this),
+                    dropShadow ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "grid grid-cols-4 gap-1",
+                        children: [
+                            "x",
+                            "y",
+                            "blur",
+                            "spread"
+                        ].map((key)=>/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.NumberField), {
+                                label: key.toUpperCase(),
+                                value: Number(dropShadow.value[key] ?? 0),
+                                min: key === "blur" ? 0 : undefined,
+                                onCommit: (value)=>updateEffect("drop-shadow", {
+                                        [key]: value
+                                    })
+                            }, key, false, {
+                                fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                                lineNumber: 268,
+                                columnNumber: 17
+                            }, this))
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                        lineNumber: 266,
+                        columnNumber: 13
+                    }, this) : null,
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.ToggleRow), {
+                        label: "Inner shadow",
+                        checked: Boolean(innerShadow),
+                        onChange: (enabled)=>toggleEffect("inner-shadow", enabled)
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                        lineNumber: 278,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.ToggleRow), {
+                        label: "Layer blur",
+                        checked: Boolean(layerBlur),
+                        onChange: (enabled)=>toggleEffect("layer-blur", enabled)
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                        lineNumber: 279,
+                        columnNumber: 11
+                    }, this),
+                    layerBlur ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.NumberField), {
+                        label: "Layer blur radius",
+                        value: Number(layerBlur.value.radius ?? 4),
+                        min: 0,
+                        onCommit: (radius)=>updateEffect("layer-blur", {
+                                radius
+                            })
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                        lineNumber: 280,
+                        columnNumber: 24
+                    }, this) : null,
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.ToggleRow), {
+                        label: "Background blur",
+                        checked: Boolean(backgroundBlur),
+                        onChange: (enabled)=>toggleEffect("background-blur", enabled)
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                        lineNumber: 281,
+                        columnNumber: 11
+                    }, this),
+                    backgroundBlur ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.NumberField), {
+                        label: "Background blur radius",
+                        value: Number(backgroundBlur.value.radius ?? 12),
+                        min: 0,
+                        onCommit: (radius)=>updateEffect("background-blur", {
+                                radius
+                            })
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                        lineNumber: 282,
+                        columnNumber: 29
+                    }, this) : null,
+                    effectExtras
+                ]
+            }, void 0, true, {
+                fileName: "F:/Storeblink/src/ui/inspector-panel/AppearanceInspector.tsx",
+                lineNumber: 263,
+                columnNumber: 9
+            }, this) : null
+        ]
+    }, void 0, true);
+};
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,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Y0FBY0M7Ozs7OztvQkFDNUdlLDZCQUFZLGlDQUFDTTt3QkFBWUMsT0FBTTt3QkFBb0JoRCxPQUFPK0QsT0FBT3RCLFVBQVV6QyxLQUFLLENBQUNtQyxNQUFNLElBQUk7d0JBQUlpQixLQUFLO3dCQUFHRyxVQUFVLENBQUNwQixTQUFXQyxhQUFhLGNBQWM7Z0NBQUVEOzRCQUFPOzs7OzsrQkFBUztxQ0FDM0ssaUNBQUM0Qzt3QkFBVS9CLE9BQU07d0JBQWtCZ0MsU0FBU0wsUUFBUWpDO3dCQUFpQnlCLFVBQVUsQ0FBQ3pDLFVBQVlELGFBQWEsbUJBQW1CQzs7Ozs7O29CQUMzSGdCLGtDQUFpQixpQ0FBQ0s7d0JBQVlDLE9BQU07d0JBQXlCaEQsT0FBTytELE9BQU9yQixlQUFlMUMsS0FBSyxDQUFDbUMsTUFBTSxJQUFJO3dCQUFLaUIsS0FBSzt3QkFBR0csVUFBVSxDQUFDcEIsU0FBV0MsYUFBYSxtQkFBbUI7Z0NBQUVEOzRCQUFPOzs7OzsrQkFBUztvQkFDL0wzQjs7Ozs7O3VCQUVEOzs7QUFHViIsIm5hbWVzIjpbInByaW1hcnlGaWxsQ29sb3IiLCJub2RlIiwidHlwZSIsInByb3BzIiwiYmFja2dyb3VuZCIsImZpbGwiLCJzdHlsZSIsImZpbGxzIiwiY29sb3IiLCJlZmZlY3RLaW5kIiwiZWZmZWN0IiwiU3RyaW5nIiwidmFsdWUiLCJraW5kIiwiQXBwZWFyYW5jZUluc3BlY3RvciIsImJyYW5kQ29sb3JzIiwic2hvd0FwcGVhcmFuY2UiLCJzaG93RmlsbCIsInNob3dTdHJva2UiLCJzaG93RWZmZWN0cyIsImVmZmVjdEV4dHJhcyIsIm9uVXBkYXRlUHJvcHMiLCJvblVwZGF0ZVN0eWxlIiwic3Ryb2tlIiwic3Ryb2tlcyIsImZpbGxWaXNpYmxlIiwiYmFja2dyb3VuZFZpc2libGUiLCJ2aXNpYmxlIiwidXBkYXRlRmlsbCIsInBhdGNoIiwiY3VycmVudCIsIk9iamVjdCIsImFzc2lnbiIsInNsaWNlIiwic2V0RmlsbENvbG9yIiwidXBkYXRlU3Ryb2tlIiwid2lkdGgiLCJ0b2dnbGVFZmZlY3QiLCJlbmFibGVkIiwibmV4dCIsImVmZmVjdHMiLCJmaWx0ZXIiLCJwdXNoIiwieCIsInkiLCJibHVyIiwic3ByZWFkIiwicmFkaXVzIiwidXBkYXRlRWZmZWN0IiwibWFwIiwiZHJvcFNoYWRvdyIsImZpbmQiLCJpbm5lclNoYWRvdyIsImxheWVyQmx1ciIsImJhY2tncm91bmRCbHVyIiwiSW5zcGVjdG9yU2VjdGlvbiIsInRpdGxlIiwiZGl2IiwiY2xhc3NOYW1lIiwiTnVtYmVyRmllbGQiLCJsYWJlbCIsIk1hdGgiLCJyb3VuZCIsIm9wYWNpdHkiLCJtaW4iLCJtYXgiLCJzdWZmaXgiLCJvbkNvbW1pdCIsImNvcm5lclJhZGl1cyIsImFjdGlvbnMiLCJJbnNwZWN0b3JJY29uQnV0dG9uIiwiaWNvbiIsIlBsdXMiLCJvbkNsaWNrIiwic3BhbiIsIk51bWJlciIsImJhY2tncm91bmRPcGFjaXR5IiwiRmlnbWFDb2xvclBpY2tlciIsIm9uT3BhY2l0eUNoYW5nZSIsIm9uQ2hhbmdlIiwiRXllIiwiRXllT2ZmIiwiVHJhc2gyIiwiZGlzYWJsZWQiLCJsZW5ndGgiLCJ1bmRlZmluZWQiLCJkZWZhdWx0T3BlbiIsIkJvb2xlYW4iLCJwb3NpdGlvbiIsIlNlbGVjdEZpZWxkIiwib3B0aW9ucyIsIlRvZ2dsZVJvdyIsImNoZWNrZWQiLCJrZXkiLCJ0b1VwcGVyQ2FzZSJdLCJpZ25vcmVMaXN0IjpbXSwic291cmNlcyI6WyJBcHBlYXJhbmNlSW5zcGVjdG9yLnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBFeWUsIEV5ZU9mZiwgUGx1cywgVHJhc2gyIH0gZnJvbSBcImx1Y2lkZS1yZWFjdFwiO1xuaW1wb3J0IHR5cGUgeyBSZWFjdE5vZGUgfSBmcm9tIFwicmVhY3RcIjtcbmltcG9ydCB7IEZpZ21hQ29sb3JQaWNrZXIgfSBmcm9tIFwiQC9lZGl0b3IvY29tcG9uZW50cy90b29sYmFycy9GaWdtYUNvbG9yUGlja2VyXCI7XG5pbXBvcnQgdHlwZSB7IEVmZmVjdCwgRmlsbCwgU2NlbmVOb2RlLCBTdHJva2UgfSBmcm9tIFwiQC90eXBlc1wiO1xuaW1wb3J0IHtcbiAgSW5zcGVjdG9ySWNvbkJ1dHRvbixcbiAgSW5zcGVjdG9yU2VjdGlvbixcbiAgTnVtYmVyRmllbGQsXG4gIFNlbGVjdEZpZWxkLFxuICBUb2dnbGVSb3csXG59IGZyb20gXCIuL0luc3BlY3RvckNvbnRyb2xzXCI7XG5cbmV4cG9ydCB0eXBlIEFwcGVhcmFuY2VJbnNwZWN0b3JQcm9wcyA9IHtcbiAgbm9kZTogU2NlbmVOb2RlO1xuICBicmFuZENvbG9yczogc3RyaW5nW107XG4gIHNob3dBcHBlYXJhbmNlPzogYm9vbGVhbjtcbiAgc2hvd0ZpbGw/OiBib29sZWFuO1xuICBzaG93U3Ryb2tlPzogYm9vbGVhbjtcbiAgc2hvd0VmZmVjdHM/OiBib29sZWFuO1xuICBlZmZlY3RFeHRyYXM/OiBSZWFjdE5vZGU7XG4gIG9uVXBkYXRlUHJvcHM6IChwYXRjaDogUmVjb3JkPHN0cmluZywgdW5rbm93bj4pID0+IHZvaWQ7XG4gIG9uVXBkYXRlU3R5bGU6IChwYXRjaDogUGFydGlhbDxTY2VuZU5vZGVbXCJzdHlsZVwiXT4pID0+IHZvaWQ7XG59O1xuXG5jb25zdCBwcmltYXJ5RmlsbENvbG9yID0gKG5vZGU6IFNjZW5lTm9kZSkgPT4ge1xuICBpZiAobm9kZS50eXBlID09PSBcImJ1dHRvblwiICYmIHR5cGVvZiBub2RlLnByb3BzLmJhY2tncm91bmQgPT09IFwic3RyaW5nXCIpIHJldHVybiBub2RlLnByb3BzLmJhY2tncm91bmQ7XG4gIGNvbnN0IGZpbGwgPSBub2RlLnN0eWxlLmZpbGxzWzBdO1xuICByZXR1cm4gZmlsbD8udHlwZSA9PT0gXCJzb2xpZFwiID8gZmlsbC5jb2xvciA6IFwiI0ZGRkZGRlwiO1xufTtcblxuY29uc3QgZWZmZWN0S2luZCA9IChlZmZlY3Q6IEVmZmVjdCkgPT5cbiAgU3RyaW5nKFxuICAgIGVmZmVjdC52YWx1ZS5raW5kID8/XG4gICAgICAoZWZmZWN0LnR5cGUgPT09IFwic2hhZG93XCIgPyBcImRyb3Atc2hhZG93XCIgOiBlZmZlY3QudHlwZSA9PT0gXCJibHVyXCIgPyBcImxheWVyLWJsdXJcIiA6IGVmZmVjdC50eXBlKSxcbiAgKTtcblxuZXhwb3J0IGNvbnN0IEFwcGVhcmFuY2VJbnNwZWN0b3IgPSAoe1xuICBub2RlLFxuICBicmFuZENvbG9ycyxcbiAgc2hvd0FwcGVhcmFuY2UgPSB0cnVlLFxuICBzaG93RmlsbCA9IHRydWUsXG4gIHNob3dTdHJva2UgPSB0cnVlLFxuICBzaG93RWZmZWN0cyA9IHRydWUsXG4gIGVmZmVjdEV4dHJhcyxcbiAgb25VcGRhdGVQcm9wcyxcbiAgb25VcGRhdGVTdHlsZSxcbn06IEFwcGVhcmFuY2VJbnNwZWN0b3JQcm9wcykgPT4ge1xuICBjb25zdCBmaWxsID0gbm9kZS5zdHlsZS5maWxsc1swXTtcbiAgY29uc3Qgc3Ryb2tlID0gbm9kZS5zdHlsZS5zdHJva2VzWzBdO1xuICBjb25zdCBmaWxsVmlzaWJsZSA9XG4gICAgbm9kZS50eXBlID09PSBcImJ1dHRvblwiXG4gICAgICA/IG5vZGUucHJvcHMuYmFja2dyb3VuZFZpc2libGUgIT09IGZhbHNlXG4gICAgICA6IGZpbGw/LnZpc2libGUgIT09IGZhbHNlO1xuXG4gIGNvbnN0IHVwZGF0ZUZpbGwgPSAocGF0Y2g6IFBhcnRpYWw8RmlsbD4pID0+IHtcbiAgICBjb25zdCBjdXJyZW50OiBGaWxsID0gZmlsbCA/PyB7IHR5cGU6IFwic29saWRcIiwgY29sb3I6IFwiI0ZGRkZGRlwiIH07XG4gICAgb25VcGRhdGVTdHlsZSh7IGZpbGxzOiBbT2JqZWN0LmFzc2lnbih7fSwgY3VycmVudCwgcGF0Y2gpIGFzIEZpbGwsIC4uLm5vZGUuc3R5bGUuZmlsbHMuc2xpY2UoMSldIH0pO1xuICB9O1xuXG4gIGNvbnN0IHNldEZpbGxDb2xvciA9IChjb2xvcjogc3RyaW5nKSA9PiB7XG4gICAgaWYgKG5vZGUudHlwZSA9PT0gXCJidXR0b25cIikge1xuICAgICAgb25VcGRhdGVQcm9wcyh7IGJhY2tncm91bmQ6IGNvbG9yIH0pO1xuICAgICAgcmV0dXJuO1xuICAgIH1cbiAgICB1cGRhdGVGaWxsKHsgdHlwZTogXCJzb2xpZFwiLCBjb2xvciB9IGFzIFBhcnRpYWw8RmlsbD4pO1xuICB9O1xuXG4gIGNvbnN0IHVwZGF0ZVN0cm9rZSA9IChwYXRjaDogUGFydGlhbDxTdHJva2U+KSA9PiB7XG4gICAgY29uc3QgY3VycmVudDogU3Ryb2tlID0gc3Ryb2tlID8/IHsgY29sb3I6IFwiIzAwMDAwMFwiLCB3aWR0aDogMSwgc3R5bGU6IFwic29saWRcIiB9O1xuICAgIG9uVXBkYXRlU3R5bGUoeyBzdHJva2VzOiBbeyAuLi5jdXJyZW50LCAuLi5wYXRjaCB9LCAuLi5ub2RlLnN0eWxlLnN0cm9rZXMuc2xpY2UoMSldIH0pO1xuICB9O1xuXG4gIGNvbnN0IHRvZ2dsZUVmZmVjdCA9IChraW5kOiBcImRyb3Atc2hhZG93XCIgfCBcImlubmVyLXNoYWRvd1wiIHwgXCJsYXllci1ibHVyXCIgfCBcImJhY2tncm91bmQtYmx1clwiLCBlbmFibGVkOiBib29sZWFuKSA9PiB7XG4gICAgY29uc3QgbmV4dCA9IG5vZGUuc3R5bGUuZWZmZWN0cy5maWx0ZXIoKGVmZmVjdCkgPT4gZWZmZWN0S2luZChlZmZlY3QpICE9PSBraW5kKTtcbiAgICBpZiAoZW5hYmxlZCkge1xuICAgICAgaWYgKGtpbmQgPT09IFwiZHJvcC1zaGFkb3dcIiB8fCBraW5kID09PSBcImlubmVyLXNoYWRvd1wiKSB7XG4gICAgICAgIG5leHQucHVzaCh7XG4gICAgICAgICAgdHlwZTogXCJzaGFkb3dcIixcbiAgICAgICAgICB2YWx1ZToge1xuICAgICAgICAgICAga2luZCxcbiAgICAgICAgICAgIHg6IDAsXG4gICAgICAgICAgICB5OiBraW5kID09PSBcImRyb3Atc2hhZG93XCIgPyA0IDogMixcbiAgICAgICAgICAgIGJsdXI6IDEyLFxuICAgICAgICAgICAgc3ByZWFkOiAwLFxuICAgICAgICAgICAgY29sb3I6IGtpbmQgPT09IFwiZHJvcC1zaGFkb3dcIiA/IFwicmdiYSgwLDAsMCwwLjIyKVwiIDogXCJyZ2JhKDAsMCwwLDAuMTgpXCIsXG4gICAgICAgICAgfSxcbiAgICAgICAgfSk7XG4gICAgICB9IGVsc2Uge1xuICAgICAgICBuZXh0LnB1c2goe1xuICAgICAgICAgIHR5cGU6IFwiYmx1clwiLFxuICAgICAgICAgIHZhbHVlOiB7IGtpbmQsIHJhZGl1czoga2luZCA9PT0gXCJsYXllci1ibHVyXCIgPyA0IDogMTIgfSxcbiAgICAgICAgfSk7XG4gICAgICB9XG4gICAgfVxuICAgIG9uVXBkYXRlU3R5bGUoeyBlZmZlY3RzOiBuZXh0IH0pO1xuICB9O1xuXG4gIGNvbnN0IHVwZGF0ZUVmZmVjdCA9IChraW5kOiBzdHJpbmcsIHBhdGNoOiBSZWNvcmQ8c3RyaW5nLCB1bmtub3duPikgPT4ge1xuICAgIG9uVXBkYXRlU3R5bGUoe1xuICAgICAgZWZmZWN0czogbm9kZS5zdHlsZS5lZmZlY3RzLm1hcCgoZWZmZWN0KSA9PlxuICAgICAgICBlZmZlY3RLaW5kKGVmZmVjdCkgPT09IGtpbmQgPyB7IC4uLmVmZmVjdCwgdmFsdWU6IHsgLi4uZWZmZWN0LnZhbHVlLCAuLi5wYXRjaCB9IH0gOiBlZmZlY3QsXG4gICAgICApLFxuICAgIH0pO1xuICB9O1xuXG4gIGNvbnN0IGRyb3BTaGFkb3cgPSBub2RlLnN0eWxlLmVmZmVjdHMuZmluZCgoZWZmZWN0KSA9PiBlZmZlY3RLaW5kKGVmZmVjdCkgPT09IFwiZHJvcC1zaGFkb3dcIik7XG4gIGNvbnN0IGlubmVyU2hhZG93ID0gbm9kZS5zdHlsZS5lZmZlY3RzLmZpbmQoKGVmZmVjdCkgPT4gZWZmZWN0S2luZChlZmZlY3QpID09PSBcImlubmVyLXNoYWRvd1wiKTtcbiAgY29uc3QgbGF5ZXJCbHVyID0gbm9kZS5zdHlsZS5lZmZlY3RzLmZpbmQoKGVmZmVjdCkgPT4gZWZmZWN0S2luZChlZmZlY3QpID09PSBcImxheWVyLWJsdXJcIik7XG4gIGNvbnN0IGJhY2tncm91bmRCbHVyID0gbm9kZS5zdHlsZS5lZmZlY3RzLmZpbmQoKGVmZmVjdCkgPT4gZWZmZWN0S2luZChlZmZlY3QpID09PSBcImJhY2tncm91bmQtYmx1clwiKTtcblxuICByZXR1cm4gKFxuICAgIDw+XG4gICAgICB7c2hvd0FwcGVhcmFuY2UgPyAoXG4gICAgICAgIDxJbnNwZWN0b3JTZWN0aW9uIHRpdGxlPVwiQXBwZWFyYW5jZVwiPlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBncmlkLWNvbHMtMiBnYXAtMlwiPlxuICAgICAgICAgICAgPE51bWJlckZpZWxkXG4gICAgICAgICAgICAgIGxhYmVsPVwiT3BhY2l0eVwiXG4gICAgICAgICAgICAgIHZhbHVlPXtNYXRoLnJvdW5kKG5vZGUuc3R5bGUub3BhY2l0eSAqIDEwMCl9XG4gICAgICAgICAgICAgIG1pbj17MH1cbiAgICAgICAgICAgICAgbWF4PXsxMDB9XG4gICAgICAgICAgICAgIHN1ZmZpeD1cIiVcIlxuICAgICAgICAgICAgICBvbkNvbW1pdD17KG9wYWNpdHkpID0+IG9uVXBkYXRlU3R5bGUoeyBvcGFjaXR5OiBvcGFjaXR5IC8gMTAwIH0pfVxuICAgICAgICAgICAgLz5cbiAgICAgICAgICAgIDxOdW1iZXJGaWVsZFxuICAgICAgICAgICAgICBsYWJlbD1cIkNvcm5lciByYWRpdXNcIlxuICAgICAgICAgICAgICB2YWx1ZT17dHlwZW9mIG5vZGUuc3R5bGUuY29ybmVyUmFkaXVzID09PSBcIm51bWJlclwiID8gbm9kZS5zdHlsZS5jb3JuZXJSYWRpdXMgOiAwfVxuICAgICAgICAgICAgICBtaW49ezB9XG4gICAgICAgICAgICAgIG9uQ29tbWl0PXsoY29ybmVyUmFkaXVzKSA9PiBvblVwZGF0ZVN0eWxlKHsgY29ybmVyUmFkaXVzIH0pfVxuICAgICAgICAgICAgLz5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgPC9JbnNwZWN0b3JTZWN0aW9uPlxuICAgICAgKSA6IG51bGx9XG5cbiAgICAgIHtzaG93RmlsbCA/IChcbiAgICAgICAgPEluc3BlY3RvclNlY3Rpb25cbiAgICAgICAgICB0aXRsZT1cIkZpbGxcIlxuICAgICAgICAgIGFjdGlvbnM9e1xuICAgICAgICAgICAgPEluc3BlY3Rvckljb25CdXR0b25cbiAgICAgICAgICAgICAgaWNvbj17UGx1c31cbiAgICAgICAgICAgICAgdGl0bGU9XCJBZGQgZmlsbFwiXG4gICAgICAgICAgICAgIG9uQ2xpY2s9eygpID0+XG4gICAgICAgICAgICAgICAgbm9kZS50eXBlID09PSBcImJ1dHRvblwiXG4gICAgICAgICAgICAgICAgICA/IG9uVXBkYXRlUHJvcHMoeyBiYWNrZ3JvdW5kOiBcIiNGRkZGRkZcIiwgYmFja2dyb3VuZFZpc2libGU6IHRydWUgfSlcbiAgICAgICAgICAgICAgICAgIDogb25VcGRhdGVTdHlsZSh7IGZpbGxzOiBbeyB0eXBlOiBcInNvbGlkXCIsIGNvbG9yOiBcIiNGRkZGRkZcIiB9LCAuLi5ub2RlLnN0eWxlLmZpbGxzXSB9KVxuICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAvPlxuICAgICAgICAgIH1cbiAgICAgICAgPlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBncmlkLWNvbHMtW2F1dG9fMWZyX2F1dG9fYXV0b10gaXRlbXMtY2VudGVyIGdhcC0xIHJvdW5kZWQgYmctWyMzODM4MzhdIHB4LTEuNSBweS0xXCI+XG4gICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJoLTQgdy00IHJvdW5kZWQtc20gYm9yZGVyIGJvcmRlci13aGl0ZS8zMFwiIHN0eWxlPXt7IGJhY2tncm91bmQ6IHByaW1hcnlGaWxsQ29sb3Iobm9kZSkgfX0gLz5cbiAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cInRydW5jYXRlIHRleHQtWzEwcHhdIHRleHQtWyNkZGRdXCI+XG4gICAgICAgICAgICAgIHtmaWxsPy50eXBlID09PSBcImdyYWRpZW50XCIgPyBcIkdyYWRpZW50XCIgOiBmaWxsPy50eXBlID09PSBcImltYWdlXCIgPyBcIkltYWdlXCIgOiBwcmltYXJ5RmlsbENvbG9yKG5vZGUpfVxuICAgICAgICAgICAgPC9zcGFuPlxuICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwidGV4dC1bOXB4XSB0ZXh0LVsjYWFhXVwiPlxuICAgICAgICAgICAgICB7TWF0aC5yb3VuZCgobm9kZS50eXBlID09PSBcImJ1dHRvblwiID8gTnVtYmVyKG5vZGUucHJvcHMuYmFja2dyb3VuZE9wYWNpdHkgPz8gMSkgOiBmaWxsPy5vcGFjaXR5ID8/IDEpICogMTAwKX0lXG4gICAgICAgICAgICA8L3NwYW4+XG4gICAgICAgICAgICA8RmlnbWFDb2xvclBpY2tlclxuICAgICAgICAgICAgICB2YWx1ZT17cHJpbWFyeUZpbGxDb2xvcihub2RlKX1cbiAgICAgICAgICAgICAgbGFiZWw9XCJGaWxsIGNvbG9yXCJcbiAgICAgICAgICAgICAgYnJhbmRDb2xvcnM9e2JyYW5kQ29sb3JzfVxuICAgICAgICAgICAgICBvcGFjaXR5PXtNYXRoLnJvdW5kKChub2RlLnR5cGUgPT09IFwiYnV0dG9uXCIgPyBOdW1iZXIobm9kZS5wcm9wcy5iYWNrZ3JvdW5kT3BhY2l0eSA/PyAxKSA6IGZpbGw/Lm9wYWNpdHkgPz8gMSkgKiAxMDApfVxuICAgICAgICAgICAgICBvbk9wYWNpdHlDaGFuZ2U9eyhvcGFjaXR5KSA9PlxuICAgICAgICAgICAgICAgIG5vZGUudHlwZSA9PT0gXCJidXR0b25cIlxuICAgICAgICAgICAgICAgICAgPyBvblVwZGF0ZVByb3BzKHsgYmFja2dyb3VuZE9wYWNpdHk6IG9wYWNpdHkgLyAxMDAgfSlcbiAgICAgICAgICAgICAgICAgIDogdXBkYXRlRmlsbCh7IG9wYWNpdHk6IG9wYWNpdHkgLyAxMDAgfSlcbiAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICBvbkNoYW5nZT17c2V0RmlsbENvbG9yfVxuICAgICAgICAgICAgLz5cbiAgICAgICAgICAgIDxzcGFuIC8+XG4gICAgICAgICAgICA8c3BhbiAvPlxuICAgICAgICAgICAgPEluc3BlY3Rvckljb25CdXR0b25cbiAgICAgICAgICAgICAgaWNvbj17ZmlsbFZpc2libGUgPyBFeWUgOiBFeWVPZmZ9XG4gICAgICAgICAgICAgIHRpdGxlPXtmaWxsVmlzaWJsZSA/IFwiSGlkZSBmaWxsXCIgOiBcIlNob3cgZmlsbFwifVxuICAgICAgICAgICAgICBvbkNsaWNrPXsoKSA9PlxuICAgICAgICAgICAgICAgIG5vZGUudHlwZSA9PT0gXCJidXR0b25cIlxuICAgICAgICAgICAgICAgICAgPyBvblVwZGF0ZVByb3BzKHsgYmFja2dyb3VuZFZpc2libGU6ICFmaWxsVmlzaWJsZSB9KVxuICAgICAgICAgICAgICAgICAgOiB1cGRhdGVGaWxsKHsgdmlzaWJsZTogIWZpbGxWaXNpYmxlIH0pXG4gICAgICAgICAgICAgIH1cbiAgICAgICAgICAgIC8+XG4gICAgICAgICAgICA8SW5zcGVjdG9ySWNvbkJ1dHRvblxuICAgICAgICAgICAgICBpY29uPXtUcmFzaDJ9XG4gICAgICAgICAgICAgIHRpdGxlPVwiRGVsZXRlIGZpbGxcIlxuICAgICAgICAgICAgICBkaXNhYmxlZD17bm9kZS50eXBlICE9PSBcImJ1dHRvblwiICYmICFub2RlLnN0eWxlLmZpbGxzLmxlbmd0aH1cbiAgICAgICAgICAgICAgb25DbGljaz17KCkgPT5cbiAgICAgICAgICAgICAgICBub2RlLnR5cGUgPT09IFwiYnV0dG9uXCJcbiAgICAgICAgICAgICAgICAgID8gb25VcGRhdGVQcm9wcyh7IGJhY2tncm91bmQ6IHVuZGVmaW5lZCwgYmFja2dyb3VuZFZpc2libGU6IGZhbHNlIH0pXG4gICAgICAgICAgICAgICAgICA6IG9uVXBkYXRlU3R5bGUoeyBmaWxsczogbm9kZS5zdHlsZS5maWxscy5zbGljZSgxKSB9KVxuICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAvPlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICA8L0luc3BlY3RvclNlY3Rpb24+XG4gICAgICApIDogbnVsbH1cblxuICAgICAge3Nob3dTdHJva2UgPyAoXG4gICAgICAgIDxJbnNwZWN0b3JTZWN0aW9uXG4gICAgICAgICAgdGl0bGU9XCJTdHJva2VcIlxuICAgICAgICAgIGRlZmF1bHRPcGVuPXtCb29sZWFuKHN0cm9rZSl9XG4gICAgICAgICAgYWN0aW9ucz17XG4gICAgICAgICAgICA8SW5zcGVjdG9ySWNvbkJ1dHRvblxuICAgICAgICAgICAgICBpY29uPXtQbHVzfVxuICAgICAgICAgICAgICB0aXRsZT1cIkFkZCBzdHJva2VcIlxuICAgICAgICAgICAgICBvbkNsaWNrPXsoKSA9PlxuICAgICAgICAgICAgICAgIG9uVXBkYXRlU3R5bGUoe1xuICAgICAgICAgICAgICAgICAgc3Ryb2tlczogW1xuICAgICAgICAgICAgICAgICAgICB7IGNvbG9yOiBcIiMwMDAwMDBcIiwgd2lkdGg6IDEsIHN0eWxlOiBcInNvbGlkXCIsIHBvc2l0aW9uOiBcImluc2lkZVwiIH0sXG4gICAgICAgICAgICAgICAgICAgIC4uLm5vZGUuc3R5bGUuc3Ryb2tlcyxcbiAgICAgICAgICAgICAgICAgIF0sXG4gICAgICAgICAgICAgICAgfSlcbiAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgLz5cbiAgICAgICAgICB9XG4gICAgICAgID5cbiAgICAgICAgICB7c3Ryb2tlID8gKFxuICAgICAgICAgICAgPD5cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWJldHdlZW4gcm91bmRlZCBiZy1bIzM4MzgzOF0gcHgtMiBweS0xXCI+XG4gICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwidGV4dC1bMTBweF0gdGV4dC1bI2RkZF1cIj5Db2xvcjwvc3Bhbj5cbiAgICAgICAgICAgICAgICA8RmlnbWFDb2xvclBpY2tlclxuICAgICAgICAgICAgICAgICAgdmFsdWU9e3N0cm9rZS5jb2xvcn1cbiAgICAgICAgICAgICAgICAgIGxhYmVsPVwiU3Ryb2tlIGNvbG9yXCJcbiAgICAgICAgICAgICAgICAgIGJyYW5kQ29sb3JzPXticmFuZENvbG9yc31cbiAgICAgICAgICAgICAgICAgIG9wYWNpdHk9e01hdGgucm91bmQoKHN0cm9rZS5vcGFjaXR5ID8/IDEpICogMTAwKX1cbiAgICAgICAgICAgICAgICAgIG9uT3BhY2l0eUNoYW5nZT17KG9wYWNpdHkpID0+IHVwZGF0ZVN0cm9rZSh7IG9wYWNpdHk6IG9wYWNpdHkgLyAxMDAgfSl9XG4gICAgICAgICAgICAgICAgICBvbkNoYW5nZT17KGNvbG9yKSA9PiB1cGRhdGVTdHJva2UoeyBjb2xvciB9KX1cbiAgICAgICAgICAgICAgICAvPlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJncmlkIGdyaWQtY29scy0yIGdhcC0yXCI+XG4gICAgICAgICAgICAgICAgPFNlbGVjdEZpZWxkXG4gICAgICAgICAgICAgICAgICBsYWJlbD1cIlBvc2l0aW9uXCJcbiAgICAgICAgICAgICAgICAgIHZhbHVlPXtzdHJva2UucG9zaXRpb24gPz8gXCJpbnNpZGVcIn1cbiAgICAgICAgICAgICAgICAgIG9wdGlvbnM9e1tcbiAgICAgICAgICAgICAgICAgICAgeyB2YWx1ZTogXCJpbnNpZGVcIiwgbGFiZWw6IFwiSW5zaWRlXCIgfSxcbiAgICAgICAgICAgICAgICAgICAgeyB2YWx1ZTogXCJjZW50ZXJcIiwgbGFiZWw6IFwiQ2VudGVyXCIgfSxcbiAgICAgICAgICAgICAgICAgICAgeyB2YWx1ZTogXCJvdXRzaWRlXCIsIGxhYmVsOiBcIk91dHNpZGVcIiB9LFxuICAgICAgICAgICAgICAgICAgXX1cbiAgICAgICAgICAgICAgICAgIG9uQ2hhbmdlPXsocG9zaXRpb24pID0+IHVwZGF0ZVN0cm9rZSh7IHBvc2l0aW9uOiBwb3NpdGlvbiBhcyBTdHJva2VbXCJwb3NpdGlvblwiXSB9KX1cbiAgICAgICAgICAgICAgICAvPlxuICAgICAgICAgICAgICAgIDxOdW1iZXJGaWVsZCBsYWJlbD1cIldlaWdodFwiIHZhbHVlPXtzdHJva2Uud2lkdGh9IG1pbj17MH0gb25Db21taXQ9eyh3aWR0aCkgPT4gdXBkYXRlU3Ryb2tlKHsgd2lkdGggfSl9IC8+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ3JpZC1jb2xzLVsxZnJfYXV0b10gaXRlbXMtZW5kIGdhcC0yXCI+XG4gICAgICAgICAgICAgICAgPFNlbGVjdEZpZWxkXG4gICAgICAgICAgICAgICAgICBsYWJlbD1cIkRhc2hcIlxuICAgICAgICAgICAgICAgICAgdmFsdWU9e3N0cm9rZS5zdHlsZSA/PyBcInNvbGlkXCJ9XG4gICAgICAgICAgICAgICAgICBvcHRpb25zPXtbXG4gICAgICAgICAgICAgICAgICAgIHsgdmFsdWU6IFwic29saWRcIiwgbGFiZWw6IFwiU29saWRcIiB9LFxuICAgICAgICAgICAgICAgICAgICB7IHZhbHVlOiBcImRhc2hlZFwiLCBsYWJlbDogXCJEYXNoZWRcIiB9LFxuICAgICAgICAgICAgICAgICAgICB7IHZhbHVlOiBcImRvdHRlZFwiLCBsYWJlbDogXCJEb3R0ZWRcIiB9LFxuICAgICAgICAgICAgICAgICAgXX1cbiAgICAgICAgICAgICAgICAgIG9uQ2hhbmdlPXsoc3R5bGUpID0+IHVwZGF0ZVN0cm9rZSh7IHN0eWxlOiBzdHlsZSBhcyBTdHJva2VbXCJzdHlsZVwiXSB9KX1cbiAgICAgICAgICAgICAgICAvPlxuICAgICAgICAgICAgICAgIDxJbnNwZWN0b3JJY29uQnV0dG9uXG4gICAgICAgICAgICAgICAgICBpY29uPXtUcmFzaDJ9XG4gICAgICAgICAgICAgICAgICB0aXRsZT1cIkRlbGV0ZSBzdHJva2VcIlxuICAgICAgICAgICAgICAgICAgb25DbGljaz17KCkgPT4gb25VcGRhdGVTdHlsZSh7IHN0cm9rZXM6IG5vZGUuc3R5bGUuc3Ryb2tlcy5zbGljZSgxKSB9KX1cbiAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cIm1iLTBcIlxuICAgICAgICAgICAgICAgIC8+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgPC8+XG4gICAgICAgICAgKSA6IDxkaXYgY2xhc3NOYW1lPVwidGV4dC1bOXB4XSB0ZXh0LVsjODg4XVwiPk5vIHN0cm9rZTwvZGl2Pn1cbiAgICAgICAgPC9JbnNwZWN0b3JTZWN0aW9uPlxuICAgICAgKSA6IG51bGx9XG5cbiAgICAgIHtzaG93RWZmZWN0cyA/IChcbiAgICAgICAgPEluc3BlY3RvclNlY3Rpb24gdGl0bGU9XCJFZmZlY3RzXCIgZGVmYXVsdE9wZW49e2ZhbHNlfT5cbiAgICAgICAgICA8VG9nZ2xlUm93IGxhYmVsPVwiRHJvcCBzaGFkb3dcIiBjaGVja2VkPXtCb29sZWFuKGRyb3BTaGFkb3cpfSBvbkNoYW5nZT17KGVuYWJsZWQpID0+IHRvZ2dsZUVmZmVjdChcImRyb3Atc2hhZG93XCIsIGVuYWJsZWQpfSAvPlxuICAgICAgICAgIHtkcm9wU2hhZG93ID8gKFxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJncmlkIGdyaWQtY29scy00IGdhcC0xXCI+XG4gICAgICAgICAgICAgIHsoW1wieFwiLCBcInlcIiwgXCJibHVyXCIsIFwic3ByZWFkXCJdIGFzIGNvbnN0KS5tYXAoKGtleSkgPT4gKFxuICAgICAgICAgICAgICAgIDxOdW1iZXJGaWVsZFxuICAgICAgICAgICAgICAgICAga2V5PXtrZXl9XG4gICAgICAgICAgICAgICAgICBsYWJlbD17a2V5LnRvVXBwZXJDYXNlKCl9XG4gICAgICAgICAgICAgICAgICB2YWx1ZT17TnVtYmVyKGRyb3BTaGFkb3cudmFsdWVba2V5XSA/PyAwKX1cbiAgICAgICAgICAgICAgICAgIG1pbj17a2V5ID09PSBcImJsdXJcIiA/IDAgOiB1bmRlZmluZWR9XG4gICAgICAgICAgICAgICAgICBvbkNvbW1pdD17KHZhbHVlKSA9PiB1cGRhdGVFZmZlY3QoXCJkcm9wLXNoYWRvd1wiLCB7IFtrZXldOiB2YWx1ZSB9KX1cbiAgICAgICAgICAgICAgICAvPlxuICAgICAgICAgICAgICApKX1cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICkgOiBudWxsfVxuICAgICAgICAgIDxUb2dnbGVSb3cgbGFiZWw9XCJJbm5lciBzaGFkb3dcIiBjaGVja2VkPXtCb29sZWFuKGlubmVyU2hhZG93KX0gb25DaGFuZ2U9eyhlbmFibGVkKSA9PiB0b2dnbGVFZmZlY3QoXCJpbm5lci1zaGFkb3dcIiwgZW5hYmxlZCl9IC8+XG4gICAgICAgICAgPFRvZ2dsZVJvdyBsYWJlbD1cIkxheWVyIGJsdXJcIiBjaGVja2VkPXtCb29sZWFuKGxheWVyQmx1cil9IG9uQ2hhbmdlPXsoZW5hYmxlZCkgPT4gdG9nZ2xlRWZmZWN0KFwibGF5ZXItYmx1clwiLCBlbmFibGVkKX0gLz5cbiAgICAgICAgICB7bGF5ZXJCbHVyID8gPE51bWJlckZpZWxkIGxhYmVsPVwiTGF5ZXIgYmx1ciByYWRpdXNcIiB2YWx1ZT17TnVtYmVyKGxheWVyQmx1ci52YWx1ZS5yYWRpdXMgPz8gNCl9IG1pbj17MH0gb25Db21taXQ9eyhyYWRpdXMpID0+IHVwZGF0ZUVmZmVjdChcImxheWVyLWJsdXJcIiwgeyByYWRpdXMgfSl9IC8+IDogbnVsbH1cbiAgICAgICAgICA8VG9nZ2xlUm93IGxhYmVsPVwiQmFja2dyb3VuZCBibHVyXCIgY2hlY2tlZD17Qm9vbGVhbihiYWNrZ3JvdW5kQmx1cil9IG9uQ2hhbmdlPXsoZW5hYmxlZCkgPT4gdG9nZ2xlRWZmZWN0KFwiYmFja2dyb3VuZC1ibHVyXCIsIGVuYWJsZWQpfSAvPlxuICAgICAgICAgIHtiYWNrZ3JvdW5kQmx1ciA/IDxOdW1iZXJGaWVsZCBsYWJlbD1cIkJhY2tncm91bmQgYmx1ciByYWRpdXNcIiB2YWx1ZT17TnVtYmVyKGJhY2tncm91bmRCbHVyLnZhbHVlLnJhZGl1cyA/PyAxMil9IG1pbj17MH0gb25Db21taXQ9eyhyYWRpdXMpID0+IHVwZGF0ZUVmZmVjdChcImJhY2tncm91bmQtYmx1clwiLCB7IHJhZGl1cyB9KX0gLz4gOiBudWxsfVxuICAgICAgICAgIHtlZmZlY3RFeHRyYXN9XG4gICAgICAgIDwvSW5zcGVjdG9yU2VjdGlvbj5cbiAgICAgICkgOiBudWxsfVxuICAgIDwvPlxuICApO1xufTtcbiJdLCJmaWxlIjoiL3NyYy91aS9pbnNwZWN0b3ItcGFuZWwvQXBwZWFyYW5jZUluc3BlY3Rvci50c3gifQ==

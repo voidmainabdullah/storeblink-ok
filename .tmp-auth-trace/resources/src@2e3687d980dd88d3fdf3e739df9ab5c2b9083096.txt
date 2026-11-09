@@ -1,0 +1,93 @@
+import { expect, test } from "@playwright/test";
+
+test("public storefront has no merchant auth or dashboard-bootstrap dependency", async ({ page }) => {
+  const forbiddenRequests: string[] = [];
+  page.on("request", (request) => {
+    const url = request.url();
+    if (/\/auth\/v1\//.test(url) || /\/rpc\/get_dashboard_bootstrap(?:\?|$)/.test(url)) {
+      forbiddenRequests.push(url);
+    }
+  });
+
+  await page.goto("/store/public-auth-boundary-probe", { waitUntil: "domcontentloaded" });
+  await page.waitForTimeout(750);
+
+  expect(forbiddenRequests).toEqual([]);
+});
+
+test("dashboard route redirects an anonymous browser to sign in", async ({ page }) => {
+  await page.goto("/dashboard/store");
+
+  await expect(page).toHaveURL(/\/auth\?returnTo=%2Fdashboard%2Fstore$/);
+  await expect(page.getByRole("heading", { name: "Welcome back" })).toBeVisible();
+});
+
+test("domain administration redirects an anonymous browser to sign in", async ({ page }) => {
+  await page.goto("/domain/connect");
+
+  await expect(page).toHaveURL(/\/auth\?returnTo=%2Fdomain%2Fconnect$/);
+  await expect(page.getByRole("heading", { name: "Welcome back" })).toBeVisible();
+});
+
+test("signup transport failure is rendered as an actionable inline error", async ({ page }) => {
+  await page.addInitScript(() => {
+    (window as typeof window & { turnstile: unknown }).turnstile = {
+      render: (_container: HTMLElement, options: { callback: (token: string) => void }) => {
+        queueMicrotask(() => options.callback("playwright-turnstile-token"));
+        return "playwright-turnstile-widget";
+      },
+      remove: () => undefined,
+    };
+  });
+  await page.route("**/auth/v1/signup", async (route) => route.abort("failed"));
+  await page.goto("/auth?mode=signup");
+  await page.getByLabel("Full name").fill("Domain Test User");
+  await page.getByLabel("Business name").fill("Domain Test Store");
+  await page.getByLabel("Email").fill("signup-network-test@example.com");
+  await page.getByLabel("Password").fill("StrongPassword123");
+  await page.getByRole("button", { name: "Create account" }).click();
+
+  const alert = page.getByRole("alert");
+  await expect(alert).toContainText("Authentication service is temporarily unavailable");
+  await expect(alert).not.toContainText("Failed to fetch");
+});
+
+test("custom storefront hosts cannot render platform auth routes", async ({ page }) => {
+  await page.route("**/rest/v1/rpc/resolve_public_storefront_by_domain", async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      headers: { "Access-Control-Allow-Origin": "*" },
+      body: JSON.stringify({
+        storeId: "11111111-1111-4111-8111-111111111111",
+        storeHandle: "domain-route-probe",
+        requestedHostname: "localtest.me",
+        primaryHostname: "localtest.me",
+        redirectRequired: false,
+      }),
+    });
+  });
+
+  await page.goto("http://localtest.me:8082/auth");
+
+  await expect(page.getByRole("heading", { name: "Page not found" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Welcome back" })).toHaveCount(0);
+});
+
+test("staging account persists through refresh and can sign out", async ({ page }) => {
+  const email = process.env.E2E_AUTH_EMAIL;
+  const password = process.env.E2E_AUTH_PASSWORD;
+  test.skip(!email || !password, "E2E_AUTH_EMAIL and E2E_AUTH_PASSWORD are required.");
+
+  await page.goto("/auth?returnTo=%2Fdashboard");
+  await page.getByLabel("Email").fill(email!);
+  await page.getByLabel("Password").fill(password!);
+  await page.getByRole("button", { name: "Sign in" }).click();
+  await expect(page).toHaveURL(/\/dashboard$/, { timeout: 30_000 });
+
+  await page.reload();
+  await expect(page).toHaveURL(/\/dashboard$/);
+  await page.getByRole("button", { name: "Open account menu" }).click();
+  await page.getByRole("button", { name: "Sign out" }).click();
+  await expect(page).toHaveURL(/\/$/);
+});

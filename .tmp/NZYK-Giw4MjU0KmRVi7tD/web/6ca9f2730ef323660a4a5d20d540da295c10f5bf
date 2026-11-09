@@ -1,0 +1,36 @@
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/react/jsx-dev-runtime.js", {"importedNames":["jsxDEV"]});
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/@testing-library/react/dist/index.js", {"importedNames":["fireEvent","render","screen"]});
+const __vite_ssr_import_2__ = await __vite_ssr_import__("/node_modules/vitest/dist/index.js", {"importedNames":["describe","expect","it","vi"]});
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/src/document/inspector/editors/NumberPropertyEditor.tsx", {"importedNames":["NumberPropertyEditor"]});
+(0,__vite_ssr_import_2__.describe)("NumberPropertyEditor", ()=>{
+    (0,__vite_ssr_import_2__.it)("keeps keystrokes local and commits once on blur", ()=>{
+        const onCommit = __vite_ssr_import_2__.vi.fn();
+        (0,__vite_ssr_import_1__.render)(/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.NumberPropertyEditor), {
+            label: "Width",
+            value: 100,
+            onCommit: onCommit
+        }, void 0, false, {
+            fileName: "F:/Storeblink/src/document/inspector/editors/NumberPropertyEditor.test.tsx",
+            lineNumber: 8,
+            columnNumber: 12
+        }, this));
+        const input = __vite_ssr_import_1__.screen.getByLabelText("Width");
+        __vite_ssr_import_1__.fireEvent.change(input, {
+            target: {
+                value: "480"
+            }
+        });
+        __vite_ssr_import_1__.fireEvent.change(input, {
+            target: {
+                value: "481"
+            }
+        });
+        (0,__vite_ssr_import_2__.expect)(onCommit).not.toHaveBeenCalled();
+        __vite_ssr_import_1__.fireEvent.blur(input);
+        (0,__vite_ssr_import_2__.expect)(onCommit).toHaveBeenCalledTimes(1);
+        (0,__vite_ssr_import_2__.expect)(onCommit).toHaveBeenCalledWith(481);
+    });
+});
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6IjtBQUFBO0FBQ0E7QUFDQTtHQUVBQSxnQ0FBUyx3QkFBd0I7T0FDL0JDLDBCQUFHLG1EQUFtRDtRQUNwRCxNQUFNQyxXQUFXQyx5QkFBR0MsRUFBRTtXQUN0QkMsK0NBQU8saUNBQUNDO1lBQXFCQyxPQUFNO1lBQVFDLE9BQU87WUFBS04sVUFBVUE7Ozs7OztRQUVqRSxNQUFNTyxRQUFRQyw2QkFBT0MsY0FBYyxDQUFDO1FBQ3BDQyxnQ0FBVUMsTUFBTSxDQUFDSixPQUFPO1lBQUVLLFFBQVE7Z0JBQUVOLE9BQU87WUFBTTtRQUFFO1FBQ25ESSxnQ0FBVUMsTUFBTSxDQUFDSixPQUFPO1lBQUVLLFFBQVE7Z0JBQUVOLE9BQU87WUFBTTtRQUFFO1dBQ25ETyw4QkFBT2IsVUFBVWMsR0FBRyxDQUFDQyxnQkFBZ0I7UUFFckNMLGdDQUFVTSxJQUFJLENBQUNUO1dBQ2ZNLDhCQUFPYixVQUFVaUIscUJBQXFCLENBQUM7V0FDdkNKLDhCQUFPYixVQUFVa0Isb0JBQW9CLENBQUM7SUFDeEM7QUFDRiIsIm5hbWVzIjpbImRlc2NyaWJlIiwiaXQiLCJvbkNvbW1pdCIsInZpIiwiZm4iLCJyZW5kZXIiLCJOdW1iZXJQcm9wZXJ0eUVkaXRvciIsImxhYmVsIiwidmFsdWUiLCJpbnB1dCIsInNjcmVlbiIsImdldEJ5TGFiZWxUZXh0IiwiZmlyZUV2ZW50IiwiY2hhbmdlIiwidGFyZ2V0IiwiZXhwZWN0Iiwibm90IiwidG9IYXZlQmVlbkNhbGxlZCIsImJsdXIiLCJ0b0hhdmVCZWVuQ2FsbGVkVGltZXMiLCJ0b0hhdmVCZWVuQ2FsbGVkV2l0aCJdLCJpZ25vcmVMaXN0IjpbXSwic291cmNlcyI6WyJOdW1iZXJQcm9wZXJ0eUVkaXRvci50ZXN0LnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBmaXJlRXZlbnQsIHJlbmRlciwgc2NyZWVuIH0gZnJvbSBcIkB0ZXN0aW5nLWxpYnJhcnkvcmVhY3RcIjtcbmltcG9ydCB7IGRlc2NyaWJlLCBleHBlY3QsIGl0LCB2aSB9IGZyb20gXCJ2aXRlc3RcIjtcbmltcG9ydCB7IE51bWJlclByb3BlcnR5RWRpdG9yIH0gZnJvbSBcIi4vTnVtYmVyUHJvcGVydHlFZGl0b3JcIjtcblxuZGVzY3JpYmUoXCJOdW1iZXJQcm9wZXJ0eUVkaXRvclwiLCAoKSA9PiB7XG4gIGl0KFwia2VlcHMga2V5c3Ryb2tlcyBsb2NhbCBhbmQgY29tbWl0cyBvbmNlIG9uIGJsdXJcIiwgKCkgPT4ge1xuICAgIGNvbnN0IG9uQ29tbWl0ID0gdmkuZm4oKTtcbiAgICByZW5kZXIoPE51bWJlclByb3BlcnR5RWRpdG9yIGxhYmVsPVwiV2lkdGhcIiB2YWx1ZT17MTAwfSBvbkNvbW1pdD17b25Db21taXR9IC8+KTtcblxuICAgIGNvbnN0IGlucHV0ID0gc2NyZWVuLmdldEJ5TGFiZWxUZXh0KFwiV2lkdGhcIik7XG4gICAgZmlyZUV2ZW50LmNoYW5nZShpbnB1dCwgeyB0YXJnZXQ6IHsgdmFsdWU6IFwiNDgwXCIgfSB9KTtcbiAgICBmaXJlRXZlbnQuY2hhbmdlKGlucHV0LCB7IHRhcmdldDogeyB2YWx1ZTogXCI0ODFcIiB9IH0pO1xuICAgIGV4cGVjdChvbkNvbW1pdCkubm90LnRvSGF2ZUJlZW5DYWxsZWQoKTtcblxuICAgIGZpcmVFdmVudC5ibHVyKGlucHV0KTtcbiAgICBleHBlY3Qob25Db21taXQpLnRvSGF2ZUJlZW5DYWxsZWRUaW1lcygxKTtcbiAgICBleHBlY3Qob25Db21taXQpLnRvSGF2ZUJlZW5DYWxsZWRXaXRoKDQ4MSk7XG4gIH0pO1xufSk7XG4iXSwiZmlsZSI6IkY6L1N0b3JlYmxpbmsvc3JjL2RvY3VtZW50L2luc3BlY3Rvci9lZGl0b3JzL051bWJlclByb3BlcnR5RWRpdG9yLnRlc3QudHN4In0=

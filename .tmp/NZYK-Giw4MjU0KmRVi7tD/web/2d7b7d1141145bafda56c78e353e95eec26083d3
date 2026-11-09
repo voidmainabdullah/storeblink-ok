@@ -1,0 +1,99 @@
+Object.defineProperty(__vite_ssr_exports__, "SceneRenderErrorBoundary", { enumerable: true, configurable: true, get(){ try { return SceneRenderErrorBoundary } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/react/jsx-dev-runtime.js", {"importedNames":["jsxDEV"]});const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/react/index.js", {"importedNames":["Component","Fragment"]});function _define_property(obj, key, value) {
+    if (key in obj) {
+        Object.defineProperty(obj, key, {
+            value: value,
+            enumerable: true,
+            configurable: true,
+            writable: true
+        });
+    } else {
+        obj[key] = value;
+    };
+    return obj;
+}
+
+
+const Component = __vite_ssr_import_1__.Component;
+class SceneRenderErrorBoundary extends Component {
+    static getDerivedStateFromError(error) {
+        return {
+            error
+        };
+    }
+    componentDidCatch(error, errorInfo) {
+        console.error(`[StoreBlink] ${this.props.surfaceName} render failed`, error, errorInfo);
+    }
+    render() {
+        if (this.state.error) {
+            return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                role: "alert",
+                className: "grid h-full min-h-64 w-full place-items-center bg-[#202020] p-6 text-white",
+                children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                    className: "max-w-md rounded-md border border-[#444] bg-[#2c2c2c] p-5 text-center",
+                    children: [
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("h2", {
+                            className: "text-sm font-semibold",
+                            children: [
+                                this.props.surfaceName,
+                                " could not render"
+                            ]
+                        }, void 0, true, {
+                            fileName: "F:/Storeblink/src/infrastructure/error-boundary/SceneRenderErrorBoundary.tsx",
+                            lineNumber: 41,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("p", {
+                            className: "mt-2 text-xs leading-5 text-[#b8b8b8]",
+                            children: "Your document is unchanged. Retry after the invalid asset or recovered data has been validated."
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/infrastructure/error-boundary/SceneRenderErrorBoundary.tsx",
+                            lineNumber: 42,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("button", {
+                            type: "button",
+                            onClick: this.retry,
+                            className: "mt-4 h-9 rounded bg-[#0178ff] px-4 text-xs font-semibold text-white hover:bg-[#0b86df] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0178ff]",
+                            children: "Retry preview"
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/infrastructure/error-boundary/SceneRenderErrorBoundary.tsx",
+                            lineNumber: 45,
+                            columnNumber: 13
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "F:/Storeblink/src/infrastructure/error-boundary/SceneRenderErrorBoundary.tsx",
+                    lineNumber: 40,
+                    columnNumber: 11
+                }, this)
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/infrastructure/error-boundary/SceneRenderErrorBoundary.tsx",
+                lineNumber: 36,
+                columnNumber: 9
+            }, this);
+        };
+        return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.Fragment), {
+            children: this.props.children
+        }, this.state.retryKey, false, {
+            fileName: "F:/Storeblink/src/infrastructure/error-boundary/SceneRenderErrorBoundary.tsx",
+            lineNumber: 57,
+            columnNumber: 12
+        }, this);
+    }
+    constructor(...args){
+        super(...args), _define_property(this, "state", {
+            error: null,
+            retryKey: 0
+        }), _define_property(this, "retry", ()=>{
+            this.props.onRetry?.();
+            this.setState((state)=>({
+                    error: null,
+                    retryKey: state.retryKey + 1
+                }));
+        });
+    }
+}
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6IjtnSUFBQTs7Ozs7Ozs7Ozs7Ozs7OztBQWFPLE1BQU1BLGlDQUFpQ0M7SUFNNUMsT0FBT0MseUJBQXlCQyxLQUFZLEVBQTBDO1FBQ3BGLE9BQU87WUFBRUE7UUFBTTtJQUNqQjtJQUVBQyxrQkFBa0JELEtBQVksRUFBRUUsU0FBb0IsRUFBUTtRQUMxREMsUUFBUUgsS0FBSyxDQUFDLENBQUMsYUFBYSxFQUFFLElBQUksQ0FBQ0ksS0FBSyxDQUFDQyxXQUFXLENBQUMsY0FBYyxDQUFDLEVBQUVMLE9BQU9FO0lBQy9FO0lBT0FJLFNBQVM7UUFDUCxJQUFJLElBQUksQ0FBQ0MsS0FBSyxDQUFDUCxLQUFLLEVBQUU7WUFDcEIsd0JBQ0UsOEJBQUNRO2dCQUNDQyxNQUFLO2dCQUNMQyxXQUFVOzBCQUVWLCtDQUFDRjtvQkFBSUUsV0FBVTs7eUNBQ2IsOEJBQUNDOzRCQUFHRCxXQUFVOztnQ0FBeUIsSUFBSSxDQUFDTixLQUFLLENBQUNDLFdBQVc7Z0NBQUM7Ozs7Ozs7eUNBQzlELDhCQUFDTzs0QkFBRUYsV0FBVTtzQ0FBd0M7Ozs7Ozt5Q0FHckQsOEJBQUNHOzRCQUNDQyxNQUFLOzRCQUNMQyxTQUFTLElBQUksQ0FBQ0MsS0FBSzs0QkFDbkJOLFdBQVU7c0NBQ1g7Ozs7Ozs7Ozs7Ozs7Ozs7O1FBTVQ7UUFFQSx3QkFBTyxpQ0FBQ087c0JBQW9DLElBQUksQ0FBQ2IsS0FBSyxDQUFDYztXQUFqQyxJQUFJLENBQUNYLEtBQUssQ0FBQ1ksUUFBUTs7Ozs7SUFDM0M7O1FBNUNLLGdCQUlMWixnQ0FBdUM7WUFBRVAsT0FBTztZQUFNbUIsVUFBVTtRQUFFLElBVWxFLHVCQUFRSCxTQUFRO1lBQ2QsSUFBSSxDQUFDWixLQUFLLENBQUNnQixPQUFPO1lBQ2xCLElBQUksQ0FBQ0MsUUFBUSxDQUFDLENBQUNkLFFBQVc7b0JBQUVQLE9BQU87b0JBQU1tQixVQUFVWixNQUFNWSxRQUFRLEdBQUc7Z0JBQUU7UUFDeEU7O0FBNEJGIiwibmFtZXMiOlsiU2NlbmVSZW5kZXJFcnJvckJvdW5kYXJ5IiwiQ29tcG9uZW50IiwiZ2V0RGVyaXZlZFN0YXRlRnJvbUVycm9yIiwiZXJyb3IiLCJjb21wb25lbnREaWRDYXRjaCIsImVycm9ySW5mbyIsImNvbnNvbGUiLCJwcm9wcyIsInN1cmZhY2VOYW1lIiwicmVuZGVyIiwic3RhdGUiLCJkaXYiLCJyb2xlIiwiY2xhc3NOYW1lIiwiaDIiLCJwIiwiYnV0dG9uIiwidHlwZSIsIm9uQ2xpY2siLCJyZXRyeSIsIkZyYWdtZW50IiwiY2hpbGRyZW4iLCJyZXRyeUtleSIsIm9uUmV0cnkiLCJzZXRTdGF0ZSJdLCJpZ25vcmVMaXN0IjpbXSwic291cmNlcyI6WyJTY2VuZVJlbmRlckVycm9yQm91bmRhcnkudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENvbXBvbmVudCwgRnJhZ21lbnQsIHR5cGUgRXJyb3JJbmZvLCB0eXBlIFJlYWN0Tm9kZSB9IGZyb20gXCJyZWFjdFwiO1xuXG5leHBvcnQgdHlwZSBTY2VuZVJlbmRlckVycm9yQm91bmRhcnlQcm9wcyA9IHtcbiAgc3VyZmFjZU5hbWU6IHN0cmluZztcbiAgY2hpbGRyZW46IFJlYWN0Tm9kZTtcbiAgb25SZXRyeT86ICgpID0+IHZvaWQ7XG59O1xuXG50eXBlIFNjZW5lUmVuZGVyRXJyb3JCb3VuZGFyeVN0YXRlID0ge1xuICBlcnJvcjogRXJyb3IgfCBudWxsO1xuICByZXRyeUtleTogbnVtYmVyO1xufTtcblxuZXhwb3J0IGNsYXNzIFNjZW5lUmVuZGVyRXJyb3JCb3VuZGFyeSBleHRlbmRzIENvbXBvbmVudDxcbiAgU2NlbmVSZW5kZXJFcnJvckJvdW5kYXJ5UHJvcHMsXG4gIFNjZW5lUmVuZGVyRXJyb3JCb3VuZGFyeVN0YXRlXG4+IHtcbiAgc3RhdGU6IFNjZW5lUmVuZGVyRXJyb3JCb3VuZGFyeVN0YXRlID0geyBlcnJvcjogbnVsbCwgcmV0cnlLZXk6IDAgfTtcblxuICBzdGF0aWMgZ2V0RGVyaXZlZFN0YXRlRnJvbUVycm9yKGVycm9yOiBFcnJvcik6IFBhcnRpYWw8U2NlbmVSZW5kZXJFcnJvckJvdW5kYXJ5U3RhdGU+IHtcbiAgICByZXR1cm4geyBlcnJvciB9O1xuICB9XG5cbiAgY29tcG9uZW50RGlkQ2F0Y2goZXJyb3I6IEVycm9yLCBlcnJvckluZm86IEVycm9ySW5mbyk6IHZvaWQge1xuICAgIGNvbnNvbGUuZXJyb3IoYFtTdG9yZUJsaW5rXSAke3RoaXMucHJvcHMuc3VyZmFjZU5hbWV9IHJlbmRlciBmYWlsZWRgLCBlcnJvciwgZXJyb3JJbmZvKTtcbiAgfVxuXG4gIHByaXZhdGUgcmV0cnkgPSAoKSA9PiB7XG4gICAgdGhpcy5wcm9wcy5vblJldHJ5Py4oKTtcbiAgICB0aGlzLnNldFN0YXRlKChzdGF0ZSkgPT4gKHsgZXJyb3I6IG51bGwsIHJldHJ5S2V5OiBzdGF0ZS5yZXRyeUtleSArIDEgfSkpO1xuICB9O1xuXG4gIHJlbmRlcigpIHtcbiAgICBpZiAodGhpcy5zdGF0ZS5lcnJvcikge1xuICAgICAgcmV0dXJuIChcbiAgICAgICAgPGRpdlxuICAgICAgICAgIHJvbGU9XCJhbGVydFwiXG4gICAgICAgICAgY2xhc3NOYW1lPVwiZ3JpZCBoLWZ1bGwgbWluLWgtNjQgdy1mdWxsIHBsYWNlLWl0ZW1zLWNlbnRlciBiZy1bIzIwMjAyMF0gcC02IHRleHQtd2hpdGVcIlxuICAgICAgICA+XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtYXgtdy1tZCByb3VuZGVkLW1kIGJvcmRlciBib3JkZXItWyM0NDRdIGJnLVsjMmMyYzJjXSBwLTUgdGV4dC1jZW50ZXJcIj5cbiAgICAgICAgICAgIDxoMiBjbGFzc05hbWU9XCJ0ZXh0LXNtIGZvbnQtc2VtaWJvbGRcIj57dGhpcy5wcm9wcy5zdXJmYWNlTmFtZX0gY291bGQgbm90IHJlbmRlcjwvaDI+XG4gICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJtdC0yIHRleHQteHMgbGVhZGluZy01IHRleHQtWyNiOGI4YjhdXCI+XG4gICAgICAgICAgICAgIFlvdXIgZG9jdW1lbnQgaXMgdW5jaGFuZ2VkLiBSZXRyeSBhZnRlciB0aGUgaW52YWxpZCBhc3NldCBvciByZWNvdmVyZWQgZGF0YSBoYXMgYmVlbiB2YWxpZGF0ZWQuXG4gICAgICAgICAgICA8L3A+XG4gICAgICAgICAgICA8YnV0dG9uXG4gICAgICAgICAgICAgIHR5cGU9XCJidXR0b25cIlxuICAgICAgICAgICAgICBvbkNsaWNrPXt0aGlzLnJldHJ5fVxuICAgICAgICAgICAgICBjbGFzc05hbWU9XCJtdC00IGgtOSByb3VuZGVkIGJnLVsjMDE3OGZmXSBweC00IHRleHQteHMgZm9udC1zZW1pYm9sZCB0ZXh0LXdoaXRlIGhvdmVyOmJnLVsjMGI4NmRmXSBmb2N1cy12aXNpYmxlOm91dGxpbmUgZm9jdXMtdmlzaWJsZTpvdXRsaW5lLTIgZm9jdXMtdmlzaWJsZTpvdXRsaW5lLW9mZnNldC0yIGZvY3VzLXZpc2libGU6b3V0bGluZS1bIzAxNzhmZl1cIlxuICAgICAgICAgICAgPlxuICAgICAgICAgICAgICBSZXRyeSBwcmV2aWV3XG4gICAgICAgICAgICA8L2J1dHRvbj5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgPC9kaXY+XG4gICAgICApO1xuICAgIH1cblxuICAgIHJldHVybiA8RnJhZ21lbnQga2V5PXt0aGlzLnN0YXRlLnJldHJ5S2V5fT57dGhpcy5wcm9wcy5jaGlsZHJlbn08L0ZyYWdtZW50PjtcbiAgfVxufVxuIl0sImZpbGUiOiIvc3JjL2luZnJhc3RydWN0dXJlL2Vycm9yLWJvdW5kYXJ5L1NjZW5lUmVuZGVyRXJyb3JCb3VuZGFyeS50c3gifQ==

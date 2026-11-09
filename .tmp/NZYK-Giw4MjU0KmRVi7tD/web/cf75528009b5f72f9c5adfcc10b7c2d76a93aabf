@@ -1,0 +1,807 @@
+Object.defineProperty(__vite_ssr_exports__, "ProductCard", { enumerable: true, configurable: true, get(){ try { return ProductCard } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/node_modules/react/jsx-dev-runtime.js", {"importedNames":["jsxDEV"]});
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/node_modules/react-router-dom/dist/index.js", {"importedNames":["Link"]});
+const __vite_ssr_import_2__ = await __vite_ssr_import__("/src/components/ui/card.tsx", {"importedNames":["Card"]});
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/node_modules/lucide-react/dist/cjs/lucide-react.js", {"importedNames":["Heart","Truck","Sparkles","Flame","Clock"]});
+const __vite_ssr_import_4__ = await __vite_ssr_import__("/src/components/store/storeUtils.ts", {"importedNames":["fmt","coverImage"]});
+const __vite_ssr_import_5__ = await __vite_ssr_import__("/src/lib/utils.ts", {"importedNames":["cn"]});
+const __vite_ssr_import_6__ = await __vite_ssr_import__("/src/components/store/Countdown.tsx", {"importedNames":["Countdown"]});
+/** Compact reusable bits shared across templates */ const SaleTag = ({ text })=>/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+        className: "inline-flex items-center bg-orange-500 text-white text-[10px] font-black px-1.5 py-0.5 rounded-sm leading-none mr-1.5 align-middle",
+        children: text
+    }, void 0, false, {
+        fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+        lineNumber: 23,
+        columnNumber: 3
+    }, this);
+const BadgeChip = ({ kind, accent })=>{
+    if (kind === "Hot") {
+        return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+            className: "inline-flex items-center gap-0.5 text-white text-[9px] font-bold uppercase px-1.5 py-0.5 rounded-sm shadow",
+            style: {
+                background: "linear-gradient(135deg,#ff7a00,#ff3d00)"
+            },
+            children: [
+                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.Sparkles), {
+                    size: 9
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                    lineNumber: 33,
+                    columnNumber: 9
+                }, this),
+                " Hot"
+            ]
+        }, void 0, true, {
+            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+            lineNumber: 31,
+            columnNumber: 7
+        }, this);
+    };
+    return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+        className: "inline-flex items-center gap-0.5 text-white text-[9px] font-bold uppercase px-1.5 py-0.5 rounded-sm shadow",
+        style: {
+            background: accent
+        },
+        children: [
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.Flame), {
+                size: 9
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                lineNumber: 40,
+                columnNumber: 7
+            }, this),
+            " Deal"
+        ]
+    }, void 0, true, {
+        fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+        lineNumber: 38,
+        columnNumber: 5
+    }, this);
+};
+const FreeDelivery = ()=>/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+        className: "inline-flex items-center gap-1 border border-emerald-500/40 text-emerald-600 dark:text-emerald-400 text-[9px] font-semibold px-1.5 py-0.5 rounded",
+        children: [
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.Truck), {
+                size: 9
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                lineNumber: 47,
+                columnNumber: 5
+            }, this),
+            " Free Delivery"
+        ]
+    }, void 0, true, {
+        fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+        lineNumber: 46,
+        columnNumber: 3
+    }, this);
+const ProductCard = ({ it, slug, template, accent, onAdd, onWish, wished, editorId })=>{
+    const cover = (0,__vite_ssr_import_4__.coverImage)(it);
+    const hasOriginal = typeof it.original_price_cents === "number" && it.original_price_cents > it.price_cents;
+    const original = hasOriginal ? it.original_price_cents : null;
+    const discount = hasOriginal ? Math.round((it.original_price_cents - it.price_cents) / it.original_price_cents * 100) : 0;
+    const productPath = typeof it.handle === "string" && it.handle.trim() ? `products/${encodeURIComponent(it.handle.trim())}` : `product/${it.id}`;
+    const href = `/store/${slug}/${productPath}`;
+    const soldOut = it.stock !== null && it.stock <= 0;
+    const badge = it.badge === "Deal" || it.badge === "Hot" ? it.badge : null;
+    const freeDelivery = !!it.free_delivery;
+    const saleTag = typeof it.sale_tag === "string" && it.sale_tag.trim() ? it.sale_tag.trim() : null;
+    const saleEndsAt = typeof it.sale_ends_at === "string" ? it.sale_ends_at : null;
+    const hasActiveCountdown = saleEndsAt && new Date(saleEndsAt).getTime() > Date.now();
+    const baseStyleId = editorId ?? `product-${template}-${it.id}`;
+    const styleId = (part)=>`${baseStyleId}-${part}`;
+    const styleLabel = (part)=>`${it.name} ${part}`;
+    // Compact timer chip rendered ON the image (top-right corner)
+    const TimerChip = ()=>hasActiveCountdown ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+            "data-style": styleId("timer"),
+            "data-style-label": styleLabel("timer"),
+            className: "absolute top-1 right-1 flex items-center gap-1 bg-black/75 backdrop-blur text-white rounded px-1.5 py-0.5 shadow-md z-10",
+            children: [
+                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.Clock), {
+                    size: 9
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                    lineNumber: 79,
+                    columnNumber: 7
+                }, this),
+                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_6__.Countdown), {
+                    endsAt: saleEndsAt,
+                    compact: true,
+                    className: "text-[9px] font-bold tracking-tight"
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                    lineNumber: 80,
+                    columnNumber: 7
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+            lineNumber: 74,
+            columnNumber: 5
+        }, this) : null;
+    const WishBtn = ({ size = 26, iconSize = 12, className = "" })=>/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("button", {
+            "data-style": styleId("wishlist"),
+            "data-style-label": styleLabel("wishlist button"),
+            onClick: (e)=>{
+                e.preventDefault();
+                e.stopPropagation();
+                onWish(it.id);
+            },
+            "aria-label": wished ? "Remove from wishlist" : "Add to wishlist",
+            style: {
+                width: size,
+                height: size
+            },
+            className: (0,__vite_ssr_import_5__.cn)("rounded-full grid place-items-center transition-all backdrop-blur", wished ? "bg-background text-rose-500" : "bg-background/85 text-foreground hover:bg-background", className),
+            children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_3__.Heart), {
+                size: iconSize,
+                fill: wished ? "currentColor" : "none"
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                lineNumber: 97,
+                columnNumber: 7
+            }, this)
+        }, void 0, false, {
+            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+            lineNumber: 85,
+            columnNumber: 5
+        }, this);
+    /* ============== Image area shared between marketplace/minimal/bold ============== */ const ImageArea = ({ aspect = "square", radius = "rounded-md" })=>/*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.Link), {
+            to: href,
+            "data-style": styleId("media-frame"),
+            "data-style-label": styleLabel("media frame"),
+            className: (0,__vite_ssr_import_5__.cn)("block overflow-hidden relative bg-muted", radius),
+            style: {
+                aspectRatio: aspect === "square" ? "1 / 1" : aspect
+            },
+            children: [
+                cover ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("img", {
+                    "data-style": styleId("image"),
+                    "data-style-label": styleLabel("image"),
+                    src: cover,
+                    alt: it.name,
+                    loading: "lazy",
+                    className: "w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                    lineNumber: 111,
+                    columnNumber: 9
+                }, this) : /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                    "data-style": styleId("image"),
+                    "data-style-label": styleLabel("image placeholder"),
+                    className: "w-full h-full grid place-items-center text-3xl font-bold text-foreground/15",
+                    style: {
+                        background: `linear-gradient(135deg, ${accent}22, ${accent}11)`
+                    },
+                    children: it.name.charAt(0).toUpperCase()
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                    lineNumber: 120,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                    className: "absolute top-1 left-1 flex flex-col items-start gap-1",
+                    children: [
+                        badge && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(BadgeChip, {
+                            kind: badge,
+                            accent: accent
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 130,
+                            columnNumber: 19
+                        }, this),
+                        discount > 0 && !badge && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                            "data-style": styleId("discount"),
+                            "data-style-label": styleLabel("discount"),
+                            className: "bg-orange-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-sm",
+                            children: [
+                                "-",
+                                discount,
+                                "%"
+                            ]
+                        }, void 0, true, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 132,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                    lineNumber: 129,
+                    columnNumber: 7
+                }, this),
+                soldOut && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                    "data-style": styleId("sold-out"),
+                    "data-style-label": styleLabel("sold out overlay"),
+                    className: "absolute inset-0 bg-background/70 grid place-items-center",
+                    children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                        className: "text-[10px] font-bold uppercase tracking-wider text-muted-foreground",
+                        children: "Sold out"
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                        lineNumber: 137,
+                        columnNumber: 11
+                    }, this)
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                    lineNumber: 136,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(TimerChip, {}, void 0, false, {
+                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                    lineNumber: 140,
+                    columnNumber: 7
+                }, this),
+                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(WishBtn, {
+                    className: (0,__vite_ssr_import_5__.cn)("absolute right-1 shadow", hasActiveCountdown ? "top-7" : "top-1")
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                    lineNumber: 141,
+                    columnNumber: 7
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+            lineNumber: 103,
+            columnNumber: 5
+        }, this);
+    // ============== BOLD ==============
+    if (template === "bold") {
+        return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.Card), {
+            "data-style": styleId("card"),
+            "data-style-label": styleLabel("card"),
+            className: "overflow-hidden group rounded-xl border border-border hover:border-foreground hover:shadow-lg transition-all bg-background",
+            children: [
+                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(ImageArea, {
+                    radius: "rounded-t-xl rounded-b-none"
+                }, void 0, false, {
+                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                    lineNumber: 149,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                    className: "p-2",
+                    children: [
+                        it.category && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                            "data-style": styleId("category"),
+                            "data-style-label": styleLabel("category"),
+                            className: "text-[9px] uppercase tracking-wider text-muted-foreground truncate",
+                            children: it.category
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 151,
+                            columnNumber: 27
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.Link), {
+                            to: href,
+                            children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("h3", {
+                                "data-style": styleId("title"),
+                                "data-style-label": styleLabel("title"),
+                                className: "text-xs font-semibold leading-snug line-clamp-2 min-h-[2rem] mt-0.5",
+                                children: [
+                                    saleTag && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(SaleTag, {
+                                        text: saleTag
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                                        lineNumber: 154,
+                                        columnNumber: 27
+                                    }, this),
+                                    it.name
+                                ]
+                            }, void 0, true, {
+                                fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                                lineNumber: 153,
+                                columnNumber: 13
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 152,
+                            columnNumber: 11
+                        }, this),
+                        freeDelivery && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                            className: "mt-1",
+                            children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(FreeDelivery, {}, void 0, false, {
+                                fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                                lineNumber: 157,
+                                columnNumber: 50
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 157,
+                            columnNumber: 28
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                            className: "flex items-baseline gap-1.5 mt-1",
+                            children: [
+                                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                    "data-style": styleId("price"),
+                                    "data-style-label": styleLabel("price"),
+                                    className: "text-sm font-black",
+                                    style: {
+                                        color: accent
+                                    },
+                                    children: (0,__vite_ssr_import_4__.fmt)(it.price_cents)
+                                }, void 0, false, {
+                                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                                    lineNumber: 159,
+                                    columnNumber: 13
+                                }, this),
+                                original && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                    "data-style": styleId("original-price"),
+                                    "data-style-label": styleLabel("original price"),
+                                    className: "text-[10px] text-muted-foreground line-through",
+                                    children: (0,__vite_ssr_import_4__.fmt)(original)
+                                }, void 0, false, {
+                                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                                    lineNumber: 160,
+                                    columnNumber: 26
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 158,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                    lineNumber: 150,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+            lineNumber: 148,
+            columnNumber: 7
+        }, this);
+    };
+    // ============== EDITORIAL ==============
+    if (template === "editorial") {
+        return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+            "data-style": styleId("card"),
+            "data-style-label": styleLabel("card"),
+            className: "group",
+            children: [
+                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.Link), {
+                    to: href,
+                    "data-style": styleId("media-frame"),
+                    "data-style-label": styleLabel("media frame"),
+                    className: "block aspect-[4/5] overflow-hidden rounded-lg bg-muted relative",
+                    children: [
+                        cover ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("img", {
+                            "data-style": styleId("image"),
+                            "data-style-label": styleLabel("image"),
+                            src: cover,
+                            alt: it.name,
+                            loading: "lazy",
+                            className: "w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 173,
+                            columnNumber: 13
+                        }, this) : /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                            "data-style": styleId("image"),
+                            "data-style-label": styleLabel("image placeholder"),
+                            className: "w-full h-full grid place-items-center text-4xl text-foreground/20",
+                            style: {
+                                fontFamily: "Georgia, serif",
+                                fontStyle: "italic"
+                            },
+                            children: it.name.charAt(0)
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 175,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                            className: "absolute top-2 left-2 flex flex-col gap-1",
+                            children: [
+                                badge && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(BadgeChip, {
+                                    kind: badge,
+                                    accent: accent
+                                }, void 0, false, {
+                                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                                    lineNumber: 178,
+                                    columnNumber: 23
+                                }, this),
+                                discount > 0 && !badge && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                    "data-style": styleId("discount"),
+                                    "data-style-label": styleLabel("discount"),
+                                    className: "bg-background text-foreground text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded",
+                                    children: [
+                                        "-",
+                                        discount,
+                                        "%"
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                                    lineNumber: 179,
+                                    columnNumber: 40
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 177,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(TimerChip, {}, void 0, false, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 181,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(WishBtn, {
+                            className: (0,__vite_ssr_import_5__.cn)("absolute right-2 shadow", hasActiveCountdown ? "top-9" : "top-2")
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 182,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                    lineNumber: 171,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                    className: "mt-2",
+                    children: [
+                        it.category && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                            "data-style": styleId("category"),
+                            "data-style-label": styleLabel("category"),
+                            className: "text-[9px] uppercase tracking-[0.2em] text-muted-foreground mb-0.5",
+                            children: it.category
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 185,
+                            columnNumber: 27
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.Link), {
+                            to: href,
+                            children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("h3", {
+                                "data-style": styleId("title"),
+                                "data-style-label": styleLabel("title"),
+                                className: "font-medium text-xs leading-snug line-clamp-2",
+                                style: {
+                                    fontFamily: "Georgia, serif"
+                                },
+                                children: [
+                                    saleTag && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(SaleTag, {
+                                        text: saleTag
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                                        lineNumber: 188,
+                                        columnNumber: 27
+                                    }, this),
+                                    it.name
+                                ]
+                            }, void 0, true, {
+                                fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                                lineNumber: 187,
+                                columnNumber: 13
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 186,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                            className: "flex items-baseline gap-1.5 mt-0.5",
+                            children: [
+                                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                    "data-style": styleId("price"),
+                                    "data-style-label": styleLabel("price"),
+                                    className: "text-xs font-semibold",
+                                    children: (0,__vite_ssr_import_4__.fmt)(it.price_cents)
+                                }, void 0, false, {
+                                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                                    lineNumber: 192,
+                                    columnNumber: 13
+                                }, this),
+                                original && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                    "data-style": styleId("original-price"),
+                                    "data-style-label": styleLabel("original price"),
+                                    className: "text-[10px] text-muted-foreground line-through",
+                                    children: (0,__vite_ssr_import_4__.fmt)(original)
+                                }, void 0, false, {
+                                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                                    lineNumber: 193,
+                                    columnNumber: 26
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 191,
+                            columnNumber: 11
+                        }, this),
+                        freeDelivery && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                            className: "mt-1",
+                            children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(FreeDelivery, {}, void 0, false, {
+                                fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                                lineNumber: 195,
+                                columnNumber: 50
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 195,
+                            columnNumber: 28
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                    lineNumber: 184,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+            lineNumber: 170,
+            columnNumber: 7
+        }, this);
+    };
+    // ============== LOOKBOOK ==============
+    if (template === "lookbook") {
+        return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+            "data-style": styleId("card"),
+            "data-style-label": styleLabel("card"),
+            className: "group relative",
+            children: [
+                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.Link), {
+                    to: href,
+                    "data-style": styleId("media-frame"),
+                    "data-style-label": styleLabel("media frame"),
+                    className: "block aspect-[3/4] overflow-hidden rounded-md bg-muted relative",
+                    children: [
+                        cover ? /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("img", {
+                            "data-style": styleId("image"),
+                            "data-style-label": styleLabel("image"),
+                            src: cover,
+                            alt: it.name,
+                            loading: "lazy",
+                            className: "w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 207,
+                            columnNumber: 13
+                        }, this) : /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                            "data-style": styleId("image"),
+                            "data-style-label": styleLabel("image placeholder"),
+                            className: "w-full h-full grid place-items-center text-4xl font-light text-foreground/15",
+                            children: it.name.charAt(0)
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 209,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                            className: "absolute top-1.5 left-1.5 flex flex-col gap-1",
+                            children: [
+                                badge && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(BadgeChip, {
+                                    kind: badge,
+                                    accent: accent
+                                }, void 0, false, {
+                                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                                    lineNumber: 212,
+                                    columnNumber: 23
+                                }, this),
+                                discount > 0 && !badge && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                    "data-style": styleId("discount"),
+                                    "data-style-label": styleLabel("discount"),
+                                    className: "bg-background text-foreground text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-sm",
+                                    children: [
+                                        "-",
+                                        discount,
+                                        "%"
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                                    lineNumber: 213,
+                                    columnNumber: 40
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 211,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(TimerChip, {}, void 0, false, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 215,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(WishBtn, {
+                            className: (0,__vite_ssr_import_5__.cn)("absolute right-1.5", hasActiveCountdown ? "top-8" : "top-1.5")
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 216,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                    lineNumber: 205,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                    className: "mt-1.5 text-center",
+                    children: [
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.Link), {
+                            to: href,
+                            children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("h3", {
+                                "data-style": styleId("title"),
+                                "data-style-label": styleLabel("title"),
+                                className: "text-[11px] font-medium uppercase tracking-wide line-clamp-1",
+                                children: [
+                                    saleTag && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(SaleTag, {
+                                        text: saleTag
+                                    }, void 0, false, {
+                                        fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                                        lineNumber: 221,
+                                        columnNumber: 27
+                                    }, this),
+                                    it.name
+                                ]
+                            }, void 0, true, {
+                                fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                                lineNumber: 220,
+                                columnNumber: 13
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 219,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                            className: "text-[11px] mt-0.5",
+                            children: [
+                                original && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                    "data-style": styleId("original-price"),
+                                    "data-style-label": styleLabel("original price"),
+                                    className: "line-through mr-1.5 text-muted-foreground",
+                                    children: (0,__vite_ssr_import_4__.fmt)(original)
+                                }, void 0, false, {
+                                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                                    lineNumber: 225,
+                                    columnNumber: 26
+                                }, this),
+                                /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                    "data-style": styleId("price"),
+                                    "data-style-label": styleLabel("price"),
+                                    className: "font-semibold text-foreground",
+                                    children: (0,__vite_ssr_import_4__.fmt)(it.price_cents)
+                                }, void 0, false, {
+                                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                                    lineNumber: 226,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 224,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                    lineNumber: 218,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+            lineNumber: 204,
+            columnNumber: 7
+        }, this);
+    };
+    // ============== MARKETPLACE (Daraz-style) - DEFAULT ==============
+    // This is the spec layout the user asked us to clone faithfully.
+    return /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_2__.Card), {
+        "data-style": styleId("card"),
+        "data-style-label": styleLabel("card"),
+        className: "overflow-hidden group rounded-md border border-border hover:shadow-md transition-all bg-background",
+        children: [
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(ImageArea, {
+                radius: "rounded-t-md rounded-b-none"
+            }, void 0, false, {
+                fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                lineNumber: 237,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                className: "p-2",
+                children: [
+                    it.category && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        "data-style": styleId("category"),
+                        "data-style-label": styleLabel("category"),
+                        className: "text-[9px] uppercase tracking-wider text-muted-foreground truncate mb-0.5",
+                        children: it.category
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                        lineNumber: 239,
+                        columnNumber: 25
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)((0,__vite_ssr_import_1__.Link), {
+                        to: href,
+                        children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("h3", {
+                            "data-style": styleId("title"),
+                            "data-style-label": styleLabel("title"),
+                            className: "text-[12px] font-medium line-clamp-2 min-h-[2.1em] leading-snug hover:text-foreground",
+                            children: [
+                                saleTag && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(SaleTag, {
+                                    text: saleTag
+                                }, void 0, false, {
+                                    fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                                    lineNumber: 242,
+                                    columnNumber: 25
+                                }, this),
+                                it.name
+                            ]
+                        }, void 0, true, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 241,
+                            columnNumber: 11
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                        lineNumber: 240,
+                        columnNumber: 9
+                    }, this),
+                    freeDelivery && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "mt-1",
+                        children: /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)(FreeDelivery, {}, void 0, false, {
+                            fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                            lineNumber: 245,
+                            columnNumber: 48
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                        lineNumber: 245,
+                        columnNumber: 26
+                    }, this),
+                    /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("div", {
+                        className: "flex items-baseline gap-1.5 mt-1",
+                        children: [
+                            /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                "data-style": styleId("price"),
+                                "data-style-label": styleLabel("price"),
+                                className: "text-[13px] font-bold",
+                                style: {
+                                    color: accent
+                                },
+                                children: (0,__vite_ssr_import_4__.fmt)(it.price_cents)
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                                lineNumber: 248,
+                                columnNumber: 11
+                            }, this),
+                            original && /*#__PURE__*/ (0,__vite_ssr_import_0__.jsxDEV)("span", {
+                                "data-style": styleId("original-price"),
+                                "data-style-label": styleLabel("original price"),
+                                className: "text-[10px] text-muted-foreground line-through",
+                                children: (0,__vite_ssr_import_4__.fmt)(original)
+                            }, void 0, false, {
+                                fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                                lineNumber: 249,
+                                columnNumber: 24
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                        lineNumber: 247,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+                lineNumber: 238,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "F:/Storeblink/src/components/store/ProductCard.tsx",
+        lineNumber: 236,
+        columnNumber: 5
+    }, this);
+};
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,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NkNBQUlzRiwyQkFBSTdFLEdBQUdXLFdBQVc7Ozs7Ozs0QkFDekpDLDZCQUFZLDhCQUFDekI7Z0NBQUt1RCxjQUFZTixRQUFRO2dDQUFtQk8sb0JBQWtCTCxXQUFXO2dDQUFtQmxELFdBQVU7NkNBQWtEeUYsMkJBQUlqRTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBS3BMIiwibmFtZXMiOlsiU2FsZVRhZyIsInRleHQiLCJzcGFuIiwiY2xhc3NOYW1lIiwiQmFkZ2VDaGlwIiwia2luZCIsImFjY2VudCIsInN0eWxlIiwiYmFja2dyb3VuZCIsIlNwYXJrbGVzIiwic2l6ZSIsIkZsYW1lIiwiRnJlZURlbGl2ZXJ5IiwiVHJ1Y2siLCJQcm9kdWN0Q2FyZCIsIml0Iiwic2x1ZyIsInRlbXBsYXRlIiwib25BZGQiLCJvbldpc2giLCJ3aXNoZWQiLCJlZGl0b3JJZCIsImNvdmVyIiwiY292ZXJJbWFnZSIsImhhc09yaWdpbmFsIiwib3JpZ2luYWxfcHJpY2VfY2VudHMiLCJwcmljZV9jZW50cyIsIm9yaWdpbmFsIiwiZGlzY291bnQiLCJNYXRoIiwicm91bmQiLCJwcm9kdWN0UGF0aCIsImhhbmRsZSIsInRyaW0iLCJlbmNvZGVVUklDb21wb25lbnQiLCJpZCIsImhyZWYiLCJzb2xkT3V0Iiwic3RvY2siLCJiYWRnZSIsImZyZWVEZWxpdmVyeSIsImZyZWVfZGVsaXZlcnkiLCJzYWxlVGFnIiwic2FsZV90YWciLCJzYWxlRW5kc0F0Iiwic2FsZV9lbmRzX2F0IiwiaGFzQWN0aXZlQ291bnRkb3duIiwiRGF0ZSIsImdldFRpbWUiLCJub3ciLCJiYXNlU3R5bGVJZCIsInN0eWxlSWQiLCJwYXJ0Iiwic3R5bGVMYWJlbCIsIm5hbWUiLCJUaW1lckNoaXAiLCJkaXYiLCJkYXRhLXN0eWxlIiwiZGF0YS1zdHlsZS1sYWJlbCIsIkNsb2NrIiwiQ291bnRkb3duIiwiZW5kc0F0IiwiY29tcGFjdCIsIldpc2hCdG4iLCJpY29uU2l6ZSIsImJ1dHRvbiIsIm9uQ2xpY2siLCJlIiwicHJldmVudERlZmF1bHQiLCJzdG9wUHJvcGFnYXRpb24iLCJhcmlhLWxhYmVsIiwid2lkdGgiLCJoZWlnaHQiLCJjbiIsIkhlYXJ0IiwiZmlsbCIsIkltYWdlQXJlYSIsImFzcGVjdCIsInJhZGl1cyIsIkxpbmsiLCJ0byIsImFzcGVjdFJhdGlvIiwiaW1nIiwic3JjIiwiYWx0IiwibG9hZGluZyIsImNoYXJBdCIsInRvVXBwZXJDYXNlIiwiQ2FyZCIsImNhdGVnb3J5IiwiaDMiLCJjb2xvciIsImZtdCIsImZvbnRGYW1pbHkiLCJmb250U3R5bGUiXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZXMiOlsiUHJvZHVjdENhcmQudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IExpbmsgfSBmcm9tIFwicmVhY3Qtcm91dGVyLWRvbVwiO1xuaW1wb3J0IHsgQ2FyZCB9IGZyb20gXCJAL2NvbXBvbmVudHMvdWkvY2FyZFwiO1xuaW1wb3J0IHsgSGVhcnQsIFRydWNrLCBTcGFya2xlcywgRmxhbWUsIENsb2NrIH0gZnJvbSBcImx1Y2lkZS1yZWFjdFwiO1xuaW1wb3J0IHR5cGUgeyBTdG9yZVRlbXBsYXRlIH0gZnJvbSBcIi4vdGVtcGxhdGVzXCI7XG5pbXBvcnQgeyBmbXQsIGNvdmVySW1hZ2UgfSBmcm9tIFwiLi9zdG9yZVV0aWxzXCI7XG5pbXBvcnQgeyBjbiB9IGZyb20gXCJAL2xpYi91dGlsc1wiO1xuaW1wb3J0IHsgQ291bnRkb3duIH0gZnJvbSBcIi4vQ291bnRkb3duXCI7XG5cbnR5cGUgUHJvcHMgPSB7XG4gIGl0OiBhbnk7XG4gIHNsdWc6IHN0cmluZztcbiAgdGVtcGxhdGU6IFN0b3JlVGVtcGxhdGU7XG4gIGFjY2VudDogc3RyaW5nO1xuICBvbkFkZDogKGlkOiBzdHJpbmcpID0+IHZvaWQ7XG4gIG9uV2lzaDogKGlkOiBzdHJpbmcpID0+IHZvaWQ7XG4gIHdpc2hlZDogYm9vbGVhbjtcbiAgZWRpdG9ySWQ/OiBzdHJpbmc7XG59O1xuXG4vKiogQ29tcGFjdCByZXVzYWJsZSBiaXRzIHNoYXJlZCBhY3Jvc3MgdGVtcGxhdGVzICovXG5cbmNvbnN0IFNhbGVUYWcgPSAoeyB0ZXh0IH06IHsgdGV4dDogc3RyaW5nIH0pID0+IChcbiAgPHNwYW4gY2xhc3NOYW1lPVwiaW5saW5lLWZsZXggaXRlbXMtY2VudGVyIGJnLW9yYW5nZS01MDAgdGV4dC13aGl0ZSB0ZXh0LVsxMHB4XSBmb250LWJsYWNrIHB4LTEuNSBweS0wLjUgcm91bmRlZC1zbSBsZWFkaW5nLW5vbmUgbXItMS41IGFsaWduLW1pZGRsZVwiPlxuICAgIHt0ZXh0fVxuICA8L3NwYW4+XG4pO1xuXG5jb25zdCBCYWRnZUNoaXAgPSAoeyBraW5kLCBhY2NlbnQgfTogeyBraW5kOiBcIkRlYWxcIiB8IFwiSG90XCI7IGFjY2VudDogc3RyaW5nIH0pID0+IHtcbiAgaWYgKGtpbmQgPT09IFwiSG90XCIpIHtcbiAgICByZXR1cm4gKFxuICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiaW5saW5lLWZsZXggaXRlbXMtY2VudGVyIGdhcC0wLjUgdGV4dC13aGl0ZSB0ZXh0LVs5cHhdIGZvbnQtYm9sZCB1cHBlcmNhc2UgcHgtMS41IHB5LTAuNSByb3VuZGVkLXNtIHNoYWRvd1wiXG4gICAgICAgIHN0eWxlPXt7IGJhY2tncm91bmQ6IFwibGluZWFyLWdyYWRpZW50KDEzNWRlZywjZmY3YTAwLCNmZjNkMDApXCIgfX0+XG4gICAgICAgIDxTcGFya2xlcyBzaXplPXs5fSAvPiBIb3RcbiAgICAgIDwvc3Bhbj5cbiAgICApO1xuICB9XG4gIHJldHVybiAoXG4gICAgPHNwYW4gY2xhc3NOYW1lPVwiaW5saW5lLWZsZXggaXRlbXMtY2VudGVyIGdhcC0wLjUgdGV4dC13aGl0ZSB0ZXh0LVs5cHhdIGZvbnQtYm9sZCB1cHBlcmNhc2UgcHgtMS41IHB5LTAuNSByb3VuZGVkLXNtIHNoYWRvd1wiXG4gICAgICBzdHlsZT17eyBiYWNrZ3JvdW5kOiBhY2NlbnQgfX0+XG4gICAgICA8RmxhbWUgc2l6ZT17OX0gLz4gRGVhbFxuICAgIDwvc3Bhbj5cbiAgKTtcbn07XG5cbmNvbnN0IEZyZWVEZWxpdmVyeSA9ICgpID0+IChcbiAgPHNwYW4gY2xhc3NOYW1lPVwiaW5saW5lLWZsZXggaXRlbXMtY2VudGVyIGdhcC0xIGJvcmRlciBib3JkZXItZW1lcmFsZC01MDAvNDAgdGV4dC1lbWVyYWxkLTYwMCBkYXJrOnRleHQtZW1lcmFsZC00MDAgdGV4dC1bOXB4XSBmb250LXNlbWlib2xkIHB4LTEuNSBweS0wLjUgcm91bmRlZFwiPlxuICAgIDxUcnVjayBzaXplPXs5fSAvPiBGcmVlIERlbGl2ZXJ5XG4gIDwvc3Bhbj5cbik7XG5cbmV4cG9ydCBjb25zdCBQcm9kdWN0Q2FyZCA9ICh7IGl0LCBzbHVnLCB0ZW1wbGF0ZSwgYWNjZW50LCBvbkFkZCwgb25XaXNoLCB3aXNoZWQsIGVkaXRvcklkIH06IFByb3BzKSA9PiB7XG4gIGNvbnN0IGNvdmVyID0gY292ZXJJbWFnZShpdCk7XG4gIGNvbnN0IGhhc09yaWdpbmFsID0gdHlwZW9mIGl0Lm9yaWdpbmFsX3ByaWNlX2NlbnRzID09PSBcIm51bWJlclwiICYmIGl0Lm9yaWdpbmFsX3ByaWNlX2NlbnRzID4gaXQucHJpY2VfY2VudHM7XG4gIGNvbnN0IG9yaWdpbmFsID0gaGFzT3JpZ2luYWwgPyBpdC5vcmlnaW5hbF9wcmljZV9jZW50cyA6IG51bGw7XG4gIGNvbnN0IGRpc2NvdW50ID0gaGFzT3JpZ2luYWxcbiAgICA/IE1hdGgucm91bmQoKChpdC5vcmlnaW5hbF9wcmljZV9jZW50cyAtIGl0LnByaWNlX2NlbnRzKSAvIGl0Lm9yaWdpbmFsX3ByaWNlX2NlbnRzKSAqIDEwMClcbiAgICA6IDA7XG4gIGNvbnN0IHByb2R1Y3RQYXRoID0gdHlwZW9mIGl0LmhhbmRsZSA9PT0gXCJzdHJpbmdcIiAmJiBpdC5oYW5kbGUudHJpbSgpXG4gICAgPyBgcHJvZHVjdHMvJHtlbmNvZGVVUklDb21wb25lbnQoaXQuaGFuZGxlLnRyaW0oKSl9YFxuICAgIDogYHByb2R1Y3QvJHtpdC5pZH1gO1xuICBjb25zdCBocmVmID0gYC9zdG9yZS8ke3NsdWd9LyR7cHJvZHVjdFBhdGh9YDtcbiAgY29uc3Qgc29sZE91dCA9IGl0LnN0b2NrICE9PSBudWxsICYmIGl0LnN0b2NrIDw9IDA7XG4gIGNvbnN0IGJhZGdlOiBcIkRlYWxcIiB8IFwiSG90XCIgfCBudWxsID0gaXQuYmFkZ2UgPT09IFwiRGVhbFwiIHx8IGl0LmJhZGdlID09PSBcIkhvdFwiID8gaXQuYmFkZ2UgOiBudWxsO1xuICBjb25zdCBmcmVlRGVsaXZlcnkgPSAhIWl0LmZyZWVfZGVsaXZlcnk7XG4gIGNvbnN0IHNhbGVUYWc6IHN0cmluZyB8IG51bGwgPSB0eXBlb2YgaXQuc2FsZV90YWcgPT09IFwic3RyaW5nXCIgJiYgaXQuc2FsZV90YWcudHJpbSgpID8gaXQuc2FsZV90YWcudHJpbSgpIDogbnVsbDtcbiAgY29uc3Qgc2FsZUVuZHNBdDogc3RyaW5nIHwgbnVsbCA9IHR5cGVvZiBpdC5zYWxlX2VuZHNfYXQgPT09IFwic3RyaW5nXCIgPyBpdC5zYWxlX2VuZHNfYXQgOiBudWxsO1xuICBjb25zdCBoYXNBY3RpdmVDb3VudGRvd24gPSBzYWxlRW5kc0F0ICYmIG5ldyBEYXRlKHNhbGVFbmRzQXQpLmdldFRpbWUoKSA+IERhdGUubm93KCk7XG4gIGNvbnN0IGJhc2VTdHlsZUlkID0gZWRpdG9ySWQgPz8gYHByb2R1Y3QtJHt0ZW1wbGF0ZX0tJHtpdC5pZH1gO1xuICBjb25zdCBzdHlsZUlkID0gKHBhcnQ6IHN0cmluZykgPT4gYCR7YmFzZVN0eWxlSWR9LSR7cGFydH1gO1xuICBjb25zdCBzdHlsZUxhYmVsID0gKHBhcnQ6IHN0cmluZykgPT4gYCR7aXQubmFtZX0gJHtwYXJ0fWA7XG5cbiAgLy8gQ29tcGFjdCB0aW1lciBjaGlwIHJlbmRlcmVkIE9OIHRoZSBpbWFnZSAodG9wLXJpZ2h0IGNvcm5lcilcbiAgY29uc3QgVGltZXJDaGlwID0gKCkgPT4gaGFzQWN0aXZlQ291bnRkb3duID8gKFxuICAgIDxkaXZcbiAgICAgIGRhdGEtc3R5bGU9e3N0eWxlSWQoXCJ0aW1lclwiKX1cbiAgICAgIGRhdGEtc3R5bGUtbGFiZWw9e3N0eWxlTGFiZWwoXCJ0aW1lclwiKX1cbiAgICAgIGNsYXNzTmFtZT1cImFic29sdXRlIHRvcC0xIHJpZ2h0LTEgZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTEgYmctYmxhY2svNzUgYmFja2Ryb3AtYmx1ciB0ZXh0LXdoaXRlIHJvdW5kZWQgcHgtMS41IHB5LTAuNSBzaGFkb3ctbWQgei0xMFwiXG4gICAgPlxuICAgICAgPENsb2NrIHNpemU9ezl9IC8+XG4gICAgICA8Q291bnRkb3duIGVuZHNBdD17c2FsZUVuZHNBdH0gY29tcGFjdCBjbGFzc05hbWU9XCJ0ZXh0LVs5cHhdIGZvbnQtYm9sZCB0cmFja2luZy10aWdodFwiIC8+XG4gICAgPC9kaXY+XG4gICkgOiBudWxsO1xuXG4gIGNvbnN0IFdpc2hCdG4gPSAoeyBzaXplID0gMjYsIGljb25TaXplID0gMTIsIGNsYXNzTmFtZSA9IFwiXCIgfTogeyBzaXplPzogbnVtYmVyOyBpY29uU2l6ZT86IG51bWJlcjsgY2xhc3NOYW1lPzogc3RyaW5nIH0pID0+IChcbiAgICA8YnV0dG9uXG4gICAgICBkYXRhLXN0eWxlPXtzdHlsZUlkKFwid2lzaGxpc3RcIil9XG4gICAgICBkYXRhLXN0eWxlLWxhYmVsPXtzdHlsZUxhYmVsKFwid2lzaGxpc3QgYnV0dG9uXCIpfVxuICAgICAgb25DbGljaz17KGUpID0+IHsgZS5wcmV2ZW50RGVmYXVsdCgpOyBlLnN0b3BQcm9wYWdhdGlvbigpOyBvbldpc2goaXQuaWQpOyB9fVxuICAgICAgYXJpYS1sYWJlbD17d2lzaGVkID8gXCJSZW1vdmUgZnJvbSB3aXNobGlzdFwiIDogXCJBZGQgdG8gd2lzaGxpc3RcIn1cbiAgICAgIHN0eWxlPXt7IHdpZHRoOiBzaXplLCBoZWlnaHQ6IHNpemUgfX1cbiAgICAgIGNsYXNzTmFtZT17Y24oXG4gICAgICAgIFwicm91bmRlZC1mdWxsIGdyaWQgcGxhY2UtaXRlbXMtY2VudGVyIHRyYW5zaXRpb24tYWxsIGJhY2tkcm9wLWJsdXJcIixcbiAgICAgICAgd2lzaGVkID8gXCJiZy1iYWNrZ3JvdW5kIHRleHQtcm9zZS01MDBcIiA6IFwiYmctYmFja2dyb3VuZC84NSB0ZXh0LWZvcmVncm91bmQgaG92ZXI6YmctYmFja2dyb3VuZFwiLFxuICAgICAgICBjbGFzc05hbWUsXG4gICAgICApfVxuICAgID5cbiAgICAgIDxIZWFydCBzaXplPXtpY29uU2l6ZX0gZmlsbD17d2lzaGVkID8gXCJjdXJyZW50Q29sb3JcIiA6IFwibm9uZVwifSAvPlxuICAgIDwvYnV0dG9uPlxuICApO1xuXG4gIC8qID09PT09PT09PT09PT09IEltYWdlIGFyZWEgc2hhcmVkIGJldHdlZW4gbWFya2V0cGxhY2UvbWluaW1hbC9ib2xkID09PT09PT09PT09PT09ICovXG4gIGNvbnN0IEltYWdlQXJlYSA9ICh7IGFzcGVjdCA9IFwic3F1YXJlXCIsIHJhZGl1cyA9IFwicm91bmRlZC1tZFwiIH06IHsgYXNwZWN0Pzogc3RyaW5nOyByYWRpdXM/OiBzdHJpbmcgfSkgPT4gKFxuICAgIDxMaW5rXG4gICAgICB0bz17aHJlZn1cbiAgICAgIGRhdGEtc3R5bGU9e3N0eWxlSWQoXCJtZWRpYS1mcmFtZVwiKX1cbiAgICAgIGRhdGEtc3R5bGUtbGFiZWw9e3N0eWxlTGFiZWwoXCJtZWRpYSBmcmFtZVwiKX1cbiAgICAgIGNsYXNzTmFtZT17Y24oXCJibG9jayBvdmVyZmxvdy1oaWRkZW4gcmVsYXRpdmUgYmctbXV0ZWRcIiwgcmFkaXVzKX1cbiAgICAgIHN0eWxlPXt7IGFzcGVjdFJhdGlvOiBhc3BlY3QgPT09IFwic3F1YXJlXCIgPyBcIjEgLyAxXCIgOiBhc3BlY3QgfX1cbiAgICA+XG4gICAgICB7Y292ZXIgPyAoXG4gICAgICAgIDxpbWdcbiAgICAgICAgICBkYXRhLXN0eWxlPXtzdHlsZUlkKFwiaW1hZ2VcIil9XG4gICAgICAgICAgZGF0YS1zdHlsZS1sYWJlbD17c3R5bGVMYWJlbChcImltYWdlXCIpfVxuICAgICAgICAgIHNyYz17Y292ZXJ9XG4gICAgICAgICAgYWx0PXtpdC5uYW1lfVxuICAgICAgICAgIGxvYWRpbmc9XCJsYXp5XCJcbiAgICAgICAgICBjbGFzc05hbWU9XCJ3LWZ1bGwgaC1mdWxsIG9iamVjdC1jb3ZlciBncm91cC1ob3ZlcjpzY2FsZS0xMDUgdHJhbnNpdGlvbi10cmFuc2Zvcm0gZHVyYXRpb24tMzAwXCJcbiAgICAgICAgLz5cbiAgICAgICkgOiAoXG4gICAgICAgIDxkaXZcbiAgICAgICAgICBkYXRhLXN0eWxlPXtzdHlsZUlkKFwiaW1hZ2VcIil9XG4gICAgICAgICAgZGF0YS1zdHlsZS1sYWJlbD17c3R5bGVMYWJlbChcImltYWdlIHBsYWNlaG9sZGVyXCIpfVxuICAgICAgICAgIGNsYXNzTmFtZT1cInctZnVsbCBoLWZ1bGwgZ3JpZCBwbGFjZS1pdGVtcy1jZW50ZXIgdGV4dC0zeGwgZm9udC1ib2xkIHRleHQtZm9yZWdyb3VuZC8xNVwiXG4gICAgICAgICAgc3R5bGU9e3sgYmFja2dyb3VuZDogYGxpbmVhci1ncmFkaWVudCgxMzVkZWcsICR7YWNjZW50fTIyLCAke2FjY2VudH0xMSlgIH19PlxuICAgICAgICAgIHtpdC5uYW1lLmNoYXJBdCgwKS50b1VwcGVyQ2FzZSgpfVxuICAgICAgICA8L2Rpdj5cbiAgICAgICl9XG4gICAgICB7LyogVG9wLWxlZnQgc3RhY2s6IG1lcmNoYW50IGJhZGdlICsgcGVyc2lzdGVkIGNvbXBhcmUtYXQgZGlzY291bnQuICovfVxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJhYnNvbHV0ZSB0b3AtMSBsZWZ0LTEgZmxleCBmbGV4LWNvbCBpdGVtcy1zdGFydCBnYXAtMVwiPlxuICAgICAgICB7YmFkZ2UgJiYgPEJhZGdlQ2hpcCBraW5kPXtiYWRnZX0gYWNjZW50PXthY2NlbnR9IC8+fVxuICAgICAgICB7ZGlzY291bnQgPiAwICYmICFiYWRnZSAmJiAoXG4gICAgICAgICAgPHNwYW4gZGF0YS1zdHlsZT17c3R5bGVJZChcImRpc2NvdW50XCIpfSBkYXRhLXN0eWxlLWxhYmVsPXtzdHlsZUxhYmVsKFwiZGlzY291bnRcIil9IGNsYXNzTmFtZT1cImJnLW9yYW5nZS01MDAgdGV4dC13aGl0ZSB0ZXh0LVs5cHhdIGZvbnQtYm9sZCBweC0xLjUgcHktMC41IHJvdW5kZWQtc21cIj4te2Rpc2NvdW50fSU8L3NwYW4+XG4gICAgICAgICl9XG4gICAgICA8L2Rpdj5cbiAgICAgIHtzb2xkT3V0ICYmIChcbiAgICAgICAgPGRpdiBkYXRhLXN0eWxlPXtzdHlsZUlkKFwic29sZC1vdXRcIil9IGRhdGEtc3R5bGUtbGFiZWw9e3N0eWxlTGFiZWwoXCJzb2xkIG91dCBvdmVybGF5XCIpfSBjbGFzc05hbWU9XCJhYnNvbHV0ZSBpbnNldC0wIGJnLWJhY2tncm91bmQvNzAgZ3JpZCBwbGFjZS1pdGVtcy1jZW50ZXJcIj5cbiAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJ0ZXh0LVsxMHB4XSBmb250LWJvbGQgdXBwZXJjYXNlIHRyYWNraW5nLXdpZGVyIHRleHQtbXV0ZWQtZm9yZWdyb3VuZFwiPlNvbGQgb3V0PC9zcGFuPlxuICAgICAgICA8L2Rpdj5cbiAgICAgICl9XG4gICAgICA8VGltZXJDaGlwIC8+XG4gICAgICA8V2lzaEJ0biBjbGFzc05hbWU9e2NuKFwiYWJzb2x1dGUgcmlnaHQtMSBzaGFkb3dcIiwgaGFzQWN0aXZlQ291bnRkb3duID8gXCJ0b3AtN1wiIDogXCJ0b3AtMVwiKX0gLz5cbiAgICA8L0xpbms+XG4gICk7XG5cbiAgLy8gPT09PT09PT09PT09PT0gQk9MRCA9PT09PT09PT09PT09PVxuICBpZiAodGVtcGxhdGUgPT09IFwiYm9sZFwiKSB7XG4gICAgcmV0dXJuIChcbiAgICAgIDxDYXJkIGRhdGEtc3R5bGU9e3N0eWxlSWQoXCJjYXJkXCIpfSBkYXRhLXN0eWxlLWxhYmVsPXtzdHlsZUxhYmVsKFwiY2FyZFwiKX0gY2xhc3NOYW1lPVwib3ZlcmZsb3ctaGlkZGVuIGdyb3VwIHJvdW5kZWQteGwgYm9yZGVyIGJvcmRlci1ib3JkZXIgaG92ZXI6Ym9yZGVyLWZvcmVncm91bmQgaG92ZXI6c2hhZG93LWxnIHRyYW5zaXRpb24tYWxsIGJnLWJhY2tncm91bmRcIj5cbiAgICAgICAgPEltYWdlQXJlYSByYWRpdXM9XCJyb3VuZGVkLXQteGwgcm91bmRlZC1iLW5vbmVcIiAvPlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInAtMlwiPlxuICAgICAgICAgIHtpdC5jYXRlZ29yeSAmJiA8ZGl2IGRhdGEtc3R5bGU9e3N0eWxlSWQoXCJjYXRlZ29yeVwiKX0gZGF0YS1zdHlsZS1sYWJlbD17c3R5bGVMYWJlbChcImNhdGVnb3J5XCIpfSBjbGFzc05hbWU9XCJ0ZXh0LVs5cHhdIHVwcGVyY2FzZSB0cmFja2luZy13aWRlciB0ZXh0LW11dGVkLWZvcmVncm91bmQgdHJ1bmNhdGVcIj57aXQuY2F0ZWdvcnl9PC9kaXY+fVxuICAgICAgICAgIDxMaW5rIHRvPXtocmVmfT5cbiAgICAgICAgICAgIDxoMyBkYXRhLXN0eWxlPXtzdHlsZUlkKFwidGl0bGVcIil9IGRhdGEtc3R5bGUtbGFiZWw9e3N0eWxlTGFiZWwoXCJ0aXRsZVwiKX0gY2xhc3NOYW1lPVwidGV4dC14cyBmb250LXNlbWlib2xkIGxlYWRpbmctc251ZyBsaW5lLWNsYW1wLTIgbWluLWgtWzJyZW1dIG10LTAuNVwiPlxuICAgICAgICAgICAgICB7c2FsZVRhZyAmJiA8U2FsZVRhZyB0ZXh0PXtzYWxlVGFnfSAvPn17aXQubmFtZX1cbiAgICAgICAgICAgIDwvaDM+XG4gICAgICAgICAgPC9MaW5rPlxuICAgICAgICAgIHtmcmVlRGVsaXZlcnkgJiYgPGRpdiBjbGFzc05hbWU9XCJtdC0xXCI+PEZyZWVEZWxpdmVyeSAvPjwvZGl2Pn1cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggaXRlbXMtYmFzZWxpbmUgZ2FwLTEuNSBtdC0xXCI+XG4gICAgICAgICAgICA8c3BhbiBkYXRhLXN0eWxlPXtzdHlsZUlkKFwicHJpY2VcIil9IGRhdGEtc3R5bGUtbGFiZWw9e3N0eWxlTGFiZWwoXCJwcmljZVwiKX0gY2xhc3NOYW1lPVwidGV4dC1zbSBmb250LWJsYWNrXCIgc3R5bGU9e3sgY29sb3I6IGFjY2VudCB9fT57Zm10KGl0LnByaWNlX2NlbnRzKX08L3NwYW4+XG4gICAgICAgICAgICB7b3JpZ2luYWwgJiYgPHNwYW4gZGF0YS1zdHlsZT17c3R5bGVJZChcIm9yaWdpbmFsLXByaWNlXCIpfSBkYXRhLXN0eWxlLWxhYmVsPXtzdHlsZUxhYmVsKFwib3JpZ2luYWwgcHJpY2VcIil9IGNsYXNzTmFtZT1cInRleHQtWzEwcHhdIHRleHQtbXV0ZWQtZm9yZWdyb3VuZCBsaW5lLXRocm91Z2hcIj57Zm10KG9yaWdpbmFsKX08L3NwYW4+fVxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICA8L2Rpdj5cbiAgICAgIDwvQ2FyZD5cbiAgICApO1xuICB9XG5cbiAgLy8gPT09PT09PT09PT09PT0gRURJVE9SSUFMID09PT09PT09PT09PT09XG4gIGlmICh0ZW1wbGF0ZSA9PT0gXCJlZGl0b3JpYWxcIikge1xuICAgIHJldHVybiAoXG4gICAgICA8ZGl2IGRhdGEtc3R5bGU9e3N0eWxlSWQoXCJjYXJkXCIpfSBkYXRhLXN0eWxlLWxhYmVsPXtzdHlsZUxhYmVsKFwiY2FyZFwiKX0gY2xhc3NOYW1lPVwiZ3JvdXBcIj5cbiAgICAgICAgPExpbmsgdG89e2hyZWZ9IGRhdGEtc3R5bGU9e3N0eWxlSWQoXCJtZWRpYS1mcmFtZVwiKX0gZGF0YS1zdHlsZS1sYWJlbD17c3R5bGVMYWJlbChcIm1lZGlhIGZyYW1lXCIpfSBjbGFzc05hbWU9XCJibG9jayBhc3BlY3QtWzQvNV0gb3ZlcmZsb3ctaGlkZGVuIHJvdW5kZWQtbGcgYmctbXV0ZWQgcmVsYXRpdmVcIj5cbiAgICAgICAgICB7Y292ZXIgPyAoXG4gICAgICAgICAgICA8aW1nIGRhdGEtc3R5bGU9e3N0eWxlSWQoXCJpbWFnZVwiKX0gZGF0YS1zdHlsZS1sYWJlbD17c3R5bGVMYWJlbChcImltYWdlXCIpfSBzcmM9e2NvdmVyfSBhbHQ9e2l0Lm5hbWV9IGxvYWRpbmc9XCJsYXp5XCIgY2xhc3NOYW1lPVwidy1mdWxsIGgtZnVsbCBvYmplY3QtY292ZXIgZ3JvdXAtaG92ZXI6c2NhbGUtMTA1IHRyYW5zaXRpb24tdHJhbnNmb3JtIGR1cmF0aW9uLTcwMFwiIC8+XG4gICAgICAgICAgKSA6IChcbiAgICAgICAgICAgIDxkaXYgZGF0YS1zdHlsZT17c3R5bGVJZChcImltYWdlXCIpfSBkYXRhLXN0eWxlLWxhYmVsPXtzdHlsZUxhYmVsKFwiaW1hZ2UgcGxhY2Vob2xkZXJcIil9IGNsYXNzTmFtZT1cInctZnVsbCBoLWZ1bGwgZ3JpZCBwbGFjZS1pdGVtcy1jZW50ZXIgdGV4dC00eGwgdGV4dC1mb3JlZ3JvdW5kLzIwXCIgc3R5bGU9e3sgZm9udEZhbWlseTogXCJHZW9yZ2lhLCBzZXJpZlwiLCBmb250U3R5bGU6IFwiaXRhbGljXCIgfX0+e2l0Lm5hbWUuY2hhckF0KDApfTwvZGl2PlxuICAgICAgICAgICl9XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJhYnNvbHV0ZSB0b3AtMiBsZWZ0LTIgZmxleCBmbGV4LWNvbCBnYXAtMVwiPlxuICAgICAgICAgICAge2JhZGdlICYmIDxCYWRnZUNoaXAga2luZD17YmFkZ2V9IGFjY2VudD17YWNjZW50fSAvPn1cbiAgICAgICAgICAgIHtkaXNjb3VudCA+IDAgJiYgIWJhZGdlICYmIDxzcGFuIGRhdGEtc3R5bGU9e3N0eWxlSWQoXCJkaXNjb3VudFwiKX0gZGF0YS1zdHlsZS1sYWJlbD17c3R5bGVMYWJlbChcImRpc2NvdW50XCIpfSBjbGFzc05hbWU9XCJiZy1iYWNrZ3JvdW5kIHRleHQtZm9yZWdyb3VuZCB0ZXh0LVs5cHhdIHVwcGVyY2FzZSB0cmFja2luZy13aWRlciBweC0xLjUgcHktMC41IHJvdW5kZWRcIj4te2Rpc2NvdW50fSU8L3NwYW4+fVxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIDxUaW1lckNoaXAgLz5cbiAgICAgICAgICA8V2lzaEJ0biBjbGFzc05hbWU9e2NuKFwiYWJzb2x1dGUgcmlnaHQtMiBzaGFkb3dcIiwgaGFzQWN0aXZlQ291bnRkb3duID8gXCJ0b3AtOVwiIDogXCJ0b3AtMlwiKX0gLz5cbiAgICAgICAgPC9MaW5rPlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm10LTJcIj5cbiAgICAgICAgICB7aXQuY2F0ZWdvcnkgJiYgPGRpdiBkYXRhLXN0eWxlPXtzdHlsZUlkKFwiY2F0ZWdvcnlcIil9IGRhdGEtc3R5bGUtbGFiZWw9e3N0eWxlTGFiZWwoXCJjYXRlZ29yeVwiKX0gY2xhc3NOYW1lPVwidGV4dC1bOXB4XSB1cHBlcmNhc2UgdHJhY2tpbmctWzAuMmVtXSB0ZXh0LW11dGVkLWZvcmVncm91bmQgbWItMC41XCI+e2l0LmNhdGVnb3J5fTwvZGl2Pn1cbiAgICAgICAgICA8TGluayB0bz17aHJlZn0+XG4gICAgICAgICAgICA8aDMgZGF0YS1zdHlsZT17c3R5bGVJZChcInRpdGxlXCIpfSBkYXRhLXN0eWxlLWxhYmVsPXtzdHlsZUxhYmVsKFwidGl0bGVcIil9IGNsYXNzTmFtZT1cImZvbnQtbWVkaXVtIHRleHQteHMgbGVhZGluZy1zbnVnIGxpbmUtY2xhbXAtMlwiIHN0eWxlPXt7IGZvbnRGYW1pbHk6IFwiR2VvcmdpYSwgc2VyaWZcIiB9fT5cbiAgICAgICAgICAgICAge3NhbGVUYWcgJiYgPFNhbGVUYWcgdGV4dD17c2FsZVRhZ30gLz59e2l0Lm5hbWV9XG4gICAgICAgICAgICA8L2gzPlxuICAgICAgICAgIDwvTGluaz5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggaXRlbXMtYmFzZWxpbmUgZ2FwLTEuNSBtdC0wLjVcIj5cbiAgICAgICAgICAgIDxzcGFuIGRhdGEtc3R5bGU9e3N0eWxlSWQoXCJwcmljZVwiKX0gZGF0YS1zdHlsZS1sYWJlbD17c3R5bGVMYWJlbChcInByaWNlXCIpfSBjbGFzc05hbWU9XCJ0ZXh0LXhzIGZvbnQtc2VtaWJvbGRcIj57Zm10KGl0LnByaWNlX2NlbnRzKX08L3NwYW4+XG4gICAgICAgICAgICB7b3JpZ2luYWwgJiYgPHNwYW4gZGF0YS1zdHlsZT17c3R5bGVJZChcIm9yaWdpbmFsLXByaWNlXCIpfSBkYXRhLXN0eWxlLWxhYmVsPXtzdHlsZUxhYmVsKFwib3JpZ2luYWwgcHJpY2VcIil9IGNsYXNzTmFtZT1cInRleHQtWzEwcHhdIHRleHQtbXV0ZWQtZm9yZWdyb3VuZCBsaW5lLXRocm91Z2hcIj57Zm10KG9yaWdpbmFsKX08L3NwYW4+fVxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIHtmcmVlRGVsaXZlcnkgJiYgPGRpdiBjbGFzc05hbWU9XCJtdC0xXCI+PEZyZWVEZWxpdmVyeSAvPjwvZGl2Pn1cbiAgICAgICAgPC9kaXY+XG4gICAgICA8L2Rpdj5cbiAgICApO1xuICB9XG5cbiAgLy8gPT09PT09PT09PT09PT0gTE9PS0JPT0sgPT09PT09PT09PT09PT1cbiAgaWYgKHRlbXBsYXRlID09PSBcImxvb2tib29rXCIpIHtcbiAgICByZXR1cm4gKFxuICAgICAgPGRpdiBkYXRhLXN0eWxlPXtzdHlsZUlkKFwiY2FyZFwiKX0gZGF0YS1zdHlsZS1sYWJlbD17c3R5bGVMYWJlbChcImNhcmRcIil9IGNsYXNzTmFtZT1cImdyb3VwIHJlbGF0aXZlXCI+XG4gICAgICAgIDxMaW5rIHRvPXtocmVmfSBkYXRhLXN0eWxlPXtzdHlsZUlkKFwibWVkaWEtZnJhbWVcIil9IGRhdGEtc3R5bGUtbGFiZWw9e3N0eWxlTGFiZWwoXCJtZWRpYSBmcmFtZVwiKX0gY2xhc3NOYW1lPVwiYmxvY2sgYXNwZWN0LVszLzRdIG92ZXJmbG93LWhpZGRlbiByb3VuZGVkLW1kIGJnLW11dGVkIHJlbGF0aXZlXCI+XG4gICAgICAgICAge2NvdmVyID8gKFxuICAgICAgICAgICAgPGltZyBkYXRhLXN0eWxlPXtzdHlsZUlkKFwiaW1hZ2VcIil9IGRhdGEtc3R5bGUtbGFiZWw9e3N0eWxlTGFiZWwoXCJpbWFnZVwiKX0gc3JjPXtjb3Zlcn0gYWx0PXtpdC5uYW1lfSBsb2FkaW5nPVwibGF6eVwiIGNsYXNzTmFtZT1cInctZnVsbCBoLWZ1bGwgb2JqZWN0LWNvdmVyIGdyb3VwLWhvdmVyOnNjYWxlLTEwNSB0cmFuc2l0aW9uLXRyYW5zZm9ybSBkdXJhdGlvbi03MDBcIiAvPlxuICAgICAgICAgICkgOiAoXG4gICAgICAgICAgICA8ZGl2IGRhdGEtc3R5bGU9e3N0eWxlSWQoXCJpbWFnZVwiKX0gZGF0YS1zdHlsZS1sYWJlbD17c3R5bGVMYWJlbChcImltYWdlIHBsYWNlaG9sZGVyXCIpfSBjbGFzc05hbWU9XCJ3LWZ1bGwgaC1mdWxsIGdyaWQgcGxhY2UtaXRlbXMtY2VudGVyIHRleHQtNHhsIGZvbnQtbGlnaHQgdGV4dC1mb3JlZ3JvdW5kLzE1XCI+e2l0Lm5hbWUuY2hhckF0KDApfTwvZGl2PlxuICAgICAgICAgICl9XG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJhYnNvbHV0ZSB0b3AtMS41IGxlZnQtMS41IGZsZXggZmxleC1jb2wgZ2FwLTFcIj5cbiAgICAgICAgICAgIHtiYWRnZSAmJiA8QmFkZ2VDaGlwIGtpbmQ9e2JhZGdlfSBhY2NlbnQ9e2FjY2VudH0gLz59XG4gICAgICAgICAgICB7ZGlzY291bnQgPiAwICYmICFiYWRnZSAmJiA8c3BhbiBkYXRhLXN0eWxlPXtzdHlsZUlkKFwiZGlzY291bnRcIil9IGRhdGEtc3R5bGUtbGFiZWw9e3N0eWxlTGFiZWwoXCJkaXNjb3VudFwiKX0gY2xhc3NOYW1lPVwiYmctYmFja2dyb3VuZCB0ZXh0LWZvcmVncm91bmQgdGV4dC1bOXB4XSBmb250LWJvbGQgdXBwZXJjYXNlIHRyYWNraW5nLXdpZGVyIHB4LTEuNSBweS0wLjUgcm91bmRlZC1zbVwiPi17ZGlzY291bnR9JTwvc3Bhbj59XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPFRpbWVyQ2hpcCAvPlxuICAgICAgICAgIDxXaXNoQnRuIGNsYXNzTmFtZT17Y24oXCJhYnNvbHV0ZSByaWdodC0xLjVcIiwgaGFzQWN0aXZlQ291bnRkb3duID8gXCJ0b3AtOFwiIDogXCJ0b3AtMS41XCIpfSAvPlxuICAgICAgICA8L0xpbms+XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwibXQtMS41IHRleHQtY2VudGVyXCI+XG4gICAgICAgICAgPExpbmsgdG89e2hyZWZ9PlxuICAgICAgICAgICAgPGgzIGRhdGEtc3R5bGU9e3N0eWxlSWQoXCJ0aXRsZVwiKX0gZGF0YS1zdHlsZS1sYWJlbD17c3R5bGVMYWJlbChcInRpdGxlXCIpfSBjbGFzc05hbWU9XCJ0ZXh0LVsxMXB4XSBmb250LW1lZGl1bSB1cHBlcmNhc2UgdHJhY2tpbmctd2lkZSBsaW5lLWNsYW1wLTFcIj5cbiAgICAgICAgICAgICAge3NhbGVUYWcgJiYgPFNhbGVUYWcgdGV4dD17c2FsZVRhZ30gLz59e2l0Lm5hbWV9XG4gICAgICAgICAgICA8L2gzPlxuICAgICAgICAgIDwvTGluaz5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInRleHQtWzExcHhdIG10LTAuNVwiPlxuICAgICAgICAgICAge29yaWdpbmFsICYmIDxzcGFuIGRhdGEtc3R5bGU9e3N0eWxlSWQoXCJvcmlnaW5hbC1wcmljZVwiKX0gZGF0YS1zdHlsZS1sYWJlbD17c3R5bGVMYWJlbChcIm9yaWdpbmFsIHByaWNlXCIpfSBjbGFzc05hbWU9XCJsaW5lLXRocm91Z2ggbXItMS41IHRleHQtbXV0ZWQtZm9yZWdyb3VuZFwiPntmbXQob3JpZ2luYWwpfTwvc3Bhbj59XG4gICAgICAgICAgICA8c3BhbiBkYXRhLXN0eWxlPXtzdHlsZUlkKFwicHJpY2VcIil9IGRhdGEtc3R5bGUtbGFiZWw9e3N0eWxlTGFiZWwoXCJwcmljZVwiKX0gY2xhc3NOYW1lPVwiZm9udC1zZW1pYm9sZCB0ZXh0LWZvcmVncm91bmRcIj57Zm10KGl0LnByaWNlX2NlbnRzKX08L3NwYW4+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgIDwvZGl2PlxuICAgICAgPC9kaXY+XG4gICAgKTtcbiAgfVxuXG4gIC8vID09PT09PT09PT09PT09IE1BUktFVFBMQUNFIChEYXJhei1zdHlsZSkgLSBERUZBVUxUID09PT09PT09PT09PT09XG4gIC8vIFRoaXMgaXMgdGhlIHNwZWMgbGF5b3V0IHRoZSB1c2VyIGFza2VkIHVzIHRvIGNsb25lIGZhaXRoZnVsbHkuXG4gIHJldHVybiAoXG4gICAgPENhcmQgZGF0YS1zdHlsZT17c3R5bGVJZChcImNhcmRcIil9IGRhdGEtc3R5bGUtbGFiZWw9e3N0eWxlTGFiZWwoXCJjYXJkXCIpfSBjbGFzc05hbWU9XCJvdmVyZmxvdy1oaWRkZW4gZ3JvdXAgcm91bmRlZC1tZCBib3JkZXIgYm9yZGVyLWJvcmRlciBob3ZlcjpzaGFkb3ctbWQgdHJhbnNpdGlvbi1hbGwgYmctYmFja2dyb3VuZFwiPlxuICAgICAgPEltYWdlQXJlYSByYWRpdXM9XCJyb3VuZGVkLXQtbWQgcm91bmRlZC1iLW5vbmVcIiAvPlxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJwLTJcIj5cbiAgICAgICAge2l0LmNhdGVnb3J5ICYmIDxkaXYgZGF0YS1zdHlsZT17c3R5bGVJZChcImNhdGVnb3J5XCIpfSBkYXRhLXN0eWxlLWxhYmVsPXtzdHlsZUxhYmVsKFwiY2F0ZWdvcnlcIil9IGNsYXNzTmFtZT1cInRleHQtWzlweF0gdXBwZXJjYXNlIHRyYWNraW5nLXdpZGVyIHRleHQtbXV0ZWQtZm9yZWdyb3VuZCB0cnVuY2F0ZSBtYi0wLjVcIj57aXQuY2F0ZWdvcnl9PC9kaXY+fVxuICAgICAgICA8TGluayB0bz17aHJlZn0+XG4gICAgICAgICAgPGgzIGRhdGEtc3R5bGU9e3N0eWxlSWQoXCJ0aXRsZVwiKX0gZGF0YS1zdHlsZS1sYWJlbD17c3R5bGVMYWJlbChcInRpdGxlXCIpfSBjbGFzc05hbWU9XCJ0ZXh0LVsxMnB4XSBmb250LW1lZGl1bSBsaW5lLWNsYW1wLTIgbWluLWgtWzIuMWVtXSBsZWFkaW5nLXNudWcgaG92ZXI6dGV4dC1mb3JlZ3JvdW5kXCI+XG4gICAgICAgICAgICB7c2FsZVRhZyAmJiA8U2FsZVRhZyB0ZXh0PXtzYWxlVGFnfSAvPn17aXQubmFtZX1cbiAgICAgICAgICA8L2gzPlxuICAgICAgICA8L0xpbms+XG4gICAgICAgIHtmcmVlRGVsaXZlcnkgJiYgPGRpdiBjbGFzc05hbWU9XCJtdC0xXCI+PEZyZWVEZWxpdmVyeSAvPjwvZGl2Pn1cbiAgICAgICAgXG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBpdGVtcy1iYXNlbGluZSBnYXAtMS41IG10LTFcIj5cbiAgICAgICAgICA8c3BhbiBkYXRhLXN0eWxlPXtzdHlsZUlkKFwicHJpY2VcIil9IGRhdGEtc3R5bGUtbGFiZWw9e3N0eWxlTGFiZWwoXCJwcmljZVwiKX0gY2xhc3NOYW1lPVwidGV4dC1bMTNweF0gZm9udC1ib2xkXCIgc3R5bGU9e3sgY29sb3I6IGFjY2VudCB9fT57Zm10KGl0LnByaWNlX2NlbnRzKX08L3NwYW4+XG4gICAgICAgICAge29yaWdpbmFsICYmIDxzcGFuIGRhdGEtc3R5bGU9e3N0eWxlSWQoXCJvcmlnaW5hbC1wcmljZVwiKX0gZGF0YS1zdHlsZS1sYWJlbD17c3R5bGVMYWJlbChcIm9yaWdpbmFsIHByaWNlXCIpfSBjbGFzc05hbWU9XCJ0ZXh0LVsxMHB4XSB0ZXh0LW11dGVkLWZvcmVncm91bmQgbGluZS10aHJvdWdoXCI+e2ZtdChvcmlnaW5hbCl9PC9zcGFuPn1cbiAgICAgICAgPC9kaXY+XG4gICAgICA8L2Rpdj5cbiAgICA8L0NhcmQ+XG4gICk7XG59O1xuIl0sImZpbGUiOiIvc3JjL2NvbXBvbmVudHMvc3RvcmUvUHJvZHVjdENhcmQudHN4In0=

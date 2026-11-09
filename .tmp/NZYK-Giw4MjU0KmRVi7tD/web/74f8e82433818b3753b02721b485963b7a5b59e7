@@ -1,0 +1,11 @@
+Object.defineProperty(__vite_ssr_exports__, "storefrontDataResolver", { enumerable: true, configurable: true, get(){ try { return storefrontDataResolver } catch {} }});
+const __vite_ssr_import_0__ = await __vite_ssr_import__("/src/storefront/data-resolvers/StorefrontDataResolver.ts", {"importedNames":["StorefrontDataResolver"]});
+const __vite_ssr_import_1__ = await __vite_ssr_import__("/src/storefront/data-resolvers/supabaseStorefrontGateway.ts", {"importedNames":["supabaseStorefrontGateway"]});
+const __vite_ssr_import_2__ = await __vite_ssr_import__("/src/storefront/data-resolvers/StorefrontDataResolver.ts");__vite_ssr_exportAll__(__vite_ssr_import_2__);
+
+const __vite_ssr_import_3__ = await __vite_ssr_import__("/src/storefront/data-resolvers/types.ts");__vite_ssr_exportAll__(__vite_ssr_import_3__);
+
+const storefrontDataResolver = new __vite_ssr_import_0__.StorefrontDataResolver(__vite_ssr_import_1__.supabaseStorefrontGateway);
+
+//# sourceMappingSource=vite-node
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJtYXBwaW5ncyI6IjtBQUFBO0FBQ0E7QUFFQTs7QUFDQTs7QUFFTyxNQUFNQSx5QkFBeUIsSUFBSUMsNkNBQXVCQyIsIm5hbWVzIjpbInN0b3JlZnJvbnREYXRhUmVzb2x2ZXIiLCJTdG9yZWZyb250RGF0YVJlc29sdmVyIiwic3VwYWJhc2VTdG9yZWZyb250R2F0ZXdheSJdLCJpZ25vcmVMaXN0IjpbXSwic291cmNlcyI6WyJpbmRleC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBTdG9yZWZyb250RGF0YVJlc29sdmVyIH0gZnJvbSBcIi4vU3RvcmVmcm9udERhdGFSZXNvbHZlclwiO1xuaW1wb3J0IHsgc3VwYWJhc2VTdG9yZWZyb250R2F0ZXdheSB9IGZyb20gXCIuL3N1cGFiYXNlU3RvcmVmcm9udEdhdGV3YXlcIjtcblxuZXhwb3J0ICogZnJvbSBcIi4vU3RvcmVmcm9udERhdGFSZXNvbHZlclwiO1xuZXhwb3J0ICogZnJvbSBcIi4vdHlwZXNcIjtcblxuZXhwb3J0IGNvbnN0IHN0b3JlZnJvbnREYXRhUmVzb2x2ZXIgPSBuZXcgU3RvcmVmcm9udERhdGFSZXNvbHZlcihzdXBhYmFzZVN0b3JlZnJvbnRHYXRld2F5KTtcbiJdLCJmaWxlIjoiL3NyYy9zdG9yZWZyb250L2RhdGEtcmVzb2x2ZXJzL2luZGV4LnRzIn0=

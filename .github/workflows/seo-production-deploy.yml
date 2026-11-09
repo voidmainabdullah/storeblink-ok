@@ -1,0 +1,102 @@
+name: SEO engine production deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: seo-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: production
+    env:
+      NODE_OPTIONS: --max-old-space-size=4096
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      SUPABASE_PROJECT_REF: shflnrznleodviqphvfg
+      DOMAIN_CRON_SECRET: ${{ secrets.DOMAIN_CRON_SECRET }}
+      SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+      SEO_SMOKE_SITEMAP_URL: ${{ vars.SEO_SMOKE_SITEMAP_URL }}
+      SEO_CREDENTIAL_ROTATION_CONFIRMED: ${{ vars.SEO_CREDENTIAL_ROTATION_CONFIRMED }}
+      VITE_SUPABASE_PROJECT_ID: shflnrznleodviqphvfg
+      VITE_SUPABASE_URL: https://shflnrznleodviqphvfg.supabase.co
+      VITE_SUPABASE_PUBLISHABLE_KEY: ${{ vars.VITE_SUPABASE_PUBLISHABLE_KEY }}
+      VITE_TURNSTILE_SITE_KEY: ${{ vars.VITE_TURNSTILE_SITE_KEY }}
+      VITE_PLATFORM_HOSTS: storeblink.com
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Verify deployment inputs
+        shell: bash
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test -n "$SUPABASE_ACCESS_TOKEN"
+          test -n "$SUPABASE_DB_PASSWORD"
+          test -n "$DOMAIN_CRON_SECRET"
+          test -n "$SENTRY_DSN"
+          test -n "$SEO_SMOKE_SITEMAP_URL"
+          test -n "$VITE_SUPABASE_PUBLISHABLE_KEY"
+          test -n "$VITE_TURNSTILE_SITE_KEY"
+          [[ "$SEO_SMOKE_SITEMAP_URL" == https://*/sitemap.xml ]]
+          [[ "$VITE_SUPABASE_PUBLISHABLE_KEY" == sb_publishable_* ]]
+          [[ "$DOMAIN_CRON_SECRET" =~ ^[A-Za-z0-9_-]{43,128}$ ]]
+          test "$SEO_CREDENTIAL_ROTATION_CONFIRMED" = "true"
+      - run: npx tsc --noEmit
+      - run: NODE_ENV=production npm run verify:supabase
+      - run: npm run test -- --maxWorkers=2
+      - run: npm run build
+      - run: npx wrangler deploy --dry-run
+      - name: Verify R2 infrastructure
+        shell: bash
+        run: npx wrangler r2 bucket list | grep -q 'storeblink-seo'
+      - name: Apply database migrations
+        shell: bash
+        run: |
+          npx supabase link --project-ref "$SUPABASE_PROJECT_REF" --password "$SUPABASE_DB_PASSWORD"
+          npx supabase db push --linked
+      - name: Synchronize internal service secret
+        shell: bash
+        run: |
+          npx supabase secrets set DOMAIN_CRON_SECRET="$DOMAIN_CRON_SECRET" STOREFRONT_WORKER_INTERNAL_URL="https://storeblink.com/.storeblink/internal/seo/rollback"
+          npx supabase db query --linked "select vault.update_secret((select id from vault.secrets where name = 'domain_cron_secret' limit 1), new_secret => '$DOMAIN_CRON_SECRET');"
+          printf '%s' "$DOMAIN_CRON_SECRET" | npx wrangler secret put DOMAIN_CRON_SECRET
+          if [ -n "$SENTRY_DSN" ]; then
+            printf '%s' "$SENTRY_DSN" | npx wrangler secret put SENTRY_DSN
+          fi
+      - name: Deploy compiler control plane
+        run: npx supabase functions deploy domain-orchestrator --no-verify-jwt
+      - name: Verify SEO backend compatibility
+        run: npm run verify:seo-backend
+      - name: Deploy storefront Worker
+        run: npx wrangler deploy
+      - name: Deploy shared metadata resolver
+        run: npx supabase functions deploy storefront-seo --no-verify-jwt
+      - name: Smoke test compiled sitemap
+        shell: bash
+        run: |
+          for attempt in $(seq 1 12); do
+            status=$(curl --silent --show-error --output /tmp/sitemap.xml --write-out '%{http_code}' "$SEO_SMOKE_SITEMAP_URL")
+            content_type=$(curl --silent --show-error --head "$SEO_SMOKE_SITEMAP_URL" | tr -d '\r' | awk -F': ' 'tolower($1)=="content-type" {print tolower($2)}')
+            if [ "$status" = "200" ] && [[ "$content_type" == application/xml* ]] && grep -Eq '<(sitemapindex|urlset)' /tmp/sitemap.xml; then
+              exit 0
+            fi
+            sleep 30
+          done
+          echo "Compiled sitemap did not become healthy within six minutes." >&2
+          exit 1

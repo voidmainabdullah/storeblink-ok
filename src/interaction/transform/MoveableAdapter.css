@@ -1,0 +1,31 @@
+.engine-moveable .moveable-control-box,
+.engine-moveable .moveable-control,
+.engine-moveable .moveable-line,
+.engine-moveable .moveable-rotation,
+.engine-moveable .moveable-direction {
+  pointer-events: auto;
+}
+
+.engine-moveable .moveable-line {
+  background: #0178ff !important;
+}
+
+.engine-moveable .moveable-control {
+  width: 8px !important;
+  height: 8px !important;
+  margin-left: -4px !important;
+  margin-top: -4px !important;
+  border: 1.5px solid #0178ff !important;
+  background: #ffffff !important;
+  border-radius: 2px !important;
+  box-sizing: border-box !important;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9);
+}
+
+.engine-moveable .moveable-rotation-control {
+  width: 10px !important;
+  height: 10px !important;
+  margin-left: -5px !important;
+  margin-top: -5px !important;
+  border-radius: 999px !important;
+}

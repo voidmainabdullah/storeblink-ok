@@ -1,0 +1,51 @@
+[data-theme-id="spark-fashion"] {
+  color: var(--spark-ink);
+  font-family: var(--spark-body);
+}
+
+[data-theme-id="spark-fashion"] [data-node-type="image"] img {
+  transition: transform var(--spark-motion) var(--spark-ease), filter var(--spark-motion) var(--spark-ease);
+}
+
+[data-public-store] [data-theme-id="spark-fashion"] [data-node-type="image"]:hover img {
+  transform: scale(1.025);
+  filter: saturate(1.04) contrast(1.02);
+}
+
+[data-theme-id="spark-fashion"] [data-node-type="button"] {
+  transition: transform var(--spark-motion) var(--spark-ease), background-color var(--spark-motion) var(--spark-ease), color var(--spark-motion) var(--spark-ease);
+}
+
+[data-public-store] [data-theme-id="spark-fashion"] [data-node-type="button"]:hover {
+  transform: translateY(-2px);
+}
+
+[data-theme-id="spark-fashion"][data-canonical-section="featured-product-collection"] [data-node-type="container"] {
+  transition: transform var(--spark-motion) var(--spark-ease);
+}
+
+[data-public-store] [data-theme-id="spark-fashion"][data-canonical-section="featured-product-collection"] [data-node-type="container"]:hover {
+  transform: translateY(-4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme-id="spark-fashion"] * {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+[data-storefront-secondary][data-active-theme="spark-fashion"] {
+  background: var(--storefront-background);
+  color: var(--storefront-text);
+}
+
+[data-storefront-secondary][data-active-theme="spark-fashion"] .bg-white {
+  background-color: var(--storefront-background) !important;
+}
+
+[data-storefront-secondary][data-active-theme="spark-fashion"] .text-neutral-950,
+[data-storefront-secondary][data-active-theme="spark-fashion"] .text-neutral-800,
+[data-storefront-secondary][data-active-theme="spark-fashion"] .text-neutral-700 {
+  color: var(--storefront-text) !important;
+}
